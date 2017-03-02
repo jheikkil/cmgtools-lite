@@ -4,6 +4,10 @@ from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 
 creator = ComponentCreator()
 
+
+HiggsAZH340 = creator.makeMCComponent(
+     "HiggsAZH340", "/AToZhToLLTauTau_M-340_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM", "CMS", ".*root", 1.0) 
+
 HiggsSUSYGG80 = creator.makeMCComponent(
     "HiggsSUSYGG80", "/SUSYGluGluToHToTauTau_M-80_TuneCUETP8M1_13TeV-pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_reHLT_80X_mcRun2_asymptotic_v14-v1/MINIAODSIM", "CMS", ".*root", 1.0)
 HiggsSUSYGG90 = creator.makeMCComponent(
@@ -132,6 +136,10 @@ HiggsSUSYBB3200 = creator.makeMCComponent(
     "HiggsSUSYBB3200", "/SUSYGluGluToBBHToTauTau_M-3200_TuneCUETP8M1_13TeV-pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_reHLT_80X_mcRun2_asymptotic_v14-v1/MINIAODSIM", "CMS", ".*root", 1.0)
 
 
+mc_higgs_azh = [
+    HiggsAZH340        
+]
+
 mc_higgs_susy_gg = [
     # HiggsSUSYGG80,
     # HiggsSUSYGG90,
@@ -202,3 +210,4 @@ mc_higgs_susy_bb = [
 
 mc_higgs_susy = copy.copy(mc_higgs_susy_gg)
 mc_higgs_susy.extend(mc_higgs_susy_bb)
+mc_higgs_susy.extend(mc_higgs_azh)
