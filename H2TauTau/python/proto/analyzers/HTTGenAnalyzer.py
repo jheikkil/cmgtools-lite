@@ -84,14 +84,73 @@ class HTTGenAnalyzer(Analyzer):
         # self.ptSelGentaus    = [ lep for lep in event.gentaus    if lep.pt()
         # > ptcut ] # not needed
 
-        self.l1 = event.diLepton.leg1()
-        self.l2 = event.diLepton.leg2()
+        #self.l1 = event.diLepton.leg1()
+        #self.l2 = event.diLepton.leg2()
 
-        self.genMatch(event, self.l1, self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
-        self.genMatch(event, self.l2, self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+        #self.genMatch(event, self.l1, self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+        #self.genMatch(event, self.l2, self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
 
-        self.attachGenStatusFlag(self.l1)
-        self.attachGenStatusFlag(self.l2)
+        #self.attachGenStatusFlag(self.l1)
+        #self.attachGenStatusFlag(self.l2)
+
+
+        if event.Hboson:
+            print 'H OK, MATCH JALAT'
+            self.genMatch(event, event.Hboson[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.genMatch(event, event.Hboson[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.Hboson[0].leg1())
+            self.attachGenStatusFlag(event.Hboson[0].leg2())
+
+
+        if event.Hboson_mt:
+            print 'H mt OK, MATCH JALAT'
+            self.genMatch(event, event.Hboson_mt[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.genMatch(event, event.Hboson_mt[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.Hboson_mt[0].leg1())
+            self.attachGenStatusFlag(event.Hboson_mt[0].leg2())
+
+        if event.Hboson_et:
+            print 'H et OK, MATCH JALAT'
+            self.genMatch(event, event.Hboson_et[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.genMatch(event, event.Hboson_et[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.Hboson_et[0].leg1())
+            self.attachGenStatusFlag(event.Hboson_et[0].leg2())
+
+        if event.Hboson_tt:
+            print 'H tt OK, MATCH JALAT'
+            self.genMatch(event, event.Hboson_tt[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.genMatch(event, event.Hboson_tt[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.Hboson_tt[0].leg1())
+            self.attachGenStatusFlag(event.Hboson_tt[0].leg2())
+
+        if event.Hboson_em:
+            print 'H em OK, MATCH JALAT'
+            self.genMatch(event, event.Hboson_em[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.genMatch(event, event.Hboson_em[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.Hboson_em[0].leg1())
+            self.attachGenStatusFlag(event.Hboson_em[0].leg2())  
+
+        if event.Zboson:
+            print 'Z OK, MATCH JALAT'
+            self.genMatch(event, event.Zboson[0].leg1(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.genMatch(event, event.Zboson[0].leg2(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.Zboson[0].leg1())
+       	    self.attachGenStatusFlag(event.Zboson[0].leg2())
+
+        if event.Zboson_mm:
+            print 'Z mm OK, MATCH JALAT'
+            self.genMatch(event, event.Zboson_mm[0].leg1(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.genMatch(event, event.Zboson_mm[0].leg2(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.Zboson_mm[0].leg1())
+            self.attachGenStatusFlag(event.Zboson_mm[0].leg2())
+
+        if event.Zboson_ee:
+            print 'Z ee OK, MATCH JALAT'
+            self.genMatch(event, event.Zboson_ee[0].leg1(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.genMatch(event, event.Zboson_ee[0].leg2(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.Zboson_ee[0].leg1())
+            self.attachGenStatusFlag(event.Zboson_ee[0].leg2())
+
 
         if hasattr(event, 'selectedTaus'):
             for tau in event.selectedTaus:
