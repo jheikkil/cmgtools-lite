@@ -42,6 +42,7 @@ susyCounter = cfg.Analyzer(
     bypass_trackMass_check=True  # bypass check that non-scanned masses are the same in all events
 )
 
+#defined here to be pulled in from channel-specific configs
 eventSelector = cfg.Analyzer(
     EventSelector,
     name='EventSelector',
@@ -50,23 +51,28 @@ eventSelector = cfg.Analyzer(
 
 lheWeightAna = cfg.Analyzer(
     LHEWeightAnalyzer, name="LHEWeightAnalyzer",
+    useLumiInfo=False,
 )
 
+#explain what lumisections to use, JSON file attached to the relevant data sample directly
 jsonAna = cfg.Analyzer(
     JSONAnalyzer,
     name='JSONAnalyzer',
 )
 
+#count events before any selection to normalise samples, used if run heppy
 skimAna = cfg.Analyzer(
     SkimAnalyzerCount,
     name='SkimAnalyzerCount'
 )
 
+#in principle same as skimAna, used if we have preprocessor
 mcWeighter = cfg.Analyzer(
     MCWeighter,
     name='MCWeighter'
 )
 
+#include trigger information, triggers added to the samples
 triggerAna = cfg.Analyzer(
     TriggerAnalyzer,
     name='TriggerAnalyzer',
@@ -75,6 +81,7 @@ triggerAna = cfg.Analyzer(
     usePrescaled=False
 )
 
+#select primary vertices, do not weight them - done my pileup analyzer (based on true number of interactions)
 vertexAna = cfg.Analyzer(
     VertexAnalyzer,
     name='VertexAnalyzer',
@@ -83,6 +90,7 @@ vertexAna = cfg.Analyzer(
     verbose=False
 )
 
+#Corrects MC pileup to given data pileup.
 pileUpAna = cfg.Analyzer(
     PileUpAnalyzer,
     name='PileUpAnalyzer',
@@ -100,6 +108,7 @@ susyScanAna = cfg.Analyzer(
     useLumiInfo=False,
 )
 
+#generator analyzer, e.g. save status flags 
 httGenAna = cfg.Analyzer(
     HTTGenAnalyzer,
     name='HTTGenAnalyzer',
@@ -108,6 +117,7 @@ httGenAna = cfg.Analyzer(
     genPtCut=8.
 )
 
+#jet analyzer
 jetAna = cfg.Analyzer(
     JetAnalyzer,
     name='JetAnalyzer',
@@ -121,6 +131,7 @@ jetAna = cfg.Analyzer(
     puJetIDDisc='pileupJetId:fullDiscriminant',
 )
 
+#save variables targeted at VBF Higgs production
 vbfAna = cfg.Analyzer(
     VBFAnalyzer,
     name='VBFAnalyzer',
@@ -129,6 +140,7 @@ vbfAna = cfg.Analyzer(
     deltaEta=3.5  # minimum delta eta, only used for counting
 )
 
+#apply recoilCorrs or not
 recoilCorr = cfg.Analyzer(
     RecoilCorrector,
     name='RecoilCorrector',
@@ -142,6 +154,7 @@ embedWeighter = cfg.Analyzer(
     verbose=False
 )
 
+#stich samples where we have separate samples with specific gen cuts
 NJetsAna = cfg.Analyzer(
     NJetsAnalyzer,
     name='NJetsAnalyzer',
@@ -159,7 +172,7 @@ higgsWeighter = cfg.Analyzer(
 ###                  SEQUENCE                   ###
 ###################################################
 commonSequence = cfg.Sequence([
-    lheWeightAna,
+    #lheWeightAna,
     jsonAna,
     skimAna,
     mcWeighter,
@@ -169,11 +182,11 @@ commonSequence = cfg.Sequence([
     vertexAna,
     httGenAna,
     jetAna,
-    vbfAna,
+    #vbfAna,
     recoilCorr,
     pileUpAna,
-    embedWeighter,
+    #embedWeighter,
     NJetsAna,
-    higgsWeighter
+    #higgsWeighter
 ])
 
