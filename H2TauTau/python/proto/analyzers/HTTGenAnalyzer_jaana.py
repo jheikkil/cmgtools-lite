@@ -21,7 +21,7 @@ class HTTGenAnalyzer_jaana(Analyzer):
     '''Add generator information to hard leptons.
     '''
     def declareHandles(self):
-        super(HTTGenAnalyzer, self).declareHandles()
+        super(HTTGenAnalyzer_jaana, self).declareHandles()
 
         self.mchandles['genInfo'] = AutoHandle(('generator','',''), 'GenEventInfoProduct' )
         self.mchandles['genJets'] = AutoHandle('slimmedGenJets', 'std::vector<reco::GenJet>')
@@ -196,7 +196,7 @@ class HTTGenAnalyzer_jaana(Analyzer):
     def getFinalTau(tau):
         for i_d in xrange(tau.numberOfDaughters()):
             if tau.daughter(i_d).pdgId() == tau.pdgId():
-                return HTTGenAnalyzer.getFinalTau(tau.daughter(i_d))
+                return HTTGenAnalyzer_jaana.getFinalTau(tau.daughter(i_d))
         return tau        
 
     @staticmethod
@@ -204,7 +204,7 @@ class HTTGenAnalyzer_jaana(Analyzer):
         event.genTauJets = []
         event.genTauJetConstituents = []
         for gentau in event.gentaus:
-            gentau = HTTGenAnalyzer.getFinalTau(gentau)
+            gentau = HTTGenAnalyzer_jaana.getFinalTau(gentau)
 
             c_genjet = TauGenTreeProducer.finalDaughters(gentau)
             c_genjet = [d for d in c_genjet if abs(d.pdgId()) not in [12, 14, 16]]
@@ -247,7 +247,7 @@ class HTTGenAnalyzer_jaana(Analyzer):
         # RM: needed to append genTauJets to the events,
         #     when genMatch is used as a static method
         if not hasattr(event, 'genTauJets'):
-            HTTGenAnalyzer.getGenTauJets(event)
+            HTTGenAnalyzer_jaana.getGenTauJets(event)
 
         l1match, dR2best = bestMatch(leg, event.genTauJets)
         if dR2best < best_dr2:
@@ -358,11 +358,11 @@ class HTTGenAnalyzer_jaana(Analyzer):
         leptons_prompt = [p for p in event.genParticles if abs(p.pdgId()) in [11, 12, 13, 14] and p.fromHardProcessFinalState()]
         taus_prompt = [p for p in event.genParticles if p.statusFlags().isDirectHardProcessTauDecayProduct()]
         all = leptons_prompt + taus_prompt
-        return HTTGenAnalyzer.p4sum(all)
+        return HTTGenAnalyzer_jaana.p4sum(all)
 
     @staticmethod 
     def getDYMassPtWeight(event):
         if not hasattr(event, 'parentBoson'):
-            event.parentBoson = HTTGenAnalyzer.getParentBoson(event)
+            event.parentBoson = HTTGenAnalyzer_jaana.getParentBoson(event)
         event.dy_weight = getDYWeight(event.parentBoson.mass(), event.parentBoson.pt())
 

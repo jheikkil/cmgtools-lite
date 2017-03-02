@@ -9,7 +9,7 @@ from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzerZboson import AZhAnalyzerZboso
 from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzer import AZhAnalyzer
 from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzerHboson import AZhAnalyzerHboson
 from CMGTools.H2TauTau.proto.analyzers.HiggsAnalyzer import HiggsAnalyzer
-from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerMuMu import H2TauTauTreeProducerMuMu
+from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZh import H2TauTauTreeProducerAZh
 from CMGTools.H2TauTau.proto.analyzers.LeptonWeighter import LeptonWeighter
 from CMGTools.H2TauTau.proto.analyzers.SVfitProducer import SVfitProducer
 
@@ -119,14 +119,14 @@ AZhAnaZboson = cfg.Analyzer(
 #)
 
 treeProducer = cfg.Analyzer(
-    H2TauTauTreeProducerMuMu,
-    name='H2TauTauTreeProducerMuMu',
+    H2TauTauTreeProducerAZh,
+    name='H2TauTauTreeProducerAZh',
     addMoreJetInfo=True
 )
 
 syncTreeProducer = cfg.Analyzer(
-    H2TauTauTreeProducerMuMu,
-    name='H2TauTauSyncTreeProducerMuMu',
+    H2TauTauTreeProducerAZh,
+    name='H2TauTauSyncTreeProducerAZh',
     varStyle='sync'
 )
 

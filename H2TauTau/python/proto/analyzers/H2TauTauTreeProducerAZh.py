@@ -7,7 +7,7 @@ class H2TauTauTreeProducerAZh(H2TauTauTreeProducer):
 
     def declareVariables(self, setup):
 
-        super(H2TauTauTreeProducerMuMu, self).declareVariables(setup)
+        super(H2TauTauTreeProducerAZh, self).declareVariables(setup)
 
        # self.bookMuon(self.tree, 'l1')
        # self.bookMuon(self.tree, 'l2')
@@ -88,7 +88,7 @@ class H2TauTauTreeProducerAZh(H2TauTauTreeProducer):
         self.bookGenParticle(self.tree, 'tau1_gen')
 
     def process(self, event):
-        super(H2TauTauTreeProducerMuMu, self).process(event)
+        super(H2TauTauTreeProducerAZh, self).process(event)
 
       #  mu1 = event.diLepton.leg1()
       #  mu2 = event.diLepton.leg2()
