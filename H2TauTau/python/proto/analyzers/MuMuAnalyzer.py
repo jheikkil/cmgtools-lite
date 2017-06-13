@@ -78,15 +78,35 @@ class MuMuAnalyzer(DiLeptonAnalyzer):
 
     def buildDiLeptonsSingle(self, leptons, event):
         di_leptons = []
+        #print "MUMU BUILD DI LEPTONS SINGLE"
         met = self.handles['met'].product()[0]
         for i_1, pat_muon1 in enumerate(leptons):
             muon1 = self.__class__.LeptonClass(pat_muon1)
+            #if event.Zboson:
+            #    print 'ON Z'
+            #    if i_1 in event.ZbosonLeg1 and event.ZbosonLeg1[i_1] == pat_muon1:
+            #        print 'DING DING DING'
             for i_2, pat_muon2 in enumerate(leptons):
                 # Keep only pairs with pT(muon1) > pT(muon2)
                 if i_2 <= i_1:
                     continue
-
                 muon2 = self.__class__.LeptonClass(pat_muon2)
+                 #if event.Zboson:
+                 #   print "OLI SE Z"
+                 #   print 'MOIKELLI JA TASSA NE JALAT:'
+                 #   print event.Zboson[0].leg1
+                 #   print event.Zboson[0].leg2      
+                 #   if muon1==event.Zboson[0].leg1 or muon1==event.Zboson[0].leg2 or muon2==event.Zboson[0].leg1 or muon2==event.Zboson[0].leg2:
+                 #       print "NYT JAIT HAAVIIN"
+                 #       continue
+                 #   elif i_1==event.Zboson[0].leg1 or i_1==event.Zboson[0].leg2 or i_2==event.Zboson[0].leg1 or i_2==event.Zboson[0].leg2:
+                 #       print "NYT JAIT HAAVIIN"
+                 #       continue
+                 #   elif pat_muon1==event.Zboson[0].leg1 or pat_muon1==event.Zboson[0].leg2 or pat_muon2==event.Zboson[0].leg1 or pat_muon2==event.Zboson[0].leg2:
+                 #       print "NYT JAIT HAAVIIN OSA 2"
+                 #       continue
+                 #   else:
+                 #       print '--------------'   
                 di_tau = DirectDiTau(muon1, muon2, met)
                 di_tau.leg2().associatedVertex = event.goodVertices[0]
                 di_tau.leg1().associatedVertex = event.goodVertices[0]
@@ -126,6 +146,7 @@ class MuMuAnalyzer(DiLeptonAnalyzer):
         event.goodVertices = event.vertices
 
         result = super(MuMuAnalyzer, self).process(event, fillCounter=True)
+
 
         if result is False:
             # trying to get a dilepton from the control region.

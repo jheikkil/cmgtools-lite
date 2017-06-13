@@ -25,15 +25,19 @@ def getHeppyOption(option, default):
         opt = False
     return opt
 
+#import ROOT
+#f = ROOT.TFile("../../data/htt_scalefactors_v3.root")
+#w = f.Get("w")
+#f.Close()
 
 # Get all heppy options; set via '-o production' or '-o production=True'
 
 # production = True run on batch, production = False (or unset) run locally
-production = getHeppyOption('production', True)
+production = getHeppyOption('production', False)
 pick_events = getHeppyOption('pick_events', False)
 syncntuple = getHeppyOption('syncntuple', True)
 cmssw = getHeppyOption('cmssw', True)
-doSUSY = getHeppyOption('susy', True)
+doSUSY = getHeppyOption('susy', False)
 computeSVfit = getHeppyOption('computeSVfit', False)
 data = getHeppyOption('data', False)
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
@@ -314,7 +318,7 @@ if not production:
     if data:
         selectedComponents = [data_list[0]]
     for comp in selectedComponents:
-        comp.splitFactor = 1
+        comp.splitFactor = 100
         comp.fineSplitFactor = 1
     # comp.files = comp.files[13:20]
 

@@ -4,6 +4,7 @@ from PhysicsTools.HeppyCore.framework.heppy_loop import getHeppyOption
 
 # Tau-tau analyzers
 from CMGTools.H2TauTau.proto.analyzers.MuMuAnalyzer import MuMuAnalyzer
+from CMGTools.H2TauTau.proto.analyzers.CountEvents import CountEvents
 from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzerMuons import AZhAnalyzerMuons
 from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzerZboson import AZhAnalyzerZboson      
 from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzer import AZhAnalyzer
@@ -28,9 +29,10 @@ from CMGTools.RootTools.samples.autoAAAconfig import autoAAA
 from CMGTools.H2TauTau.htt_ntuple_base_cff import commonSequence, httGenAna, triggerAna, jetAna, puFileData, puFileMC, eventSelector
 
 # mu-mu specific configuration settings
+#nEvents = getHeppyOption('nEvents', 100)
 production = getHeppyOption('production', False)
 pick_events = getHeppyOption('pick_events', False)
-syncntuple = getHeppyOption('syncntuple', True)
+syncntuple = getHeppyOption('syncntuple', False)
 cmssw = getHeppyOption('cmssw', False)
 computeSVfit = getHeppyOption('computeSVfit', False)
 data = getHeppyOption('data', False)
@@ -51,6 +53,14 @@ if reapplyJEC:
         jetAna.recalibrateJets = True
 
 # Define mu-mu specific modules
+
+#CountEvents = cfg.Analyzer(
+#    CountEvents,
+#    name='CountEvents',     
+#    jetCol='slimmedJets',
+#    channel='',
+#    genPtCut=8.
+#)
 
 #AZhAnaMuons = cfg.Analyzer(
 #    AZhAnalyzerMuons,
@@ -151,12 +161,14 @@ inputJaana = sync_list
 # Additional samples
 
 # split_factor = 3e4
-split_factor = 1 #2e5
+split_factor = 2e5 
 
 
 sequence=commonSequence
 #sequence.insert(sequence.index(httGenAna), MuMuAna)
 #sequence.insert(sequence.index(MuMuAna), AZhAnaMuons)
+#sequence.insert(sequence.index(httGenAna), CountEvents)
+#sequence.insert(sequence.index(jetAna), AZhAnaZboson)
 sequence.insert(sequence.index(httGenAna), AZhAnaZboson)
 #sequence.insert(sequence.index(MuMuAna), AZhAnaHboson)
 #sequence.append(muonWeighter1)
@@ -181,8 +193,15 @@ if not production:
     #comp = selectedComponents[0]
     #selectedComponents = [comp]
     print 'OK JAAANAAAAA'
-    comp = inputJaana[0]
-    comp.splitFactor = 1#00
+    #comp = inputJaana[0]
+    #for b in inputJaana:
+    for i in xrange(len(inputJaana)):
+        #print inputJaana[i]
+        comp = inputJaana[i]
+        comp.splitFactor = 100
+   # comp2 = inputJaana[1]
+    #comp.splitFactor = 1#00
+  #  comp2.splitFactor = 1
     # comp.files = comp.files[14:16]
 
 #autoAAA(selectedComponents)
@@ -196,15 +215,23 @@ if cmssw:
     preprocessor = CmsswPreprocessor(
         "$CMSSW_BASE/src/CMGTools/H2TauTau/prod/h2TauTauMiniAOD_mumu_data_cfg.py" if data else "$CMSSW_BASE/src/CMGTools/H2TauTau/prod/h2TauTauMiniAOD_mumu_cfg.py", addOrigAsSecondary=False)
 
+#maxEvents=100
+
 # the following is declared in case this cfg is used in input to the
 # heppy.py script
 from PhysicsTools.HeppyCore.framework.eventsfwlite import Events
+
+#Events.options.maxEvents=100
+
 config = cfg.Config(components=inputJaana,
                     sequence=sequence,
                     services=[],
                     preprocessor=preprocessor,
                     events_class=Events
                     )
+
+#options = cfg.Options(maxEvents=100,
+#                     )
 
 printComps(config.components, True)
 

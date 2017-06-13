@@ -25,7 +25,7 @@ from CMGTools.H2TauTau.proto.samples.spring16.triggers_muMu import data_triggers
 from CMGTools.RootTools.samples.autoAAAconfig import autoAAA
 
 # common configuration and sequence
-from CMGTools.H2TauTau.htt_ntuple_base_cff_jaana import commonSequence, httGenAna, triggerAna, jetAna, puFileData, puFileMC, eventSelector
+from CMGTools.H2TauTau.htt_ntuple_base_cff import commonSequence, httGenAna, triggerAna, jetAna, puFileData, puFileMC, eventSelector
 
 # mu-mu specific configuration settings
 production = getHeppyOption('production', False)

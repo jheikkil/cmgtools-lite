@@ -20,8 +20,15 @@ from CMGTools.H2TauTau.proto.samples.spring16.triggers_muEle import mc_triggers,
 
 from CMGTools.H2TauTau.proto.samples.spring16.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_muon_electron, sync_list
 
+
+#data/Muon_Mu8leg_eff.root
+import ROOT
+f = ROOT.TFile("../../data/Muon_Mu8leg_eff.root")
+w = f.Get("w")
+f.Close()
+
 # local switches
-production = getHeppyOption('production', True)
+production = getHeppyOption('production', False)
 pick_events = getHeppyOption('pick_events', False)
 syncntuple = getHeppyOption('syncntuple', True)
 cmssw = getHeppyOption('cmssw', True)
@@ -204,7 +211,7 @@ if not production:
     cache = True
     comp = data_list[-1] if data else sync_list[0]
     selectedComponents = [comp]
-    comp.splitFactor = 1 if pick_events else 4
+    comp.splitFactor = 1 if pick_events else 100
     comp.fineSplitFactor = 1
 #  comp.files           = comp.files[:1]
 
