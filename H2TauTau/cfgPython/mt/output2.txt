@@ -1,0 +1,98 @@
+loading FWLite.
+dbs	: das_client.py --query="summary dataset=/QCD_Pt_80to170_bcToE_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM"
+dbs	: das_client.py --query="file dataset=/QCD_Pt_80to170_bcToE_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM" --limit 0
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mRuntimeError[0m                              Traceback (most recent call last)
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/src/CMGTools/H2TauTau/cfgPython/mt/tmp_heppy.py[0m in [0;36m<module>[1;34m()[0m
+[0;32m     68[0m     [1;33m([0m[0moptions[0m[1;33m,[0m[0margs[0m[1;33m)[0m [1;33m=[0m [0mparser[0m[1;33m.[0m[0mparse_args[0m[1;33m([0m[1;33m)[0m[1;33m[0m[0m
+[0;32m     69[0m [1;33m[0m[0m
+[1;32m---> 70[1;33m     [0mloop[0m [1;33m=[0m [0mmain[0m[1;33m([0m[0moptions[0m[1;33m,[0m [0margs[0m[1;33m,[0m [0mparser[0m[1;33m)[0m[1;33m[0m[0m
+[0m[0;32m     71[0m     [1;32mif[0m [1;32mnot[0m [0moptions[0m[1;33m.[0m[0minteractive[0m[1;33m:[0m[1;33m[0m[0m
+[0;32m     72[0m         [0mexit[0m[1;33m([0m[1;33m)[0m [1;31m# trigger exit also from ipython[0m[1;33m[0m[0m
+
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/python/PhysicsTools/HeppyCore/framework/heppy_loop.pyc[0m in [0;36mmain[1;34m(options, args, parser)[0m
+[0;32m    171[0m [1;33m[0m[0m
+[0;32m    172[0m     [0mfile[0m [1;33m=[0m [0mopen[0m[1;33m([0m [0mcfgFileName[0m[1;33m,[0m [1;34m'r'[0m [1;33m)[0m[1;33m[0m[0m
+[1;32m--> 173[1;33m     [0mcfg[0m [1;33m=[0m [0mimp[0m[1;33m.[0m[0mload_source[0m[1;33m([0m [1;34m'PhysicsTools.HeppyCore.__cfg_to_run__'[0m[1;33m,[0m [0mcfgFileName[0m[1;33m,[0m [0mfile[0m[1;33m)[0m[1;33m[0m[0m
+[0m[0;32m    174[0m [1;33m[0m[0m
+[0;32m    175[0m     [0mselComps[0m [1;33m=[0m [1;33m[[0m[0mcomp[0m [1;32mfor[0m [0mcomp[0m [1;32min[0m [0mcfg[0m[1;33m.[0m[0mconfig[0m[1;33m.[0m[0mcomponents[0m [1;32mif[0m [0mlen[0m[1;33m([0m[0mcomp[0m[1;33m.[0m[0mfiles[0m[1;33m)[0m[1;33m>[0m[1;36m0[0m[1;33m][0m[1;33m[0m[0m
+
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/src/CMGTools/H2TauTau/cfgPython/mt/tauMu_2016_cfg.py[0m in [0;36m<module>[1;34m()[0m
+[0;32m     22[0m [1;33m[0m[0m
+[0;32m     23[0m [1;32mfrom[0m [0mCMGTools[0m[1;33m.[0m[0mRootTools[0m[1;33m.[0m[0mutils[0m[1;33m.[0m[0msplitFactor[0m [1;32mimport[0m [0msplitFactor[0m[1;33m[0m[0m
+[1;32m---> 24[1;33m [1;32mfrom[0m [0mCMGTools[0m[1;33m.[0m[0mH2TauTau[0m[1;33m.[0m[0mproto[0m[1;33m.[0m[0msamples[0m[1;33m.[0m[0mspring16[0m[1;33m.[0m[0mhtt_common[0m [1;32mimport[0m [0mbackgrounds_mu[0m[1;33m,[0m [0msm_signals[0m[1;33m,[0m [0mmssm_signals[0m[1;33m,[0m [0mdata_single_muon[0m[1;33m,[0m [0msync_list[0m[1;33m[0m[0m
+[0m[0;32m     25[0m [1;32mfrom[0m [0mCMGTools[0m[1;33m.[0m[0mH2TauTau[0m[1;33m.[0m[0mproto[0m[1;33m.[0m[0msamples[0m[1;33m.[0m[0mspring16[0m[1;33m.[0m[0mtriggers_tauMu[0m [1;32mimport[0m [0mmc_triggers[0m[1;33m,[0m [0mmc_triggerfilters[0m[1;33m[0m[0m
+[0;32m     26[0m [1;32mfrom[0m [0mCMGTools[0m[1;33m.[0m[0mH2TauTau[0m[1;33m.[0m[0mproto[0m[1;33m.[0m[0msamples[0m[1;33m.[0m[0mspring16[0m[1;33m.[0m[0mtriggers_tauMu[0m [1;32mimport[0m [0mdata_triggers[0m[1;33m,[0m [0mdata_triggerfilters[0m[1;33m[0m[0m
+
+[1;32m/cvmfs/cms.cern.ch/slc6_amd64_gcc530/lcg/root/6.06.00-ikhhed5/lib/ROOT.pyc[0m in [0;36m_importhook[1;34m(name, *args, **kwds)[0m
+[0;32m    301[0m       [1;32mexcept[0m [0mException[0m[1;33m:[0m[1;33m[0m[0m
+[0;32m    302[0m          [1;32mpass[0m[1;33m[0m[0m
+[1;32m--> 303[1;33m    [1;32mreturn[0m [0m_orig_ihook[0m[1;33m([0m [0mname[0m[1;33m,[0m [1;33m*[0m[0margs[0m[1;33m,[0m [1;33m**[0m[0mkwds[0m [1;33m)[0m[1;33m[0m[0m
+[0m[0;32m    304[0m [1;33m[0m[0m
+[0;32m    305[0m [0m__builtin__[0m[1;33m.[0m[0m__import__[0m [1;33m=[0m [0m_importhook[0m[1;33m[0m[0m
+
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/python/CMGTools/H2TauTau/proto/samples/spring16/htt_common.py[0m in [0;36m<module>[1;34m()[0m
+[1;32m----> 1[1;33m [1;32mfrom[0m [0mCMGTools[0m[1;33m.[0m[0mRootTools[0m[1;33m.[0m[0msamples[0m[1;33m.[0m[0msamples_13TeV_RunIISpring16MiniAODv2[0m [1;32mimport[0m [0mDYJetsToLL_M50[0m[1;33m,[0m [0mWJetsToLNu[0m[1;33m,[0m  [0mWWTo2L2Nu[0m[1;33m,[0m [0mZZ[0m[1;33m,[0m [0mWZ[0m[1;33m,[0m  [0mQCD_Mu5[0m[1;33m,[0m [0mTBar_tWch[0m[1;33m,[0m [0mT_tWch[0m[1;33m,[0m [0mQCDPtEMEnriched[0m[1;33m,[0m [0mQCDPtbcToE[0m[1;33m,[0m [0mTBarToLeptons_tch_powheg[0m[1;33m,[0m [0mDYNJets[0m[1;33m,[0m [0mWNJets[0m[1;33m,[0m [0mTToLeptons_tch_powheg[0m[1;33m,[0m [0mDYJetsToLL_M10to50_LO[0m [1;31m#DYJetsToLL_M50_LO WJetsToLNu_LO[0m[1;33m[0m[0m
+[0m[0;32m      2[0m [1;33m[0m[0m
+[0;32m      3[0m [1;32mfrom[0m [0mCMGTools[0m[1;33m.[0m[0mRootTools[0m[1;33m.[0m[0msamples[0m[1;33m.[0m[0msamples_13TeV_RunIISpring16MiniAODv2[0m [1;32mimport[0m [0mDYJetsToLL_M50_LO_reHLT[0m [1;32mas[0m [0mDYJetsToLL_M50_LO[0m[1;33m[0m[0m
+[0;32m      4[0m [1;32mfrom[0m [0mCMGTools[0m[1;33m.[0m[0mRootTools[0m[1;33m.[0m[0msamples[0m[1;33m.[0m[0msamples_13TeV_RunIISpring16MiniAODv2[0m [1;32mimport[0m [0mWJetsToLNu_LO_reHLT[0m [1;32mas[0m [0mWJetsToLNu_LO[0m[1;33m[0m[0m
+[0;32m      5[0m [1;31m# WJetsToLNu_HT100to200, WJetsToLNu_HT200to400, WJetsToLNu_HT400to600, WJetsToLNu_HT600toInf, QCD_Mu15,  DYJetsToTauTau_M150_LO,[0m[1;33m[0m[1;33m[0m[0m
+
+[1;32m/cvmfs/cms.cern.ch/slc6_amd64_gcc530/lcg/root/6.06.00-ikhhed5/lib/ROOT.pyc[0m in [0;36m_importhook[1;34m(name, *args, **kwds)[0m
+[0;32m    301[0m       [1;32mexcept[0m [0mException[0m[1;33m:[0m[1;33m[0m[0m
+[0;32m    302[0m          [1;32mpass[0m[1;33m[0m[0m
+[1;32m--> 303[1;33m    [1;32mreturn[0m [0m_orig_ihook[0m[1;33m([0m [0mname[0m[1;33m,[0m [1;33m*[0m[0margs[0m[1;33m,[0m [1;33m**[0m[0mkwds[0m [1;33m)[0m[1;33m[0m[0m
+[0m[0;32m    304[0m [1;33m[0m[0m
+[0;32m    305[0m [0m__builtin__[0m[1;33m.[0m[0m__import__[0m [1;33m=[0m [0m_importhook[0m[1;33m[0m[0m
+
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/python/CMGTools/RootTools/samples/samples_13TeV_RunIISpring16MiniAODv2.py[0m in [0;36m<module>[1;34m()[0m
+[0;32m    480[0m [1;31m#QCD_Pt_20to30_bcToE   = kreator.makeMCComponent("QCD_Pt_20to30_bcToE"   , ""  , "CMS" , ".*root" , 557627000*0.00059)[0m[1;33m[0m[1;33m[0m[0m
+[0;32m    481[0m [0mQCD_Pt_30to80_bcToE[0m   [1;33m=[0m [0mkreator[0m[1;33m.[0m[0mmakeMCComponent[0m[1;33m([0m[1;34m"QCD_Pt_30to80_bcToE"[0m   [1;33m,[0m [1;34m"/QCD_Pt_30to80_bcToE_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v2/MINIAODSIM"[0m  [1;33m,[0m [1;34m"CMS"[0m [1;33m,[0m [1;34m".*root"[0m [1;33m,[0m [1;36m159068000[0m[1;33m*[0m[1;36m0.00255[0m[1;33m)[0m[1;33m[0m[0m
+[1;32m--> 482[1;33m [0mQCD_Pt_80to170_bcToE[0m  [1;33m=[0m [0mkreator[0m[1;33m.[0m[0mmakeMCComponent[0m[1;33m([0m[1;34m"QCD_Pt_80to170_bcToE"[0m  [1;33m,[0m [1;34m"/QCD_Pt_80to170_bcToE_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM"[0m [1;33m,[0m [1;34m"CMS"[0m [1;33m,[0m [1;34m".*root"[0m [1;33m,[0m [1;36m3221000[0m[1;33m*[0m[1;36m0.01183[0m[1;33m)[0m [1;31m# status: production[0m[1;33m[0m[0m
+[0m[0;32m    483[0m [0mQCD_Pt_170to250_bcToE[0m [1;33m=[0m [0mkreator[0m[1;33m.[0m[0mmakeMCComponent[0m[1;33m([0m[1;34m"QCD_Pt_170to250_bcToE"[0m[1;33m,[0m[1;34m"/QCD_Pt_170to250_bcToE_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM"[0m[1;33m,[0m [1;34m"CMS"[0m[1;33m,[0m [1;34m".*root"[0m[1;33m,[0m [1;36m105771[0m[1;33m*[0m[1;36m0.02492[0m[1;33m)[0m[1;33m[0m[0m
+[0;32m    484[0m [0mQCD_Pt_250toInf_bcToE[0m [1;33m=[0m [0mkreator[0m[1;33m.[0m[0mmakeMCComponent[0m[1;33m([0m[1;34m"QCD_Pt_250toInf_bcToE"[0m [1;33m,[0m [1;34m"/QCD_Pt_250toInf_bcToE_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM"[0m[1;33m,[0m [1;34m"CMS"[0m [1;33m,[0m [1;34m".*root"[0m [1;33m,[0m [1;36m21094.1[0m[1;33m*[0m[1;36m0.03375[0m[1;33m)[0m[1;33m[0m[0m
+
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/python/CMGTools/RootTools/samples/ComponentCreator.pyc[0m in [0;36mmakeMCComponent[1;34m(self, name, dataset, user, pattern, xSec, useAAA)[0m
+[0;32m     10[0m              [0mdataset[0m[1;33m=[0m[0mdataset[0m[1;33m,[0m[1;33m[0m[0m
+[0;32m     11[0m              [0mname[0m [1;33m=[0m [0mname[0m[1;33m,[0m[1;33m[0m[0m
+[1;32m---> 12[1;33m              [0mfiles[0m [1;33m=[0m [0mself[0m[1;33m.[0m[0mgetFiles[0m[1;33m([0m[0mdataset[0m[1;33m,[0m[0muser[0m[1;33m,[0m[0mpattern[0m[1;33m,[0m[0museAAA[0m[1;33m=[0m[0museAAA[0m[1;33m)[0m[1;33m,[0m[1;33m[0m[0m
+[0m[0;32m     13[0m              [0mxSection[0m [1;33m=[0m [0mxSec[0m[1;33m,[0m[1;33m[0m[0m
+[0;32m     14[0m              [0mnGenEvents[0m [1;33m=[0m [1;36m1[0m[1;33m,[0m[1;33m[0m[0m
+
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/python/CMGTools/RootTools/samples/ComponentCreator.pyc[0m in [0;36mgetFiles[1;34m(self, dataset, user, pattern, useAAA, run_range, json)[0m
+[0;32m    176[0m     [1;32mdef[0m [0mgetFiles[0m[1;33m([0m[0mself[0m[1;33m,[0m [0mdataset[0m[1;33m,[0m [0muser[0m[1;33m,[0m [0mpattern[0m[1;33m,[0m [0museAAA[0m[1;33m=[0m[0mFalse[0m[1;33m,[0m [0mrun_range[0m[1;33m=[0m[0mNone[0m[1;33m,[0m [0mjson[0m[1;33m=[0m[0mNone[0m[1;33m)[0m[1;33m:[0m[1;33m[0m[0m
+[0;32m    177[0m         [1;31m# print 'getting files for', dataset,user,pattern[0m[1;33m[0m[1;33m[0m[0m
+[1;32m--> 178[1;33m         [0mds[0m [1;33m=[0m [0mcreateDataset[0m[1;33m([0m [0muser[0m[1;33m,[0m [0mdataset[0m[1;33m,[0m [0mpattern[0m[1;33m,[0m [0mreadcache[0m[1;33m=[0m[0mTrue[0m[1;33m,[0m [0mrun_range[0m[1;33m=[0m[0mrun_range[0m[1;33m,[0m [0mjson[0m[1;33m=[0m[0mjson[0m [1;33m)[0m[1;33m[0m[0m
+[0m[0;32m    179[0m         [0mfiles[0m [1;33m=[0m [0mds[0m[1;33m.[0m[0mlistOfGoodFiles[0m[1;33m([0m[1;33m)[0m[1;33m[0m[0m
+[0;32m    180[0m         [0mmapping[0m [1;33m=[0m [1;34m'root://eoscms.cern.ch//eos/cms%s'[0m[1;33m[0m[0m
+
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/python/CMGTools/Production/dataset.pyc[0m in [0;36mcreateDataset[1;34m(user, dataset, pattern, readcache, basedir, run_range, json)[0m
+[0;32m    506[0m         [1;31m#print "CreateDataset called: '%s', '%s', '%s', run_range %r" % (user, dataset, pattern, run_range)[0m[1;33m[0m[1;33m[0m[0m
+[0;32m    507[0m         [1;32mif[0m [0muser[0m [1;33m==[0m [1;34m'CMS'[0m[1;33m:[0m[1;33m[0m[0m
+[1;32m--> 508[1;33m             [0mdata[0m [1;33m=[0m [0mCMSDataset[0m[1;33m([0m [0mdataset[0m[1;33m,[0m [0mrun_range[0m [1;33m=[0m [0mrun_range[0m[1;33m,[0m [0mjson[0m [1;33m=[0m [0mjson[0m[1;33m)[0m[1;33m[0m[0m
+[0m[0;32m    509[0m             [0minfo[0m [1;33m=[0m [0mFalse[0m[1;33m[0m[0m
+[0;32m    510[0m         [1;32melif[0m [0muser[0m [1;33m==[0m [1;34m'LOCAL'[0m[1;33m:[0m[1;33m[0m[0m
+
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/python/CMGTools/Production/dataset.pyc[0m in [0;36m__init__[1;34m(self, name, run_range, json)[0m
+[0;32m    139[0m [1;33m[0m[0m
+[0;32m    140[0m     [1;32mdef[0m [0m__init__[0m[1;33m([0m[0mself[0m[1;33m,[0m [0mname[0m[1;33m,[0m [0mrun_range[0m [1;33m=[0m [0mNone[0m[1;33m,[0m [0mjson[0m [1;33m=[0m [0mNone[0m[1;33m)[0m[1;33m:[0m[1;33m[0m[0m
+[1;32m--> 141[1;33m         [0msuper[0m[1;33m([0m[0mCMSDataset[0m[1;33m,[0m [0mself[0m[1;33m)[0m[1;33m.[0m[0m__init__[0m[1;33m([0m [0mname[0m[1;33m,[0m [1;34m'CMS'[0m[1;33m,[0m [0mrun_range[0m[1;33m=[0m[0mrun_range[0m[1;33m,[0m [0mjson[0m[1;33m=[0m[0mjson[0m[1;33m)[0m[1;33m[0m[0m
+[0m[0;32m    142[0m [1;33m[0m[0m
+[0;32m    143[0m     [1;32mdef[0m [0mbuildListOfFilesDBS[0m[1;33m([0m[0mself[0m[1;33m,[0m [0mpattern[0m[1;33m,[0m [0mbegin[0m[1;33m=[0m[1;33m-[0m[1;36m1[0m[1;33m,[0m [0mend[0m[1;33m=[0m[1;33m-[0m[1;36m1[0m[1;33m,[0m [0mrun_range[0m[1;33m=[0m[1;34m"self"[0m[1;33m)[0m[1;33m:[0m[1;33m[0m[0m
+
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/python/CMGTools/Production/dataset.pyc[0m in [0;36m__init__[1;34m(self, name, user, pattern, run_range, dbsInstance, json)[0m
+[0;32m     42[0m         [0mself[0m[1;33m.[0m[0mprimaryDatasetEntries[0m [1;33m=[0m [1;33m-[0m[1;36m1[0m[1;33m[0m[0m
+[0;32m     43[0m         [0mself[0m[1;33m.[0m[0mreport[0m [1;33m=[0m [0mNone[0m[1;33m[0m[0m
+[1;32m---> 44[1;33m         [0mself[0m[1;33m.[0m[0mbuildListOfFiles[0m[1;33m([0m [0mself[0m[1;33m.[0m[0mpattern[0m [1;33m)[0m[1;33m[0m[0m
+[0m[0;32m     45[0m         [0mself[0m[1;33m.[0m[0mextractFileSizes[0m[1;33m([0m[1;33m)[0m[1;33m[0m[0m
+[0;32m     46[0m         [0mself[0m[1;33m.[0m[0mbuildListOfBadFiles[0m[1;33m([0m[1;33m)[0m[1;33m[0m[0m
+
+[1;32m/afs/cern.ch/work/j/jheikkil/MSSM2016/CMSSW_8_0_21/python/CMGTools/Production/dataset.pyc[0m in [0;36mbuildListOfFiles[1;34m(self, pattern)[0m
+[0;32m    227[0m         [0mself[0m[1;33m.[0m[0mfiles[0m [1;33m=[0m [0mself[0m[1;33m.[0m[0mbuildListOfFilesDBS[0m[1;33m([0m[0mpattern[0m[1;33m)[0m[1;33m[0m[0m
+[0;32m    228[0m         [1;32mif[0m [0mlen[0m[1;33m([0m[0mself[0m[1;33m.[0m[0mfiles[0m[1;33m)[0m [1;33m!=[0m [0mnum_files[0m[1;33m:[0m[1;33m[0m[0m
+[1;32m--> 229[1;33m             [1;32mraise[0m [0mRuntimeError[0m[1;33m,[0m [1;34m"ERROR: mismatching number of files between dataset summary (%d) and dataset query for files(%d)\n"[0m [1;33m%[0m [1;33m([0m[0mnum_files[0m[1;33m,[0m [0mlen[0m[1;33m([0m[0mself[0m[1;33m.[0m[0mfiles[0m[1;33m)[0m[1;33m)[0m[1;33m[0m[0m
+[0m[0;32m    230[0m [1;33m[0m[0m
+[0;32m    231[0m     [1;33m@[0m[0mstaticmethod[0m[1;33m[0m[0m
+
+[1;31mRuntimeError[0m: ERROR: mismatching number of files between dataset summary (0) and dataset query for files(128)
+

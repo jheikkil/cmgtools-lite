@@ -114,4 +114,3 @@ class LeptonWeighter(Analyzer):
 
         for sf_name in self.dataEffs:
             self.averages['weight_'+sf_name].add(getattr(lep, 'weight_'+sf_name))
-

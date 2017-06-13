@@ -13,7 +13,7 @@ HiggsGGH125 = creator.makeMCComponent('HiggsGGH125', '/GluGluHToTauTau_M125_13Te
 HiggsVBF125 = creator.makeMCComponent('HiggsVBF125', '/VBFHToTauTau_M125_13TeV_powheg_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM', 'CMS', '.*root', 1.0)
 # HiggsVBF130 = creator.makeMCComponent('HiggsVBF125', '/VBFHToTauTau_M130_13TeV_powheg_pythia8/RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/MINIAODSIM', 'CMS', '.*root', 1.0)
 
-
+HiggsZH125= creator.makeMCComponent('HiggsZH125', '/ZHToTauTau_M125_13TeV_powheg_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM', 'CMS', '.*root', 1.0)
 
 
 HiggsTTH125 = creator.makeMCComponent('HiggsTTH125', '/ttHToTT_M125_13TeV_powheg_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM', 'CMS', '.*root', 1.0)
@@ -33,6 +33,7 @@ mc_higgs_ggh = [
 
 mc_higgs_vh = [
     # HiggsVH125,
+    HiggsZH125
     # HiggsVHtoWW125
 ]
 
@@ -42,6 +43,7 @@ mc_higgs_tth = [
 
 mc_higgs = copy.copy(mc_higgs_vbf)
 mc_higgs.extend(mc_higgs_ggh)
+
 
 mc_higgs.extend(mc_higgs_vh)
 mc_higgs.extend(mc_higgs_tth)

@@ -4,6 +4,38 @@ from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 
 creator = ComponentCreator()
 
+
+HiggsAZH340 = creator.makeMCComponent(
+     "HiggsAZH340", "/AToZhToLLTauTau_M-340_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM", "CMS", ".*root", 1.0) 
+
+HiggsZZTo4lJaana = creator.makeMCComponent(
+     "HiggsZZTo4LJaana", "/ZZTo4L_13TeV_powheg_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM ", "CMS", ".*root", 1.256*1.1)
+
+HiggsGGToZZ2e2mJaana  = creator.makeMCComponent(
+     "HiggsGGToZZ2e2mJaana", "/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00319*1.7)
+HiggsGGToZZ2e2tJaana  = creator.makeMCComponent(
+     "HiggsGGToZZ2e2tJaana", "/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00319*1.7)
+HiggsGGToZZ2m2tJaana  = creator.makeMCComponent(
+     "HiggsGGToZZ2m2tJaana", "/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00319*1.7)
+HiggsGGToZZ4mJaana  = creator.makeMCComponent(
+     "HiggsGGToZZ4mJaana", "/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00159*1.7)
+HiggsGGToZZ4eJaana  = creator.makeMCComponent(
+     "HiggsGGToZZ4eJaana", "/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM ", "CMS", ".*root", 0.00159*1.7)
+HiggsGGToZZ4tJaana  = creator.makeMCComponent(
+     "HiggsGGToZZ4tJaana", "/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00159*1.7)
+
+HiggsWZJaana = creator.makeMCComponent(
+     "HiggsWZJaana", "/WZ_TuneCUETP8M1_13TeV-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 4.42965)
+
+HiggsTTJaana = creator.makeMCComponent(
+     "HiggsTTJaana", "/TT_TuneCUETP8M2T4_13TeV-powheg-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 831.76)
+
+#/WWW_4F_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM 	  	  	0.2086 	 
+#/WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM 	  	  	0.1651 	 
+#/WZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM 	  	  	0.05565 	 
+#/ZZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM 	  	  	0.01398
+
+
 HiggsSUSYGG80 = creator.makeMCComponent(
     "HiggsSUSYGG80", "/SUSYGluGluToHToTauTau_M-80_TuneCUETP8M1_13TeV-pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_reHLT_80X_mcRun2_asymptotic_v14-v1/MINIAODSIM", "CMS", ".*root", 1.0)
 HiggsSUSYGG90 = creator.makeMCComponent(
@@ -131,6 +163,21 @@ HiggsSUSYBB2900 = creator.makeMCComponent(
 HiggsSUSYBB3200 = creator.makeMCComponent(
     "HiggsSUSYBB3200", "/SUSYGluGluToBBHToTauTau_M-3200_TuneCUETP8M1_13TeV-pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_reHLT_80X_mcRun2_asymptotic_v14-v1/MINIAODSIM", "CMS", ".*root", 1.0)
 
+mc_higgs_azh_bkg = [
+    HiggsZZTo4lJaana,
+    HiggsGGToZZ2e2mJaana,
+    HiggsGGToZZ2e2tJaana,
+    HiggsGGToZZ2m2tJaana,
+    HiggsGGToZZ4mJaana,
+    HiggsGGToZZ4eJaana,
+    HiggsGGToZZ4tJaana,
+    HiggsWZJaana,
+    HiggsTTJaana,
+]
+
+mc_higgs_azh = [
+    HiggsAZH340,
+]
 
 mc_higgs_susy_gg = [
     # HiggsSUSYGG80,
@@ -202,3 +249,5 @@ mc_higgs_susy_bb = [
 
 mc_higgs_susy = copy.copy(mc_higgs_susy_gg)
 mc_higgs_susy.extend(mc_higgs_susy_bb)
+mc_higgs_susy.extend(mc_higgs_azh)
+#mc_higgs_susy.extend(mc_higgs_azh_bkg)
