@@ -12,7 +12,7 @@ import subprocess
 
 def splitPFN(pfn):
     """Split the PFN in to { <protocol>, <host>, <path>, <opaque> }"""
-    groups = re.match("^(\w\+)://([^/]+)/(/[^?]+)(\?.*)?", pfn)
+    groups = re.match("^(\w+)://([^/]+)/(/[^?]+)(\?.*)?", pfn)
     if not groups: raise RuntimeError, "Malformed pfn: '%s'" % pfn
     return (groups.group(1), groups.group(2), groups.group(3), groups.group(4))
 
