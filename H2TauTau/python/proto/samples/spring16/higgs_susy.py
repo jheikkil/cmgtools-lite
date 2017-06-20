@@ -11,6 +11,10 @@ HiggsAZH340 = creator.makeMCComponent(
 HiggsZZTo4lJaana = creator.makeMCComponent(
      "HiggsZZTo4LJaana", "/ZZTo4L_13TeV_powheg_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM ", "CMS", ".*root", 1.256*1.1)
 
+HiggsDY50Jaana = creator.makeMCComponent(
+     "HiggsDY50Jaana", "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v2/MINIAODSIM ", "CMS", ".*root", 4954*1.1638)
+
+
 HiggsGGToZZ2e2mJaana  = creator.makeMCComponent(
      "HiggsGGToZZ2e2mJaana", "/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00319*1.7)
 HiggsGGToZZ2e2tJaana  = creator.makeMCComponent(
@@ -165,6 +169,7 @@ HiggsSUSYBB3200 = creator.makeMCComponent(
 
 mc_higgs_azh_bkg = [
     HiggsZZTo4lJaana,
+    HiggsDY50Jaana,
     HiggsGGToZZ2e2mJaana,
     HiggsGGToZZ2e2tJaana,
     HiggsGGToZZ2m2tJaana,

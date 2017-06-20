@@ -18,7 +18,7 @@ from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import mc_higgs_susy_gg
 
 from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsSUSYGG160 as ggh160
 from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsAZH340 as azh340
-from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsZZTo4lJaana, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZJaana, HiggsTTJaana
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsZZTo4lJaana, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZJaana, HiggsTTJaana, HiggsDY50Jaana
 
 
 
@@ -148,5 +148,5 @@ sync_list = []
 #sync_list = [ggh160]
 #for background syncs
 #sync_list=[DYJetsToLL_M50, WZTo3LNu_amcatnlo]
-sync_list=[HiggsZZTo4lJaana]#, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZJaana, HiggsTTJaana, DYJetsToLL_M50]
+sync_list=[HiggsZZTo4lJaana, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZJaana, HiggsTTJaana, HiggsDY50Jaana]
 #sync_list = [azh_bkg]

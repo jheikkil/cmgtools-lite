@@ -50,8 +50,9 @@ if reapplyJEC:
         jetAna.jetCol = 'patJetsReapplyJEC'
         httGenAna.jetCol = 'patJetsReapplyJEC'
     else:
-        jetAna.recalibrateJets = True
-
+        jetAna.recalibrateJets = False
+        jetAna.mcGT = 'Summer16_23Sep2016V3_MC'
+        jetAna.dataGT = 'Summer16_23Sep2016HV3_DATA'
 # Define mu-mu specific modules
 
 #CountEvents = cfg.Analyzer(
