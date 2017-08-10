@@ -112,6 +112,7 @@ class JetAnalyzer(Analyzer):
         leptons = []
         if hasattr(event, 'selectedLeptons'):
             leptons = event.selectedLeptons
+            #print "FOUNDFOUND"
         if hasattr(self.cfg_ana, 'toClean'):
             leptons = getattr(event, self.cfg_ana.toClean)
             
@@ -153,10 +154,10 @@ class JetAnalyzer(Analyzer):
 
         event.cleanJets, dummy = cleanObjectCollection(event.jets,
                                                        masks=leptons,
-                                                       deltaRMin=0.5)
+                                                       deltaRMin=0.4)
         event.cleanBJets, dummy = cleanObjectCollection(event.bJets,
                                                         masks=leptons,
-                                                        deltaRMin=0.5)
+                                                        deltaRMin=0.4)
 
         # Attach matched jets to selected + other leptons
         if hasattr(event, 'otherLeptons'):

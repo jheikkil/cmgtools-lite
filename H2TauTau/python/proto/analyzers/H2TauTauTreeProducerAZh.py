@@ -80,9 +80,24 @@ class H2TauTauTreeProducerAZh(H2TauTauTreeProducer):
         self.bookGenParticle(self.tree, 'H_em_l1_gen')
         self.bookGenParticle(self.tree, 'H_em_l2_gen')
        
-        #A
+        #A_mt
+
+        self.bookParticle(self.tree, 'Aboson_mt')
+
+        #A_et
+
+        self.bookParticle(self.tree, 'Aboson_et')
+
+        #A_tt
+
+        self.bookParticle(self.tree, 'Aboson_tt')
+  
+        #A_em
+
+        self.bookParticle(self.tree, 'Aboson_em')
+
         
-        self.bookParticle(self.tree, 'Aboson')
+        #self.bookParticle(self.tree, 'Aboson')
 
         self.bookTau(self.tree, 'tau1')
         self.bookGenParticle(self.tree, 'tau1_gen')
@@ -174,102 +189,114 @@ class H2TauTauTreeProducerAZh(H2TauTauTreeProducer):
         #mt
 
         if hasattr(event, 'Hboson_mt'):
-            for i in xrange( len(event.Hboson_mt) ):
+            #for i in xrange( len(event.Hboson_mt) ):
                 #if event.Hboson_mt[i].leg1().gen_match==4 and event.Hboson_mt[i].leg2().gen_match==5:
-                    Hboson_mt = event.Hboson_mt[i]
-                    H_mt_mu1 = event.Hboson_mt[i].leg1()
-                    H_mt_tau2 = event.Hboson_mt[i].leg2()
+                Hboson_mt = event.Hboson_mt[0]
+                H_mt_mu1 = event.Hboson_mt[0].leg1()
+                H_mt_tau2 = event.Hboson_mt[0].leg2()
 
                 #    print 'H JALAT'
                 #    print event.Hboson_mt[i].leg1()
                 #    print event.Hboson_mt[i].leg2()
 
-                    self.fillMuon(self.tree, 'H_mt_l1', H_mt_mu1)
-                    self.fillTau(self.tree, 'H_mt_l2', H_mt_tau2)
+                self.fillMuon(self.tree, 'H_mt_l1', H_mt_mu1)
+                self.fillTau(self.tree, 'H_mt_l2', H_mt_tau2)
 
-                    self.fillParticle(self.tree, 'Hboson_mt', Hboson_mt)
+                self.fillParticle(self.tree, 'Hboson_mt', Hboson_mt)
 
-                    if hasattr(H_mt_mu1, 'genp') and H_mt_mu1.genp:
-                        self.fillGenParticle(self.tree, 'H_mt_l1_gen', H_mt_mu1.genp)
-                    if hasattr(H_mt_tau2, 'genp') and H_mt_tau2.genp:
-                        self.fillGenParticle(self.tree, 'H_mt_l2_gen', H_mt_tau2.genp)
+                if hasattr(H_mt_mu1, 'genp') and H_mt_mu1.genp:
+                    self.fillGenParticle(self.tree, 'H_mt_l1_gen', H_mt_mu1.genp)
+                if hasattr(H_mt_tau2, 'genp') and H_mt_tau2.genp:
+                    self.fillGenParticle(self.tree, 'H_mt_l2_gen', H_mt_tau2.genp)
 
 
         #et
 
         if hasattr(event, 'Hboson_et'):
-            for i in xrange( len(event.Hboson_et) ):
+           # for i in xrange( len(event.Hboson_et) ):
                 #if event.Hboson_et[i].leg1().gen_match==3 and event.Hboson_et[i].leg2().gen_match==5:
-                    Hboson_et = event.Hboson_et[i]
-                    H_et_el1 = event.Hboson_et[i].leg1()
-                    H_et_tau2 = event.Hboson_et[i].leg2()
+                Hboson_et = event.Hboson_et[0]
+                H_et_el1 = event.Hboson_et[0].leg1()
+                H_et_tau2 = event.Hboson_et[0].leg2()
 
                  #   print 'H JALAT'
                  #   print event.Hboson_et[i].leg1()
                  #   print event.Hboson_et[i].leg2()
 
-                    self.fillEle(self.tree, 'H_et_l1', H_et_el1)
-                    self.fillTau(self.tree, 'H_et_l2', H_et_tau2)
+                self.fillEle(self.tree, 'H_et_l1', H_et_el1)
+                self.fillTau(self.tree, 'H_et_l2', H_et_tau2)
 
-                    self.fillParticle(self.tree, 'Hboson_et', Hboson_et)
+                self.fillParticle(self.tree, 'Hboson_et', Hboson_et)
 
-                    if hasattr(H_et_el1, 'genp') and H_et_el1.genp:
-                        self.fillGenParticle(self.tree, 'H_et_l1_gen', H_et_el1.genp)
-                    if hasattr(H_et_tau2, 'genp') and H_et_tau2.genp:
-                        self.fillGenParticle(self.tree, 'H_et_l2_gen', H_et_tau2.genp)
+                if hasattr(H_et_el1, 'genp') and H_et_el1.genp:
+                    self.fillGenParticle(self.tree, 'H_et_l1_gen', H_et_el1.genp)
+                if hasattr(H_et_tau2, 'genp') and H_et_tau2.genp:
+                    self.fillGenParticle(self.tree, 'H_et_l2_gen', H_et_tau2.genp)
 
         #tt
 
         if hasattr(event, 'Hboson_tt'):
-            for i in xrange( len(event.Hboson_tt) ):
+           # for i in xrange( len(event.Hboson_tt) ):
                 #if event.Hboson_tt[i].leg1().gen_match==5 and event.Hboson_tt[i].leg2().gen_match==5:
-                    Hboson_tt = event.Hboson_tt[i]
-                    H_tt_tau1 = event.Hboson_tt[i].leg1()
-                    H_tt_tau2 = event.Hboson_tt[i].leg2()
+                Hboson_tt = event.Hboson_tt[0]
+                H_tt_tau1 = event.Hboson_tt[0].leg1()
+                H_tt_tau2 = event.Hboson_tt[0].leg2()
 
                  #   print 'H JALAT'
                  #   print 'INDEKSI ON %d' %i
                  #   print event.Hboson_tt[i].leg1()
                  #   print event.Hboson_tt[i].leg2()
 
-                    self.fillTau(self.tree, 'H_tt_l1', H_tt_tau1)
-                    self.fillTau(self.tree, 'H_tt_l2', H_tt_tau2)
+                self.fillTau(self.tree, 'H_tt_l1', H_tt_tau1)
+                self.fillTau(self.tree, 'H_tt_l2', H_tt_tau2)
 
-                    self.fillParticle(self.tree, 'Hboson_tt', Hboson_tt)
+                self.fillParticle(self.tree, 'Hboson_tt', Hboson_tt)
 
-                    if hasattr(H_tt_tau1, 'genp') and H_tt_tau1.genp:
-                        self.fillGenParticle(self.tree, 'H_tt_l1_gen', H_tt_tau1.genp)
-                    if hasattr(H_tt_tau2, 'genp') and H_tt_tau2.genp:
-                        self.fillGenParticle(self.tree, 'H_tt_l2_gen', H_tt_tau2.genp) 
+                if hasattr(H_tt_tau1, 'genp') and H_tt_tau1.genp:
+                    self.fillGenParticle(self.tree, 'H_tt_l1_gen', H_tt_tau1.genp)
+                if hasattr(H_tt_tau2, 'genp') and H_tt_tau2.genp:
+                    self.fillGenParticle(self.tree, 'H_tt_l2_gen', H_tt_tau2.genp) 
                 #else:
                 #    print 'NO PASS'
         #em
 
         if hasattr(event, 'Hboson_em'):
-            for i in xrange( len(event.Hboson_em) ):
+           # for i in xrange( len(event.Hboson_em) ):
                 #if event.Hboson_em[i].leg1().gen_match==3 and event.Hboson_em[i].leg2().gen_match==4:
-                    Hboson_em = event.Hboson_em[i]
-                    H_em_el1 = event.Hboson_em[i].leg1()
-                    H_em_mu2 = event.Hboson_em[i].leg2()
+                Hboson_em = event.Hboson_em[0]
+                H_em_el1 = event.Hboson_em[0].leg1()
+                H_em_mu2 = event.Hboson_em[0].leg2()
 
                  #   print 'H JALAT'
                 #    print event.Hboson_em[i].leg1()
                  #   print event.Hboson_em[i].leg2()
 
-                    self.fillEle(self.tree, 'H_em_l1', H_em_el1)
-                    self.fillMuon(self.tree, 'H_em_l2', H_em_mu2)
+                self.fillEle(self.tree, 'H_em_l1', H_em_el1)
+                self.fillMuon(self.tree, 'H_em_l2', H_em_mu2)
 
-                    self.fillParticle(self.tree, 'Hboson_em', Hboson_em)
+                self.fillParticle(self.tree, 'Hboson_em', Hboson_em)
 
-                    if hasattr(H_em_el1, 'genp') and H_em_el1.genp:
-                        self.fillGenParticle(self.tree, 'H_em_l1_gen', H_em_el1.genp)
-                    if hasattr(H_em_mu2, 'genp') and H_em_mu2.genp:
-                        self.fillGenParticle(self.tree, 'H_em_l2_gen', H_em_mu2.genp)
+                if hasattr(H_em_el1, 'genp') and H_em_el1.genp:
+                    self.fillGenParticle(self.tree, 'H_em_l1_gen', H_em_el1.genp)
+                if hasattr(H_em_mu2, 'genp') and H_em_mu2.genp:
+                    self.fillGenParticle(self.tree, 'H_em_l2_gen', H_em_mu2.genp)
 
 
-        if hasattr(event, 'Aboson'):
-            Aboson = event.Aboson[0]
-            self.fillParticle(self.tree, 'Aboson', Aboson)
+        if hasattr(event, 'Aboson_mt'):
+            Aboson_mt = event.Aboson_mt[0]
+            self.fillParticle(self.tree, 'Aboson_mt', Aboson_mt)
+
+        if hasattr(event, 'Aboson_et'):
+            Aboson_et = event.Aboson_et[0]
+            self.fillParticle(self.tree, 'Aboson_et', Aboson_et)
+
+        if hasattr(event, 'Aboson_tt'):
+            Aboson_tt = event.Aboson_tt[0]
+            self.fillParticle(self.tree, 'Aboson_tt', Aboson_tt)
+
+        if hasattr(event, 'Aboson_em'):
+            Aboson_em = event.Aboson_em[0]
+            self.fillParticle(self.tree, 'Aboson_em', Aboson_em)
 
        # if hasattr(mu1, 'genp') and mu1.genp:
        #     self.fillGenParticle(self.tree, 'l1_gen', mu1.genp)

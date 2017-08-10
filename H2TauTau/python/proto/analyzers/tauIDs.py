@@ -16,8 +16,8 @@ tauIDs = [
     'neutralIsoPtSum',
     'puCorrPtSum',
     'photonPtSumOutsideSignalCone',
-    'byTightIsolationMVArun2v1DBoldDMwLT' # For sync check
-    
+    'byTightIsolationMVArun2v1DBoldDMwLT', # For sync check
+    'byMediumIsolationMVArun2v1DBoldDMwLT'    
 ]
 tauIDs_extra = [
     'againstElectronMVA6category',
