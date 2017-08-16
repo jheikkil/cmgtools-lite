@@ -26,8 +26,10 @@ from CMGTools.TTHAnalysis.analyzers.ttHhistoCounterAnalyzer import ttHhistoCount
 from CMGTools.TTHAnalysis.analyzers.susyParameterScanAnalyzer import susyParameterScanAnalyzer
 from CMGTools.TTHAnalysis.analyzers.badMuonAnalyzerMoriond2017 import badMuonAnalyzerMoriond2017
 
-puFileMC = '$CMSSW_BASE/src/CMGTools/H2TauTau/data/MC_Moriond17_PU25ns_V1.root'
-puFileData = '/afs/cern.ch/user/a/anehrkor/public/Data_Pileup_2016_271036-284044_80bins.root'
+puFileMC = '/afs/cern.ch/work/t/truggles/public/2016_Pileup_Moriond17/MC_Moriond17_PU25ns_V1.root'
+   #'$CMSSW_BASE/src/CMGTools/H2TauTau/data/MC_Moriond17_PU25ns_V1.root'
+puFileData = '/afs/cern.ch/work/t/truggles/public/2016_Pileup_Moriond17/Data_Pileup_2016_271036-284044_80bins.root'
+  #'/afs/cern.ch/user/a/anehrkor/public/Data_Pileup_2016_271036-284044_80bins.root'
 
 badCloneMuonAnaMoriond2017 = cfg.Analyzer(
     badMuonAnalyzerMoriond2017, name='badCloneMuonMoriond2017',
@@ -196,7 +198,7 @@ commonSequence = cfg.Sequence([
     mcWeighter,
     # genAna,
     # susyScanAna,
-    triggerAna,  # First analyser that applies selections
+    #triggerAna,  # First analyser that applies selections
     vertexAna,
     httGenAna,
     jetAna,

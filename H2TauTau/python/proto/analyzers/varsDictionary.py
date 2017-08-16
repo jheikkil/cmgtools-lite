@@ -12,18 +12,11 @@ vars['XSecLumiWeight'] = {'std': 'XSecLumiWeight', 'sync': 'XSecLumiWeight'}
 # My own variables
 
 
-# EEMT
+# EE
 vars['Zboson_ee_pt'] = {'std': 'Zboson_ee_pt', 'sync': 'Z_Pt'}
 vars['Zboson_ee_mass']= {'std': 'Zboson_ee_mass', 'sync': 'm_vis'}
 vars['Zboson_ee_DR'] = {'std': 'Zboson_ee_DR', 'sync': 'Z_DR'}
 
-vars['Hboson_mt_pt'] = {'std': 'Hboson_mt_pt', 'sync': 'H_Pt'}
-vars['Hboson_mt_mass']= {'std': 'Hboson_mt_mass', 'sync': 'H_vis'}
-vars['Hboson_mt_DR'] = {'std': 'Hboson_mt_DR', 'sync': 'H_DR'}
-
-vars['Aboson_mt_mass'] = {'std': 'Aboson_mt_mass', 'sync': 'Mass'}
-
- 
 vars['Z_ee_l1_pt']  = {'std': 'Z_ee_l1_pt', 'sync': 'pt_1'}
 vars['Z_ee_l1_phi']  = {'std': 'Z_ee_l1_phi', 'sync': 'phi_1'}
 vars['Z_ee_l1_eta']  = {'std': 'Z_ee_l1_eta', 'sync': 'eta_1'}
@@ -33,6 +26,31 @@ vars['Z_ee_l2_pt']  = {'std': 'Z_ee_l2_pt', 'sync': 'pt_2'}
 vars['Z_ee_l2_phi']  = {'std': 'Z_ee_l2_phi', 'sync': 'phi_2'}
 vars['Z_ee_l2_eta']  = {'std': 'Z_ee_l2_eta', 'sync': 'eta_2'}
 vars['Z_ee_l2_reliso05']  = {'std': 'Z_ee_l2_reliso05', 'sync': 'iso_2'}
+
+# MM
+
+vars['Zboson_mm_pt'] = {'std': 'Zboson_mm_pt', 'sync': 'Z_Pt'}
+vars['Zboson_mm_mass']= {'std': 'Zboson_mm_mass', 'sync': 'm_vis'}
+vars['Zboson_mm_DR'] = {'std': 'Zboson_mm_DR', 'sync': 'Z_DR'}
+
+vars['Z_mm_l1_pt']  = {'std': 'Z_mm_l1_pt', 'sync': 'pt_1'}
+vars['Z_mm_l1_phi']  = {'std': 'Z_mm_l1_phi', 'sync': 'phi_1'}
+vars['Z_mm_l1_eta']  = {'std': 'Z_mm_l1_eta', 'sync': 'eta_1'}
+vars['Z_mm_l1_reliso05']  = {'std': 'Z_mm_l1_reliso05', 'sync': 'iso_1'}
+
+vars['Z_mm_l2_pt']  = {'std': 'Z_mm_l2_pt', 'sync': 'pt_2'}
+vars['Z_mm_l2_phi']  = {'std': 'Z_mm_l2_phi', 'sync': 'phi_2'}
+vars['Z_mm_l2_eta']  = {'std': 'Z_mm_l2_eta', 'sync': 'eta_2'}
+vars['Z_mm_l2_reliso05']  = {'std': 'Z_mm_l2_reliso05', 'sync': 'iso_2'}
+
+
+#MT
+
+vars['Hboson_mt_pt'] = {'std': 'Hboson_mt_pt', 'sync': 'H_Pt'}
+vars['Hboson_mt_mass']= {'std': 'Hboson_mt_mass', 'sync': 'H_vis'}
+vars['Hboson_mt_DR'] = {'std': 'Hboson_mt_DR', 'sync': 'H_DR'}
+
+vars['Aboson_mt_mass'] = {'std': 'Aboson_mt_mass', 'sync': 'Mass'}
 
 vars['H_mt_l1_pt']  = {'std': 'H_mt_l1_pt', 'sync': 'pt_3'}
 vars['H_mt_l1_phi']  = {'std': 'H_mt_l1_phi', 'sync': 'phi_3'}
@@ -44,11 +62,7 @@ vars['H_mt_l2_phi']  = {'std': 'H_mt_l2_phi', 'sync': 'phi_4'}
 vars['H_mt_l2_eta']  = {'std': 'H_mt_l2_eta', 'sync': 'eta_4'}
 vars['H_mt_l2_byIsolationMVArun2v1DBoldDMwLTraw']  = {'std': 'H_mt_l2_byIsolationMVArun2v1DBoldDMwLTraw', 'sync': 'iso_4'}
 
-#MMET
-
-vars['Zboson_mm_pt'] = {'std': 'Zboson_mm_pt', 'sync': 'Z_Pt'}
-vars['Zboson_mm_mass']= {'std': 'Zboson_mm_mass', 'sync': 'm_vis'}
-vars['Zboson_mm_DR'] = {'std': 'Zboson_mm_DR', 'sync': 'Z_DR'}
+#ET
 
 vars['Hboson_et_pt'] = {'std': 'Hboson_et_pt', 'sync': 'H_Pt'}
 vars['Hboson_et_mass']= {'std': 'Hboson_et_mass', 'sync': 'H_vis'}
@@ -56,6 +70,51 @@ vars['Hboson_et_DR'] = {'std': 'Hboson_et_DR', 'sync': 'H_DR'}
 
 vars['Aboson_et_mass'] = {'std': 'Aboson_et_mass', 'sync': 'Mass'}
 
+vars['H_et_l1_pt']  = {'std': 'H_et_l1_pt', 'sync': 'pt_3'}
+vars['H_et_l1_phi']  = {'std': 'H_et_l1_phi', 'sync': 'phi_3'}
+vars['H_et_l1_eta']  = {'std': 'H_et_l1_eta', 'sync': 'eta_3'}
+vars['H_et_l1_reliso05']  = {'std': 'H_et_l1_reliso05', 'sync': 'iso_3'}
+
+vars['H_et_l2_pt']  = {'std': 'H_et_l2_pt', 'sync': 'pt_4'}
+vars['H_et_l2_phi']  = {'std': 'H_et_l2_phi', 'sync': 'phi_4'}
+vars['H_et_l2_eta']  = {'std': 'H_et_l2_eta', 'sync': 'eta_4'}
+vars['H_et_l2_byIsolationMVArun2v1DBoldDMwLTraw']  = {'std': 'H_et_l2_byIsolationMVArun2v1DBoldDMwLTraw', 'sync': 'iso_4'}
+
+# TT
+
+vars['Hboson_tt_pt'] = {'std': 'Hboson_tt_pt', 'sync': 'H_Pt'}
+vars['Hboson_tt_mass']= {'std': 'Hboson_tt_mass', 'sync': 'H_vis'}
+vars['Hboson_tt_DR'] = {'std': 'Hboson_tt_DR', 'sync': 'H_DR'}
+
+vars['Aboson_tt_mass'] = {'std': 'Aboson_tt_mass', 'sync': 'Mass'}
+
+vars['H_tt_l1_pt']  = {'std': 'H_tt_l1_pt', 'sync': 'pt_3'}
+vars['H_tt_l1_phi']  = {'std': 'H_tt_l1_phi', 'sync': 'phi_3'}
+vars['H_tt_l1_eta']  = {'std': 'H_tt_l1_eta', 'sync': 'eta_3'}
+vars['H_tt_l1_byIsolationMVArun2v1DBoldDMwLTraw']  = {'std': 'H_tt_l1_byIsolationMVArun2v1DBoldDMwLTraw', 'sync': 'iso_3'}
+
+vars['H_tt_l2_pt']  = {'std': 'H_tt_l2_pt', 'sync': 'pt_4'}
+vars['H_tt_l2_phi']  = {'std': 'H_tt_l2_phi', 'sync': 'phi_4'}
+vars['H_tt_l2_eta']  = {'std': 'H_tt_l2_eta', 'sync': 'eta_4'}
+vars['H_tt_l2_byIsolationMVArun2v1DBoldDMwLTraw']  = {'std': 'H_tt_l2_byIsolationMVArun2v1DBoldDMwLTraw', 'sync': 'iso_4'}
+
+#EM
+
+vars['Hboson_em_pt'] = {'std': 'Hboson_em_pt', 'sync': 'H_Pt'}
+vars['Hboson_em_mass']= {'std': 'Hboson_em_mass', 'sync': 'H_vis'}
+vars['Hboson_em_DR'] = {'std': 'Hboson_em_DR', 'sync': 'H_DR'}
+
+vars['Aboson_em_mass'] = {'std': 'Aboson_em_mass', 'sync': 'Mass'}
+
+vars['H_em_l1_pt']  = {'std': 'H_em_l1_pt', 'sync': 'pt_3'}
+vars['H_em_l1_phi']  = {'std': 'H_em_l1_phi', 'sync': 'phi_3'}
+vars['H_em_l1_eta']  = {'std': 'H_em_l1_eta', 'sync': 'eta_3'}
+vars['H_em_l1_reliso05']  = {'std': 'H_em_l1_reliso05', 'sync': 'iso_3'}
+
+vars['H_em_l2_pt']  = {'std': 'H_em_l2_pt', 'sync': 'pt_4'}
+vars['H_em_l2_phi']  = {'std': 'H_em_l2_phi', 'sync': 'phi_4'}
+vars['H_em_l2_eta']  = {'std': 'H_em_l2_eta', 'sync': 'eta_4'}
+vars['H_em_l2_reliso05']  = {'std': 'H_em_l2_reliso05', 'sync': 'iso_4'}
 
 # Generator info
 vars['geninfo_tt'] = {'std': 'geninfo_tt', 'sync': 'isZtt'}

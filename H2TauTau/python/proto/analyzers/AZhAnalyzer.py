@@ -148,7 +148,7 @@ class AZhAnalyzer(Analyzer):
             leg1.associatedVertex = event.goodVertices[0]
             leg2.associatedVertex = event.goodVertices[0]
             if (leg1.charge()+leg2.charge())==0 and self.testDeltaR(leg1, leg2, deltaR_min):
-             #   print "LOOKS GOOD"
+               # print "LOOKS GOOD"
                 Zbosoni = Resonance(leg1, leg2, None, 23, 3)
                 #check muon id iso
                 m1OK = abs(Zbosoni.leg1().pdgId())==13 and leg1.muonID('POG_ID_Loose') and leg1.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.25
@@ -168,38 +168,39 @@ class AZhAnalyzer(Analyzer):
              #   print e1OK
              #   print e2OK
 
-             #   if e1OK or e2OK:
-             #      print "leg1"
-             #      print Zbosoni.leg1().pt()
-             #      print Zbosoni.leg1().pdgId()
-             #      print Zbosoni.leg1().relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0)
-             #      print "id:"
-             #      print Zbosoni.leg1().mvaIDRun2('NonTrigSpring15MiniAOD', 'POG90')
-             #      print "uusi:"
-             #      print Zbosoni.leg1().mvaIDRun2('Spring16', 'POG90')
-             #      print "leg 2"
-             #      print Zbosoni.leg2().pt()
-             #      print Zbosoni.leg2().pdgId()
-             #      print "iso"
-             #      print Zbosoni.leg2().relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0)
-             #      print "id:"
-             #      print Zbosoni.leg2().mvaIDRun2('NonTrigSpring15MiniAOD', 'POG90')
-             #      print "uusi:"
-             #      print Zbosoni.leg2().mvaIDRun2('Spring16', 'POG90')
+              #  if e1OK or e2OK:
+              #     print "leg1"
+              #     print Zbosoni.leg1().pt()
+              #     print Zbosoni.leg1().pdgId()
+              #     print Zbosoni.leg1().relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0)
+              #     print "id:"
+              #     print Zbosoni.leg1().mvaIDRun2('NonTrigSpring15MiniAOD', 'POG90')
+              #     print "uusi:"
+              #     print Zbosoni.leg1().mvaIDRun2('Spring16', 'POG90')
+              #     print "leg 2"
+              #     print Zbosoni.leg2().pt()
+              #     print Zbosoni.leg2().pdgId()
+              #     print "iso"
+              #     print Zbosoni.leg2().relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0)
+              #     print "id:"
+              #     print Zbosoni.leg2().mvaIDRun2('NonTrigSpring15MiniAOD', 'POG90')
+              #     print "uusi:"
+              #     print Zbosoni.leg2().mvaIDRun2('Spring16', 'POG90')
 
                 if m1OK and m2OK:
                #    print "muons OK"
                    resonances.append( Zbosoni )
                 elif e1OK and e2OK:
-              #     print "z ok"
+               #    print "z ok"
                    resonances.append( Zbosoni ) 
     
         nominal_mass = mass[23]
         resonances.sort(key=lambda x: abs(x.mass()-nominal_mass))
 
         if resonances:
+            #print resonances[0].mass()
             if 60 < resonances[0].mass() < 120:
-               # print "JEE"
+              #  print "JEE"
                 Z_bosons.append(resonances[0])
         
         return Z_bosons
@@ -395,15 +396,15 @@ class AZhAnalyzer(Analyzer):
 
         #Throw away events with EEMM
         if (Z_muons and Z_electrons):
-       #     print "THERE WAS TOO"
+            #print "THERE WAS TOO"
             Z_resonance = []
             Z_muons = []
             Z_electrons = []
         elif Z_muons and not Z_electrons:
-        #    print "MUONS"
+            #print "MUONS"
             Z_resonance.append(Z_muons[0])
         elif not Z_muons and Z_electrons:
-        #    print "ELS"
+            #print "ELS"
             Z_resonance.append(Z_electrons[0])
 
             
@@ -424,7 +425,7 @@ class AZhAnalyzer(Analyzer):
 
 
         if Z_resonance:
-
+          #  print "RAKENNA H"
             Zleg1=Z_resonance[0].leg1()
             Zleg2=Z_resonance[0].leg2()
 
@@ -474,21 +475,27 @@ class AZhAnalyzer(Analyzer):
                 H_tt=[]
             if H_et and ( len(muonsGOOD) != 2 or len(electronsGOOD) > 1 ):
                 H_et=[]
-            if H_mt and ( 2<len(muonsGOOD) or len(muonsGOOD)>3 or len(electronsGOOD) != 0 ):
+            if H_mt and ( 2>len(muonsGOOD) or len(muonsGOOD)>3 or len(electronsGOOD) != 0 ):
                 H_mt=[]
-            if H_em and ( 2<len(muonsGOOD) or len(muonsGOOD)>3 or len(electronsGOOD) > 1 ):
+            if H_em and ( 2>len(muonsGOOD) or len(muonsGOOD)>3 or len(electronsGOOD) > 1 ):
                 H_em=[]
         elif (Z_electrons):
+            #print "OK"
             if H_tt and ( len(muonsGOOD) != 0 or len(electronsGOOD) != 2 ):
+             #   print "HYLKY HTT"
                 H_tt=[]
-       	    if H_et and ( len(muonsGOOD) != 0 or 2<len(electronsGOOD) or len(electronsGOOD)>3 ):
+       	    if H_et and ( len(muonsGOOD) != 0 or 2>len(electronsGOOD) or len(electronsGOOD)>3 ):
+             #   print len(muonsGOOD)
+             #   print len(electronsGOOD)
+             #   print "HYLKY HET"
                 H_et=[]
        	    if H_mt and ( len(muonsGOOD) > 1 or len(electronsGOOD) != 2 ):
-               # "HYLKAA"
+              #  "HYLKAA"
                # print len(muonsGOOD)
                # print len(electronsGOOD)
                 H_mt=[]
-       	    if H_em and ( len(muonsGOOD) > 1 or 2<len(electronsGOOD) or len(electronsGOOD)>3 ):
+       	    if H_em and ( len(muonsGOOD) > 1 or 2>len(electronsGOOD) or len(electronsGOOD)>3 ):
+               # print "HYLKY HEM"
                 H_em=[]
       
         

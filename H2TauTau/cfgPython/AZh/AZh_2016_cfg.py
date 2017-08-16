@@ -14,8 +14,19 @@ from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzer import AZhAnalyzer
 from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzerHboson import AZhAnalyzerHboson
 from CMGTools.H2TauTau.proto.analyzers.LeptonSelector import LeptonSelector
 from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZh import H2TauTauTreeProducerAZh
+
 from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhEEMT import H2TauTauTreeProducerAZhEEMT
+from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhEEET import H2TauTauTreeProducerAZhEEET
+from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhEETT import H2TauTauTreeProducerAZhEETT
+from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhEEEM import H2TauTauTreeProducerAZhEEEM
+
+from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhMMMT import H2TauTauTreeProducerAZhMMMT
 from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhMMET import H2TauTauTreeProducerAZhMMET
+from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhMMTT import H2TauTauTreeProducerAZhMMTT
+from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhMMEM import H2TauTauTreeProducerAZhMMEM
+
+
+
 from CMGTools.H2TauTau.proto.analyzers.LeptonWeighter import LeptonWeighter
 from CMGTools.H2TauTau.proto.analyzers.SVfitProducer import SVfitProducer
 
@@ -219,9 +230,56 @@ EEMTtreeProducer = cfg.Analyzer(
     varStyle='sync'
 )
 
+EEETtreeProducer = cfg.Analyzer(
+    H2TauTauTreeProducerAZhEEET,
+    name='H2TauTauTreeProducerAZhEEET',
+    addMoreJetInfo=True,
+    varStyle='sync'
+)
+
+
+EETTtreeProducer = cfg.Analyzer(
+    H2TauTauTreeProducerAZhEETT,
+    name='H2TauTauTreeProducerAZhEETT',
+    addMoreJetInfo=True,
+    varStyle='sync'
+)
+
+
+EEEMtreeProducer = cfg.Analyzer(
+    H2TauTauTreeProducerAZhEEEM,
+    name='H2TauTauTreeProducerAZhEEEM',
+    addMoreJetInfo=True,
+    varStyle='sync'
+)
+
+
 MMETtreeProducer = cfg.Analyzer(
     H2TauTauTreeProducerAZhMMET,
     name='H2TauTauTreeProducerAZhMMET',
+    addMoreJetInfo=True,
+    varStyle='sync'
+)
+
+MMMTtreeProducer = cfg.Analyzer(
+    H2TauTauTreeProducerAZhMMMT,
+    name='H2TauTauTreeProducerAZhMMMT',
+    addMoreJetInfo=True,
+    varStyle='sync'
+)
+
+
+MMTTtreeProducer = cfg.Analyzer(
+    H2TauTauTreeProducerAZhMMTT,
+    name='H2TauTauTreeProducerAZhMMTT',
+    addMoreJetInfo=True,
+    varStyle='sync'
+)
+
+
+MMEMtreeProducer = cfg.Analyzer(
+    H2TauTauTreeProducerAZhMMEM,
+    name='H2TauTauTreeProducerAZhMMEM',
     addMoreJetInfo=True,
     varStyle='sync'
 )
@@ -288,10 +346,22 @@ sequence.insert(sequence.index(httGenAna), AZhAnaZboson)
 if computeSVfit:
     sequence.append(svfitProducer)
 sequence.append(treeProducer)
-sequence.append(EEMTtreeProducer)
-sequence.append(MMETtreeProducer)
-if syncntuple:
-    sequence.append(syncTreeProducer)
+
+test = getHeppyOption('test')
+
+if syncntuple and test==None:
+    sequence.append(EEMTtreeProducer)
+    sequence.append(EEETtreeProducer)
+    sequence.append(EETTtreeProducer)
+    sequence.append(EEEMtreeProducer)
+
+    sequence.append(MMMTtreeProducer)
+    sequence.append(MMETtreeProducer)
+    sequence.append(MMTTtreeProducer)
+    sequence.append(MMEMtreeProducer)
+
+#if syncntuple:
+  #  sequence.append(syncTreeProducer)
 
 if pick_events:
     eventSelector.toSelect = []
@@ -301,7 +371,7 @@ if not cmssw:
     module = [s for s in sequence if s.name == 'MCWeighter'][0]
     sequence.remove(module)
 
-test = getHeppyOption('test')
+#test = getHeppyOption('test')
 
 #DYtest = getHeppyOption('DYtest')
 #if DYtest:
@@ -379,7 +449,7 @@ if not production and test == None:
 #elif test != None:
 #    raise RuntimeError, "Unknown test %r" % test
 
-#autoAAA(selectedComponents)
+autoAAA(selectedComponents)
 
 print "TASSSA SEQUAENCE:"
 print sequence

@@ -145,7 +145,7 @@ class MCAnalysis:
                     # Heppy calls the tree just 'tree.root'
                     rootfile = "%s/%s/%s/tree.root" % (basepath, cname, treename)
                     rootfile = open(rootfile+".url","r").readline().strip()
-                pckfile = basepath+"/%s/skimAnalyzerCount/SkimReport.pck" % cname
+                pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % cname
 
                 tty = TreeToYield(rootfile, options, settings=extra, name=pname, cname=cname, objname=objname); ttys.append(tty)
                 if signal: 
@@ -165,7 +165,7 @@ class MCAnalysis:
                         if (is_w==0): raise RuntimeError, "Can't put together a weighted and an unweighted component (%s)" % cnames
                         is_w = 1; 
                         total_w += counters['Sum Weights']
-                        scale = "genWeight*(%s)" % field[2]
+                        scale = "weight_gen*(%s)" % field[2]
                     else:
                         if (is_w==1): raise RuntimeError, "Can't put together a weighted and an unweighted component (%s)" % cnames
                         is_w = 0;

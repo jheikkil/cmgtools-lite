@@ -24,7 +24,7 @@ class ComponentCreator(object):
             raise RuntimeError, "Trying to make a component %s with no files" % name
          dprefix = dataset +"/" if files[0][0] != "/" else ""
          if prefix == "auto":
-            if (dprefix+files[0]).startswith("/store"): prefix = "root://eoscms.cern.ch//eos/cms"
+            if (dprefix+files[0]).startswith("/store"): prefix = "root://xrootd-cms.infn.it/" 
             else: prefix = ""
          # prefix filenames with dataset unless they start with "/"
          component = cfg.MCComponent(
@@ -177,7 +177,8 @@ class ComponentCreator(object):
         # print 'getting files for', dataset,user,pattern
         ds = createDataset( user, dataset, pattern, readcache=True, run_range=run_range, json=json )
         files = ds.listOfGoodFiles()
-        mapping = 'root://eoscms.cern.ch//eos/cms%s'
+        mapping = 'root://cms-xrd-global.cern.ch/%s'
+        #mapping = 'root://eoscms.cern.ch//eos/cms%s'
         if useAAA: mapping = 'root://cms-xrd-global.cern.ch/%s'
         return [ mapping % f for f in files]
 
