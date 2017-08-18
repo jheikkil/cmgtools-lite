@@ -8,15 +8,20 @@ from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import SingleMuon_Run2016
 from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import SingleMuon_Run2016C_PromptReco_v2, SingleElectron_Run2016C_PromptReco_v2, MuonEG_Run2016C_PromptReco_v2, Tau_Run2016C_PromptReco_v2
 from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import SingleMuon_Run2016D_PromptReco_v2, SingleElectron_Run2016D_PromptReco_v2, MuonEG_Run2016D_PromptReco_v2, Tau_Run2016D_PromptReco_v2
 from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import SingleMuon_Run2016G_PromptReco_v1, SingleElectron_Run2016G_PromptReco_v1, MuonEG_Run2016G_PromptReco_v1, Tau_Run2016G_PromptReco_v1
-from CMGTools.RootTools.samples.samples_13TeV_RunIISpring16MiniAODv2 import ZZTo4L, WZTo1L3Nu, WWTo1L1Nu2Q, WZTo1L1Nu2Q, ZZTo2L2Q, WZTo2L2Q, VVTo2L2Nu, WZTo3LNu_amcatnlo
+from CMGTools.RootTools.samples.samples_13TeV_RunIISpring16MiniAODv2 import ZZTo4L, WZTo1L3Nu, WWTo1L1Nu2Q, WZTo1L1Nu2Q, ZZTo2L2Q, WZTo2L2Q, VVTo2L2Nu, WZTo3LNu, WZTo3LNu_amcatnlo
 
 # from CMGTools.RootTools.samples.samples_13TeV_RunIISpring16MiniAODv2 import DYJetsToLL_M10to50_ext1
 # DY1JetsToLL_M50_LO, DY2JetsToLL_M50_LO, DY3JetsToLL_M50_LO, DY4JetsToLL_M50_LO,
 
-from CMGTools.H2TauTau.proto.samples.spring16.higgs import HiggsGGH125, HiggsVBF125, HiggsTTH125
-from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import mc_higgs_susy_gg, mc_higgs_susy_bb
+from CMGTools.H2TauTau.proto.samples.spring16.higgs import HiggsGGH125, HiggsVBF125, HiggsTTH125, HiggsZH125
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import mc_higgs_susy_gg, mc_higgs_susy_bb, mc_higgs_azh #, mc_higgs_azh_bkg
 
 from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsSUSYGG160 as ggh160
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsAZH340 as azh340
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsAZH300 as azh300
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsZZTo4lJaana, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZv1, HiggsWZv2, HiggsTTJaana, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import WZ_min01, WZJ, WZ
+
 
 # 21 July
 
@@ -133,4 +138,19 @@ for sample in data_single_muon + data_single_electron + data_muon_electron + dat
 sm_signals = [HiggsGGH125, HiggsVBF125, HiggsTTH125]
 mssm_signals = mc_higgs_susy_bb + mc_higgs_susy_gg
 
-sync_list = [ggh160, HiggsVBF125]
+#azh_bkg = mc_higgs_azh_bkg ##+ DYJetsToLL_M50
+
+sync_list = []
+
+
+#for sm sync
+#sync_list = [azh340] 
+sync_list = [azh300]
+#for mssm sync
+#sync_list = [ggh160]
+#for background syncs
+#sync_list=[DYJetsToLL_M50, WZTo3LNu_amcatnlo]
+DY_sync_list = [HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
+WZ_sync_list = [HiggsWZv1, HiggsWZv2, WZ_min01, WZJ, WZ]
+#sync_list=[HiggsZZTo4lJaana, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZv1, HiggsWZv2, HiggsTTJaana, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
+#sync_list = [azh_bkg]

@@ -7,7 +7,7 @@ tauIDs = [
     'byIsolationMVArun2v1DBdR03oldDMwLTraw',
     ('by{wp}CombinedIsolationDeltaBetaCorr3Hits', ['Loose', 'Medium', 'Tight']),
     ('by{wp}IsolationMVArun2v1DBoldDMwLT', ['VLoose', 'Loose', 'Medium', 'Tight', 'VTight', 'VVTight']),
-    ('by{wp}IsolationMVArun2v1DBoldDMwLTNew', ['VLoose', 'Loose', 'Medium', 'Tight', 'VTight', 'VVTight']),
+   # ('by{wp}IsolationMVArun2v1DBoldDMwLTNew', ['VLoose', 'Loose', 'Medium', 'Tight', 'VTight', 'VVTight']),
     ('by{wp}IsolationMVArun2v1DBnewDMwLT', ['VLoose', 'Loose', 'Medium', 'Tight', 'VTight', 'VVTight']),
     ('by{wp}IsolationMVArun2v1DBdR03oldDMwLT', ['VLoose', 'Loose', 'Medium', 'Tight', 'VTight', 'VVTight']),
     'chargedIsoPtSum',
@@ -16,8 +16,8 @@ tauIDs = [
     'neutralIsoPtSum',
     'puCorrPtSum',
     'photonPtSumOutsideSignalCone',
-    'byTightIsolationMVArun2v1DBoldDMwLT' # For sync check
-    
+    'byTightIsolationMVArun2v1DBoldDMwLT', # For sync check
+    'byMediumIsolationMVArun2v1DBoldDMwLT'    
 ]
 tauIDs_extra = [
     'againstElectronMVA6category',

@@ -16,17 +16,41 @@ def default():
 
 # event variables
 event_vars = [
+    Variable('XSecLumiWeight'),
     Variable('run', type=int),
     Variable('lumi', type=int),
+    Variable('nMuons', type=int),
+    Variable('nElectrons', type=int),
+    Variable('nTaus', type=int),
+    Variable('nMuonsBEFORE', type=int),
+    Variable('nElectronsBEFORE', type=int),
+    Variable('nTausBEFORE', type=int),
+    Variable('nMuonsGOOD', type=int),
+    Variable('nElectronsGOOD', type=int),
+    Variable('nTausPtEtaGOOD', type=int),
+    Variable('nMuonsPtEtaIso', type=int),
+    Variable('nElectronsPtEtaIso', type=int),
+    Variable('nTausPtEtaIso', type=int),
+    Variable('nCleanedTaus', type=int),
+    Variable('allLeptonsOK', type=int),
+    Variable('fourLeptons', type=int),
+    Variable('Z_mm_len', type=int),
+    Variable('Z_ee_len', type=int),
+    Variable('H_tt_len', type=int),
+    Variable('H_mt_len', type=int),
+    Variable('H_et_len', type=int),
+    Variable('H_em_len', type=int),
+    Variable('allLeptons', type=int),
+    Variable('allLeptonsFinal', type=int),
     Variable('event', lambda ev : ev.eventId, type=int),
     Variable('bx', lambda ev : (ev.input.eventAuxiliary().bunchCrossing() * ev.input.eventAuxiliary().isRealData()), type=int),
     Variable('orbit_number', lambda ev : (ev.input.eventAuxiliary().orbitNumber() * ev.input.eventAuxiliary().isRealData()), type=int),
     Variable('is_data', lambda ev: ev.input.eventAuxiliary().isRealData(), type=int),
     Variable('nPU', lambda ev : -99 if getattr(ev, 'nPU', -1) is None else getattr(ev, 'nPU', -1)),
-    Variable('pass_leptons', lambda ev : ev.isSignal, type=int),
-    Variable('veto_dilepton', lambda ev : not ev.leptonAccept, type=int),
-    Variable('veto_thirdlepton', lambda ev : not ev.thirdLeptonVeto, type=int),
-    Variable('veto_otherlepton', lambda ev : not ev.otherLeptonVeto, type=int),
+    #Variable('pass_leptons', lambda ev : ev.isSignal, type=int),
+    #Variable('veto_dilepton', lambda ev : not ev.leptonAccept, type=int),
+    #Variable('veto_thirdlepton', lambda ev : not ev.thirdLeptonVeto, type=int),
+    #Variable('veto_otherlepton', lambda ev : not ev.otherLeptonVeto, type=int),
     Variable('n_jets', lambda ev : len(ev.cleanJets30), type=int),
     Variable('n_jets_puid', lambda ev : sum(1 for j in ev.cleanJets30 if j.puJetId()), type=int),
     Variable('n_jets_20', lambda ev : len(ev.cleanJets), type=int),
@@ -39,8 +63,8 @@ event_vars = [
     Variable('weight_vertex', lambda ev : ev.puWeight),
     # # Add back for embedded samples once needed
     # Variable('weight_embed', lambda ev : getattr(ev, 'embedWeight', 1.)),
-    Variable('weight_njet', lambda ev : ev.NJetWeight),
-    Variable('weight_dy', lambda ev : getattr(ev, 'dy_weight', 1.)),
+    #Variable('weight_njet', lambda ev : ev.NJetWeight),
+    #Variable('weight_dy', lambda ev : getattr(ev, 'dy_weight', 1.)),
     # # Add back the following only for ggH samples once needed
     # Variable('weight_hqt', lambda ev : getattr(ev, 'higgsPtWeight', 1.)),
     # Variable('weight_hqt_up', lambda ev : getattr(ev, 'higgsPtWeightUp', 1.)),
@@ -62,6 +86,7 @@ event_vars = [
     Variable('badMuonMoriond2017', type=int),
     Variable('badCloneMuonMoriond2017', type=int)
 ]
+
 
 # di-tau object variables
 ditau_vars = [
@@ -110,6 +135,8 @@ svfit_vars = [
 
 # generic particle
 particle_vars = [
+    Variable('LT', lambda p: p.LT() if hasattr(p, 'LT') else 0),
+    Variable('DR', lambda p: p.DR() if hasattr(p, 'DR') else 0),
     Variable('pt', lambda p: p.pt()),
     Variable('eta', lambda p: p.eta()),
     Variable('phi', lambda p: p.phi()),
@@ -138,6 +165,8 @@ electron_vars = [
     # Variable('eid_nontrigmva_loose', lambda ele : ele.mvaIDRun2("NonTrigPhys14", "Loose")),
     Variable('eid_nontrigmva_loose', lambda ele : ele.mvaRun2('NonTrigSpring15MiniAOD')),
     Variable('eid_nontrigmva_tight', lambda ele : ele.mvaIDRun2("NonTrigSpring15MiniAOD", "POG80")),
+    Variable('eid_nontrigmva_medium', lambda ele : ele.mvaIDRun2("NonTrigSpring15MiniAOD", "POG90")),
+    Variable('eid_spring16', lambda ele: ele.mvaIDRun2('Spring16', 'POG90')),
     Variable('eid_veto', lambda ele : ele.cutBasedId('POG_SPRING15_25ns_v1_Veto')),
     Variable('eid_loose', lambda ele : ele.cutBasedId('POG_SPRING15_25ns_v1_Loose')),
     Variable('eid_medium', lambda ele : ele.cutBasedId('POG_SPRING15_25ns_v1_Medium')),
@@ -148,6 +177,7 @@ electron_vars = [
     Variable('reliso05_04', lambda lep : lep.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0)),
     Variable('reliso05_04', lambda lep : lep.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0)),
     Variable('weight_tracking', lambda lep : getattr(lep, 'weight_tracking', 1.)),
+    Variable('matchedTrgObj', lambda lep: 1 if hasattr(lep,'matchedTrgObjEls') else 0, int),
 ]
 
 # muon
@@ -162,6 +192,10 @@ muon_vars = [
     Variable('dxy_innertrack', lambda muon : muon.innerTrack().dxy(muon.associatedVertex.position())),
     Variable('dz_innertrack', lambda muon : muon.innerTrack().dz(muon.associatedVertex.position())),
     Variable('weight_tracking', lambda muon : getattr(muon, 'weight_tracking', 1.)),
+    Variable('trackerMuon', lambda muon : muon.isTrackerMuon()),
+    Variable('globalMuon', lambda muon : muon.isGlobalMuon()),
+    Variable('PFMuon', lambda muon : muon.isPFMuon()),
+    Variable('matchedTrgObj', lambda muon: 1 if hasattr(muon,'matchedTrgObjMus') else 0, int),
 ]
 
 # tau
