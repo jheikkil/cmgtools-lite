@@ -163,6 +163,7 @@ lepton_vars = [
 # electron
 electron_vars = [
     # Variable('eid_nontrigmva_loose', lambda ele : ele.mvaIDRun2("NonTrigPhys14", "Loose")),
+    Variable('eid_spring16MVAraw', lambda ele: ele.mvaRun2('Spring16GP')),
     Variable('eid_nontrigmva_loose', lambda ele : ele.mvaRun2('NonTrigSpring15MiniAOD')),
     Variable('eid_nontrigmva_tight', lambda ele : ele.mvaIDRun2("NonTrigSpring15MiniAOD", "POG80")),
     Variable('eid_nontrigmva_medium', lambda ele : ele.mvaIDRun2("NonTrigSpring15MiniAOD", "POG90")),
