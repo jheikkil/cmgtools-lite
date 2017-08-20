@@ -27,6 +27,11 @@ vars['Z_ee_l2_phi']  = {'std': 'Z_ee_l2_phi', 'sync': 'phi_2'}
 vars['Z_ee_l2_eta']  = {'std': 'Z_ee_l2_eta', 'sync': 'eta_2'}
 vars['Z_ee_l2_reliso05']  = {'std': 'Z_ee_l2_reliso05', 'sync': 'iso_2'}
 
+#Variable('eid_spring16MVAraw', lambda ele: ele.mvaRun2('Spring16GP')),
+vars['Z_ee_l1_eid_spring16MVAraw']  = {'std': 'Z_ee_l1_eid_spring16MVAraw', 'sync': 'IdRawMva_1'}
+vars['Z_ee_l2_eid_spring16MVAraw']  = {'std': 'Z_ee_l2_eid_spring16MVAraw', 'sync': 'IdRawMva_2'}
+
+
 # MM
 
 vars['Zboson_mm_pt'] = {'std': 'Zboson_mm_pt', 'sync': 'Z_Pt'}
@@ -74,6 +79,8 @@ vars['H_et_l1_pt']  = {'std': 'H_et_l1_pt', 'sync': 'pt_3'}
 vars['H_et_l1_phi']  = {'std': 'H_et_l1_phi', 'sync': 'phi_3'}
 vars['H_et_l1_eta']  = {'std': 'H_et_l1_eta', 'sync': 'eta_3'}
 vars['H_et_l1_reliso05']  = {'std': 'H_et_l1_reliso05', 'sync': 'iso_3'}
+vars['H_et_l1_eid_spring16MVAraw']  = {'std': 'H_et_l1_eid_spring16MVAraw', 'sync': 'IdRawMva_3'}
+
 
 vars['H_et_l2_pt']  = {'std': 'H_et_l2_pt', 'sync': 'pt_4'}
 vars['H_et_l2_phi']  = {'std': 'H_et_l2_phi', 'sync': 'phi_4'}
@@ -115,6 +122,8 @@ vars['H_em_l2_pt']  = {'std': 'H_em_l2_pt', 'sync': 'pt_4'}
 vars['H_em_l2_phi']  = {'std': 'H_em_l2_phi', 'sync': 'phi_4'}
 vars['H_em_l2_eta']  = {'std': 'H_em_l2_eta', 'sync': 'eta_4'}
 vars['H_em_l2_reliso05']  = {'std': 'H_em_l2_reliso05', 'sync': 'iso_4'}
+vars['H_em_l1_eid_spring16MVAraw']  = {'std': 'H_em_l1_eid_spring16MVAraw', 'sync': 'IdRawMva_3'}
+
 
 # Generator info
 vars['geninfo_tt'] = {'std': 'geninfo_tt', 'sync': 'isZtt'}

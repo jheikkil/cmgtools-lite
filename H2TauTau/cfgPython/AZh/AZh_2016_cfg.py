@@ -407,7 +407,8 @@ elif test == '2':
         #nev = getattr(comp, 'dataset_entries', 0)
        	#print "number of entries:" 
         #print nev
-
+elif test == '3':
+    split_factor=1 
 
 elif test != None:
     raise RuntimeError, "Unknown test %r" % test
@@ -449,7 +450,7 @@ if not production and test == None:
 #elif test != None:
 #    raise RuntimeError, "Unknown test %r" % test
 
-autoAAA(selectedComponents)
+#autoAAA(selectedComponents)
 
 print "TASSSA SEQUAENCE:"
 print sequence
