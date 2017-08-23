@@ -360,8 +360,8 @@ if syncntuple and test==None:
     sequence.append(MMTTtreeProducer)
     sequence.append(MMEMtreeProducer)
 
-#if syncntuple:
-  #  sequence.append(syncTreeProducer)
+if syncntuple:
+    sequence.append(syncTreeProducer)
 
 if pick_events:
     eventSelector.toSelect = []

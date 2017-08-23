@@ -105,6 +105,8 @@ class H2TauTauTreeProducerAZh(H2TauTauTreeProducer):
     def process(self, event):
         super(H2TauTauTreeProducerAZh, self).process(event)
 
+        print "MOIIIIIIIIIIIIIIIIIIIIIIIIIIII TREEEEEEEEEEE PRODUUUCEEEEEEEEEEEEEEEEEER"
+
       #  mu1 = event.diLepton.leg1()
       #  mu2 = event.diLepton.leg2()
  
