@@ -3,13 +3,14 @@ from PhysicsTools.HeppyCore.utils.deltar import deltaR, deltaPhi
 from CMGTools.H2TauTau.proto.analyzers.tauIDs import tauIDs, tauIDs_extra
 
 class Variable():
-    def __init__(self, name, function=None, type=float):
+    def __init__(self, name, function=None, type=float, storageType="default"):
         self.name = name
         self.function = function
         if function is None:
             # Note: works for attributes, not member functions
             self.function = lambda x : getattr(x, self.name, -999.) 
         self.type = type
+        self.storageType = storageType
 
 def default():
     return -999.
@@ -42,7 +43,7 @@ event_vars = [
     Variable('H_em_len', type=int),
     Variable('allLeptons', type=int),
     Variable('allLeptonsFinal', type=int),
-    Variable('event', lambda ev : ev.eventId, type=int),
+    Variable('event', lambda ev : ev.eventId, type=int, storageType="l"),
     Variable('bx', lambda ev : (ev.input.eventAuxiliary().bunchCrossing() * ev.input.eventAuxiliary().isRealData()), type=int),
     Variable('orbit_number', lambda ev : (ev.input.eventAuxiliary().orbitNumber() * ev.input.eventAuxiliary().isRealData()), type=int),
     Variable('is_data', lambda ev: ev.input.eventAuxiliary().isRealData(), type=int),
