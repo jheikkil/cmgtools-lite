@@ -33,7 +33,7 @@ from CMGTools.H2TauTau.proto.analyzers.SVfitProducer import SVfitProducer
 from PhysicsTools.Heppy.utils.cmsswPreprocessor import CmsswPreprocessor
 from CMGTools.H2TauTau.proto.analyzers.FileCleaner import FileCleaner
 
-from CMGTools.H2TauTau.proto.samples.spring16.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_single_muon, sync_list, DY_sync_list, WZ_sync_list
+from CMGTools.H2TauTau.proto.samples.spring16.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_single_muon, sync_list, DY_sync_list, WZ_sync_list, AZH_control, AZH_data
 
 from CMGTools.RootTools.utils.splitFactor import splitFactor
 from CMGTools.H2TauTau.proto.samples.spring16.triggers_muMu import mc_triggers, mc_triggerfilters
@@ -53,7 +53,7 @@ cmssw = getHeppyOption('cmssw', False)
 computeSVfit = getHeppyOption('computeSVfit', False)
 data = getHeppyOption('data', False)
 reapplyJEC = getHeppyOption('reapplyJEC', True)
-applyIDISO = getHeppyOption('applyIDISO', False)
+applyIDISO = getHeppyOption('applyIDISO', True) #if you want to run control plots/signal, select true
 
 #if getHeppyOption('test'):
 #    test = getHeppyOption('test')
@@ -110,6 +110,7 @@ LepSelector = cfg.Analyzer(
 #        'data' : 'EgammaAnalysis/ElectronTools/data/Moriond17_23Jan_ele',
 
 #        'GBRForest': ('$CMSSW_BASE/src/CMGTools/RootTools/data/egamma_epComb_GBRForest_76X.root',
+
 
 #                      'gedelectron_p4combination_25ns'),
 
@@ -308,8 +309,9 @@ fileCleaner = cfg.Analyzer(
 )
 
 # Minimal list of samples
-samples = backgrounds_mu + sm_signals + mssm_signals + sync_list + [inputSample]
+#samples = backgrounds_mu + sm_signals + mssm_signals + AZH_control
 #samples = sync_list + [inputSample]
+samples = AZH_control
 inputJaana = sync_list
 
 ###################################################
@@ -318,6 +320,7 @@ inputJaana = sync_list
 for mc in samples:
     mc.puFileData = puFileData
     mc.puFileMC = puFileMC
+    print mc.dataset
     if hasattr(mc, 'dataset'):
         if 'PUSpring16' in mc.dataset:
             print 'Attaching Spring 16 pileup to sample', mc.dataset
@@ -378,8 +381,8 @@ if not cmssw:
 #    selectedComponents=DY_sync_list
 #else:
 
-selectedComponents=sync_list
-
+#selectedComponents=AZH_data
+selectedComponents=AZH_control
 #selectedComponents=[inputSample]
 
 #selectedComponents=DY_sync_list
@@ -413,7 +416,7 @@ elif test == '3':
 elif test != None:
     raise RuntimeError, "Unknown test %r" % test
 
-if not production and test == None:
+if not production and not data and test == None:
     #print "TUTII"
     #comp = [b for b in backgrounds_mu if b.name == 'DYJetsToLL_M50_LO'][0]
     # comp = data_list[0] if data else sync_list[0]

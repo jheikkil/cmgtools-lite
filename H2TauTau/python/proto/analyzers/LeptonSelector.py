@@ -96,12 +96,17 @@ class LeptonSelector(Analyzer):
 
         #ADD LATER ON: electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1
 
-        if not self.cfg_ana.applyIDISO:
+        #define good leptons
+        muonsGOOD = [ muon for muon in muons if muon.pt()>10 and abs(muon.eta())<2.4 and  abs(muon.dxy()) < 0.045 and abs(muon.dz()) < 0.2 and muon.muonID('POG_ID_Loose') and muon.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.25]
+        electronsGOOD = [ electron for electron in electrons if electron.pt()>10 and abs(electron.eta())<2.5 and abs(electron.dxy()) < 0.045 and abs(electron.dz()) < 0.2 and electron.mvaIDRun2('Spring16', 'POG90') and electron.passConversionVeto() and electron.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.3 and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1]
+        tausGOOD = [ tau for tau in taus if tau.pt()>20 and abs(tau.eta())<2.3 and tau.tauID('decayModeFinding') > 0.5 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('byMediumIsolationMVArun2v1DBoldDMwLT') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonLoose3') > 0.5]
+
+        if self.cfg_ana.applyIDISO:
             #print "OKOKOK"
-            muonsGOOD = [ muon for muon in muons if muon.pt()>10 and abs(muon.eta())<2.4 and  abs(muon.dxy()) < 0.045 and abs(muon.dz()) < 0.2 and muon.muonID('POG_ID_Loose') and muon.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.25]
-            electronsGOOD = [ electron for electron in electrons if electron.pt()>10 and abs(electron.eta())<2.5 and abs(electron.dxy()) < 0.045 and abs(electron.dz()) < 0.2 and electron.mvaIDRun2('Spring16', 'POG90') and electron.passConversionVeto() and electron.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.3 and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1]
-            tausGOOD = [ tau for tau in taus if tau.pt()>20 and abs(tau.eta())<2.3 and tau.tauID('decayModeFinding') > 0.5 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('byMediumIsolationMVArun2v1DBoldDMwLT') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonLoose3') > 0.5]     
-        #else:
+            muons = [ muon for muon in muonsGOOD]
+            electrons = [ electron for electron in electronsGOOD] # if electron.pt()>10 and abs(electron.eta())<2.5 and abs(electron.dxy()) < 0.045 and abs(electron.dz()) < 0.2 and electron.mvaIDRun2('Spring16', 'POG90') and electron.passConversionVeto() and electron.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.3 and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1]
+            taus = [ tau for tau in tausGOOD] #if tau.pt()>20 and abs(tau.eta())<2.3 and tau.tauID('decayModeFinding') > 0.5 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('byMediumIsolationMVArun2v1DBoldDMwLT') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonLoose3') > 0.5]     
+        else:
             #print "LET US NOT USE IDISO YET!"
             muons = [ muon for muon in muons if muon.pt()>10 and abs(muon.eta())<2.4 and abs(muon.dxy()) < 0.045 and abs(muon.dz()) < 0.2 and ( muon.isGlobalMuon() or muon.isTrackerMuon() )]
             electrons = [ electron for electron in electrons if electron.pt()>10 and abs(electron.eta())<2.5 and abs(electron.dxy()) < 0.045 and abs(electron.dz()) < 0.2 and electron.passConversionVeto() and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1]

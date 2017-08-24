@@ -516,6 +516,7 @@ class AZhAnalyzer(Analyzer):
 
      #   H_resonance.sort(key=lambda x: x.LT(), reverse=True)
 
+
         if (Z_muons):
             if H_tt and ( len(muonsGOOD) != 2 or len(electronsGOOD) != 0 ):
                 H_tt=[]
@@ -577,8 +578,12 @@ class AZhAnalyzer(Analyzer):
 
         H_resonance.sort(key=lambda x: x.pt(), reverse=True)
 
-        print "len resonances"
-        print len(H_resonance)
+        #print "len resonances"
+        #print len(H_resonance)
+
+       #another check
+        if self.cfg_ana.applyIDISO and len(H_resonance)>1:
+            H_resonance = []
   
         #If more than one Higgs, take the one with the largest LT
        # if (len(H_em) + len(H_et) + len(H_tt) + len(H_mt) > 1):
