@@ -1,0 +1,11 @@
+#abs(eta)    : abs(electron_FR_eta): 10,0,2.5; LegendCutoff=1e-7
+pt    : tau_FR_pt : [20,30,40,50,60,70,80,90]; LegendCutoff=1e-7
+pt_jet : tau_FR_jet_pt : [20,30,40,50,60,70,80,90]; LegendCutoff=1e-7
+###tau_jet_pt_ratio : tau_FR_pt/tau_FR_jet_pt : 10,0,2; LegendCutoff=1e-7
+#met : met_pt : 20,0,200; LegendCutoff=1e-7
+#pfmt : mt_2(tau_FR_pt, tau_FR_phi, met_pt, met_phi): 20,0,120; LegendCutoff=1e-7
+pfmt_fix:  mt_2(35.0, tau_FR_phi, met_pt, met_phi): 20,0,120; LegendCutoff=1e-7
+#Z_vis   : m_vis: 6,60,120; LegendCutoff=1e-7
+#Z_Pt   :  Z_Pt : 23,0,230; LegendCutoff=1e-7
+#n_vertices : npv : 20,0,60; LegendCutoff=1e-7
+#puweight : puweight : 10,0,2; LegendCutoff=1e-7

@@ -1,0 +1,5 @@
+abs(eta): abs(tau_FR_eta): 10,0,2.3; LegendCutoff=1e-7
+pt: tau_FR_pt : 8,20,100; LegendCutoff=1e-7
+#VVloose: getVVLoose(tau_FR_byIsolationMVArun2v1DBoldDMwLTraw, tau_FR_pt): 2,-0.5,1.5; LegendCutoff=1e-7
+#Vloose: getVLoose(tau_FR_byIsolationMVArun2v1DBoldDMwLTraw, tau_FR_pt): 2,-0.5,1.5; LegendCutoff=1e-7
+

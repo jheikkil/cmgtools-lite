@@ -1,0 +1,9 @@
+#match: (gen_match_3==2 || gen_match_3==4) &&((gen_match_1!=1 && gen_match_2==1 && gen_match_1!=2 && gen_match_2!=2)||(gen_match_1==1 && gen_match_2!=1 && gen_match_1!=2 && gen_match_2!=2)||(gen_match_1!=1 && gen_match_2!=1 && gen_match_1!=2 && gen_match_2!=2)||(gen_match_1!=2 && gen_match_2==2 && gen_match_1!=1 && gen_match_2!=1)||(gen_match_1==2 && gen_match_2!=2 && gen_match_1!=1 && gen_match_2!=1))
+denom:  pt_3>10 && pt_4>20 && iso_3 < 1.0 && H_SS != 0 && m_vis>-1 && H_vis>-1
+#&& getVVLoose( iso_4, pt_4 ) > 0
+num_leg3: iso_3 < 0.15 &&  H_mt_l1_muonid_loose > 0 
+#num_leg4: H_mt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_mt_l2_againstMuon3>=2 && H_mt_l2_againstElectronMVA6>=4
+#mass: H_SS != 0 && m_vis>-1 && H_vis>-1
+#LT : Hboson_tt_LT > 80
+
+

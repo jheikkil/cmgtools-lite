@@ -19,7 +19,7 @@ class H2TauTauTreeProducerAZhEE_FR(H2TauTauTreeProducer):
 
         #muon
         self.bookMuon(self.tree, 'muon_FR')
-        self.bookGenParticle(self.tree, 'muon_FR')
+        self.bookGenParticle(self.tree, 'muon_FR_gen')
 
 
         #electron
@@ -59,9 +59,9 @@ class H2TauTauTreeProducerAZhEE_FR(H2TauTauTreeProducer):
             muon_FR_l1 = event.muon_FR[0]
             self.fillMuon(self.tree, 'muon_FR', muon_FR_l1)
 
-            #if hasattr(muon_FR_l1, 'genp') and muon_FR_l1.genp:
+            if hasattr(muon_FR_l1, 'genp') and muon_FR_l1.genp:
             #    print "tayta tama"
-            #    self.fillGenParticle(self.tree, 'muon_FR_gen', muon_FR_l1.genp)
+                self.fillGenParticle(self.tree, 'muon_FR_gen', muon_FR_l1.genp)
 
         if hasattr(event, 'electron_FR'):
             electron_FR = event.electron_FR[0]

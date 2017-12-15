@@ -4,7 +4,7 @@ from PhysicsTools.HeppyCore.framework.heppy_loop import getHeppyOption
 
 # Tau-tau analyzers
 from PhysicsTools.Heppy.analyzers.core.all import TriggerMatchAnalyzer
-
+from PhysicsTools.Heppy.analyzers.core.all import TriggerBitFilter
 
 from CMGTools.H2TauTau.proto.analyzers.MuMuAnalyzer import MuMuAnalyzer
 from CMGTools.H2TauTau.proto.analyzers.CountEvents import CountEvents
@@ -20,6 +20,11 @@ from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhEEET import H2TauT
 from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhEETT import H2TauTauTreeProducerAZhEETT
 from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhEEEM import H2TauTauTreeProducerAZhEEEM
 
+
+from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhEE_FR import H2TauTauTreeProducerAZhEE_FR
+from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhMM_FR import H2TauTauTreeProducerAZhMM_FR
+
+
 from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhMMMT import H2TauTauTreeProducerAZhMMMT
 from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhMMET import H2TauTauTreeProducerAZhMMET
 from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZhMMTT import H2TauTauTreeProducerAZhMMTT
@@ -33,7 +38,17 @@ from CMGTools.H2TauTau.proto.analyzers.SVfitProducer import SVfitProducer
 from PhysicsTools.Heppy.utils.cmsswPreprocessor import CmsswPreprocessor
 from CMGTools.H2TauTau.proto.analyzers.FileCleaner import FileCleaner
 
-from CMGTools.H2TauTau.proto.samples.spring16.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_single_muon, sync_list, DY_sync_list, WZ_sync_list, AZH_control, AZH_data
+from CMGTools.H2TauTau.proto.samples.spring16.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_single_muon, sync_list, DY_sync_list, WZ_sync_list, AZH_control, AZH_data, ZZ_control2, AZH_tight, AZH_test, AZH_masses, DY_inc, AZH_data_single
+from CMGTools.H2TauTau.proto.samples.spring16.htt_common import *
+
+
+#for d in AZH_data:
+#    d.triggers = triggers_2m if 'Muon' in d.name else triggers_2e
+#    d.vetoTriggers = []
+#for d in AZH_data_single:
+#    d.triggers = triggers_1m if 'Muon' in d.name else triggers_1e
+#    d.vetoTriggers = triggers_2m if 'Muon' in d.name else triggers_2e
+
 
 from CMGTools.RootTools.utils.splitFactor import splitFactor
 from CMGTools.H2TauTau.proto.samples.spring16.triggers_muMu import mc_triggers, mc_triggerfilters
@@ -53,7 +68,8 @@ cmssw = getHeppyOption('cmssw', False)
 computeSVfit = getHeppyOption('computeSVfit', False)
 data = getHeppyOption('data', False)
 reapplyJEC = getHeppyOption('reapplyJEC', True)
-applyIDISO = getHeppyOption('applyIDISO', True) #if you want to run control plots/signal, select true
+applyIDISO = getHeppyOption('applyIDISO', False) #if you want to run control plots/signal, select true
+FAKERATE = getHeppyOption('FAKERATE', False)
 
 #if getHeppyOption('test'):
 #    test = getHeppyOption('test')
@@ -124,7 +140,8 @@ trigMatcherEls = cfg.Analyzer(
     processName = 'PAT',
     fallbackProcessName = 'RECO',
     unpackPathNames = True,
-    trgObjSelectors = [ lambda t : t.path("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v*",1,0)],
+    trgObjSelectors = [ lambda t : t.path("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v*",1,0)], 
+#or t.path("HLT_Ele27_WPTight_Gsf_v*",1,0)],
     collToMatch = 'electrons',
     collMatchSelectors = [ lambda l,t : abs(l.pdgId()) == 11 ],
     collMatchDRCut = 0.5,
@@ -139,7 +156,8 @@ trigMatcherMus = trigMatcherEls.clone(
     name="trigMatcherMus",
     label='Mus',
     collToMatch = 'muons',
-    trgObjSelectors = [ lambda t : t.path("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v*",1,0) or t.path("HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v*",1,0)],
+    trgObjSelectors = [ lambda t : t.path("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v*",1,0) or t.path("HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v*",1,0)], 
+#####or t.path("HLT_IsoMu24_v*",1,0) or t.path("HLT_IsoTkMu24_v*",1,0)],
     collMatchSelectors = [ lambda l,t : abs(l.pdgId()) == 13 ],
     id = 13,
     pt1 = 18,
@@ -153,6 +171,7 @@ AZhAnaZboson = cfg.Analyzer(
     pdgid = 23,
     applyIDISO = True if applyIDISO else False,
     MC = False if data else True,
+    FAKERATE = True if FAKERATE else False,
     filter_func = lambda x : True,
 )
 
@@ -286,6 +305,22 @@ MMEMtreeProducer = cfg.Analyzer(
 )
 
 
+EE_FRtreeProducer = cfg.Analyzer(
+    H2TauTauTreeProducerAZhEE_FR,
+    name='H2TauTauTreeProducerAZhEE_FR',
+    addMoreJetInfo=True,
+    varStyle='sync'
+)
+
+
+MM_FRtreeProducer = cfg.Analyzer(
+    H2TauTauTreeProducerAZhMM_FR,
+    name='H2TauTauTreeProducerAZhMM_FR',
+    addMoreJetInfo=True,
+    varStyle='sync'
+)
+
+
 syncTreeProducer = cfg.Analyzer(
     H2TauTauTreeProducerAZh,
     name='H2TauTauSyncTreeProducerAZh',
@@ -309,23 +344,30 @@ fileCleaner = cfg.Analyzer(
 )
 
 # Minimal list of samples
+samples=[]
+#samples = DY_all
+#samples = ttZ_control
+#samples = DY_inc
 #samples = backgrounds_mu + sm_signals + mssm_signals + AZH_control
-#samples = sync_list + [inputSample]
-samples = AZH_control
-inputJaana = sync_list
+#samples = [inputSample]
+#samples = AZH_control
+#samples = AZH_masses
+#samples = sync_list
+#inputJaana = sync_list
 
 ###################################################
 ###              ASSIGN PU to MC                ###
 ###################################################
-for mc in samples:
-    mc.puFileData = puFileData
-    mc.puFileMC = puFileMC
-    print mc.dataset
-    if hasattr(mc, 'dataset'):
-        if 'PUSpring16' in mc.dataset:
-            print 'Attaching Spring 16 pileup to sample', mc.dataset
+if samples:
+    for mc in samples:
+        mc.puFileData = puFileData
+        mc.puFileMC = puFileMC
+        print mc.dataset
+        if hasattr(mc, 'dataset'):
+            if 'PUSpring16' in mc.dataset:
+                print 'Attaching Spring 16 pileup to sample', mc.dataset
         # mc.puFileData = '$CMSSW_BASE/src/CMGTools/H2TauTau/data/data_pu_25-07-2016_69p2mb_60.root'
-            mc.puFileMC = '$CMSSW_BASE/src/CMGTools/H2TauTau/data/MC_Spring16_PU25_Startup_800.root'
+                mc.puFileMC = '$CMSSW_BASE/src/CMGTools/H2TauTau/data/MC_Spring16_PU25_Startup_800.root'
 
 
 # Additional samples
@@ -348,11 +390,15 @@ sequence.insert(sequence.index(httGenAna), AZhAnaZboson)
 #sequence.append(muonWeighter2)
 if computeSVfit:
     sequence.append(svfitProducer)
-sequence.append(treeProducer)
+#sequence.append(treeProducer)
 
 test = getHeppyOption('test')
 
-if syncntuple and test==None:
+if syncntuple and (test==None or test=='1') and FAKERATE:
+    sequence.append(EE_FRtreeProducer)
+    sequence.append(MM_FRtreeProducer)
+
+if syncntuple and (test==None or test=='1' or test=='2') and not FAKERATE:
     sequence.append(EEMTtreeProducer)
     sequence.append(EEETtreeProducer)
     sequence.append(EETTtreeProducer)
@@ -381,11 +427,13 @@ if not cmssw:
 #    selectedComponents=DY_sync_list
 #else:
 
-#selectedComponents=AZH_data
-selectedComponents=AZH_control
+#selectedComponents=ZZ_control2
+#selectedComponents=AZH_tight
+#selectedComponents=AZH_control
 #selectedComponents=[inputSample]
-
-#selectedComponents=DY_sync_list
+selectedComponents=samples
+#selectedComponents=AZH_data_single
+#selectedComponents=DY_inc
 #selectedComponents=WZ_sync_list
 
 if test == '1':
@@ -453,7 +501,7 @@ if not production and not data and test == None:
 #elif test != None:
 #    raise RuntimeError, "Unknown test %r" % test
 
-#autoAAA(selectedComponents)
+autoAAA(selectedComponents)
 
 print "TASSSA SEQUAENCE:"
 print sequence

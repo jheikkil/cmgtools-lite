@@ -69,6 +69,7 @@ parser.add_option("-t", "--tree",    dest="tree",      default='ttHLepTreeProduc
 parser.add_option("-V", "--vector",  dest="vectorTree", action="store_true", default=True, help="Input tree is a vector");
 parser.add_option("-F", "--add-friend",    dest="friendTrees",  action="append", default=[], nargs=2, help="Add a friend tree (treename, filename). Can use {name}, {cname} patterns in the treename")
 parser.add_option("--FMC", "--add-friend-mc",    dest="friendTreesMC",  action="append", default=[], nargs=2, help="Add a friend tree (treename, filename) to MC only. Can use {name}, {cname} patterns in the treename")
+parser.add_option("--MC", "--only-mc",    dest="onlyMC",  action="store_true", default=False, help="Include MC only.")
 parser.add_option("--FD", "--add-friend-data",    dest="friendTreesData",  action="append", default=[], nargs=2, help="Add a friend tree (treename, filename) to data trees only. Can use {name}, {cname} patterns in the treename")
 parser.add_option("-L", "--list-modules",  dest="listModules", action="store_true", default=False, help="just list the configured modules");
 parser.add_option("-n", "--new",  dest="newOnly", action="store_true", default=False, help="Make only missing trees");
@@ -86,6 +87,7 @@ if options.imports:
     for mod in options.imports:
         import_module(mod)
         obj = sys.modules[mod]
+        print obj
         for (name,x) in obj.MODULES:
             print "Loaded %s from %s " % (name, mod)
             MODULES.append((name,x))
@@ -157,8 +159,14 @@ for D in glob(args[0]+"/*"):
                     continue
         chunk = options.chunkSize
         if entries < chunk:
-            print "  ",os.path.basename(D),("  DATA" if data else "  MC")," single chunk"
-            jobs.append((short,fname,"%s/evVarFriend_%s.root" % (args[1],short),data,xrange(entries),-1,None))
+            #print options.onlyMC
+            #print data
+            if options.onlyMC and not data:
+                print "  ",os.path.basename(D),("  DATA" if data else "  MC")," single chunk"
+                jobs.append((short,fname,"%s/evVarFriend_%s.root" % (args[1],short),data,xrange(entries),-1,None))
+            elif not options.onlyMC:
+                print "  ",os.path.basename(D),("  DATA" if data else "  MC")," single chunk"
+                jobs.append((short,fname,"%s/evVarFriend_%s.root" % (args[1],short),data,xrange(entries),-1,None))
         else:
             nchunk = int(ceil(entries/float(chunk)))
             print "  ",os.path.basename(D),("  DATA" if data else "  MC")," %d chunks" % nchunk
@@ -277,6 +285,8 @@ def _runIt(myargs):
     friends = options.friendTrees[:]
     friends += (options.friendTreesData if data else options.friendTreesMC)
     friends_ = [] # to make sure pyroot does not delete them
+    #print "FRIENDS"
+    #print friends
     for tf_tree,tf_file in friends:
         tf = tb.AddFriend(tf_tree, tf_file.format(name=name, cname=name, P=args[0])),
         friends_.append(tf) # to make sure pyroot does not delete them

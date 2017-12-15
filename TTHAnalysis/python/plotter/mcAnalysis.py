@@ -126,14 +126,28 @@ class MCAnalysis:
                 objname  = extra["ObjName"]  if "ObjName"  in extra else options.obj
 
                 basepath = None
+                #skimpath = None
+                #print treepath
+
+                #print "basepath: %s" %(basepath)
+                #print "treename: %s" %(treename)
+                #print "cname: %s" %(cname)
+                #print "rootfile: %s" %(rootfile)
+
                 for treepath in options.path:
                     if os.path.exists(treepath+"/"+cname):
                         basepath = treepath
                         break
                 if not basepath:
                     raise RuntimeError("%s -- ERROR: %s process not found in paths (%s)" % (__name__, cname, repr(options.path)))
-
-                rootfile = "%s/%s/%s/%s_tree.root" % (basepath, cname, treename, treename)
+ 
+                
+                #rootfile = "%s/%s/%s/%s_tree.root" % (basepath, cname, treename, treename)
+                rootfile = "%s/%s/tree.root" % (basepath, cname)
+                #print "basepath: %s" %(basepath)
+                #print "treename: %s" %(treename)
+                #print "cname: %s" %(cname)
+                #print "rootfile: %s" %(rootfile)
                 if options.remotePath:
                     rootfile = "root:%s/%s/%s_tree.root" % (options.remotePath, cname, treename)
                 elif os.path.exists(rootfile+".url"): #(not os.path.exists(rootfile)) and :
@@ -145,8 +159,14 @@ class MCAnalysis:
                     # Heppy calls the tree just 'tree.root'
                     rootfile = "%s/%s/%s/tree.root" % (basepath, cname, treename)
                     rootfile = open(rootfile+".url","r").readline().strip()
-                pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % cname
-
+                if options.skimpath:
+                    skimpath = cname.split('/', 1)
+                    #print skimpath
+                    pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % skimpath[0]
+                    #print pckfile
+                else:
+                    pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % cname
+                #print pckfile 
                 tty = TreeToYield(rootfile, options, settings=extra, name=pname, cname=cname, objname=objname); ttys.append(tty)
                 if signal: 
                     self._signals.append(tty)
@@ -583,6 +603,7 @@ def addMCAnalysisOptions(parser,addTreeToYieldOnesToo=True):
     parser.add_option("--scaleplot", dest="plotscalemap", type="string", default=[], action="append", help="Scale plots by this factor (before grouping). Syntax is '<newname> := (comma-separated list of regexp)', can specify multiple times.")
     parser.add_option("-t", "--tree",          dest="tree", default='ttHLepTreeProducerTTH', help="Pattern for tree name");
     parser.add_option("--fom", "--figure-of-merit", dest="figureOfMerit", type="string", default=[], action="append", help="Add this figure of merit to the output table (S/B, S/sqrB, S/sqrSB)")
+    parser.add_option("--skimPath", dest="skimpath", action="store_true", default=False, help="Give different path for skimAnalyzer files") 
 
 if __name__ == "__main__":
     from optparse import OptionParser

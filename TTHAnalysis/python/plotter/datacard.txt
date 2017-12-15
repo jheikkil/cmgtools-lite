@@ -1,0 +1,12 @@
+## Datacard for cut file  cutsCTRL_OS.txt
+##----------------------------------
+bin          cutsCTRL_OS
+observation  84116.4759968
+##----------------------------------
+##----------------------------------
+bin           cutsCTRL_OS   cutsCTRL_OS   cutsCTRL_OS   cutsCTRL_OS   cutsCTRL_OS 
+process            AZH300        DYjets            WZ            TT            ZZ 
+process                 0             1             2             3             4 
+rate              105.420     74637.532       163.687      9152.361        57.476 
+##----------------------------------
+

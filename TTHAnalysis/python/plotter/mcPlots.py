@@ -364,6 +364,8 @@ def doNormFit(pspec,pmap,mca,saveScales=False):
         normSystematic = mca.getProcessOption(p,'NormSystematic', 0.0)
         if p in pmap and p in procNormMap:
            # setthe scale
+           print p
+           print procNormMap[p].getVal()
            newscale = procNormMap[p].getVal()/pmap[p].Integral()
            pmap[p].Scale(newscale)
            # now get the 1 sigma
@@ -749,6 +751,9 @@ class PlotMaker:
                 if self._options.scaleBackgroundToData != []: self._sf = doScaleBkgNormData(pspec,pmap,mca,self._options.scaleBackgroundToData)
                 elif self._options.fitData: doNormFit(pspec,pmap,mca)
                 elif self._options.preFitData and pspec.name == self._options.preFitData:
+                    print "JAAAAAAAAAAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    print self._options.preFitData
+                    print pspec.name
                     doNormFit(pspec,pmap,mca,saveScales=True)
                 #
                 for k,v in pmap.iteritems():
@@ -935,8 +940,8 @@ class PlotMaker:
                     total.GetYaxis().SetRangeUser(pspec.getOption('YMin',1.0), pspec.getOption('YMax',1.0))
                 if pspec.hasOption('ZMin') and pspec.hasOption('ZMax'):
                     total.GetZaxis().SetRangeUser(pspec.getOption('ZMin',1.0), pspec.getOption('ZMax',1.0))
-                #if options.yrange: 
-                #    total.GetYaxis().SetRangeUser(options.yrange[0], options.yrange[1])
+                #if pspec.hasOption('yrange') and pspec.hasOption('yrangeMax'): 
+                #    total.GetYaxis().SetRangeUser(pspec.getOption(''), options.yrange[1])
                 legendCutoff = pspec.getOption('LegendCutoff', 1e-5 if c1.GetLogy() else 1e-2)
                 if plotmode == "norm": legendCutoff = 0 
                 if plotmode == "stack":

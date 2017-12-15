@@ -170,21 +170,21 @@ class HTTGenAnalyzer(Analyzer):
                 self.genMatch(event, event.Hboson_mt[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
                 self.attachGenStatusFlag(event.Hboson_mt[0].leg1())
                 self.attachGenStatusFlag(event.Hboson_mt[0].leg2())
-        elif hasattr(event, 'Hboson_et'):
+        if hasattr(event, 'Hboson_et'):
           #  for i in xrange( len(event.Hboson_et) ):
           #      print 'H et OK, MATCH JALAT'
                 self.genMatch(event, event.Hboson_et[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
                 self.genMatch(event, event.Hboson_et[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
                 self.attachGenStatusFlag(event.Hboson_et[0].leg1())
                 self.attachGenStatusFlag(event.Hboson_et[0].leg2())
-        elif hasattr(event, 'Hboson_tt'):
+        if hasattr(event, 'Hboson_tt'):
           #  for i in xrange( len(event.Hboson_tt) ):
          #       print 'H tt OK, MATCH JALAT'
                 self.genMatch(event, event.Hboson_tt[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
                 self.genMatch(event, event.Hboson_tt[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
                 self.attachGenStatusFlag(event.Hboson_tt[0].leg1())
                 self.attachGenStatusFlag(event.Hboson_tt[0].leg2())
-        elif hasattr(event, 'Hboson_em'):
+        if hasattr(event, 'Hboson_em'):
           #  for i in xrange( len(event.Hboson_em) ):
         #        print 'H em OK, MATCH JALAT'
                 self.genMatch(event, event.Hboson_em[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
@@ -213,6 +213,18 @@ class HTTGenAnalyzer(Analyzer):
                 self.genMatch(event, event.Zboson_ee[0].leg2(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
                 self.attachGenStatusFlag(event.Zboson_ee[0].leg1())
                 self.attachGenStatusFlag(event.Zboson_ee[0].leg2())
+        
+        if hasattr(event, 'tau_FR'):
+            self.genMatch(event, event.tau_FR[0], self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.tau_FR[0])
+
+        elif hasattr(event, 'muon_FR'):
+            self.genMatch(event, event.muon_FR[0], self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.muon_FR[0])
+
+        elif hasattr(event, 'electron_FR'):
+            self.genMatch(event, event.electron_FR[0], self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.electron_FR[0])
 
 
         if hasattr(event, 'selectedTaus'):

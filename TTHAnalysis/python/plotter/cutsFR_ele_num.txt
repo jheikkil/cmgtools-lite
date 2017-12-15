@@ -1,0 +1,1 @@
+eleFR_signal: electron_FR_eid_spring16_80>0 && electron_FR_reliso05<0.15 : 2,-0.5,1.5

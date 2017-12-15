@@ -2,6 +2,7 @@ Sync for AZh (MC)
   
   Using AZh sample: /AToZhToLLTauTau_M-300_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM
 
+
 16 October 2017:
   - Bug fix for implementing trigger cuts
 
@@ -15,6 +16,18 @@ Sync for AZh (MC)
      /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1510TRG/MMMT_1510.root
      /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1510TRG/MMET_1510.root
     
+  - Later on, same day: use Z mass 91.1876 instead of 91.2
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/EEEM_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/EETT_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/EEET_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/EEMT_1610.root
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/MMEM_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/MMTT_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/MMMT_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/MMET_1610.root
+
 
 15 October 2017:
 

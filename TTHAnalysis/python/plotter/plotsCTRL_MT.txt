@@ -1,0 +1,30 @@
+Z_vis: m_vis: 6,60,120; LegendCutoff=1e-7, MoreY=1.7, Legend="TR"
+Z_Pt :  Z_Pt : 23,0,230; LegendCutoff=1e-7, MoreY=1.7, Legend="TR"
+#H_vis : H_vis: 40,0,400; LegendCutoff=1e-7
+pt1 : pt_3 : 4,10,90; LegendCutoff=1e-7
+pt2 : pt_4 : 4,20,100; LegendCutoff=1e-7
+abs(eta1) : abs(eta_3): 5,0, 2.4;  LegendCutoff=1e-7
+abs(eta2) : abs(eta_4): 5,0, 2.3;  LegendCutoff=1e-7
+#H_Pt : H_Pt : 20,0,200; LegendCutoff=1e-7
+#A_vis : Mass : 60,50,750; LegendCutoff=1e-7
+#A_Pt : A_Pt : 30,0,300; LegendCutoff=1e-7
+#A_scaled : scaledHpt: 35,100,800; LegendCutoff=1e-7
+#MET_pt : met_pt : 30,0,300;  LegendCutoff=1e-7
+#DeltaPhi(MET, H) : H_METphi: 8,-4,4 ;  LegendCutoff=1e-7
+
+
+
+pt1_jet : H_mt_l1_jet_pt : [20,30,40,50,60,70,80,90,100,110,120]; LegendCutoff=1e-7
+muon1_jet_pt_ratio : pt_3/H_mt_l1_jet_pt : 10,0,2; LegendCutoff=1e-7
+
+pt2_jet : H_mt_l2_jet_pt : [20,30,40,50,60,70,80,90,100,110,120]; LegendCutoff=1e-7
+tau2_jet_pt_ratio : pt_4/H_mt_l2_jet_pt : 10,0,2; LegendCutoff=1e-7
+
+
+pfmt_fix1:  mt_2(35.0, phi_3, met_pt, met_phi): 20,0,120; LegendCutoff=1e-7
+pfmt_fix2:  mt_2(35.0, phi_4, met_pt, met_phi): 20,0,120; LegendCutoff=1e-7
+
+
+n_vertices : npv : 20,0,60; LegendCutoff=1e-7
+puweight : puweight : 10,0,2; LegendCutoff=1e-7
+

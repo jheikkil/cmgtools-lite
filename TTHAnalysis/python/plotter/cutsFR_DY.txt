@@ -1,0 +1,5 @@
+denom:  getVVLoose( iso_3, pt_3 ) > 0 && getVVLoose( iso_4, pt_4 ) > 0
+num_leg3: H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l1_againstMuon3>=2 && H_tt_l1_againstElectronMVA6>=4 
+num_leg4: H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l2_againstMuon3>=2 && H_tt_l2_againstElectronMVA6>=4
+mass: H_SS == 0 && m_vis>-1 && H_vis>-1
+#LT : Hboson_tt_LT > 80

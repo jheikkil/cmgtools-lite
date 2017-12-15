@@ -137,6 +137,70 @@ bool loadFRHisto(const std::string &histoName, const char *file, const char *nam
     return histo != 0;
 }
 
+
+float fakeRateWeight_AZh(float pt1, float eta1, float pt2, float eta2, int channel, bool leg3, bool leg4)
+{
+    TH2 *hist1=nullptr, *hist2=nullptr;
+    int l1_failed=0, l2_failed=0, both_failed=0, passed=0;
+    if (channel==1115){
+        hist1 = FR_el;
+        hist2 = FR_tau;
+        if (pt1 >= 60.0) {pt1 = 59.99;}
+        if (pt2 >= 90.0) {pt2 = 89.99;}
+    }
+    else if (channel==1315){
+        hist1 = FR_mu;
+        hist2 = FR_tau;
+        if (pt1 >= 60.0) {pt1 = 59.99;}
+        if (pt2 >= 90.0) {pt2 = 89.99;}
+    }
+    else if (channel==1113){
+        hist1 = FR_el;
+        hist2 = FR_mu;
+        if (pt1 >= 60.0) {pt1 = 59.99;}
+        if (pt2 >= 60.0) {pt2 = 59.99;}
+    }
+    else if (channel==1515){
+        hist1 = FR_tau;
+        hist2 = FR_tau;
+        if (pt1 >= 90.0) {pt1 = 89.99;}
+        if (pt2 >= 90.0) {pt2 = 89.99;}
+    }
+    //cout<<leg4<<endl;
+    double fr1 = hist1->GetBinContent( hist1->FindBin(pt1, std::abs(eta1)) );
+    double fr2 = hist2->GetBinContent( hist2->FindBin(pt2, std::abs(eta2)) );
+
+/*    #double x1 = hist1->GetXaxis()->FindBin(pt1);
+    #double y1 = hist1->GetYaxis()->FindBin(std::abs(eta1));
+    #double x2 = hist2->GetXaxis()->FindBin(pt2);
+    #double y2 = hist2->GetYaxis()->FindBin(std::abs(eta2));
+    
+    double fr1 = hist1->GetBinContent( hist1->FindBin(pt1, std::abs(eta1)) );
+    double fr2 = hist2->GetBinContent( hist2->FindBin(pt2, std::abs(eta2)) );
+    #double fr1=0.0;
+    #double fr2=0.0;
+    #if(x1>=1 && x1<=7 && y1>=1 && y1<=2){
+    #    fr1 = hist1->GetBinContent( x1, y1 );
+    #}
+    #else{
+    #    cout<<"OH NOOOOOOOOOOOOOO"<<endl;
+    #}
+    #if(x2>=1 && x2<=7 && y2>=1 && y2<=2){
+    #    fr2 = hist1->GetBinContent( x2, y2 );
+    #}
+    #else{
+    #    cout<<"OH NOOUKA 2"<<endl;
+    # } */
+    if (leg3 == true and leg4 == true) {return 0;}
+    else if (leg3==false and leg4==true) {return fr1/(1.0-fr1);}
+    else if (leg3==true and leg4==false) {return fr2/(1.0-fr2);}
+    else if (leg3==false and leg4==false) {return -fr1*fr2/((1-fr1)*(1-fr2));}
+    //else if (leg3==false and leg4==false) {return fr1/(1.0-fr1)+fr2/(1.0-fr2)-fr1*fr2/((1-fr1)*(1-fr2));}
+    //f1/(1-f1) + f2/(f-f2) - f1*f2/((1-f1)*(1-f2))
+    else {return 0;}
+    //return fr1*fr2;
+}
+
 float fakeRateWeight_2lssMVA(float l1pt, float l1eta, int l1pdgId, float l1mva,
                          float l2pt, float l2eta, int l2pdgId, float l2mva, float WP) 
 {

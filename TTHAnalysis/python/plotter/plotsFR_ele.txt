@@ -1,0 +1,3 @@
+abs(eta): abs(electron_FR_eta): 10,0,2.5; LegendCutoff=1e-7
+pt: electron_FR_pt : 7,10,80; LegendCutoff=1e-7
+cone_pt: conePt(electron_FR_pt, electron_FR_reliso05, 0.15): 7,10,80; LegendCutoff=1e-7

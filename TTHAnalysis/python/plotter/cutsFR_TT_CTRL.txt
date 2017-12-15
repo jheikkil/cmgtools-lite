@@ -1,0 +1,3 @@
+tauFR_CTRL: tau_FR_pt>20 && deltaR(eta_1,phi_1,tau_FR_eta,tau_FR_phi)>0.5 && deltaR(eta_2,phi_2,tau_FR_eta,tau_FR_phi)>0.5
+# && getVVLoose( tau_FR_byIsolationMVArun2v1DBoldDMwLTraw, tau_FR_pt ) > 0
+#tauFR_numLL: tau_FR_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && tau_FR_againstMuon3>=2 && tau_FR_againstElectronMVA6>=4

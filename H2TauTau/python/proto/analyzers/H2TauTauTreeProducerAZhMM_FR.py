@@ -19,7 +19,7 @@ class H2TauTauTreeProducerAZhMM_FR(H2TauTauTreeProducer):
 
         #muon
         self.bookMuon(self.tree, 'muon_FR')
-        self.bookGenParticle(self.tree, 'muon_FR')
+        self.bookGenParticle(self.tree, 'muon_FR_gen')
 
 
         #electron

@@ -19,6 +19,8 @@ def default():
 event_vars = [
     Variable('XSecLumiWeight'),
     Variable('run', type=int),
+    Variable('Z_mm_aligned', type=int),
+    Variable('Z_ee_aligned', type=int),
     Variable('lumi', type=int),
     Variable('nMuons', type=int),
     Variable('nElectrons', type=int),
@@ -60,6 +62,10 @@ event_vars = [
     Variable('n_jets_csvl', lambda ev : sum(1 for jet in ev.cleanJets if jet.btagWP('CSVv2IVFL')), type=int),
     Variable('n_vertices', lambda ev : len(ev.vertices), type=int),
     Variable('rho', lambda ev : ev.rho),
+    Variable('met_pt', lambda ev: ev.met.pt()),
+    Variable('met_py', lambda ev: ev.met.py()),
+    Variable('met_px', lambda ev: ev.met.px()),
+    Variable('met_phi', lambda ev: ev.met.phi()),
     Variable('weight', lambda ev : ev.eventWeight),
     Variable('weight_vertex', lambda ev : ev.puWeight),
     # # Add back for embedded samples once needed
@@ -106,12 +112,12 @@ ditau_vars = [
     # Variable('mt_leg1', lambda dil : dil.mTLeg1()), # redundant
     Variable('met_cov00', lambda dil : dil.mvaMetSig(0, 0) if dil.mvaMetSig else 0.),
     # Variable('met_cov01', lambda dil : dil.mvaMetSig(0, 1) if dil.mvaMetSig else 0.), # redundant
-    Variable('met_cov10', lambda dil : dil.mvaMetSig(1, 0) if dil.mvaMetSig else 0.),
-    Variable('met_cov11', lambda dil : dil.mvaMetSig(1, 1) if dil.mvaMetSig else 0.),
-    Variable('met_phi', lambda dil : dil.met().phi()),
+    #Variable('met_cov10', lambda dil : dil.mvaMetSig(1, 0) if dil.mvaMetSig else 0.),
+    #Variable('met_cov11', lambda dil : dil.mvaMetSig(1, 1) if dil.mvaMetSig else 0.),
+    #Variable('met_phi', lambda dil : dil.met().phi()),
     # Variable('met_px', lambda dil : dil.met().px()),
     # Variable('met_py', lambda dil : dil.met().py()),
-    Variable('met_pt', lambda dil : dil.met().pt()),
+    # Variable('met_pt', lambda dil : dil.met().pt()),
     Variable('pthiggs', lambda dil : (dil.leg1().p4() + dil.leg2().p4() + dil.met().p4()).pt()),
     # Variable('delta_phi_l1_l2', lambda dil : deltaPhi(dil.leg1().phi(), dil.leg2().phi())),
     # Variable('delta_eta_l1_l2', lambda dil : abs(dil.leg1().eta() - dil.leg2().eta())),
@@ -139,10 +145,13 @@ particle_vars = [
     Variable('LT', lambda p: p.LT() if hasattr(p, 'LT') else 0),
     Variable('DR', lambda p: p.DR() if hasattr(p, 'DR') else 0),
     Variable('pt', lambda p: p.pt()),
+    #Variable('pdgId', lambda p: p.pdgId()),
     Variable('eta', lambda p: p.eta()),
     Variable('phi', lambda p: p.phi()),
     Variable('charge', lambda p: p.charge() if hasattr(p, 'charge') else 0), # charge may be non-integer for gen particles
+    Variable('SS', lambda p: 0 if hasattr(p, 'charge') and p.charge()==0 else 1),
     Variable('mass', lambda p: p.mass()),
+    Variable('METphi', lambda p: p.METphi() if hasattr(p, 'METphi') else -999),
 ]
 
 # generic lepton
@@ -169,6 +178,7 @@ electron_vars = [
     Variable('eid_nontrigmva_tight', lambda ele : ele.mvaIDRun2("NonTrigSpring15MiniAOD", "POG80")),
     Variable('eid_nontrigmva_medium', lambda ele : ele.mvaIDRun2("NonTrigSpring15MiniAOD", "POG90")),
     Variable('eid_spring16', lambda ele: ele.mvaIDRun2('Spring16', 'POG90')),
+    Variable('eid_spring16_80', lambda ele: ele.mvaIDRun2('Spring16', 'POG80')),
     Variable('eid_veto', lambda ele : ele.cutBasedId('POG_SPRING15_25ns_v1_Veto')),
     Variable('eid_loose', lambda ele : ele.cutBasedId('POG_SPRING15_25ns_v1_Loose')),
     Variable('eid_medium', lambda ele : ele.cutBasedId('POG_SPRING15_25ns_v1_Medium')),
@@ -180,6 +190,8 @@ electron_vars = [
     Variable('reliso05_04', lambda lep : lep.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0)),
     Variable('weight_tracking', lambda lep : getattr(lep, 'weight_tracking', 1.)),
     Variable('matchedTrgObj', lambda lep: 1 if hasattr(lep,'matchedTrgObjEls') else 0, int),
+    Variable('matchedTrgObj_Double', lambda lep: 1 if hasattr(lep,'matchedTrgObjEls_Double') else 0, int),
+    Variable('matchedTrgObj_Single', lambda lep: 1 if hasattr(lep,'matchedTrgObjEls_Single') else 0, int),
 ]
 
 # muon
@@ -198,6 +210,9 @@ muon_vars = [
     Variable('globalMuon', lambda muon : muon.isGlobalMuon()),
     Variable('PFMuon', lambda muon : muon.isPFMuon()),
     Variable('matchedTrgObj', lambda muon: 1 if hasattr(muon,'matchedTrgObjMus') else 0, int),
+    Variable('matchedTrgObj_Double', lambda lep: 1 if hasattr(lep,'matchedTrgObjMus_Double') else 0, int),
+    Variable('matchedTrgObj_Single', lambda lep: 1 if hasattr(lep,'matchedTrgObjMus_Single') else 0, int),
+
 ]
 
 # tau

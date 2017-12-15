@@ -1,0 +1,131 @@
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(hist_data_sub_syst): fit range of variable x expanded to nearest bin boundaries: [0,200] --> [0,200]
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset hist_data_sub_syst
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(hist_ZZ): fit range of variable x expanded to nearest bin boundaries: [0,200] --> [0,200]
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset hist_ZZ
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(hist_TT): fit range of variable x expanded to nearest bin boundaries: [0,200] --> [0,200]
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset hist_TT
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(hist_data_sub): fit range of variable x expanded to nearest bin boundaries: [0,200] --> [0,200]
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset hist_data_sub
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(hist_background): fit range of variable x expanded to nearest bin boundaries: [0,200] --> [0,200]
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset hist_background
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(hist_DY): fit range of variable x expanded to nearest bin boundaries: [0,200] --> [0,200]
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset hist_DY
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(hist_data): fit range of variable x expanded to nearest bin boundaries: [0,200] --> [0,200]
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset hist_data
+[#1] INFO:DataHandling -- RooDataHist::adjustBinning(hist_WZ): fit range of variable x expanded to nearest bin boundaries: [0,200] --> [0,200]
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset hist_WZ
+[#1] INFO:ObjectHandling -- RooWorkSpace::import(w) Recycling existing object syst_WZ created with identical factory specification
+  1) RooHistPdf:: pdf_DY = 0.548546
+  2) RooHistPdf:: pdf_WZ = 5.51054
+  3) RooHistPdf:: pdf_TT = 1.93217
+  4) RooHistPdf:: pdf_ZZ = 0.132105
+  1) RooProduct:: norm_DY = 4800.25
+  2) RooProduct:: norm_WZ = 1651.06
+  3) RooProduct:: norm_TT = 332.338
+  4) RooProduct:: norm_ZZ = 420.891
+[#1] INFO:Minization -- p.d.f. provides expected number of events, including extended term in likelihood.
+[#1] INFO:Minization -- RooMinuit::optimizeConst: activating const optimization
+[#1] INFO:Minization --  The following expressions have been identified as constant and will be precalculated and cached: (pdf_DY,pdf_WZ,pdf_TT,pdf_ZZ)
+ **********
+ **   13 **MIGRAD        1500           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=-21853.2 FROM MIGRAD    STATUS=INITIATE       12 CALLS          13 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  syst_DY      1.00000e+00   4.00000e-01   2.30756e-01   9.28158e+02
+   2  syst_TT      1.00000e+00   4.00000e-01   2.30756e-01  -2.06976e+01
+   3  syst_WZ      1.00000e+00   4.00000e-01   2.30756e-01  -6.75215e+01
+                               ERR DEF= 0.5
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-21910.4 FROM MIGRAD    STATUS=CONVERGED      69 CALLS          70 TOTAL
+                     EDM=2.65417e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  syst_DY      8.04374e-01   1.80585e-02   9.87329e-04   1.65644e-01
+   2  syst_TT      1.34429e+00   3.46939e-01   8.95433e-03   1.40481e-02
+   3  syst_WZ      1.17141e+00   6.89862e-02   1.76282e-03  -6.21957e-02
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  3    ERR DEF=0.5
+  3.261e-04  4.267e-04 -4.358e-04 
+  4.267e-04  1.215e-01 -1.985e-02 
+ -4.358e-04 -1.985e-02  4.761e-03 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3
+        1  0.52443   1.000  0.068 -0.350
+        2  0.85807   0.068  1.000 -0.825
+        3  0.87606  -0.350 -0.825  1.000
+ **********
+ **   18 **HESSE        1500
+ **********
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=-21910.4 FROM HESSE     STATUS=OK             16 CALLS          86 TOTAL
+                     EDM=2.66126e-05    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  syst_DY      8.04374e-01   1.80662e-02   1.97466e-04  -8.45311e-01
+   2  syst_TT      1.34429e+00   3.47101e-01   3.58173e-04  -5.50618e-01
+   3  syst_WZ      1.17141e+00   6.90580e-02   3.52564e-04  -6.37572e-01
+                               ERR DEF= 0.5
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  3    ERR DEF=0.5
+  3.264e-04  4.408e-04 -4.387e-04 
+  4.408e-04  1.217e-01 -1.988e-02 
+ -4.387e-04 -1.988e-02  4.771e-03 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3
+        1  0.52503   1.000  0.070 -0.352
+        2  0.85822   0.070  1.000 -0.825
+        3  0.87634  -0.352 -0.825  1.000
+[#1] INFO:Minization -- RooMinuit::optimizeConst: deactivating const optimization
+DY
+3861.19568102
+Scaling process DY by the extracted scale factor 0.804 with rel. syst uncertainty 0.022
+WZ
+1934.06663409
+Scaling process WZ by the extracted scale factor 1.171 with rel. syst uncertainty 0.059
+TT
+446.75726124
+Scaling process TT by the extracted scale factor 1.344 with rel. syst uncertainty 0.258
+ZZ
+493.035528502
+Scaling process ZZ by the extracted scale factor 1.171 with rel. syst uncertainty 0.059
+XVALs
+10.0
+15.0
+20.0
+XVALs
+20.0
+25.0
+30.0
+XVALs
+30.0
+35.0
+40.0
+XVALs
+40.0
+45.0
+50.0
+XVALs
+50.0
+55.0
+60.0
+data_sub_syst                 : None
+data_prefit                   : <ROOT.TGraphAsymmErrors object ("eleFR_signal_vs_pt_data_2d_prefit_graph") at 0x71bf9f0>
+ZZ                            : None
+TT                            : None
+background                    : None
+data_sub                      : None
+WZ                            : None
+DY_prefit                     : <ROOT.TGraphAsymmErrors object ("eleFR_signal_vs_pt_DY_2d_prefit_graph") at 0x7264800>
+data_sub_syst_prefit          : <ROOT.TGraphAsymmErrors object ("eleFR_signal_vs_pt_data_2d_prefit_sub_syst_graph") at 0x7271950>
+TT_prefit                     : <ROOT.TGraphAsymmErrors object ("eleFR_signal_vs_pt_TT_2d_prefit_graph") at 0x6369c70>
+DY                            : None
+background_prefit             : <ROOT.TGraphAsymmErrors object ("eleFR_signal_vs_pt_background_2d_prefit_graph") at 0x71d4c30>
+WZ_prefit                     : <ROOT.TGraphAsymmErrors object ("eleFR_signal_vs_pt_WZ_2d_prefit_graph") at 0x7247650>
+data                          : None
+ZZ_prefit                     : <ROOT.TGraphAsymmErrors object ("eleFR_signal_vs_pt_ZZ_2d_prefit_graph") at 0x727d7d0>
+data_sub_prefit               : <ROOT.TGraphAsymmErrors object ("eleFR_signal_vs_pt_data_2d_prefit_sub_graph") at 0x726ab10>

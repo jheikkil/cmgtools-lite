@@ -1,0 +1,7 @@
+#eleFR: electron_FR_pt>10 
+eleFR_baseline: electron_FR_pt>10 && (electron_FR_gen_match!=1 && electron_FR_gen_match !=3)
+#eleFR_baseline2: electron_FR_pt>10 && (electron_FR_gen_match!=1 && electron_FR_gen_match !=3)
+
+#eleFR_tight: electron_FR_pt>10 && (electron_FR_gen_match!=1 && electron_FR_gen_match !=3)
+#eleFR_loose: electron_FR_pt>10 && (electron_FR_gen_match!=1 && electron_FR_gen_match !=3)
+

@@ -7,14 +7,85 @@
 #include "TLorentzVector.h"
 #include "TH2Poly.h"
 #include "TGraphAsymmErrors.h"
+#include "TFormula.h"
 #include "TH1F.h"
 #include "TFile.h"
 #include "PhysicsTools/Heppy/interface/Davismt2.h"
 #include "TSystem.h"
+#include <iostream>
 
 TString CMSSW_BASE = gSystem->ExpandPathName("${CMSSW_BASE}");
 
 //// UTILITY FUNCTIONS NOT IN TFORMULA ALREADY
+
+TFile *inFile = NULL; 
+TGraphAsymmErrors* wpVVLoose = NULL;
+TFormula* formula = NULL;
+
+float getVVLoose( float isoRaw, float pt ){
+    if (!inFile){
+       inFile = new TFile("wpDiscriminationByIsolationMVARun2v1_DBoldDMwLT.root","read");
+       wpVVLoose = (TGraphAsymmErrors*)(inFile->Get("DBoldDMwLTEff95"));
+       formula = (TFormula*)(inFile->Get("mvaOutput_normalization_DBoldDMwLT"));
+    }
+    //cout<<isoRaw<<" "<<pt<<endl;
+    if (pt > 1900)  pt = 1900;
+    if (pt < 23)  pt = 23;
+    float thresholdAtPt = wpVVLoose->Eval(pt);
+    //cout<<thresholdAtPt<<endl;
+    if (formula->Eval(isoRaw) > thresholdAtPt){
+       return 1.0;
+    }
+    else{
+       return 0.0;
+    }
+
+}
+
+float getVLoose( float isoRaw, float pt ){
+    if (!inFile){
+       inFile = new TFile("wpDiscriminationByIsolationMVARun2v1_DBoldDMwLT.root","read");
+       wpVVLoose = (TGraphAsymmErrors*)(inFile->Get("DBoldDMwLTEff90"));
+       formula = (TFormula*)(inFile->Get("mvaOutput_normalization_DBoldDMwLT"));
+    }
+    //cout<<isoRaw<<" "<<pt<<endl;
+    if (pt > 1900)  pt = 1900;
+    if (pt < 23)  pt = 23;
+    float thresholdAtPt = wpVVLoose->Eval(pt);
+    //cout<<thresholdAtPt<<endl;
+    if (formula->Eval(isoRaw) > thresholdAtPt){
+       return 1.0;
+    }
+    else{
+       return 0.0;
+    }
+
+}
+
+
+/*float getVLoose( float isoRaw, float pt ){
+    wpVVLoose = inFile->Get('DBoldDMwLTEff95');
+    formula = inFile->Get('mvaOutput_normalization_DBoldDMwLT');
+    if (pt > 1900)  pt = 1900;
+    if (pt < 23)  pt = 23;
+    thresholdAtPt = wpVLoose->Eval( pt );
+    if (formula->Eval( isoRaw ) > thresholdAtPt) { 
+       return 1.0 ;
+     }
+    else{
+       return 0.0;
+    }
+}*/
+float conePt(float pt, float iso, float iso_num){
+    float conept = 0.0;
+    if (iso < iso_num){
+        conept = pt;
+    }
+    else{
+        conept = pt*( 1 + (iso-iso_num) ); 
+    }
+    return conept;
+}
 
 float myratio(float num, float denom) {
   if(denom==0) return 0;

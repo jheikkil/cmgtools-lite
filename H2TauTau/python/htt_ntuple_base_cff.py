@@ -9,6 +9,7 @@ from PhysicsTools.Heppy.analyzers.objects.VertexAnalyzer import VertexAnalyzer
 from PhysicsTools.Heppy.analyzers.core.PileUpAnalyzer import PileUpAnalyzer
 # from PhysicsTools.Heppy.analyzers.gen.GeneratorAnalyzer import GeneratorAnalyzer
 from PhysicsTools.Heppy.analyzers.gen.LHEWeightAnalyzer import LHEWeightAnalyzer
+from PhysicsTools.Heppy.analyzers.core.all import TriggerBitFilter
 
 # Tau-tau analyzers
 from CMGTools.H2TauTau.proto.analyzers.MCWeighter import MCWeighter
@@ -30,6 +31,13 @@ puFileMC = '/afs/cern.ch/work/t/truggles/public/2016_Pileup_Moriond17/MC_Moriond
    #'$CMSSW_BASE/src/CMGTools/H2TauTau/data/MC_Moriond17_PU25ns_V1.root'
 puFileData = '/afs/cern.ch/work/t/truggles/public/2016_Pileup_Moriond17/Data_Pileup_2016_271036-284044_80bins.root'
   #'/afs/cern.ch/user/a/anehrkor/public/Data_Pileup_2016_271036-284044_80bins.root'
+
+
+triggerAna = cfg.Analyzer(
+    TriggerBitFilter, name="TriggerBitFilter",
+    )
+
+
 
 badCloneMuonAnaMoriond2017 = cfg.Analyzer(
     badMuonAnalyzerMoriond2017, name='badCloneMuonMoriond2017',
@@ -93,13 +101,13 @@ mcWeighter = cfg.Analyzer(
 )
 
 #include trigger information, triggers added to the samples
-triggerAna = cfg.Analyzer(
-    TriggerAnalyzer,
-    name='TriggerAnalyzer',
-    addTriggerObjects=True,
-    requireTrigger=True,
-    usePrescaled=False
-)
+#triggerAna = cfg.Analyzer(
+#    TriggerAnalyzer,
+#    name='TriggerAnalyzer',
+#    addTriggerObjects=True,
+#    requireTrigger=True,
+#    usePrescaled=False
+#)
 
 #select primary vertices, do not weight them - done my pileup analyzer (based on true number of interactions)
 vertexAna = cfg.Analyzer(

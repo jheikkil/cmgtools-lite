@@ -10,6 +10,7 @@ from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import SingleMuon_Run2016
 from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import SingleMuon_Run2016G_PromptReco_v1, SingleElectron_Run2016G_PromptReco_v1, MuonEG_Run2016G_PromptReco_v1, Tau_Run2016G_PromptReco_v1
 from CMGTools.RootTools.samples.samples_13TeV_DATA2016_AZH import DoubleMuon_Run2016B_03Feb2017_v1, DoubleMuon_Run2016B_03Feb2017_v2, DoubleMuon_Run2016C_03Feb2017_v1, DoubleMuon_Run2016D_03Feb2017_v1, DoubleMuon_Run2016E_03Feb2017_v1, DoubleMuon_Run2016F_03Feb2017_v1, DoubleMuon_Run2016G_03Feb2017_v1, DoubleMuon_Run2016H_03Feb2017_v1, DoubleMuon_Run2016H_03Feb2017_v2
 from CMGTools.RootTools.samples.samples_13TeV_DATA2016_AZH import DoubleEG_Run2016B_03Feb2017_v1, DoubleEG_Run2016B_03Feb2017_v2, DoubleEG_Run2016C_03Feb2017_v1, DoubleEG_Run2016D_03Feb2017_v1, DoubleEG_Run2016E_03Feb2017_v1, DoubleEG_Run2016F_03Feb2017_v1, DoubleEG_Run2016G_03Feb2017_v1, DoubleEG_Run2016H_03Feb2017_v1, DoubleEG_Run2016H_03Feb2017_v2
+from CMGTools.RootTools.samples.samples_13TeV_DATA2016_AZH import *
 
 #dataSamples_DoubleMu_AZH, dataSamples_DoubleEl_AZH
 
@@ -23,10 +24,9 @@ from CMGTools.H2TauTau.proto.samples.spring16.higgs import HiggsGGH125, HiggsVBF
 from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import mc_higgs_susy_gg, mc_higgs_susy_bb, mc_higgs_azh #, mc_higgs_azh_bkg
 
 from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsSUSYGG160 as ggh160
-from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsAZH340 as azh340
 from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsAZH300 as azh300
-from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsZZTo4lJaana, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZv1, HiggsWZv2, HiggsTTJaana, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET
-from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import WZ_min01, WZJ, WZ
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsZZTo4lv1, HiggsZZTo4lv2, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZv1, HiggsWZv2, HiggsTT, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsWZ_min01, WZJ, WZ, HiggsAZH260, HiggsAZH280, HiggsAZH320, HiggsAZH340, HiggsAZH350, HiggsAZH400, HiggsSM, HiggsttZ
 
 
 # 21 July
@@ -143,16 +143,22 @@ data_muon_electron = [MuonEG_Run2016B_PromptReco_v2, MuonEG_Run2016C_PromptReco_
 data_tau = [Tau_Run2016B_PromptReco_v2, Tau_Run2016C_PromptReco_v2, Tau_Run2016D_PromptReco_v2] #, ]
 
 for sample in data_single_muon + data_single_electron + data_muon_electron + data_tau:
-    sample.json = json
-    sample.lumi = lumi if sample != SingleMuon_Run2016G_PromptReco_v1 else lumi_2016G
+    sample.json = json_AZH
+    sample.lumi = lumi_AZH if sample != SingleMuon_Run2016G_PromptReco_v1 else lumi_2016G
+    #print "JES"
 
 #Data AZH
 
 data_AZH = [DoubleMuon_Run2016B_03Feb2017_v1, DoubleMuon_Run2016B_03Feb2017_v2, DoubleMuon_Run2016C_03Feb2017_v1, DoubleMuon_Run2016D_03Feb2017_v1, DoubleMuon_Run2016E_03Feb2017_v1, DoubleMuon_Run2016F_03Feb2017_v1, DoubleMuon_Run2016G_03Feb2017_v1, DoubleMuon_Run2016H_03Feb2017_v1, DoubleMuon_Run2016H_03Feb2017_v2, DoubleEG_Run2016B_03Feb2017_v1, DoubleEG_Run2016B_03Feb2017_v2, DoubleEG_Run2016C_03Feb2017_v1, DoubleEG_Run2016D_03Feb2017_v1, DoubleEG_Run2016E_03Feb2017_v1, DoubleEG_Run2016F_03Feb2017_v1, DoubleEG_Run2016G_03Feb2017_v1, DoubleEG_Run2016H_03Feb2017_v1, DoubleEG_Run2016H_03Feb2017_v2]
+data_AZH_single = [SingleMuon_Run2016B_03Feb2017_v1,SingleMuon_Run2016B_03Feb2017_v2,SingleMuon_Run2016C_03Feb2017_v1,SingleMuon_Run2016D_03Feb2017_v1,SingleMuon_Run2016E_03Feb2017_v1,SingleMuon_Run2016F_03Feb2017_v1,SingleMuon_Run2016G_03Feb2017_v1,SingleMuon_Run2016H_03Feb2017_v1,SingleMuon_Run2016H_03Feb2017_v2,SingleEG_Run2016B_03Feb2017_v1,SingleEG_Run2016B_03Feb2017_v2,SingleEG_Run2016C_03Feb2017_v1,SingleEG_Run2016D_03Feb2017_v1,SingleEG_Run2016E_03Feb2017_v1,SingleEG_Run2016F_03Feb2017_v1,SingleEG_Run2016G_03Feb2017_v1,SingleEG_Run2016H_03Feb2017_v1,SingleEG_Run2016H_03Feb2017_v2]
 
-for sample in data_AZH:
+for sample in data_AZH + data_AZH_single:
     sample.json = json_AZH
     sample.lumi = lumi_AZH   
+    
+#for sample in data_AZH_single:
+#    print sample.json
+#    print sample.lumi
 
 # Signals
 sm_signals = [HiggsGGH125, HiggsVBF125, HiggsTTH125]
@@ -165,19 +171,31 @@ sync_list = []
 
 #for sm sync
 #sync_list = [azh340] 
-sync_list = [azh300]
+#sync_list = [azh300]
 #for mssm sync
 #sync_list = [ggh160]
 #for background syncs
 #sync_list=[DYJetsToLL_M50, WZTo3LNu_amcatnlo]
 DY_sync_list = [HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
-WZ_sync_list = [HiggsWZv1, HiggsWZv2, WZ_min01, WZJ, WZ]
+WZ_sync_list = [HiggsWZv1, HiggsWZv2, HiggsWZ_min01, WZJ, WZ]
 #sync_list=[HiggsZZTo4lJaana, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZv1, HiggsWZv2, HiggsTTJaana, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
 #sync_list = [azh_bkg]
 
 
 #control list
 DY_control = [HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
-WZ_control = [WZ_min01]
-AZH_control = DY_control + WZ_control + sync_list 
+WZ_control = [HiggsWZ_min01]
+TT_control = [HiggsTT]
+ZZ_control = [HiggsZZTo4lv1]
+SM_control = [HiggsSM]
+ttZ_control = [HiggsttZ]
+DY_inc = [HiggsDY50v1, HiggsDY50v2]
+DY_all = DY_control + DY_inc
+ZZ_control2 = [HiggsZZTo4lv2]
+AZH_control = WZ_control + DY_control + TT_control + ZZ_control + ZZ_control2 + SM_control #+ sync_list 
+AZH_tight = TT_control + ZZ_control + ZZ_control2
 AZH_data =  data_AZH
+AZH_data_single = data_AZH_single
+AZH_test = [HiggsDY50v1, azh300]
+AZH_masses = [azh300]#, #HiggsAZH260, HiggsAZH280, HiggsAZH320, HiggsAZH340, HiggsAZH350, HiggsAZH400]
+sync_list = AZH_control #+ AZH_masses

@@ -82,5 +82,6 @@ class H2TauTauTreeProducerAZhMMEM(H2TauTauTreeProducer):
             Aboson_em = event.Aboson_em[0]
             self.fillParticle(self.tree, 'Aboson_em', Aboson_em)
 
-        self.fillTree(event)
+        if hasattr(event, 'Zboson_mm') and hasattr(event, 'Hboson_em') and event.Hboson_em[0].mass()>-1 and event.Zboson_mm[0].mass()>-1:
+            self.fillTree(event)
         

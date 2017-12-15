@@ -1,6 +1,18 @@
 import PhysicsTools.HeppyCore.framework.config as cfg
 import os
 
+
+
+triggers_2m = [ 'HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v*', 'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v*',]
+
+triggers_2e = [ 'HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v*', ]
+
+triggers_1m = [ 'HLT_IsoMu24_v*', 'HLT_IsoTkMu24_v*', ]
+triggers_1e = [ 'HLT_Ele27_WPTight_Gsf_v*',]
+
+
+
+
 #####COMPONENT CREATOR
 
 from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
@@ -51,7 +63,40 @@ DoubleEG_Run2016H_03Feb2017_v2        = kreator.makeDataComponent("DoubleEG_Run2
 dataSamples_DoubleMu_AZH = [DoubleMuon_Run2016B_03Feb2017_v1, DoubleMuon_Run2016B_03Feb2017_v2, DoubleMuon_Run2016C_03Feb2017_v1, DoubleMuon_Run2016D_03Feb2017_v1, DoubleMuon_Run2016E_03Feb2017_v1, DoubleMuon_Run2016F_03Feb2017_v1, DoubleMuon_Run2016G_03Feb2017_v1, DoubleMuon_Run2016H_03Feb2017_v1, DoubleMuon_Run2016H_03Feb2017_v2 ]
 dataSamples_DoubleEl_AZH = [DoubleEG_Run2016B_03Feb2017_v1, DoubleEG_Run2016B_03Feb2017_v2, DoubleEG_Run2016C_03Feb2017_v1, DoubleEG_Run2016D_03Feb2017_v1, DoubleEG_Run2016E_03Feb2017_v1, DoubleEG_Run2016F_03Feb2017_v1, DoubleEG_Run2016G_03Feb2017_v1, DoubleEG_Run2016H_03Feb2017_v1, DoubleEG_Run2016H_03Feb2017_v2 ]
 
-dataSamples_AZH = dataSamples_DoubleMu_AZH + dataSamples_DoubleEl_AZH
+
+
+#------SINGLELE------#
+
+SingleEG_Run2016B_03Feb2017_v1        = kreator.makeDataComponent("SingleEG_Run2016B_03Feb2017_v1"        , "/SingleElectron/Run2016B-03Feb2017_ver1-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleEG_Run2016B_03Feb2017_v2        = kreator.makeDataComponent("SingleEG_Run2016B_03Feb2017_v2"        , "/SingleElectron/Run2016B-03Feb2017_ver2-v2/MINIAOD"        , "CMS", ".*root", json)
+SingleEG_Run2016C_03Feb2017_v1        = kreator.makeDataComponent("SingleEG_Run2016C_03Feb2017_v1"        , "/SingleElectron/Run2016C-03Feb2017-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleEG_Run2016D_03Feb2017_v1        = kreator.makeDataComponent("SingleEG_Run2016D_03Feb2017_v1"        , "/SingleElectron/Run2016D-03Feb2017-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleEG_Run2016E_03Feb2017_v1        = kreator.makeDataComponent("SingleEG_Run2016E_03Feb2017_v1"        , "/SingleElectron/Run2016E-03Feb2017-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleEG_Run2016F_03Feb2017_v1        = kreator.makeDataComponent("SingleEG_Run2016F_03Feb2017_v1"        , "/SingleElectron/Run2016F-03Feb2017-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleEG_Run2016G_03Feb2017_v1        = kreator.makeDataComponent("SingleEG_Run2016G_03Feb2017_v1"        , "/SingleElectron/Run2016G-03Feb2017-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleEG_Run2016H_03Feb2017_v1        = kreator.makeDataComponent("SingleEG_Run2016H_03Feb2017_v1"        , "/SingleElectron/Run2016H-03Feb2017_ver3-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleEG_Run2016H_03Feb2017_v2        = kreator.makeDataComponent("SingleEG_Run2016H_03Feb2017_v2"        , "/SingleElectron/Run2016H-03Feb2017_ver2-v1/MINIAOD"        , "CMS", ".*root", json)
+
+#-----MUON------#
+
+SingleMuon_Run2016B_03Feb2017_v1        = kreator.makeDataComponent("SingleMuon_Run2016B_03Feb2017_v1"        , "/SingleMuon/Run2016B-03Feb2017_ver1-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleMuon_Run2016B_03Feb2017_v2        = kreator.makeDataComponent("SingleMuon_Run2016B_03Feb2017_v2"        , "/SingleMuon/Run2016B-03Feb2017_ver2-v2/MINIAOD"        , "CMS", ".*root", json)
+SingleMuon_Run2016C_03Feb2017_v1        = kreator.makeDataComponent("SingleMuon_Run2016C_03Feb2017_v1"        , "/SingleMuon/Run2016C-03Feb2017-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleMuon_Run2016D_03Feb2017_v1        = kreator.makeDataComponent("SingleMuon_Run2016D_03Feb2017_v1"        , "/SingleMuon/Run2016D-03Feb2017-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleMuon_Run2016E_03Feb2017_v1        = kreator.makeDataComponent("SingleMuon_Run2016E_03Feb2017_v1"        , "/SingleMuon/Run2016E-03Feb2017-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleMuon_Run2016F_03Feb2017_v1        = kreator.makeDataComponent("SingleMuon_Run2016F_03Feb2017_v1"        , "/SingleMuon/Run2016F-03Feb2017-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleMuon_Run2016G_03Feb2017_v1        = kreator.makeDataComponent("SingleMuon_Run2016G_03Feb2017_v1"        , "/SingleMuon/Run2016G-03Feb2017-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleMuon_Run2016H_03Feb2017_v1        = kreator.makeDataComponent("SingleMuon_Run2016H_03Feb2017_v1"        , "/SingleMuon/Run2016H-03Feb2017_ver3-v1/MINIAOD"        , "CMS", ".*root", json)
+SingleMuon_Run2016H_03Feb2017_v2        = kreator.makeDataComponent("SingleMuon_Run2016H_03Feb2017_v2"        , "/SingleMuon/Run2016H-03Feb2017_ver2-v1/MINIAOD"        , "CMS", ".*root", json)
+
+
+
+dataSamples_SingleMu_AZH = [SingleMuon_Run2016B_03Feb2017_v1,SingleMuon_Run2016B_03Feb2017_v2,SingleMuon_Run2016C_03Feb2017_v1,SingleMuon_Run2016D_03Feb2017_v1,SingleMuon_Run2016E_03Feb2017_v1,SingleMuon_Run2016F_03Feb2017_v1,SingleMuon_Run2016G_03Feb2017_v1,SingleMuon_Run2016H_03Feb2017_v1,SingleMuon_Run2016H_03Feb2017_v2]
+dataSamples_SingleEl_AZH = [SingleEG_Run2016B_03Feb2017_v1,SingleEG_Run2016B_03Feb2017_v2,SingleEG_Run2016C_03Feb2017_v1,SingleEG_Run2016D_03Feb2017_v1,SingleEG_Run2016E_03Feb2017_v1,SingleEG_Run2016F_03Feb2017_v1,SingleEG_Run2016G_03Feb2017_v1,SingleEG_Run2016H_03Feb2017_v1,SingleEG_Run2016H_03Feb2017_v2]
+
+dataSamples_AZH = dataSamples_DoubleMu_AZH + dataSamples_DoubleEl_AZH + dataSamples_SingleMu_AZH + dataSamples_SingleEl_AZH
+
+
 
 samples = dataSamples_AZH
 

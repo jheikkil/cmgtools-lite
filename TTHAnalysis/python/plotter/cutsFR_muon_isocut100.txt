@@ -1,0 +1,1 @@
+muonFR_isocut100: muon_FR_pt>10 && muon_FR_gen_match!=2 && muon_FR_gen_match!=4 && muon_FR_reliso05 < 1.0 && deltaR(eta_1,phi_1,muon_FR_eta,muon_FR_phi)>0.3 && deltaR(eta_2,phi_2,muon_FR_eta,muon_FR_phi)>0.3

@@ -194,14 +194,21 @@ if __name__ == "__main__":
                 for (p,h) in report.iteritems():
                     if gnorms[p]['pre'] != gnorms[p]['post'] and gnorms[p]['post'] > 0:
                         h.Scale(gnorms[p]['post']/gnorms[p]['pre'])
+            ##ALKU
             for ix in xrange(1,projection.GetNbinsX()+1):
                 bxname = "_bin_%g_%g" % (projection.GetXaxis().GetBinLowEdge(ix),projection.GetXaxis().GetBinUpEdge(ix))
                 xval = projection.GetXaxis().GetBinCenter(ix)
+                #print "XVALs"
+                #print projection.GetXaxis().GetBinLowEdge(ix)
+                #print xval
+                #print projection.GetXaxis().GetBinUpEdge(ix)
                 if options.xcut:
+                    #print "OLI LEIKKAUS"
                     if not ( options.xcut[0] <= xval and xval <= options.xcut[1] ): continue
                 freport_num_den = {"pass":{},"fail":{}}
                 for (bzname,iz) in [("_pass",2),("_fail",1)]:
                     if options.algo == "fitND":
+                        #print "fitND"
                         for p in mca.listBackgrounds():
                             mca.setProcessOption(p, 'FreeFloat',      (iz == 2))
                             mca.setProcessOption(p, 'NormSystematic', hypot(1, mca.getProcessOption(p,'NormSystematic',0.)))
@@ -216,13 +223,26 @@ if __name__ == "__main__":
                         myfz = fzreport[p]
                         for iy in xrange(1,h.GetNbinsY()+1):
                             if options.fcut:
+                                #print "OLI FCUT"
                                 fval = h.GetYaxis().GetBinCenter(iy)
                                 if fval < options.fcut[0] or fval > options.fcut[1]: continue
+                            #print h.GetYaxis().GetBinCenter(iy)
                             hproj.SetBinContent(iy, h.GetBinContent(ix,iy,iz))
                             hproj.SetBinError(iy, h.GetBinError(ix,iy,iz))
                             myfz.SetBinContent(iy, iz, h.GetBinContent(ix,iy,iz))
                             myfz.SetBinError(iy, iz, h.GetBinError(ix,iy,iz))
                         mca.stylePlot(p, hproj, fspec, mayBeMissing=True)
+                        #print "prosessi"
+                        #print p
+                        #if p in ["data_sub_syst"]:
+                        #    print "prosessi"
+                        #    print p
+                        #    for iy in xrange(1,hproj.GetNbinsY()+1):     
+                        #        print "ENNEN "
+                        #        print hproj.GetBinContent(iy)
+                       #         cropNegativeBins(hproj)
+                        #        print "JALKEEN"
+                        #        print hproj.GetBinContent(iy)
                         cropNegativeBins(hproj)
                         if options.globalRebin > 1: hproj.Rebin(options.globalRebin)
                         freport[p] = hproj
@@ -230,6 +250,7 @@ if __name__ == "__main__":
                         outfile.WriteTObject(hproj, hproj.GetName()+"_prefit")
                         xzreport0[p].SetBinContent(ix,iz, hproj.Integral())
                         xzreport0[p].SetBinError(  ix,iz, _h1NormWithError(hproj, 0.0)[1])
+                     ##LOPU
                     if options.algo == "fitND":
                         plotter.printOnePlot(mca, fspec, freport, printDir=bindirname, 
                                              outputName = "%s_for_%s%s_%s%s_prefit" % (fspec.name,xspec.name,bxname,yspec.name,bzname)) 
@@ -505,8 +526,8 @@ if __name__ == "__main__":
         for rep in xzreport, xzreport0: 
             for p,h in rep.iteritems(): 
                 if p in [ "signal", "background", "total", "data_sub", "data" ] : continue
-                rep["total"].Add(h) 
-                if  mca.isSignal(p): rep["signal"    ].Add(h)
+                if "total" in rep: rep["total"].Add(h) 
+                if  mca.isSignal(p): rep["signal"].Add(h)
                 else:                rep["background"].Add(h)
             makeDataSub(rep,mca)
         #print "\n"

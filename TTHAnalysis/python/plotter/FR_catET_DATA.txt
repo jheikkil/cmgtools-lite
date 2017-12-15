@@ -1,0 +1,22 @@
+
+## Let the first and second lepton always pass the MVA cuts (set the value to 1)
+###	 && H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l1_againstMuon3>=2 && H_tt_l1_againstElectronMVA6>=4 &&  H_SS == 0 && m_vis>-1 && H_vis>-1 && Hboson_tt_LT > 80 && H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l2_againstMuon3>=2 && H_tt_l2_againstElectronMVA6>=4
+cut-change: H_et_l1_eid_spring16_80:1
+cut-change: iso_3: 0.14 
+
+cut-change: H_et_l2_byMediumIsolationMVArun2v1DBoldDMwLT: 1
+cut-change: H_et_l2_againstMuon3 : 2
+cut-change: H_et_l2_againstElectronMVA6 : 4
+
+
+## define the FR weight
+#weight: fakeRateWeight_2lssBCat(LepGood1_pt,LepGood1_eta,LepGood1_pdgId,LepGood1_mva,LepGood2_pt,LepGood2_eta,LepGood2_pdgId,LepGood2_mva, 0.70, nBJetMedium25, 1.0,1.0,1.0,1.0)
+#weight: (getVVLoose( iso_4, pt_4 ) > 0 &&  iso_3<2.0 && H_et_l1_eid_spring16>0)*fakeRateWeight_AZh(pt_3, eta_3, pt_4, eta_4, 1115,  H_et_l1_eid_spring16_80>0 && iso_3<0.15, H_et_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_et_l2_againstMuon3>=2 && H_et_l2_againstElectronMVA6>=4)
+weight: (iso_3<2.0 && H_et_l1_eid_spring16>0)*fakeRateWeight_AZh(pt_3, eta_3, pt_4, eta_4, 1115,  H_et_l1_eid_spring16_80>0 && iso_3<0.15, 1)
+
+
+## load histograms 
+load-histo: FR_mu  : FR0712.root : FR_muon_data
+load-histo: FR_el  : FR0712.root : FR_ele_data
+load-histo: FR_tau  : FR0712.root : FR_tau_data
+
