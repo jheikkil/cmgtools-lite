@@ -5,6 +5,11 @@
 #include <string>
 #include <map>
 
+
+TH2 * FR_tau00 = 0;
+TH2 * FR_tau01 = 0;
+TH2 * FR_tau10 = 0;
+
 TH2 * FR_mu = 0;
 TH2 * FR2_mu = 0;
 TH2 * FR3_mu = 0;
@@ -58,6 +63,9 @@ TH2 * MUSF3 = 0;
 bool loadFRHisto(const std::string &histoName, const char *file, const char *name) {
     TH2 **histo = 0, **hptr2 = 0;
     if      (histoName == "FR_tau") { histo = & FR_tau; hptr2 = & FRi_tau[0]; }
+    else if (histoName == "FR_tau00") { histo = & FR_tau00; hptr2 = & FRi_tau[1]; }
+    else if (histoName == "FR_tau01") { histo = & FR_tau01; hptr2 = & FRi_tau[2]; }
+    else if (histoName == "FR_tau10") { histo = & FR_tau10; hptr2 = & FRi_tau[3]; }
     else if (histoName == "FR_mu")  { histo = & FR_mu;  hptr2 = & FRi_mu[0]; }
     else if (histoName == "FR_el")  { histo = & FR_el;  hptr2 = & FRi_el[0]; }
     else if (histoName == "FR2_mu") { histo = & FR2_mu; hptr2 = & FRi_mu[2]; }
@@ -138,9 +146,12 @@ bool loadFRHisto(const std::string &histoName, const char *file, const char *nam
 }
 
 
-float fakeRateWeight_AZh(float pt1, float eta1, float pt2, float eta2, int channel, bool leg3, bool leg4)
+float fakeRateWeight_AZh(float pt1, float eta1, float pt2, float eta2, int channel, int DM1, int DM2, float leg3, float leg4)
 {
+    //cout<<"---------NEW EVENT--------"<<endl;
+    //cout<<"Run, lumi, evt: "<<run<<endl;
     TH2 *hist1=nullptr, *hist2=nullptr;
+    float ret = 1.0f;
     int l1_failed=0, l2_failed=0, both_failed=0, passed=0;
     if (channel==1115){
         hist1 = FR_el;
@@ -161,44 +172,42 @@ float fakeRateWeight_AZh(float pt1, float eta1, float pt2, float eta2, int chann
         if (pt2 >= 60.0) {pt2 = 59.99;}
     }
     else if (channel==1515){
-        hist1 = FR_tau;
-        hist2 = FR_tau;
+        if (DM1 == 0) { hist1 = FR_tau00;}
+        else if (DM1 == 1) { hist1 = FR_tau01;}
+        else if (DM1 == 10) { hist1 = FR_tau10;}
+        if (DM2 == 0) { hist2 = FR_tau00;}
+       	else if	(DM2 == 1) { hist2 = FR_tau01;}
+       	else if	(DM2 == 10) { hist2 = FR_tau10;}
+        //hist1 = FR_tau;
+        //hist2 = FR_tau;
         if (pt1 >= 90.0) {pt1 = 89.99;}
         if (pt2 >= 90.0) {pt2 = 89.99;}
     }
     //cout<<leg4<<endl;
-    double fr1 = hist1->GetBinContent( hist1->FindBin(pt1, std::abs(eta1)) );
-    double fr2 = hist2->GetBinContent( hist2->FindBin(pt2, std::abs(eta2)) );
+    //double fr1 = hist1->GetBinContent( hist1->FindBin(pt1, std::abs(eta1)) );
+    //double fr2 = hist2->GetBinContent( hist2->FindBin(pt2, std::abs(eta2)) );
 
-/*    #double x1 = hist1->GetXaxis()->FindBin(pt1);
-    #double y1 = hist1->GetYaxis()->FindBin(std::abs(eta1));
-    #double x2 = hist2->GetXaxis()->FindBin(pt2);
-    #double y2 = hist2->GetYaxis()->FindBin(std::abs(eta2));
-    
-    double fr1 = hist1->GetBinContent( hist1->FindBin(pt1, std::abs(eta1)) );
-    double fr2 = hist2->GetBinContent( hist2->FindBin(pt2, std::abs(eta2)) );
-    #double fr1=0.0;
-    #double fr2=0.0;
-    #if(x1>=1 && x1<=7 && y1>=1 && y1<=2){
-    #    fr1 = hist1->GetBinContent( x1, y1 );
-    #}
-    #else{
-    #    cout<<"OH NOOOOOOOOOOOOOO"<<endl;
-    #}
-    #if(x2>=1 && x2<=7 && y2>=1 && y2<=2){
-    #    fr2 = hist1->GetBinContent( x2, y2 );
-    #}
-    #else{
-    #    cout<<"OH NOOUKA 2"<<endl;
-    # } */
-    if (leg3 == true and leg4 == true) {return 0;}
-    else if (leg3==false and leg4==true) {return fr1/(1.0-fr1);}
-    else if (leg3==true and leg4==false) {return fr2/(1.0-fr2);}
-    else if (leg3==false and leg4==false) {return -fr1*fr2/((1-fr1)*(1-fr2));}
-    //else if (leg3==false and leg4==false) {return fr1/(1.0-fr1)+fr2/(1.0-fr2)-fr1*fr2/((1-fr1)*(1-fr2));}
-    //f1/(1-f1) + f2/(f-f2) - f1*f2/((1-f1)*(1-f2))
-    else {return 0;}
-    //return fr1*fr2;
+    //std::cout<<"Run number:"<<run<<endl;
+    double fr1 = hist1->GetBinContent( hist1->FindBin(pt1, DM1) );
+    //std::cout<<"pt, DM, fr: "<<pt1<<": "<<DM1<<": "<<fr1<<endl;
+    double fr2 = hist2->GetBinContent( hist2->FindBin(pt2, DM2) );
+    //std::cout<<"pt, DM, fr: "<<pt2<<": "<<DM2<<": "<<fr2<<endl;
+    if (fr1 <= 0)  { std::cerr << "WARNING, FR is " << fr1 << std::endl; if (fr1<0) std::abort(); }
+    if (fr2 <= 0)  { std::cerr << "WARNING, FR is " << fr2 << std::endl; if (fr2<0) std::abort(); }
+
+    ////if (leg3 == 1 and leg4==1) {cout<<"YASS"<<endl;}
+    //cout<<"Our legs are: "<<leg3<<" and "<<leg4<<endl;
+    //cout<<"pt1, DM1, pt2, DM2: "<<pt1<<" "<<DM1<<" "<<pt2<<" "<<DM2<<endl;
+    //cout<<"Fr1 and fr2 are: "<<fr1<<" and "<<fr2<<endl;
+    if (leg3 > 0.5 and leg4 > 0.5) {ret *= 0.0f;}
+    else if (leg3<0.5 and leg4>0.5) {ret *= fr1/(1.0f-fr1);}
+    else if (leg3>0.5 and leg4<0.5) {ret *= fr2/(1.0f-fr2);}
+    else if (leg3<0.5 and leg4<0.5) {ret *= -fr1*fr2/((1.0f-fr1)*(1.0f-fr2));}
+
+    //cout<<"Weight: "<<ret<<endl;
+    if (ret == 1.0f) ret = 0.0f;
+    //std::cout<<"ret: "<<ret<<std::endl;    
+    return ret;
 }
 
 float fakeRateWeight_2lssMVA(float l1pt, float l1eta, int l1pdgId, float l1mva,

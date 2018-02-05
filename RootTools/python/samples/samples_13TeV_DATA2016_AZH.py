@@ -104,7 +104,7 @@ from CMGTools.TTHAnalysis.setup.Efficiencies import *
 dataDir = "$CMSSW_BASE/src/CMGTools/TTHAnalysis/data"
 
 for comp in samples:
-    comp.splitFactor = 1000
+    comp.splitFactor = 100
     comp.isMC = False
     comp.isData = True
     comp.lumi = lumi

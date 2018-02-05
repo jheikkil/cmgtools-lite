@@ -3,6 +3,20 @@ Sync for AZh (MC)
   Using AZh sample: /AToZhToLLTauTau_M-300_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM
 
 
+26 January 2018:
+  - Update ntuples, include new single lepton triggers
+    
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/eeem.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/eett.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/eeet.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/eemt.root
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/mmem.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/mmtt.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/mmmt.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/mmet.root
+
+
 16 October 2017:
   - Bug fix for implementing trigger cuts
 

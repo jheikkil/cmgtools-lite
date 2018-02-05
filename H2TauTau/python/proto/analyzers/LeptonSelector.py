@@ -114,10 +114,6 @@ class LeptonSelector(Analyzer):
             electrons = [ electron for electron in electrons if electron.pt()>9 and abs(electron.eta())<2.5 and abs(electron.dxy()) < 0.045 and abs(electron.dz()) < 0.2 and electron.passConversionVeto() and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1]
             taus = [ tau for tau in taus if tau.pt()>20 and abs(tau.eta())<2.3 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('decayModeFinding') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonLoose3') > 0.5]
 
-       # setattr(event, 'nMuonsPtEtaIso', len(muons))
-       # setattr(event, 'nElectronsPtEtaIso', len(electrons))
-       # setattr(event, 'nTausPtEtaIso', len(taus))
-
         leptons_me = []
         leptons_me += muons
         leptons_me += electrons
@@ -144,45 +140,14 @@ class LeptonSelector(Analyzer):
 
         #check how many electrons and muons we have 
         if ( len(muonsGOOD)+len(electronsGOOD) )<2 or ( len(muonsGOOD)+len(electronsGOOD) )>4:
-            #print "JEEEEEEEEEee1"
-            #print len(muonsGOOD)
-            #print len(electronsGOOD)
             return False
 
         #we cannot have more than 3 electrons or 3 muons at this point anymore
         if ( len(muonsGOOD) > 3 ) or ( len(electronsGOOD) > 3):
-            #print "JEEEEEEEEEE2"
             return False
 
 
         event.isSignal = True
-
-        #maybe not needed?
-        #setattr(event, 'muons', muons)
-        #setattr(event, 'electrons', electrons)
-        #setattr(event, 'taus', taus) 
-        #setattr(event, 'met', met)
-
-
-        #muons = [ muon for muon in muons if muon.pt()>9 and abs(muon.eta())<2.4 and muon.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.15]
-        #electrons = [ electron for electron in electrons if electron.pt()>9 and abs(electron.eta())<2.5 and electron.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.1]
-        #taus = [ tau for tau in taus if tau.pt()>9 and abs(tau.eta())<2.3 and tau.tauID('byTightIsolationMVArun2v1DBoldDMwLT') > 0.5]
-
-        #make the final cuts cuts
-       # muons = [ muon for muon in muons if muon.pt()>9 and abs(muon.eta())<2.4 and muon.muonID('POG_ID_Medium_ICHEP') and muon.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.15] 
-       # electrons = [ electron for electron in electrons if electron.pt()>9 and abs(electron.eta())<2.5 and electron.mvaIDRun2('NonTrigSpring15MiniAOD', 'POG90') and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1 and electron.passConversionVeto() and electron.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.1]
-       # taus = [ tau for tau in taus if tau.pt()>9 and abs(tau.eta())<2.3 and tau.tauID('decayModeFinding') > 0.5 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('byTightIsolationMVArun2v1DBoldDMwLT') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonTight3') > 0.5]
-
-        #for DY test
-       # muons = [ muon for muon in muons if muon.pt()>9 and abs(muon.eta())<2.4 and muon.muonID('POG_ID_Loose') and muon.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.25]
-       # electrons = [ electron for electron in electrons if electron.pt()>9 and abs(electron.eta())<2.5 and electron.mvaIDRun2('NonTrigSpring15MiniAOD', 'POG90') and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1 and electron.passConversionVeto() and electron.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.3]
-       # taus = [ tau for tau in taus if tau.pt()>9 and abs(tau.eta())<2.3 and tau.tauID('decayModeFinding') > 0.5 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('byMediumIsolationMVArun2v1DBoldDMwLT') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonLoose3') > 0.5]
-
- 
-        #muons = [ muon for muon in muons if muon.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.15]
-        #electrons = [ electron for electron in electrons if electron.mvaIDRun2('NonTrigSpring15MiniAOD', 'POG90') and electron.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.1 and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1 and electron.passConversionVeto()]
-        #taus = [ tau for tau in taus if tau.tauID('decayModeFinding') > 0.5 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('byTightIsolationMVArun2v1DBoldDMwLT') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonTight3') > 0.5]
-
 
         allLeptons = []
         allLeptons += muons
@@ -192,14 +157,10 @@ class LeptonSelector(Analyzer):
         setattr(event, 'allLeptons', len(allLeptons))
         setattr(event, 'selectedLeptons', allLeptons)
 
-        #allLeptonsFinal = []
-        #allLeptonsFinal += allLeptons
-
         #if len(allLeptons)!=3:
         #    fourLeptons = True
         #else:
         #    return False
            
 	
-        #setattr(event, 'allLeptonsFinal', len(allLeptonsFinal))
 

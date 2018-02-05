@@ -3410,3 +3410,380 @@ ERR MATRIX APPROXIMATE
 Scaling process DY by the extracted scale factor 0.338 with rel. syst uncertainty 4.450
 Scaling process WZ by the extracted scale factor 1.000 with rel. syst uncertainty 1.505
 Scaling process TT by the extracted scale factor 1.000 with rel. syst uncertainty 17.473
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 89.99 10 25.0003 10
+Fr1 and fr2 are: 0.0702699 and 0.133482
+Weight: -0.0116428
+--
+OMG3! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 39.9992 10 37.94 10
+Fr1 and fr2 are: 0.130441 and 0.130441
+Weight: -0.0225026
+--
+OMG! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 24.9996 10 24.8758 10
+Fr1 and fr2 are: 0.117478 and 0.117478
+Weight: -0.0177198
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 44.9487 10 25.0009 10
+Fr1 and fr2 are: 0.139245 and 0.133482
+Weight: -0.0249199
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 29.478 10 25.0005 1
+Fr1 and fr2 are: 0.133482 and 0.264543
+Weight: -0.0554097
+--
+OMG2! 
+Our legs are: 1 and 1
+pt1, DM1, pt2, DM2: 30.0008 1 25.744 1
+Fr1 and fr2 are: 0.239518 and 0.264543
+Weight: 0
+--
+OMGAPUA3! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 78.1301 10 40.0002 10
+Fr1 and fr2 are: 0.0702699 and 0.139245
+Weight: -0.0122268
+--
+OMGAPUA2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 89.99 10 30.0004 10
+Fr1 and fr2 are: 0.0702699 and 0.130441
+Weight: -0.0113378
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 25.1126 0 24.9991 10
+Fr1 and fr2 are: 0.264121 and 0.117478
+Weight: -0.0477777
+--
+OMG! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 25.0004 10 23.0691 10
+Fr1 and fr2 are: 0.133482 and 0.117478
+Weight: -0.0205057
+--
+OMGAPUA3! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 69.127 10 40 10
+Fr1 and fr2 are: 0.15384 and 0.130441
+Weight: -0.0272731
+--
+OMG3! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 40.0003 10 24.0575 10
+Fr1 and fr2 are: 0.139245 and 0.117478
+Weight: -0.0215342
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 37.878 10 24.9999 10
+Fr1 and fr2 are: 0.130441 and 0.117478
+Weight: -0.0199685
+--
+OMG2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 30.0006 10 26.6375 10
+Fr1 and fr2 are: 0.130441 and 0.133482
+Weight: -0.023108
+--
+OMG! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 24.9997 10 22.8559 10
+Fr1 and fr2 are: 0.117478 and 0.117478
+Weight: -0.0177198
+--
+OMG4! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 49.9995 10 20.6873 10
+Fr1 and fr2 are: 0.139245 and 0.117478
+Weight: -0.0215342
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 36.7981 10 25.0004 10
+Fr1 and fr2 are: 0.130441 and 0.133482
+Weight: -0.023108
+--
+OMGAPUA2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 59.5856 10 30.0007 10
+Fr1 and fr2 are: 0.15384 and 0.130441
+Weight: -0.0272731
+--
+OMGAPUA2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 52.9292 10 29.9993 10
+Fr1 and fr2 are: 0.15384 and 0.133482
+Weight: -0.0280068
+--
+OMG3! 
+Our legs are: 0 and 1
+pt1, DM1, pt2, DM2: 40.0006 10 23.8601 1
+Fr1 and fr2 are: 0.139245 and 0.270147
+Weight: 0.161771
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 39.6215 10 25.0005 10
+Fr1 and fr2 are: 0.130441 and 0.133482
+Weight: -0.023108
+--
+OMG! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 24.9994 10 20.0053 10
+Fr1 and fr2 are: 0.117478 and 0.117478
+Weight: -0.0177198
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 62.0242 10 24.9999 0
+Fr1 and fr2 are: 0.15384 and 0.293842
+Weight: -0.0756534
+--
+OMG! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 25.0005 10 22.7406 10
+Fr1 and fr2 are: 0.133482 and 0.117478
+Weight: -0.0205057
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 55.0723 10 25.0001 10
+Fr1 and fr2 are: 0.15384 and 0.133482
+Weight: -0.0280068
+--
+OMGAPUA3! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 43.2875 10 39.9993 1
+Fr1 and fr2 are: 0.139245 and 0.239518
+Weight: -0.0509507
+--
+OMG! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 25.0004 10 23.2321 10
+Fr1 and fr2 are: 0.133482 and 0.117478
+Weight: -0.0205057
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 66.9826 10 25.0003 10
+Fr1 and fr2 are: 0.15384 and 0.133482
+Weight: -0.0280068
+--
+OMG3! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 40.0004 10 21.3543 10
+Fr1 and fr2 are: 0.139245 and 0.117478
+Weight: -0.0215342
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 58.916 10 25.0009 10
+Fr1 and fr2 are: 0.15384 and 0.133482
+Weight: -0.0280068
+--
+OMG2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 30.0003 10 24.1108 10
+Fr1 and fr2 are: 0.130441 and 0.117478
+Weight: -0.0199685
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 27.2799 10 24.9994 10
+Fr1 and fr2 are: 0.133482 and 0.117478
+Weight: -0.0205057
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 33.0259 10 24.9998 10
+Fr1 and fr2 are: 0.130441 and 0.117478
+Weight: -0.0199685
+--
+OMGAPUA2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 36.3071 10 30.0002 10
+Fr1 and fr2 are: 0.130441 and 0.130441
+Weight: -0.0225026
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 36.2002 10 24.9991 10
+Fr1 and fr2 are: 0.130441 and 0.117478
+Weight: -0.0199685
+--
+OMG2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 29.9996 10 26.4762 10
+Fr1 and fr2 are: 0.133482 and 0.133482
+Weight: -0.0237297
+--
+OMGAPUA2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 40.0143 10 29.9991 10
+Fr1 and fr2 are: 0.139245 and 0.133482
+Weight: -0.0249199
+--
+OMG2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 29.9994 10 22.3698 0
+Fr1 and fr2 are: 0.133482 and 0.293842
+Weight: -0.0641
+--
+OMG5! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 70.0008 10 31.4828 10
+Fr1 and fr2 are: 0.0702699 and 0.130441
+Weight: -0.0113378
+--
+OMG5! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 69.9997 10 62.8832 0
+Fr1 and fr2 are: 0.15384 and 0.223367
+Weight: -0.0522901
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 29.9021 10 24.9996 10
+Fr1 and fr2 are: 0.133482 and 0.117478
+Weight: -0.0205057
+--
+OMG2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 30.0008 10 26.2294 10
+Fr1 and fr2 are: 0.130441 and 0.133482
+Weight: -0.023108
+--
+OMG4! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 49.9998 10 24.3452 10
+Fr1 and fr2 are: 0.139245 and 0.117478
+Weight: -0.0215342
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 27.5189 10 25.0009 10
+Fr1 and fr2 are: 0.133482 and 0.133482
+Weight: -0.0237297
+--
+OMGAPUA2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 31.0091 10 30.001 10
+Fr1 and fr2 are: 0.130441 and 0.130441
+Weight: -0.0225026
+--
+OMG! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 25.0001 10 20.2522 10
+Fr1 and fr2 are: 0.133482 and 0.117478
+Weight: -0.0205057
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 64.3635 1 24.9993 1
+Fr1 and fr2 are: 0.208047 and 0.270147
+Weight: -0.0972356
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 58.6674 10 24.9998 10
+Fr1 and fr2 are: 0.15384 and 0.117478
+Weight: -0.0242017
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 32.5057 10 25.0008 10
+Fr1 and fr2 are: 0.130441 and 0.133482
+Weight: -0.023108
+--
+OMG4! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 49.9993 10 44.6883 10
+Fr1 and fr2 are: 0.139245 and 0.139245
+Weight: -0.0261698
+--
+OMGAPUA4! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 89.99 10 49.9994 10
+Fr1 and fr2 are: 0.0702699 and 0.139245
+Weight: -0.0122268
+--
+OMG! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 25.0001 10 23.1238 10
+Fr1 and fr2 are: 0.133482 and 0.117478
+Weight: -0.0205057
+--
+OMG4! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 49.9994 1 36.2253 10
+Fr1 and fr2 are: 0.235573 and 0.130441
+Weight: -0.0462281
+--
+OMG5! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 69.9999 10 45.1805 10
+Fr1 and fr2 are: 0.15384 and 0.139245
+Weight: -0.0294115
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 89.99 10 24.9992 1
+Fr1 and fr2 are: 0.0702699 and 0.270147
+Weight: -0.0279754
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 89.99 10 25.0005 10
+Fr1 and fr2 are: 0.0702699 and 0.133482
+Weight: -0.0116428
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 30.4587 10 25.0007 10
+Fr1 and fr2 are: 0.130441 and 0.133482
+Weight: -0.023108
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 88.8959 10 24.9991 10
+Fr1 and fr2 are: 0.0702699 and 0.117478
+Weight: -0.010061
+--
+OMG3! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 39.9991 10 22.1557 10
+Fr1 and fr2 are: 0.130441 and 0.117478
+Weight: -0.0199685
+--
+OMG5! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 70.0003 10 56.5783 10
+Fr1 and fr2 are: 0.0702699 and 0.15384
+Weight: -0.0137414
+--
+OMG3! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 40.0005 10 25.6535 10
+Fr1 and fr2 are: 0.139245 and 0.133482
+Weight: -0.0249199
+--
+OMGAPUA! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 56.9463 10 24.9999 10
+Fr1 and fr2 are: 0.15384 and 0.117478
+Weight: -0.0242017
+--
+OMGAPUA2! 
+Our legs are: 0 and 0
+pt1, DM1, pt2, DM2: 38.2375 10 29.9993 10
+Fr1 and fr2 are: 0.130441 and 0.133482
+Weight: -0.023108

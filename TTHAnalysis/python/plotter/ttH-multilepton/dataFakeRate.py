@@ -20,6 +20,7 @@ def addPolySystBands(tlist,amplitude,order):
     for b in xrange(1,ref.GetNbinsX()+1):
         xval = ref.GetXaxis().GetBinCenter(b)
         r = 1 + amplitude * funcs[order]((xval-xmin)/(xmax-xmin))
+        print "bin %d, hi poly syst band: %f , and low also: %f" %(b, ref.GetBinContent(b) * r, ref.GetBinContent(b) / r)
         hi.SetBinContent(b, ref.GetBinContent(b) * r)
         lo.SetBinContent(b, ref.GetBinContent(b) / r)
     tlist.Add(hi)
@@ -37,6 +38,8 @@ def addStretchBands(tlist,amplitude,fineSlices=100):
         w  = ref.GetBinContent(b)/fineSlices
         for fineSlice in xrange(0,fineSlices):
             x = x0 + dx*fineSlice
+            #print "x*(1+amplitude)=%f" %(x*(1+amplitude))
+            #print "x*(1-amplitude)=%f" %(x*(1-amplitude))
             hi.Fill(x*(1+amplitude), w)
             lo.Fill(x*(1-amplitude), w)
     tlist.Add(hi)
@@ -45,6 +48,7 @@ def addBbB(tlist,ycutoff,relcutoff,verbose=False):
     ret = []
     ref = tlist.At(0)
     ytot = ref.Integral()
+    if (ytot == 0): return ret
     for b in xrange(1,ref.GetNbinsX()+1):
         y, e = ref.GetBinContent(b), ref.GetBinError(b)
         if y/ytot < ycutoff: continue
@@ -194,21 +198,16 @@ if __name__ == "__main__":
                 for (p,h) in report.iteritems():
                     if gnorms[p]['pre'] != gnorms[p]['post'] and gnorms[p]['post'] > 0:
                         h.Scale(gnorms[p]['post']/gnorms[p]['pre'])
-            ##ALKU
             for ix in xrange(1,projection.GetNbinsX()+1):
                 bxname = "_bin_%g_%g" % (projection.GetXaxis().GetBinLowEdge(ix),projection.GetXaxis().GetBinUpEdge(ix))
+                #print "bxname"
+                #print bxname
                 xval = projection.GetXaxis().GetBinCenter(ix)
-                #print "XVALs"
-                #print projection.GetXaxis().GetBinLowEdge(ix)
-                #print xval
-                #print projection.GetXaxis().GetBinUpEdge(ix)
                 if options.xcut:
-                    #print "OLI LEIKKAUS"
                     if not ( options.xcut[0] <= xval and xval <= options.xcut[1] ): continue
                 freport_num_den = {"pass":{},"fail":{}}
                 for (bzname,iz) in [("_pass",2),("_fail",1)]:
                     if options.algo == "fitND":
-                        #print "fitND"
                         for p in mca.listBackgrounds():
                             mca.setProcessOption(p, 'FreeFloat',      (iz == 2))
                             mca.setProcessOption(p, 'NormSystematic', hypot(1, mca.getProcessOption(p,'NormSystematic',0.)))
@@ -220,29 +219,20 @@ if __name__ == "__main__":
                         if p in [ "signal", "background", "total", "data_sub" ] : continue
                         hproj = fitvarhist.Clone("%s_for_%s%s_%s%s_%s" % (fspec.name,xspec.name,bxname,yspec.name,bzname,p))
                         hproj.SetDirectory(None)
+                        # sanity check binning
+                        if h.GetNbinsX() != projection.GetNbinsX(): raise RuntimeError, "Inconsistent input binning with x variable binning"
+                        if h.GetXaxis().GetBinLowEdge(ix) != projection.GetXaxis().GetBinLowEdge(ix): raise RuntimeError, "Inconsistent input binning with x variable binning"
+                        if h.GetXaxis().GetBinUpEdge(ix) != projection.GetXaxis().GetBinUpEdge(ix): raise RuntimeError, "Inconsistent input binning with x variable binning"
                         myfz = fzreport[p]
                         for iy in xrange(1,h.GetNbinsY()+1):
                             if options.fcut:
-                                #print "OLI FCUT"
                                 fval = h.GetYaxis().GetBinCenter(iy)
                                 if fval < options.fcut[0] or fval > options.fcut[1]: continue
-                            #print h.GetYaxis().GetBinCenter(iy)
                             hproj.SetBinContent(iy, h.GetBinContent(ix,iy,iz))
                             hproj.SetBinError(iy, h.GetBinError(ix,iy,iz))
                             myfz.SetBinContent(iy, iz, h.GetBinContent(ix,iy,iz))
                             myfz.SetBinError(iy, iz, h.GetBinError(ix,iy,iz))
                         mca.stylePlot(p, hproj, fspec, mayBeMissing=True)
-                        #print "prosessi"
-                        #print p
-                        #if p in ["data_sub_syst"]:
-                        #    print "prosessi"
-                        #    print p
-                        #    for iy in xrange(1,hproj.GetNbinsY()+1):     
-                        #        print "ENNEN "
-                        #        print hproj.GetBinContent(iy)
-                       #         cropNegativeBins(hproj)
-                        #        print "JALKEEN"
-                        #        print hproj.GetBinContent(iy)
                         cropNegativeBins(hproj)
                         if options.globalRebin > 1: hproj.Rebin(options.globalRebin)
                         freport[p] = hproj
@@ -250,7 +240,6 @@ if __name__ == "__main__":
                         outfile.WriteTObject(hproj, hproj.GetName()+"_prefit")
                         xzreport0[p].SetBinContent(ix,iz, hproj.Integral())
                         xzreport0[p].SetBinError(  ix,iz, _h1NormWithError(hproj, 0.0)[1])
-                     ##LOPU
                     if options.algo == "fitND":
                         plotter.printOnePlot(mca, fspec, freport, printDir=bindirname, 
                                              outputName = "%s_for_%s%s_%s%s_prefit" % (fspec.name,xspec.name,bxname,yspec.name,bzname)) 
@@ -261,7 +250,7 @@ if __name__ == "__main__":
                             xzreport[p].SetBinError(  ix,iz, _h1NormWithError(h, mca.getProcessOption(p,'NormSystematic',0.))[1])
                         plotter.printOnePlot(mca, fspec, freport, printDir=bindirname,
                                              outputName = "%s_for_%s%s_%s%s" % (fspec.name,xspec.name,bxname,yspec.name,bzname)) 
-                if options.algo == "fQCD":
+                if options.algo in ("fQCD","ifQCD"):
                     # == save settings ===
                     ybackup = options.yrange; xcbackup = options.xcut; rbackup = options.showRatio
                     options.yrange = (0,1.3); options.xcut = None; options.showRatio = False
@@ -318,15 +307,66 @@ if __name__ == "__main__":
                     r_slp = (b_s_a/n_s_a)/(b_l_a/n_l_a)
                     r_slp_stat = r_slp * sqrt(sum(x**2 for x in [db_s_a/b_s_a, db_l_a/b_l_a, dn_s_a/n_s_a, dn_l_a/n_l_a]))
                     r_slp_syst = r_slp * 2 * abs(fb_s[0]-fb_l[0])/(fb_s[0]+fb_l[0])
-                    if options.subSyst > 0: 
-                        r_slp_syst = hypot(r_slp_syst, r_slp * options.subSyst)
-                    dr     = hypot(r_slp_stat, r_slp_syst)
-                    f_qcd  = max(0,f_s[0] - r_slp*f_l[0])/(1-r_slp)
-                    df_s = max(f_s[1],f_s[2])/(1-r_slp)
-                    df_l = (r_slp*max(f_l[1],f_l[2]))/(1-r_slp)
-                    df_r = 0.5*abs((f_s[0] - (r_slp-dr)*f_l[0])/(1-(r_slp-dr)) - (f_s[0] - (r_slp+dr)*f_l[0])/(1-(r_slp+dr)))
-                    df   = sqrt(sum(x**2 for x in [df_s,df_l,df_r]))
-                    #print "%s  f_s %.3f  f_l %.3f  r_slp %.3f +- %.3f +- %.3f  f_qcd %.3f +- %.3f" % (bxname, f_s[0], f_l[0], r_slp, r_slp_stat, r_slp_syst, f_qcd, df)
+                    if options.algo == "fQCD":
+                        if options.subSyst > 0: 
+                            r_slp_syst = hypot(r_slp_syst, r_slp * options.subSyst)
+                        dr     = hypot(r_slp_stat, r_slp_syst)
+                        f_qcd  = max(0,f_s[0] - r_slp*f_l[0])/(1-r_slp)
+                        df_s = max(f_s[1],f_s[2])/(1-r_slp)
+                        df_l = (r_slp*max(f_l[1],f_l[2]))/(1-r_slp)
+                        df_r = 0.5*abs((f_s[0] - (r_slp-dr)*f_l[0])/(1-(r_slp-dr)) - (f_s[0] - (r_slp+dr)*f_l[0])/(1-(r_slp+dr)))
+                        df   = sqrt(sum(x**2 for x in [df_s,df_l,df_r]))
+                        print "%s  f_s %.3f  f_l %.3f  r_slp %.3f +- %.3f +- %.3f  f_qcd %.3f +- %.3f" % (bxname, f_s[0], f_l[0], r_slp, r_slp_stat, r_slp_syst, f_qcd, df)
+                    elif options.algo == "ifQCD":
+                        fs_s = (ereport["signal"].GetY()[0], ereport["signal"].GetErrorYlow(0), ereport["signal"].GetErrorYhigh(0))
+                        fs_l = (ereport["signal"].GetY()[1], ereport["signal"].GetErrorYlow(1), ereport["signal"].GetErrorYhigh(1))
+                        gamma, dgamma = fs_l[0]/fs_s[0], fs_l[0]/fs_s[0]*hypot(max(fs_s[1:])/fs_s[0], max(fs_l[1:])/fs_l[0])
+                        mu   , dmu    = fb_s[0]/fb_l[0], fb_s[0]/fb_l[0]*hypot(max(fb_s[1:])/fb_s[0], max(fb_l[1:])/fb_l[0])
+                        s_s_a = (fzreport["signal"].GetBinContent(1,1) + fzreport["signal"].GetBinContent(1,2))
+                        ds_s_a = hypot(fzreport["signal"].GetBinError(1,1), fzreport["signal"].GetBinError(1,2))
+                        bs_ns  = b_s_a / (b_s_a + s_s_a)
+                        dbs_ns = (b_s_a * s_s_a)/((b_s_a+s_s_a)**2)*hypot(db_s_a/b_s_a, ds_s_a/s_s_a)
+                        def ifqcd(fs,fl,r,m,g,bsns):
+                            fs,fl,r,m,g,bsns = map( lambda x : max(x,0), [fs,fl,r,m,g,bsns] );
+                            return max(0,fs - r*m*fl)/(1 - r*m*g + bsns*(g*m-1)) 
+                        def mhypot(*args):
+                            return sqrt(sum(x**2 for x in args))
+                        def ifqcd_werr(fsv,flv,r,dr,m,dm,g,dg,bsns,dbsns):
+                            fs, fl = fsv[0], flv[0]
+                            f = ifqcd(fs,fl,r,m,g,bsns)
+                            df_f = hypot(ifqcd(max(fsv[1],fsv[2]),0,r,m,g,bsns), ifqcd(0,max(flv[1],flv[2]),r,m,g,bsns))
+                            df_r = 0.5*abs(ifqcd(fs,fl,r+dr,m,g,bsns)-ifqcd(fs,fl,r-dr,m,g,bsns))
+                            if m == 1: 
+                                return (f, df_f, df_r, mhypot(df_r,df_r))
+                            df_m = 0.5*abs(ifqcd(fs,fl,r,m+dm,g,bsns)-ifqcd(fs,fl,r,m-dm,g,bsns))
+                            if g == 1:
+                                return (f, df_f, df_r, df_m, mhypot(df_r,df_r,df_m))
+                            df_g = 0.5*abs(ifqcd(fs,fl,r,m,g+dg,bsns)-ifqcd(fs,fl,r,m,g-dg,bsns))
+                            if bsns == 0:
+                                return (f, df_f, df_r, df_m, df_g, mhypot(df_r,df_r,df_m,df_g))
+                            df_bsns = 0.5*abs(ifqcd(fs,fl,r,m,g,bsns+dbsns)-ifqcd(fs,fl,r,m,g,bsns-dbsns))
+                            return (f, df_f, df_r, df_m, df_g, df_bsns, mhypot(df_r,df_r,df_m,df_g,df_bsns))
+                        print "First iteration for %s, f_s %.3f  f_l %.3f :" % (bxname, f_s[0], f_l[0])
+                        print "    r_slp               %.3f +- %.3f (stat) as in fQCD " % (r_slp, r_slp_stat)
+                        print "    mu    = fb_s/fb_l = %.3f +- %.3f (stat) from MC" % (mu, dmu)
+                        print "    gamma = fs_l/fs_s = %.3f +- %.3f (stat) from MC" % (gamma, dgamma)
+                        print "    b_s/n_s           = %.3f +- %.3f (stat) from MC" % (bs_ns, dbs_ns)
+                        print "    f_qcd(r, mu=1, gamma=1, bsns=*) = %.4f +- %.4f (f) +- %.4f (r)                                            [ +- %.4f (tot) ]" % ( 
+                                ifqcd_werr(f_s,f_l, r_slp,r_slp_stat,  1,0,   1,0,    0,0  ) )
+                        print "    f_qcd(r,  mu , gamma=1, bsns=0) = %.4f +- %.4f (f) +- %.4f (r) +- %.4f (g)                              [ +- %.4f (tot) ]" % ( 
+                                ifqcd_werr(f_s,f_l, r_slp,r_slp_stat, mu,dmu,  1,0,   0,0  ) )
+                        print "    f_qcd(r,  mu ,  gamma , bsns=0) = %.4f +- %.4f (f) +- %.4f (r) +- %.4f (g) +- %.4f (m)                [ +- %.4f (tot) ]" % ( 
+                                ifqcd_werr(f_s,f_l, r_slp,r_slp_stat, mu,dmu,  gamma,dgamma,  0,0  ) ) 
+                        print "    f_qcd(r,  mu ,  gamma ,  bsns ) = %.4f +- %.4f (f) +- %.4f (r) +- %.4f (g) +- %.4f (m) +- %.4f (b)  [ +- %.4f (tot) ]" % ( 
+                                ifqcd_werr(f_s,f_l, r_slp,r_slp_stat, mu,dmu,  gamma,dgamma,  bs_ns,dbs_ns) )
+                        print "Now with conservative systematics:"
+                        print "    mu    = fb_s/fb_l = %.3f +- %.3f (full) from MC with additional %3.0f%% uncertainty" % (mu, hypot(dmu,options.subSyst*(mu-1)), 100*options.subSyst)
+                        print "    gamma = fs_l/fs_s = %.3f +- %.3f (full) from MC with additional %3.0f%% uncertainty" % (gamma, hypot(dgamma,options.subSyst*(gamma-1)), 100*options.subSyst)
+                        print "    b_s/n_s           = %.3f +- %.3f (full) from MC with additional %3.0f%% uncertainty" % (bs_ns, hypot(dbs_ns,options.subSyst*bs_ns), 100*options.subSyst)
+                        print "    f_qcd(r,  mu ,  gamma ,  bsns ) = %.4f +- %.4f (f) +- %.4f (r) +- %.4f (g) +- %.4f (m) +- %.4f (b)  [ +- %.4f (tot) ]" % ( 
+                                ifqcd_werr(f_s,f_l, r_slp, r_slp_stat, mu,hypot(dmu,options.subSyst*(mu-1)),  gamma,hypot(dgamma,options.subSyst*(gamma-1)),  bs_ns,hypot(dbs_ns,options.subSyst*bs_ns)) )
+                        final = ifqcd_werr(f_s,f_l, r_slp, r_slp_stat, mu,hypot(dmu,options.subSyst*(mu-1)),  gamma,hypot(dgamma,options.subSyst*(gamma-1)),  bs_ns,hypot(dbs_ns,options.subSyst*bs_ns))
+                        f_qcd, df = final[0], final[-1] 
                     ilast = fr_fit.GetN()
                     fr_fit.Set(ilast+1)
                     fr_fit.SetPoint(ilast, xval, f_qcd)
@@ -348,12 +388,24 @@ if __name__ == "__main__":
                     Ndata = sum(freport_num_den[i]["data"].Integral() for i in ("pass", "fail"))
                     Newk  = sum(freport_num_den[i][p].Integral() for i in ("pass", "fail") for p in mca.listBackgrounds() if p in freport_num_den[i])
                     Nqcd  = sum(freport_num_den[i][p].Integral() for i in ("pass", "fail") for p in mca.listSignals()     if p in freport_num_den[i])
+                    print "Here the yields (data,ewk,qcd)"
+                    print Ndata
+                    print Newk
+                    print Nqcd
                     if Newk+Nqcd == 0: continue
                     fewk  = sum(freport_num_den["pass"][p].Integral() for p in mca.listBackgrounds() if p in freport_num_den["pass"])/(Newk if Newk else 1)
                     fqcd  = sum(freport_num_den["pass"][p].Integral() for p in mca.listSignals()     if p in freport_num_den["pass"])/(Nqcd if Nqcd else 1)
                     Nqcd, Newk = Nqcd*Ndata/(Nqcd+Newk), Newk*Ndata/(Nqcd+Newk)
+                    print "Here the yields, second round (data,ewk,qcd)"
+                    print Ndata
+                    print Newk
+                    print Nqcd
+                    print "also fewk and fqcd"
+                    print fewk
+                    print fqcd
                     w.factory("expr::Nsig_pass(\"@0* @1   \",N_sig[%g,0,%g], fsig[%g,0,1])" % (Nqcd,Ndata,fqcd))
                     w.factory("expr::Nbkg_pass(\"@0* @1   \",N_bkg[%g,0,%g], fbkg[%g,0,1])" % (Newk,Ndata,fewk))
+                   ### w.factory("expr::Nbkg_pass(\"@0* @1   \",N_bkg[%g,0,%g], fbkg[%g,0,1])" % (Newk,1.2*Newk,fewk))
                     w.factory("expr::Nsig_fail(\"@0*(1-@1)\",N_sig, fsig)")
                     w.factory("expr::Nbkg_fail(\"@0*(1-@1)\",N_bkg, fbkg)")
                     combiner = ROOT.CombDataSetFactory(ROOT.RooArgSet(w.var("f")), w.cat("num"))
@@ -374,6 +426,11 @@ if __name__ == "__main__":
                     for zstate in "pass", "fail":
                         rep = freport_num_den[zstate];  
                         # make nominal templates 
+                        print "----------------------LET US MAKE TEMPLATES--------------------------"
+                        print "ZSTATE"
+                        print zstate
+                        signalsum = 0
+                        backgroundsum = 0
                         if options.sameNDTemplates:
                             print [ (p,r[p].Integral()) for p in mca.listSignals()     for r in freport_num_den.values() if p in r]
                             print [ (p,r[p].Integral()) for p in mca.listBackgrounds() for r in freport_num_den.values() if p in r]
@@ -382,30 +439,50 @@ if __name__ == "__main__":
                         else: 
                             rep["signal"]     = mergePlots("signal_"+zstate,     [rep[p] for p in mca.listSignals()     if p in rep])
                             rep["background"] = mergePlots("background_"+zstate, [rep[p] for p in mca.listBackgrounds() if p in rep])
+                            nsig, nsigErr = _h1NormWithError(rep["signal"],0)
+                            if zstate == "pass" and (nsig < 10*nsigErr):
+                                print "Very poor statistics in the signal passing template (%g +/- %g), will use the failing one (normalized to the passing)" % (nsig, nsigErr)
+                                rep["signal"] = mergePlots("signal_"+zstate,     [r[p] for p in mca.listSignals()     for r in freport_num_den.values() if p in r])
+                                rep["signal"].Scale(nsig/rep["signal"].Integral()) 
                         #rep["signal"].Smooth()
                         #rep["background"].Smooth()
                         # make dataset 
                         for b in xrange(1,rep["data"].GetNbinsX()+1):
                             if rep["data"].GetBinContent(b) > 0:
+                                #print "JEEJEE, nyt bin %d" %b
+                                #print "signal content %d" %rep["signal"].GetBinContent(b)
+                                #print "background content %d" %rep["background"].GetBinContent(b)
+                                signalsum = signalsum + rep["signal"].GetBinContent(b)
+                                backgroundsum = backgroundsum + rep["background"].GetBinContent(b)
                                 if rep["signal"].GetBinContent(b) <= 0 and rep["background"].GetBinContent(b) <= 0:
                                     print "WARNING, bin %d filled in data (%d/%d) and not in MC" % ( b, rep["data"].GetBinContent(b), Ndata )
                                     rep["data"].SetBinContent(b, 0) 
                                     rep["data"].SetBinError(b, 0) 
+                        print "total of signal and background: %d and %d" %(signalsum, backgroundsum)
                         rdh = ROOT.RooDataHist("data_"+zstate,"data",ROOT.RooArgList(w.var("f")), rep["data"])
                         combiner.addSetAny(zstate,rdh)
                         # make systematic histograms
                         sighists = ROOT.TList(); sighists.Add(rep["signal"])
                         bkghists = ROOT.TList(); bkghists.Add(rep["background"])
+                        print "-----------------Let us produce systematic histograms----------"
                         for what,tlist in [('sig',sighists),('bkg',bkghists)]:
+                            #if what == "sig":
+                            print what 
+                            for b in xrange(1,tlist.At(0).GetNbinsX()+1):
+                                print "bin %d and content %f" %(b, tlist.At(0).GetBinContent(b))
+                                #print tlist.At(0).GetYaxis().GetBinContent(b)  
+                                #print tlist.At(0).GetY()[0]
                             for n,val in nuis[what]:
+                                print "n, val: %s, %g" %(n, val)
                                 if n == "l": addPolySystBands(tlist, val, 1)
                                 if n == "q": addPolySystBands(tlist, val, 2)
                                 if n == "s": addStretchBands(tlist, val)
                                 if n == "b": 
                                     print "Adding bin-by-bin uncertainties on %s %s, threshold %g" % (what,zstate,val)
-                                    bins = addBbB(tlist,1e-3,val)
+                                    bins = addBbB(tlist,1e-3,val, verbose=True)
                                     for b in bins:
-                                        key = "%s_%s_%s" % (what,zstate,b)
+                                        key = "%s_%s_%s" % (what,zstate,b) 
+                                        print "key: %s" %key
                                         w.factory("Gaussian::nuis_{0}_shapePdf(nuis_{0}_shape[0,-3,3], 0, 1)".format(key))
                                         nuislists[what][zstate].add(w.var("nuis_{0}_shape".format(key)))
                                         constraints.append(w.pdf("nuis_{0}_shapePdf".format(key)))
@@ -431,25 +508,38 @@ if __name__ == "__main__":
                     cmdArgs.Add(ROOT.RooFit.Constrain(allnuis))
                     nll = sim.createNLL(data, cmdArgs)
                     minim = ROOT.RooMinimizer(nll)
-                    minim.setPrintLevel(-1); minim.setStrategy(0);
+                    #minim.setPrintLevel(-1); 
+                    minim.setStrategy(0);
                     minim.minimize("Minuit2","migrad")
-                    minim.setPrintLevel(-1); minim.setStrategy(1);
+            	    #minim.setPrintLevel(-1); 
+                    minim.setStrategy(1);
 #                    nll.setZeroPoint()
                     minim.minimize("Minuit2","migrad")
                     minim.hesse();
                     result = minim.save()
                     # post-fit plots
+                    #print "-----------post-fit plots--------------"
                     for zstate in "pass","fail":
                         pfrep = { 'data':freport_num_den[zstate]["data"] }
+                        print pfrep
                         for what,wlong,label in [('sig','signal',lsig),('bkg','background',lbkg)]:
                             pdf  = w.pdf(wlong+"_"+zstate)
+                            #print zstate
+                            #print what
+                            #print wlong
+                            #print label
                             # nominal
                             w.allVars().assignValueOnly(result.floatParsFinal())
                             hist = pdf.createHistogram(wlong+"_"+zstate,w.var("f")); hist.SetDirectory(None)
                             hist.Scale(w.function("N%s_%s"%(what,zstate)).getVal()/hist.Integral())
+                            #print "w.function...."
+                            #print w.function("N%s_%s"%(what,zstate)).getVal()
+                            #print "integral"
+                            #print hist.Integral()
                             # toys
                             ntoys = 500
                             sumw2s = [ 0. for b in xrange(1,hist.GetNbinsX()+1) ]
+                            #print sumw2s
                             for itoy in xrange(ntoys):
                                 w.allVars().assignValueOnly(result.randomizePars())
                                 histT = pdf.createHistogram(wlong+"_"+zstate+"_toy",w.var("f")); histT.SetDirectory(None)
@@ -464,14 +554,23 @@ if __name__ == "__main__":
                         plotter.printOnePlot(mca, fspec, pfrep, printDir=bindirname, 
                                              outputName = "%s_for_%s%s_%s_%s_postfit" % (fspec.name,xspec.name,bxname,yspec.name,zstate)) 
                     # pre-fit plots
+                    #print "-----------pre-fit plots--------------"
                     for zstate in "pass","fail":
                         pfrep = { 'data':freport_num_den[zstate]["data"] }
                         for what,wlong,label in [('sig','signal',lsig),('bkg','background',lbkg)]:
                             pdf  = w.pdf(wlong+"_"+zstate)
                             # nominal
+                            #print zstate
+                            #print what
+                            #print wlong
+                            #print label
                             w.allVars().assignValueOnly(result.floatParsInit())
                             hist = pdf.createHistogram(wlong+"_"+zstate,w.var("f")); hist.SetDirectory(None)
                             hist.Scale(w.function("N%s_%s"%(what,zstate)).getVal()/hist.Integral())
+                            #print "w.function...."
+                            #print w.function("N%s_%s"%(what,zstate)).getVal()
+                            #print "integral"
+                            #print hist.Integral()
                             # toys
                             nuisancesSet = ROOT.RooArgSet(nuislists[what][zstate])
                             nuispdfs  = ROOT.RooArgList()
@@ -493,17 +592,31 @@ if __name__ == "__main__":
                             pfrep[label] = hist
                         plotter.printOnePlot(mca, fspec, pfrep, printDir=bindirname, 
                                              outputName = "%s_for_%s%s_%s_%s_prefit" % (fspec.name,xspec.name,bxname,yspec.name,zstate)) 
-                    # minos for the efficiency
+                    print "-----minos for the efficiency-----"
+		    # minos for the efficiency
                     w.allVars().assignValueOnly(result.floatParsFinal())
                     nll = sim.createNLL(data, cmdArgs)
 #                    nll.setZeroPoint()
                     var = w.var("fsig"); var.setConstant(True)
                     minim = ROOT.RooMinimizer(nll)
-                    minim.setPrintLevel(-1); minim.setStrategy(0);
+                    #minim.setPrintLevel(-1); 
+                    minim.setStrategy(0);
                     minim.minimize("Minuit2","migrad");
                     nll0 = nll.getVal(); f0 = var.getVal()
-                    bounds = []
-                    for x1,x2 in ((f0,f0-4*var.getError()), (f0,f0+4*var.getError())):
+                    print "some values"
+                    print nll0
+                    print f0
+                    bounds = []; search = []
+                    if f0 > 0: search.append((f0,max(0,f0-4*var.getError())))
+                    if f0 < 1: search.append((f0,min(1,f0+4*var.getError())))
+                    for x1,x2 in search:
+                        for iTry in xrange(10):
+                            var.setVal(x2)
+                            minim.minimize("Minuit2","migrad");
+                            y2 = 2*(nll.getVal()-nll0)
+                            if y2 > 1: break
+                            if x2 > x1: x2 = min((x2+1)/2, x2+(x2-x1))
+                            else:       x2 = max((x2+0)/2, x2-(x1-x2))
                         while abs(x1-x2) > 0.0005:
                             xc = 0.5*(x1+x2)
                             var.setVal(xc)
@@ -519,15 +632,15 @@ if __name__ == "__main__":
                     fr_fit.SetPointError(ilast, 
                                           -projection.GetXaxis().GetBinLowEdge(ix) + xval,
                                           +projection.GetXaxis().GetBinUpEdge(ix)  - xval, 
-                                          df, df)
-                    #print "MC fake rate: %.4f " % fqcd
-                    #print "Data fake rate: %.4f +- %.4f " % (f0, df)
+                                          df, df) 
+                    print "MC fake rate: %.4f " % fqcd
+                    print "Data fake rate: %.4f +- %.4f " % (f0, df)
         #print "\n"*5,"===== ALL BINS DONE ===== "
         for rep in xzreport, xzreport0: 
             for p,h in rep.iteritems(): 
                 if p in [ "signal", "background", "total", "data_sub", "data" ] : continue
-                if "total" in rep: rep["total"].Add(h) 
-                if  mca.isSignal(p): rep["signal"].Add(h)
+                rep["total"].Add(h) 
+                if  mca.isSignal(p): rep["signal"    ].Add(h)
                 else:                rep["background"].Add(h)
             makeDataSub(rep,mca)
         #print "\n"
@@ -537,10 +650,13 @@ if __name__ == "__main__":
         for p,h in xzreport.iteritems(): outfile.WriteTObject(h)
         if is2D: ereport = dict([(title, effFromH3D(hist,options)) for (title, hist) in xzreport.iteritems()])
         else:    ereport = dict([(title, effFromH2D(hist,options, uncertainties="PF")) for (title, hist) in xzreport.iteritems()])
-        if options.algo == "fQCD":
+        if options.algo in ("fQCD","ifQCD"):
             ereport["data_fqcd"] = fr_fit
         elif options.algo == "fitSimND":
             ereport["data_fit"] = fr_fit
+            print "fr_fit"
+            print fr_fit.GetY()[0]
+            print fr_fit.GetX()[0]
         for p,g in ereport.iteritems(): 
             print "%-30s: %s" % (p,g) 
             if g: outfile.WriteTObject(g)
@@ -548,6 +664,7 @@ if __name__ == "__main__":
         effs = styleEffsByProc(ereport,procsToStack,mca)
         if len(effs) == 0: continue
         stackEffs(myname,xspec,effs,options)
+        ##w.writeToFile("tylleri.root")
         for p in procsToStack: outfile.WriteTObject(ereport[p], "%s_vs_%s_%s_%s" % (yspec.name,xspec.name,fspec.name,p))
     outfile.Close()
 
