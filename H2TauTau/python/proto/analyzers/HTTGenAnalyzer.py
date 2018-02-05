@@ -35,26 +35,14 @@ class HTTGenAnalyzer(Analyzer):
 
         self.handles['jets'] = AutoHandle(self.cfg_ana.jetCol, 'std::vector<pat::Jet>')
 
+    def beginLoop(self, setup):
+        super(HTTGenAnalyzer, self).beginLoop(setup)
+        self.counters.addCounter('LHEWeights')
+        self.count = self.counters.counter('LHEWeights')
 
-  #      self.handles['muons'] = AutoHandle(
-  #          'slimmedMuons',
-  #          'std::vector<pat::Muon>'
-  #          )
+        for n_lhe in xrange(1, 11):
+            self.count.register('Sum LHEWeight {}'.format(n_lhe))
 
-  #      self.handles['electrons'] = AutoHandle(
-  #          'slimmedElectrons',
-  #          'std::vector<pat::Electron>'
-  #          )
-
-   #     self.handles['taus'] = AutoHandle(
-   #             'slimmedTaus',
-   #             'std::vector<pat::Tau>'
-   #         )
-
-#	self.handles['met'] = AutoHandle(
- #               'slimmedMETs',
- #               'std::vector<pat::MET>'
- #           )
 
     def process(self, event):
         event.genmet_pt = -99.
@@ -69,6 +57,10 @@ class HTTGenAnalyzer(Analyzer):
 
         if self.cfg_comp.isData:
             return True
+
+        for n_lhe in xrange(1, 11):
+            if hasattr(event, 'LHE_weights') and len(event.LHE_weights) > n_lhe:
+                self.count.inc('Sum LHEWeight {}'.format(n_lhe), event.LHE_weights[n_lhe].wgt)
 
         self.readCollections(event.input)
         event.genJets = self.mchandles['genJets'].product()
@@ -97,6 +89,13 @@ class HTTGenAnalyzer(Analyzer):
         event.genmet_px = genmet.px()
         event.genmet_py = genmet.py()
         event.genmet_phi = genmet.phi()
+
+        if self.cfg_comp.name.find('TT') != -1 or self.cfg_comp.name.find('TTH') == -1:
+            self.getTopPtWeight(event)
+
+        if self.cfg_comp.name.find('DY') != -1:
+            self.getDYMassPtWeight(event)
+
 
         ptcut = 0.
         # you can apply a pt cut on the gen leptons, electrons and muons
@@ -443,4 +442,11 @@ class HTTGenAnalyzer(Analyzer):
         if not hasattr(event, 'parentBoson'):
             event.parentBoson = HTTGenAnalyzer.getParentBoson(event)
         event.dy_weight = getDYWeight(event.parentBoson.mass(), event.parentBoson.pt())
+
+    @staticmethod
+    def getSusySystem(event):
+        initialSusyParticles = [p for p in event.genParticles if abs(p.pdgId()) in (1000024, 1000023) and p.daughter(0).pdgId() != p.pdgId()]
+        if len(initialSusyParticles) != 2:
+            import pdb; pdb.set_trace()
+        return initialSusyParticles[0].p4() + initialSusyParticles[1].p4()
 

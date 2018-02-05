@@ -1,4 +1,4 @@
-from CMGTools.RootTools.samples.samples_13TeV_RunIISummer16MiniAODv2 import WJetsToLNu,  WWTo2L2Nu, QCD_Mu5, QCDPtEMEnriched, QCDPtbcToE, TBar_tch_powheg, DYNJets, WNJets, T_tch_powheg, DYJetsToLL_M10to50_LO, DYJetsToLL_M50_LO_ext2 #DYJetsToLL_M50_LO WJetsToLNu_LO
+from CMGTools.RootTools.samples.samples_13TeV_RunIISummer16MiniAODv2 import WJetsToLNu,  WWTo2L2Nu, QCD_Mu5, QCDPtEMEnriched, QCDPtbcToE, TBar_tch_powheg, DYNJets, WNJets, T_tch_powheg, DYJetsToLL_M10to50_LO, DYJetsToLL_M50_LO_ext2, VVTo2L2Nu_ext, WJetsToLNu_LO_ext, WZJToLLLNu #DYJetsToLL_M50_LO WJetsToLNu_LO
 
 from CMGTools.RootTools.samples.samples_13TeV_RunIISummer16MiniAODv2 import DYJetsToLL_M50_LO_ext as DYJetsToLL_M50_LO
 from CMGTools.RootTools.samples.samples_13TeV_RunIISummer16MiniAODv2 import TBar_tWch_ext as TBar_tWch
@@ -103,7 +103,7 @@ w_weight_dict = {
     4:0.06275589/w_xsec
 }
 
-def getWWeight(n_jets, m_gen_dummy):
+def getWWeight(n_jets):
     return w_weight_dict[n_jets]
 
 for sample in [WJetsToLNu_LO] + WNJets: # 
@@ -124,7 +124,7 @@ backgrounds += DYNJets
 # backgrounds += [DYJetsToTauTau_M150_LO, DYJetsToLL_M10to50_ext1]
 backgrounds += WNJets
 backgrounds += diboson_nlo
-backgrounds += []
+backgrounds += [VVTo2L2Nu_ext, WJetsToLNu_LO_ext, WZJToLLLNu]
 
 backgrounds_mu = backgrounds[:]
 # backgrounds_mu += [QCD_Mu15]

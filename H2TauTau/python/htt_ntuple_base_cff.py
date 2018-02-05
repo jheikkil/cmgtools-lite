@@ -17,6 +17,7 @@ from CMGTools.H2TauTau.proto.analyzers.TriggerAnalyzer import TriggerAnalyzer
 from CMGTools.H2TauTau.proto.analyzers.JetAnalyzer import JetAnalyzer
 from CMGTools.H2TauTau.proto.analyzers.EmbedWeighter import EmbedWeighter
 from CMGTools.H2TauTau.proto.analyzers.HTTGenAnalyzer import HTTGenAnalyzer
+from CMGTools.H2TauTau.proto.analyzers.HTTGenMatcher import HTTGenMatcher
 from CMGTools.H2TauTau.proto.analyzers.NJetsAnalyzer import NJetsAnalyzer
 # from CMGTools.H2TauTau.proto.analyzers.HiggsPtWeighter import HiggsPtWeighter
 from CMGTools.H2TauTau.proto.analyzers.VBFAnalyzer import VBFAnalyzer
@@ -141,11 +142,9 @@ httGenAna = cfg.Analyzer(
     HTTGenAnalyzer,
     name='HTTGenAnalyzer',
     jetCol='slimmedJets',
-    channel='',
     genPtCut=8.
 )
 
-#jet analyzer
 jetAna = cfg.Analyzer(
     JetAnalyzer,
     name='JetAnalyzer',
@@ -208,7 +207,8 @@ commonSequence = cfg.Sequence([
     # susyScanAna,
     #triggerAna,  # First analyser that applies selections
     vertexAna,
-    httGenAna,
+    httGenAna, # only relies on gen quantities
+    httGenMatcher, # interpretation of event
     jetAna,
     #vbfAna,
     recoilCorr,

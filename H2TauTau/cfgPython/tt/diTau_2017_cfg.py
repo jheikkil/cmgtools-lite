@@ -17,7 +17,7 @@ from CMGTools.H2TauTau.proto.analyzers.MT2Analyzer import MT2Analyzer
 from CMGTools.H2TauTau.proto.analyzers.METFilter import METFilter
 
 # common configuration and sequence
-from CMGTools.H2TauTau.htt_ntuple_base_cff import commonSequence, httGenAna, puFileData, puFileMC, eventSelector, susyCounter, susyScanAna, jetAna, recoilCorr, mcWeighter, triggerAna
+from CMGTools.H2TauTau.htt_ntuple_base_cff import commonSequence, httGenAna, puFileData, puFileMC, eventSelector, susyCounter, susyScanAna, jetAna, recoilCorr, mcWeighter, triggerAna, lheWeightAna
 
 def getHeppyOption(option, default):
     opt = _getHeppyOption(option, default)
@@ -37,9 +37,19 @@ doSUSY = getHeppyOption('susy', True)
 computeSVfit = getHeppyOption('computeSVfit', False)
 data = getHeppyOption('data', False)
 tes_string = getHeppyOption('tes_string', '') # '_tesup' '_tesdown'
-reapplyJEC = getHeppyOption('reapplyJEC', True)
+reapplyJEC = getHeppyOption('reapplyJEC', False)
 calibrateTaus = getHeppyOption('calibrateTaus', False)
+scaleTaus = getHeppyOption('scaleTaus', False)
 correct_recoil = getHeppyOption('correct_recoil', True)
+
+if doSUSY:
+    cmssw = False
+
+tes_up = False
+tes_scale = 1.0
+if tes_up:
+    scaleTaus = True
+    tes_scale = 1.03
 
 # Just to be sure
 if production:
@@ -92,7 +102,8 @@ tauTauAna = cfg.Analyzer(
     verbose=False,
     from_single_objects=False,
     ignoreTriggerMatch=True, 
-    scaleTaus=calibrateTaus,
+    scaleTaus=calibrateTaus or scaleTaus,
+    tes_scale=tes_scale
 )
 
 if not cmssw:
@@ -150,7 +161,7 @@ tau1Weighter = cfg.Analyzer(
     LeptonWeighter,
     name='LeptonWeighter_tau1',
     scaleFactorFiles={
-        'trigger': ('$CMSSW_BASE/src/CMGTools/H2TauTau/data/htt_scalefactors_v16_4.root', 't_genuine_TightIso_tt'),
+        'trigger': ('$CMSSW_BASE/src/CMGTools/H2TauTau/data/htt_scalefactors_v16_5.root', 't_genuine_TightIso_tt'),
         # 'trigger': '$CMSSW_BASE/src/CMGTools/H2TauTau/data/Tau_diTau35_summer16.py',  # include in the event's overall weight
     },
 
@@ -167,7 +178,7 @@ tau2Weighter = cfg.Analyzer(
     LeptonWeighter,
     name='LeptonWeighter_tau2',
     scaleFactorFiles={
-        'trigger': ('$CMSSW_BASE/src/CMGTools/H2TauTau/data/htt_scalefactors_v16_4.root', 't_genuine_TightIso_tt'),
+        'trigger': ('$CMSSW_BASE/src/CMGTools/H2TauTau/data/htt_scalefactors_v16_5.root', 't_genuine_TightIso_tt'),
         # 'trigger': '$CMSSW_BASE/src/CMGTools/H2TauTau/data/Tau_diTau35_summer16.py',  # include in the event's overall weight
     },
 
@@ -184,10 +195,12 @@ if doSUSY:
     for module in tau1Weighter, tau2Weighter:
         module.dataEffFiles = module.scaleFactorFiles
         module.scaleFactorFiles = {}
+    lheWeightAna.useLumiInfo = True
 
 treeProducer = cfg.Analyzer(
     H2TauTauTreeProducerTauTau,
     name='H2TauTauTreeProducerTauTau',
+    isSUSY=doSUSY,
     skimFunction='event.leptonAccept and event.thirdLeptonVeto and event.otherLeptonVeto'
 )
 
@@ -234,7 +247,7 @@ from CMGTools.H2TauTau.proto.samples.summer16.sms import samples_susy
 from CMGTools.H2TauTau.proto.samples.summer16.triggers_tauTau import mc_triggers, mc_triggerfilters, data_triggers, data_triggerfilters
 
 data_list = data_tau
-samples = backgrounds + sm_signals + mssm_signals + sync_list
+samples = backgrounds + sm_signals + sync_list #+ mssm_signals 
 if doSUSY:
     samples = samples_susy #+ SignalSUSY[:1]
 split_factor = 1e5
@@ -274,7 +287,7 @@ if data:
 sequence = commonSequence
 if calibrateTaus:
     sequence.insert(sequence.index(httGenAna), tauP4Scaler)
-sequence.insert(sequence.index(httGenAna), tauTauAna)
+sequence.insert(sequence.index(httGenAna)+1, tauTauAna)
 # sequence.insert(sequence.index(genAna), l1Ana)
 # sequence.append(tau1Calibration)
 # sequence.append(tau2Calibration)
@@ -323,7 +336,7 @@ if not production:
     # comp = data_list[0] if data else sync_list[0]
     # comp = SMS
     # comp = samples_susy[1]
-    selectedComponents = samples_susy if doSUSY else sync_list
+    selectedComponents = [samples_susy[2]] if doSUSY else sync_list
     if data:
         selectedComponents = [data_list[0]]
     selectedComponents = selectedComponents[:1]
@@ -332,11 +345,10 @@ if not production:
         comp.fineSplitFactor = 1
     # comp.files = comp.files[13:20]
 
-# selectedComponents = selectedComponents[-1:]
-
 if doSUSY:
     from CMGTools.RootTools.samples.autoAAAconfig import autoAAA
     autoAAA(selectedComponents)
+    selectedComponents = [samples_susy[2]] # FIXME
 
 preprocessor = None
 if cmssw:
