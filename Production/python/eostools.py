@@ -48,7 +48,7 @@ def runEOSCommand(path, cmd, *args):
     tokens = splitPFN(path)
     
     #obviously, this is not nice
-    command = ['/afs/cern.ch/project/eos/installation/pro/bin/eos.select', cmd]
+    command = ['eos', cmd]
     command.extend(args)
     command.append(tokens[2])
     return _runCommand(command)
@@ -190,10 +190,10 @@ def createEOSDir( path ):
     ???Will, I'm quite worried by the fact that if this path already exists, and is
     a file, everything will 'work'. But then we have a file, and not a directory,
     while we expect a dir..."""
-    lfn = eosToLFN(path)
-    if not isEOSFile(lfn):
+    pfn = lfnToPFN(path)
+    if not isEOSFile(pfn):
     # if not isDirectory(lfn):
-        runEOSCommand(lfn,'mkdir','-p')
+        runEOSCommand(pfn,'mkdir','-p')
     if isDirectory(path):
         return path
     else:
