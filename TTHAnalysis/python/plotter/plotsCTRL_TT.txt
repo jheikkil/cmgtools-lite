@@ -1,26 +1,33 @@
 #Z_vis: m_vis: 10,60,120; LegendCutoff=1e-7
 #Z_Pt :  Z_Pt : 40,0,400; LegendCutoff=1e-7
 #H_vis : H_vis: 40,0,400; LegendCutoff=1e-7
-tau1_pt : pt_3 : [20,25,30,40,50,70,100]; LegendCutoff=1e-7
-tau2_pt : pt_4 : [20,25,30,40,50,70,100]; LegendCutoff=1e-7
+pt_3 : pt_3 : [20,25,30,40,50,70,100]; LegendCutoff=1e-7
+pt_4 : pt_4 : [20,25,30,40,50,70,100]; LegendCutoff=1e-7
 #abs(eta3) : abs(eta_3): 5,0, 2.3;  LegendCutoff=1e-7
 #abs(eta4) : abs(eta_4): 5,0, 2.3;  LegendCutoff=1e-7
-#H_Pt : H_Pt : 20,0,200; LegendCutoff=1e-7
+H_Pt : H_Pt : 20,0,200; LegendCutoff=1e-7
 #A_vis : Mass : 60,50,750; LegendCutoff=1e-7
 #A_Pt : A_Pt : 30,0,300; LegendCutoff=1e-7
 #A_scaled : scaledHpt: 35,100,800; LegendCutoff=1e-7
-MET_pt : met_pt : 30,0,300;  LegendCutoff=1e-7
+#MET_pt : met_pt : 30,0,300;  LegendCutoff=1e-7
 #DeltaPhi(MET, H) : H_METphi: 8,-4,4 ;  LegendCutoff=1e-7
+
 
 #njetspt20: njetspt20 : 4,0,4; LegendCutoff=1e-7
 #njets : njets : 4,0,4 ; LegendCutoff=1e-7
 #nbjets : nbtag : 4,0,4 ; LegendCutsoff=1e-7
-Z_vis: m_vis: 6,60,120; LegendCutoff=1e-7, MoreY=1.7, Legend="TR"
-#Z_Pt :  Z_Pt : 23,0,230; LegendCutoff=1e-7
-#H_vis : H_vis: 40,0,400; LegendCutoff=1e-7
-#Z1pt : pt_1 : 10,20,120; LegendCutoff=1e-7
-#Z2pt : pt_2 : 10,20,120; LegendCutoff=1e-7
+m_vis: m_vis: 6,60,120; LegendCutoff=1e-7, MoreY=1.7, Legend="TR"
+Z_Pt :  Z_Pt : 23,0,230; LegendCutoff=1e-7
+H_vis : H_vis: 40,0,400; LegendCutoff=1e-7
+pt_1 : pt_1 : 10,20,120; LegendCutoff=1e-7
+pt_2 : pt_2 : 10,20,120; LegendCutoff=1e-7
 
+H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT: H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT:2,0,1; LegendCutoff=1e-7
+H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT: H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT:2,0,1; LegendCutoff=1e-7
+
+lumi:lumi: 10,0,300000; LegendCutoff=1e-7
+run:run:10,0,300000; LegendCutoff=1e-7
+evt:evt:10,0,2000000; LegendCutoff=1e-7
 #tau1_jet_pt : H_tt_l1_jet_pt : [20,30,40,50,60,70,80,90,100,110,120]; LegendCutoff=1e-7
 #tau1_jet_pt_ratio : pt_3/H_tt_l1_jet_pt : 10,0,2; LegendCutoff=1e-7
 
@@ -36,8 +43,8 @@ Z_vis: m_vis: 6,60,120; LegendCutoff=1e-7, MoreY=1.7, Legend="TR"
 #abs(eta1) : abs(eta_1): 5,0, 2.5;  LegendCutoff=1e-7
 #abs(eta2) : abs(eta_2): 5,0, 2.5;  LegendCutoff=1e-7
 
-abs(eta3) : abs(eta_3): 5,0, 2.3;  LegendCutoff=1e-7
-abs(eta4) : abs(eta_4): 5,0, 2.3;  LegendCutoff=1e-7
+#abs(eta3) : abs(eta_3): 5,0, 2.3;  LegendCutoff=1e-7
+#abs(eta4) : abs(eta_4): 5,0, 2.3;  LegendCutoff=1e-7
 #H_Pt : H_Pt : 20,0,200; LegendCutoff=1e-7
 #A_vis : Mass : 60,50,750; LegendCutoff=1e-7
 #A_Pt : A_Pt : 30,0,300; LegendCutoff=1e-7
@@ -61,3 +68,7 @@ abs(eta4) : abs(eta_4): 5,0, 2.3;  LegendCutoff=1e-7
 #puweight : puweight : 10,0,2; LegendCutoff=1e-7
 
 
+#l1_Double : Z_mm_l1_matchedTrgObj_Double : 2,0,1
+#l2_Double : Z_mm_l2_matchedTrgObj_Double : 2,0,1
+#l1_Single : Z_mm_l1_matchedTrgObj_Single : 2,0,1
+#l2_Single : Z_mm_l2_matchedTrgObj_Single : 2,0,1
