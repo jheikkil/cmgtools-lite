@@ -1,0 +1,7 @@
+##Zboson: gen_match_1 != 6 && gen_match_2 != 6
+##MC: gen_match_3 == 6 || gen_match_4 == 6
+denom: H_SS == 0 && pt_3 > 10 && pt_4 > 10 && iso_3<0.6 && electronIDZZ(eta_3, IdRawMva_3)>0  && iso_4<1.0 	
+num: H_em_l1_eid_spring16_80>0 && iso_3<0.15 && iso_4 < 0.15 &&  H_em_l2_muonid_loose > 0
+##mass: H_SS != 0 && m_vis>-1 && H_vis>-1
+#LT : Hboson_tt_LT > 80
+

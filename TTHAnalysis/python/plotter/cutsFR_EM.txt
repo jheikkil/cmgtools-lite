@@ -1,0 +1,6 @@
+denom:  iso_3<2.0 && H_em_l1_eid_spring16>0 && iso_4<1.0
+num_leg3: H_em_l1_eid_spring16_80>0 && iso_3<0.15
+num_leg4: iso_4 < 0.15 &&  H_em_l2_muonid_loose > 0
+mass: H_SS != 0 && m_vis>-1 && H_vis>-1
+#LT : Hboson_tt_LT > 80
+

@@ -1,0 +1,6 @@
+#3Zmass: m_vis > 81.2
+#Zboson: gen_match_1 != 6 && gen_match_2 != 6
+#MC: gen_match_3 == 6 || gen_match_4 == 6
+denom : H_SS == 0 && pt_3 > 20 && pt_4 > 20  && getVVLoose( iso_3, pt_3 ) > 0 && getVVLoose( iso_4, pt_4 ) > 0 	
+num :  H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 
+##nbtag==0

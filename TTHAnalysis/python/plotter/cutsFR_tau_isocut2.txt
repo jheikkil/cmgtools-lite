@@ -1,0 +1,1 @@
+tauFR_SYNC: tau_FR_gen_match!=5 && deltaR(eta_1,phi_1,tau_FR_eta,tau_FR_phi)>0.5 && deltaR(eta_2,phi_2,tau_FR_eta,tau_FR_phi)>0.5

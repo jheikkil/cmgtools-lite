@@ -182,14 +182,28 @@ class MCAnalysis:
                 objname  = extra["ObjName"]  if "ObjName"  in extra else options.obj
 
                 basepath = None
+                #skimpath = None
+                #print treepath
+
+                #print "basepath: %s" %(basepath)
+                #print "treename: %s" %(treename)
+                #print "cname: %s" %(cname)
+                #print "rootfile: %s" %(rootfile)
+
                 for treepath in options.path:
                     if os.path.exists(treepath+"/"+cname):
                         basepath = treepath
                         break
                 if not basepath:
                     raise RuntimeError("%s -- ERROR: %s process not found in paths (%s)" % (__name__, cname, repr(options.path)))
-
-                rootfile = "%s/%s/%s/%s_tree.root" % (basepath, cname, treename, treename)
+ 
+                
+                #rootfile = "%s/%s/%s/%s_tree.root" % (basepath, cname, treename, treename)
+                rootfile = "%s/%s/tree.root" % (basepath, cname)
+                #print "basepath: %s" %(basepath)
+                #print "treename: %s" %(treename)
+                #print "cname: %s" %(cname)
+                #print "rootfile: %s" %(rootfile)
                 if options.remotePath:
                     rootfile = "root:%s/%s/%s_tree.root" % (options.remotePath, cname, treename)
                 elif os.path.exists(rootfile+".url"): #(not os.path.exists(rootfile)) and :
@@ -201,9 +215,15 @@ class MCAnalysis:
                     # Heppy calls the tree just 'tree.root'
                     rootfile = "%s/%s/%s/tree.root" % (basepath, cname, treename)
                     rootfile = open(rootfile+".url","r").readline().strip()
-                pckfile = basepath+"/%s/skimAnalyzerCount/SkimReport.pck" % cname
-
-                tty = TreeToYield(rootfile, options, settings=extra, name=pname, cname=cname, objname=objname, variation_inputs=variations.values()); ttys.append(tty)
+                if options.skimpath:
+                    skimpath = cname.split('/', 1)
+                    #print skimpath
+                    pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % skimpath[0]
+                    #print pckfile
+                else:
+                    pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % cname
+                #print pckfile 
+                tty = TreeToYield(rootfile, options, settings=extra, name=pname, cname=cname, objname=objname); ttys.append(tty)
                 if signal: 
                     self._signals.append(tty)
                     self._isSignal[pname] = True
@@ -217,11 +237,13 @@ class MCAnalysis:
                 if "data" not in pname:
                     pckobj  = pickle.load(open(pckfile,'r'))
                     counters = dict(pckobj)
+                    #print "olaanko me talla"
                     if ('Sum Weights' in counters) and options.weight:
                         if (is_w==0): raise RuntimeError, "Can't put together a weighted and an unweighted component (%s)" % cnames
                         is_w = 1; 
                         total_w += counters['Sum Weights']
-                        scale = "genWeight*(%s)" % field[2]
+                        scale = "weight_gen*(%s)" % field[2]
+                        #print "SCALEEE: ",scale
                     else:
                         if (is_w==1): raise RuntimeError, "Can't put together a weighted and an unweighted component (%s)" % cnames
                         is_w = 0;
@@ -668,7 +690,7 @@ class MCAnalysis:
             raise KeyError, "Process %r not found" % process
     def _processTasks(self,func,tasks,name=None,chunkTasks=200):
         #timer = ROOT.TStopwatch()
-        #print "Starting job %s with %d tasks, %d threads" % (name,len(tasks),self._options.jobs)
+        print "Starting job %s with %d tasks, %d threads" % (name,len(tasks),self._options.jobs)
         if self._options.jobs == 0: 
             retlist = map(func, tasks)
         else:
@@ -742,6 +764,7 @@ def addMCAnalysisOptions(parser,addTreeToYieldOnesToo=True):
     parser.add_option("--scaleplot", dest="plotscalemap", type="string", default=[], action="append", help="Scale plots by this factor (before grouping). Syntax is '<newname> := (comma-separated list of regexp)', can specify multiple times.")
     parser.add_option("-t", "--tree",          dest="tree", default='ttHLepTreeProducerTTH', help="Pattern for tree name");
     parser.add_option("--fom", "--figure-of-merit", dest="figureOfMerit", type="string", default=[], action="append", help="Add this figure of merit to the output table (S/B, S/sqrB, S/sqrSB)")
+    parser.add_option("--skimPath", dest="skimpath", action="store_true", default=False, help="Give different path for skimAnalyzer files") 
     parser.add_option("--binname", dest="binname", type="string", default='default', help="Bin name for uncertainties matching and datacard preparation [default]")
     parser.add_option("--unc", dest="variationsFile", type="string", default=None, help="Uncertainty file to be loaded")
     parser.add_option("--xu", "--exclude-uncertainty", dest="uncertaintiesToExclude", type="string", default=[], action="append", help="Uncertainties to exclude (comma-separated list of regexp, can specify multiple ones)");
@@ -749,6 +772,7 @@ def addMCAnalysisOptions(parser,addTreeToYieldOnesToo=True):
     parser.add_option("--aefr", "--alt-external-fitResults", dest="altExternalFitResults", type="string", default=[], nargs=2, action="append", help="External fitResult")
     parser.add_option("--aefrl", "--alt-external-fitResult-labels", dest="altExternalFitResultLabels", type="string", default=[], nargs=1, action="append", help="External fitResult")
 
+	
 if __name__ == "__main__":
     from optparse import OptionParser
     parser = OptionParser(usage="%prog [options] tree.root cuts.txt")

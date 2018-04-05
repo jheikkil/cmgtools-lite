@@ -1,0 +1,1 @@
+mass: H_SS != 0 && m_vis>-1 && H_vis>-1 && H_em_l1_eid_spring16>0 && iso_4<0.25 && H_em_l2_muonid_loose > 0.5

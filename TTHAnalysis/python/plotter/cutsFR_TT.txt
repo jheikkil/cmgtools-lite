@@ -1,0 +1,42 @@
+denom : H_SS != 0 && pt_3 > 20 && pt_4 > 20 && nbtag==0  && getVVLoose( iso_3, pt_3 ) > 0 && getVVLoose( iso_4, pt_4 ) > 0 && H_tt_l1_decayMode==10
+num :  H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5
+#denom : H_SS !=0 && m_vis>-1 && H_vis>-1 && pt_3 > 20 && pt_4 > 20 && nbtag==0 && Hboson_tt_LT>50 && getVVLoose( iso_3, pt_3 ) > 0  &&  H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 
+#####&& H_tt_l2_againstMuon3>=2 && H_tt_l2_againstElectronMVA6>=4
+##num : H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT>0.5
+
+##denom : H_SS != 0 && m_vis>-1 && H_vis>-1 && pt_3 > 20 && pt_4 > 20 && nbtag==0  && getVVLoose( iso_3, pt_3 ) > 0 && getVVLoose( iso_4, pt_4 ) > 0 
+###&& Hboson_tt_LT>50
+##num_leg3 : H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l1_againstMuon3>=2 && H_tt_l1_againstElectronMVA6>=4
+#3num_leg4 : H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l2_againstMuon3>=2 && H_tt_l2_againstElectronMVA6>=4
+
+#denom: H_SS !=0 && m_vis>-1 && H_vis>-1 && pt_3 > 20 && pt_4 > 20 && nbtag==0 
+###&& getVVLoose( iso_4, pt_4 ) > 0 
+#num: getVVLoose( iso_4, pt_4 ) > 0 
+##&& Hboson_tt_LT>50
+#&& getVVLoose( iso_4, pt_4 ) > 0 && Hboson_tt_LT>50
+##&& H_tt_l1_againstMuon3>=2 && H_tt_l1_againstElectronMVA6>=5 && H_tt_l2_againstMuon3>=2 && H_tt_l2_againstElectronMVA6>=5
+#nbtag: nbtag<1
+##VVLoose: getVVLoose( iso_3, pt_3 ) > 0 && getVVLoose( iso_4, pt_4 ) > 0 
+#####denom: H_SS == 0 && m_vis>-1 && H_vis>-1 && pt_3 > 20 && pt_4 > 20 && getVVLoose( iso_3, pt_3 ) > 0 && getVVLoose( iso_4, pt_4 ) > 0
+###fake : gen_match_3 == 6 || gen_match_4 == 6
+##denom : H_SS != 0 && m_vis>-1 && H_vis>-1 && pt_3 > 20 && pt_4 > 20 
+##&& getVVLoose( iso_3, pt_3 ) > 0 && getVVLoose( iso_4, pt_4 ) > 0
+##num_leg3 : H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT<0.5 || H_tt_l1_againstMuon3<2 || H_tt_l1_againstElectronMVA6<4
+##num_leg4 : H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT<0.5 || H_tt_l2_againstMuon3<2 || H_tt_l2_againstElectronMVA6<4
+
+#&& H_SS != 0 && m_vis>-1 && H_vis>-1 && pt_3 > 20 && pt_4 > 20
+#num_leg3: H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l1_againstMuon3>=2 && H_tt_l1_againstElectronMVA6>=4 
+#num_leg4: H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l2_againstMuon3>=2 && H_tt_l2_againstElectronMVA6>=4
+
+##num: H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l2_againstMuon3>=2 && H_tt_l2_againstElectronMVA6>=4
+##num: H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 
+##&& H_tt_l1_againstMuon3>=2 && H_tt_l1_againstElectronMVA6>=4
+##num: H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT>0.5  
+##num: H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l1_againstMuon3>=2 && H_tt_l1_againstElectronMVA6>=4 && H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l2_againstMuon3>=2 && H_tt_l2_againstElectronMVA6>=4
+
+#num_leg4: H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_tt_l2_againstMuon3>=2 && H_tt_l2_againstElectronMVA6>=4
+##mass: H_SS != 0 && m_vis>-1 && H_vis>-1 && pt_3 > 20 && pt_4 > 20 
+#&& abs(eta_4)>1.479 
+###LT : Hboson_tt_LT > 50
+##nbtag: nbtag<1
+

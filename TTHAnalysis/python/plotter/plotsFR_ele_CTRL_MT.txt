@@ -1,0 +1,9 @@
+abs(eta)E_MT_END   : abs(electron_FR_eta): 10,0,2.5; LegendCutoff=1e-7
+ptE_MT_END   : electron_FR_pt : [20,30]; LegendCutoff=1e-7
+#Z_pt_1_MME    : pt_1 : 6,0,120; LegendCutoff=1e-7
+#Z_pt_2_MME   : pt_2 : 6,0,120; LegendCutoff=1e-7
+Z_visE_MT_END   : m_vis: 6,60,120; LegendCutoff=1e-7
+Z_PtE_MT_END   :  Z_Pt : 20,30,230; LegendCutoff=1e-7
+#Z_iso_max : max(iso_1,iso_2) : 10,0,1; LegendCutoff=1e-7	
+#dz_max : abs(max( max(Z_mm_l1_dz, Z_mm_l2_dz), electron_FR_dz )): 10, 0, 1; LegendCutoff=1e-7 
+pfmtE_MT_END: mt_2(electron_FR_pt, electron_FR_phi, met_pt, met_phi): 20,0,200; LegendCutoff=1e-7
