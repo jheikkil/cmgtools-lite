@@ -302,21 +302,58 @@ class TreeToYield:
         friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in self._options.friendTreesSimple]
         friendOpts += (self._options.friendTreesData if self._isdata else self._options.friendTreesMC)
         friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in (self._options.friendTreesDataSimple if self._isdata else self._options.friendTreesMCSimple) ]
+        #if self._options.friendTreesMCSimple:
+        #    print "printtaillaan"
+        #    for a in self._options.friendTreesMCSimple:
+        #        print a
         if 'Friends' in self._settings: friendOpts += self._settings['Friends']
         if 'FriendsSimple' in self._settings: friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in self._settings['FriendsSimple'] ]
         for tf_tree,tf_file in friendOpts:
-#            print 'Adding friend',tf_tree,tf_file
+            #print 'Adding friend'
+            #print "tree ",tf_tree
+            #print "file ",tf_file
             basepath = None
-            for treepath in getattr(self._options, 'path', []):
-                if self._cname in os.listdir(treepath):
-                    basepath = treepath
+            for jee in self._options.path:
+                #print "JEEJEEJEJEE"
+                #print jee
+                #print "yritetaan"
+                #print os.listdir(jee)
+                #print "self cname on"
+                #print self._cname
+                if "/" in self._cname:
+                    cnames = self._cname.split("/")[0]
+                else:
+                    cnames = self._cname
+                if cnames in os.listdir(jee):
+                    #print "jeemoikka2"
+                    basepath = jee
+                    #print "basepath: "
+                    #print basepath
                     break
-            if not basepath:
-                raise RuntimeError("%s -- ERROR: %s process not found in paths (%s)" % (__name__, cname, repr(options.path)))
 
-            tf_filename = tf_file.format(name=self._name, cname=self._cname, P=basepath)
+            for treepath in getattr(self._options, 'path', []):
+                #print "moikka"
+                #print treepath
+                #print "cname"
+                #print self._cname
+                if self._cname in os.listdir(treepath):
+                    #print "moikka2"
+                    basepath = treepath
+                    #print "basepath: "
+                    #print basepath
+                    break
+            #print "jatkuu"
+            #print basepath
+            if not basepath:
+                raise RuntimeError("%s -- ERROR: %s process not found in paths (%s)" % (__name__, self._cname, repr(self._options.path)))
+            #print "eteenpain"
+            cname2 = self._cname
+            tf_filename = tf_file.format(name=self._name, cname=cname2, P=basepath)
+            #print "JAANA",tf_filename
             tf = self._tree.AddFriend(tf_tree, tf_filename),
+            #print tf
             self._friends.append(tf)
+            #print self._friends
         self._isInit = True
     def _close(self):
         self._tree = None

@@ -1,2 +1,4 @@
-eleFR_isocut200: electron_FR_pt>10 && electron_FR_reliso05<2.0 && electron_FR_eid_spring16>0  && deltaR(eta_1,phi_1,electron_FR_eta,electron_FR_phi)>0.3 && deltaR(eta_2,phi_2,electron_FR_eta,electron_FR_phi)>0.3
+eleFR_isocut200: electron_FR_pt>10 && electron_FR_reliso05<0.6 && electronIDZZ(electron_FR_eta, electron_FR_eid_spring16MVAraw)>0  && deltaR(eta_1,phi_1,electron_FR_eta,electron_FR_phi)>0.3 && deltaR(eta_2,phi_2,electron_FR_eta,electron_FR_phi)>0.3
+##electron_FR_reliso05<0.2 && electron_FR_eid_spring16>0  && deltaR(eta_1,phi_1,electron_FR_eta,electron_FR_phi)>0.3 && deltaR(eta_2,phi_2,electron_FR_eta,electron_FR_phi)>0.3
+#&& electron_FR_eid_spring16>0  && deltaR(eta_1,phi_1,electron_FR_eta,electron_FR_phi)>0.3 && deltaR(eta_2,phi_2,electron_FR_eta,electron_FR_phi)>0.3
 #electron_FR_eid_spring16>0 && deltaR(eta_1,phi_1,electron_FR_eta,electron_FR_phi)>0.3 && deltaR(eta_2,phi_2,electron_FR_eta,electron_FR_phi)>0.3

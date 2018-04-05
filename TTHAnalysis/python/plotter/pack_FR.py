@@ -129,9 +129,9 @@ if __name__ == "__main__":
         ROOT.gROOT.ProcessLine(".x tdrstyle.cc")
         ROOT.gStyle.SetOptStat(0)
     if True:
-       ptbins_el =  [10,20,30,40,50,60]#[ 5.0,7.5,10,15,20,30]
-       ptbins_mu =  [10,20,30,40,50,60]#[ 3.5,5.0,7.5,10,15,20,30 ]
-       ptbins_tau =  [20,25,30,40,50,70,100]
+       ptbins_el =  [10,20,40,60]#[ 5.0,7.5,10,15,20,30]
+       ptbins_mu =  [10,20,30,40,60]#[ 3.5,5.0,7.5,10,15,20,30 ]
+       ptbins_tau =  [20,30,40,50,60,70,80,90]
        etabins_el = [0, 1.479, 2.5]
        etabins_tau = [0, 1.479, 2.3]
        etabins_mu = [0, 1.2, 2.4]
@@ -141,31 +141,36 @@ if __name__ == "__main__":
  
        DMbins_tau = [0, 1, 10]
        DMslices_tau = [ (0.4,"0"), (1.8,"1"), (10, "10") ]
+
        el    = [ "eleFR_signal_vs_pt_signal_2d_prefit_graph", "eleFR_signal_vs_pt_signal_2d_prefit_graph" ]
        mu    = [ "muonFR_signal_vs_pt_signal_2d_prefit_graph", "muonFR_signal_vs_pt_signal_2d_prefit_graph" ] 
-       #ta    = [ "tauFR_numLL_vs_pt_signal_2d_prefit_graph", "tauFR_numLL_vs_pt_signal_2d_prefit_graph" ]
-       ta00 = ["tau-DM0_lltt_AllEta_leptonPt_graph", "tau-DM0_lltt_AllEta_leptonPt_graph"]
-       ta01 = ["tau-DM1_lltt_AllEta_leptonPt_graph", "tau-DM1_lltt_AllEta_leptonPt_graph"]
-       ta10 = ["tau-DM10_lltt_AllEta_leptonPt_graph", "tau-DM10_lltt_AllEta_leptonPt_graph"]
-       ta_jet  = [ "tauFR_numLL_vs_pt_jet_signal_2d_prefit_graph", "tauFR_numLL_vs_pt_jet_signal_2d_prefit_graph" ]
-       el_data = ["eleFR_signal_vs_pt_pfmt_fix_data_sub_prefit", "eleFR_signal_vs_pt_pfmt_fix_data_sub_prefit"] 
-       mu_data = ["muonFR_signal_vs_pt_pfmt_fix_data_sub_prefit", "muonFR_signal_vs_pt_pfmt_fix_data_sub_prefit"]
+       ta    = [ "tauFR_numLL_vs_pt_signal_2d_prefit_graph", "tauFR_numLL_vs_pt_signal_2d_prefit_graph" ]
+       #ta00 = ["tau-DM0_lltt_AllEta_leptonPt_graph", "tau-DM0_lltt_AllEta_leptonPt_graph"]
+       #ta01 = ["tau-DM1_lltt_AllEta_leptonPt_graph", "tau-DM1_lltt_AllEta_leptonPt_graph"]
+       #ta10 = ["tau-DM10_lltt_AllEta_leptonPt_graph", "tau-DM10_lltt_AllEta_leptonPt_graph"]
+       #ta_jet  = [ "tauFR_numLL_vs_pt_jet_signal_2d_prefit_graph", "tauFR_numLL_vs_pt_jet_signal_2d_prefit_graph" ]
+
+       el_data = ["eleFR_signal_vs_pt_pfmt_fix_data_fit", "eleFR_signal_vs_pt_pfmt_fix_data_fit"] 
+       mu_data = ["muonFR_signal_vs_pt_pfmt_fix_data_fit", "muonFR_signal_vs_pt_pfmt_fix_data_fit"]
        ta_data = ["tauFR_numLL_vs_pt_pfmt_fix_data_fit", "tauFR_numLL_vs_pt_pfmt_fix_data_fit"]
-       ta_data_jet = ["tauFR_numLL_vs_pt_jet_pfmt_fix_data_fit", "tauFR_numLL_vs_pt_jet_pfmt_fix_data_fit"]
+
+#       ta_data_jet = ["tauFR_numLL_vs_pt_jet_pfmt_fix_data_fit", "tauFR_numLL_vs_pt_jet_pfmt_fix_data_fit"]
        #XsD    = [ "DY",  "data_comb" ]
        #Xnices = [ "MC QCD/DY", "Data, comb." ]
-   #    h2d_el = [ make2D(outfile, "FR_ele", ptbins_el, etabins_el) ]
-   #    h2d_mu = [ make2D(outfile, "FR_muon", ptbins_mu, etabins_mu)]
-      ## h2d_tau = [ make2D(outfile, "FR_tau", ptbins_tau, DMbins_tau)]
+
+       h2d_el = [ make2D(outfile, "FR_ele", ptbins_el, etabins_el) ]
+       h2d_mu = [ make2D(outfile, "FR_muon", ptbins_mu, etabins_mu)]
+       h2d_tau = [ make2D(outfile, "FR_tau", ptbins_tau, DMbins_tau)]
+
        #h2d_tau = [ make2D(outfile, "FR_tau", ptbins_tau, etabins_tau)]
-       h2d_tau0 = [ make2D(outfile, "FR_tau_DM0", ptbins_tau, DMbins_tau)]
-       h2d_tau1 = [ make2D(outfile, "FR_tau_DM1", ptbins_tau, DMbins_tau)]
-       h2d_tau10 = [ make2D(outfile, "FR_tau_DM10", ptbins_tau, DMbins_tau)]
+       #h2d_tau0 = [ make2D(outfile, "FR_tau_DM0", ptbins_tau, DMbins_tau)]
+       #h2d_tau1 = [ make2D(outfile, "FR_tau_DM1", ptbins_tau, DMbins_tau)]
+       ##h2d_tau = [ make2D(outfile, "FR_tau", ptbins_tau, DMbins_tau)]
     #   h2d_tauJET = [ make2D(outfile, "FR_tau_jet", ptbins_tau, etabins_tau)]
-   #    h2d_elD = [ make2D(outfile, "FR_ele_data", ptbins_el, etabins_el) ]
-   #    h2d_muD = [ make2D(outfile, "FR_muon_data", ptbins_mu, etabins_mu)]
+       h2d_elD = [ make2D(outfile, "FR_ele_data", ptbins_el, etabins_el) ]
+       h2d_muD = [ make2D(outfile, "FR_muon_data", ptbins_mu, etabins_mu)]
       # h2d_tauD = [ make2D(outfile, "FR_tau_data", ptbins_tau, etabins_tau)]
-    ##   h2d_tauD = [ make2D(outfile, "FR_tau_data", ptbins_tau, DMbins_tau)]
+       h2d_tauD = [ make2D(outfile, "FR_tau_data", ptbins_tau, DMbins_tau)]
       # h2d_tauD0 = [ make2D(outfile, "FR_tau_data_DM0", ptbins_tau, etabins_tau)]
       # h2d_tauD1 = [ make2D(outfile, "FR_tau_data_DM1", ptbins_tau, etabins_tau)]
       # h2d_tauD10 = [ make2D(outfile, "FR_tau_data_DM10", ptbins_tau, etabins_tau)]
@@ -179,30 +184,33 @@ if __name__ == "__main__":
        #h2d_el_PB = [ make2D(outfile,"FR_SOS_el_PromptBkg", ptbins_el, etabins_el) ]
        #h2d_mu_PB = [ make2D(outfile,"FR_SOS_mu_PromptBkg", ptbins_mu, etabins_mu) ]
 
-       Plots="/afs/cern.ch/work/j/jheikkil/MSSM2017/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter"
+       Plots="/eos/user/j/jheikkil/www/FR_Mar02/"
        Z3l=None # "z3l/v2.1.1"
        #QCD="qcd1l/v3.0.1"
        QCD="qcd1l/v3.1"
 
        #### Electrons: 
-       ##readMany2D(el, h2d_el,    "/".join([Plots, "FR_ele_%s.root"]), "%s", etaslices_el, (5,999) )
-       ##readMany2D(el_data, h2d_elD,    "/".join([Plots, "FR_ele_%s.root"]), "%s", etaslices_el, (5,999) )
+       readMany2D(el, h2d_el,    "/".join([Plots, "electron_%s.root"]), "%s", etaslices_el, (5,999) )
+       readMany2D(el_data, h2d_elD,    "/".join([Plots, "electron_%s.root"]), "%s", etaslices_el, (5,999) )
        #if Z3l:
        #   readMany2D(XsD, h2d_el_DY, "/".join([Plots, Z3l, "el/fakerates-mtW3R/fr_sub_eta_%s_comp.root"]), "%s", etaslices_el, (5,999) )
 
        #### Muons: 
        # up to 10 from Mu3
-       ##readMany2D(mu, h2d_mu, "/".join([Plots, "FR_muon_%s.root"]), "%s", etaslices_mu, (5,999) )
-       readMany2D(ta00, h2d_tau0, "/".join([Plots, "tyler%s.root"]), "%s", DMslices_tau, (5,999) )
-       readMany2D(ta01, h2d_tau1, "/".join([Plots, "tyler%s.root"]), "%s", DMslices_tau, (5,999) )
-       readMany2D(ta10, h2d_tau10, "/".join([Plots, "tyler%s.root"]), "%s", DMslices_tau, (5,999) )
+       readMany2D(mu, h2d_mu, "/".join([Plots, "muon_%s.root"]), "%s", etaslices_mu, (5,999) )
+       readMany2D(mu_data, h2d_muD, "/".join([Plots, "muon_%s.root"]), "%s", etaslices_mu, (5,999) )
 
-      # readMany2D(ta, h2d_tau0, "/".join([Plots, "tau_%s_genmatch6_DM0.root"]), "%s", etaslices_tau, (5,999) )
-     #  readMany2D(ta, h2d_tau1, "/".join([Plots, "tau_%s_genmatch6_DM1.root"]), "%s", etaslices_tau, (5,999) )
-     #  readMany2D(ta, h2d_tau10, "/".join([Plots, "tau_%s_genmatch6_DM10.root"]), "%s", etaslices_tau, (5,999) )
+      # readMany2D(ta00, h2d_tau0, "/".join([Plots, "tyler%s.root"]), "%s", DMslices_tau, (5,999) )
+      # readMany2D(ta01, h2d_tau1, "/".join([Plots, "tyler%s.root"]), "%s", DMslices_tau, (5,999) )
+      # readMany2D(ta10, h2d_tau10, "/".join([Plots, "tyler%s.root"]), "%s", DMslices_tau, (5,999) )
+
+       readMany2D(ta, h2d_tau, "/".join([Plots, "taus_DM%s.root"]), "%s", DMslices_tau, (5,999) )
+       readMany2D(ta_data, h2d_tauD, "/".join([Plots, "taus_DM%s.root"]), "%s", DMslices_tau, (5,999) ) 
+       #readMany2D(ta, h2d_tau1, "/".join([Plots, "taus_DM1.root"]), "%s", etaslices_tau, (5,999) )
+       #readMany2D(ta, h2d_tau10, "/".join([Plots, "taus_DM10.root"]), "%s", etaslices_tau, (5,999) )
        ##readMany2D(ta_jet, h2d_tauJET, "/".join([Plots, "tau_%s_genmatch6.root"]), "%s", etaslices_tau, (5,999) )
        ##readMany2D([ make2D(outfile, "FR_tau", ptbins_tau, etabins_tau)]mu_data, h2d_muD, "/".join([Plots, "FR_muon_%s.root"]), "%s", etaslices_mu, (5,999) )
-      ## readMany2D(ta_data, h2d_tauD, "/".join([Plots, "tau_genmatch6_DM%s.root"]), "%s", DMslices_tau, (5,999) )
+       ##readMany2D(ta_data, h2d_tauD, "/".join([Plots, "taus_kappa1_DM%s.root"]), "%s", DMslices_tau, (5,999) )
        
      #  readMany2D(ta_data, h2d_tauD0, "/".join([Plots, "tau_%s_genmatch6_DM0.root"]), "%s", etaslices_tau, (5,999) )
      #  readMany2D(ta_data, h2d_tauD1, "/".join([Plots, "tau_%s_genmatch6_DM1.root"]), "%s", etaslices_tau, (5,999) )
@@ -229,8 +237,8 @@ if __name__ == "__main__":
 
        # Serialize
        #for h in h2d_mu: outfile.WriteTObject(h)
-       for h in h2d_tau0 + h2d_tau1 + h2d_tau10: outfile.WriteTObject(h)
-       #for h in h2d_el + h2d_mu + h2d_tau + h2d_elD + h2d_muD + h2d_tauD: outfile.WriteTObject(h) #+ h2d_el_DY + h2d_mu + h2d_mu_DY:    outfile.WriteTObject(h)
+       ##for h in h2d_tauD: outfile.WriteTObject(h)
+       for h in h2d_el + h2d_mu + h2d_tau + h2d_elD + h2d_muD + h2d_tauD: outfile.WriteTObject(h) #+ h2d_el_DY + h2d_mu + h2d_mu_DY:    outfile.WriteTObject(h)
        #for h in h2d_el_WJ + h2d_mu_WJ: outfile.WriteTObject(h)
        #for h in h2d_el_PB + h2d_mu_PB: outfile.WriteTObject(h)
 

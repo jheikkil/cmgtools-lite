@@ -54,6 +54,7 @@ class VariableProducer(Module):
 import os, itertools
 from optparse import OptionParser
 parser = OptionParser(usage="%prog [options] <TREE_DIR> <OUT>")
+parser.add_option("--name", dest="outName",  type="string", default=[], action="append", help="Name output file as follows");
 parser.add_option("-m", "--modules", dest="modules",  type="string", default=[], action="append", help="Run these modules");
 parser.add_option("-d", "--dataset", dest="datasets",  type="string", default=[], action="append", help="Process only this dataset (or dataset if specified multiple times)");
 parser.add_option("-D", "--dm", "--dataset-match", dest="datasetMatches",  type="string", default=[], action="append", help="Process only this dataset (or dataset if specified multiple times): REGEXP");
@@ -81,11 +82,16 @@ parser.add_option("--bk",   dest="bookkeeping",  action="store_true", default=Fa
 parser.add_option("--tra2",  dest="useTRAv2", action="store_true", default=False, help="Use the new experimental version of treeReAnalyzer");
 (options, args) = parser.parse_args()
 
+if options.outName:
+    #print "olkoon nimi"
+    outFile=options.outName[0]
+    #print outFile
 
 if options.imports:
     MODULES = []
     from importlib import import_module
     for mod in options.imports:
+        print mod
         import_module(mod)
         obj = sys.modules[mod]
         print obj
@@ -120,17 +126,25 @@ if len(options.chunks) != 0 and len(options.datasets) != 1:
 jobs = []
 for D in glob(args[0]+"/*"):
     treename = options.tree
-    fname    = "%s/%s/%s_tree.root" % (D,options.tree,options.tree)
+    #print "MOIKKA"
+    #print treename
+    ##fname    = "%s/%s/%s_tree.root" % (D,options.tree,options.tree)
+    fname    = "%s" % (D) 
+    #print fname
     if (not os.path.exists(fname)) and (os.path.exists("%s/%s/tree.root" % (D,options.tree)) ):
         treename = "tree"
         fname    = "%s/%s/tree.root" % (D,options.tree)
+        #print "uusi yritys"
+        #print fname
 
     if (not os.path.exists(fname)) and (os.path.exists("%s/%s/tree.root.url" % (D,options.tree)) ):
         treename = "tree"
+        #print "HOI"
         fname    = "%s/%s/tree.root" % (D,options.tree)
         fname    = open(fname+".url","r").readline().strip()
 
     if os.path.exists(fname) or (os.path.exists("%s/%s/tree.root.url" % (D,options.tree))):
+        #print "OHO"
         short = os.path.basename(D)
         if options.datasets != []:
             if short not in options.datasets: continue
@@ -140,6 +154,8 @@ for D in glob(args[0]+"/*"):
                 if re.match(dm,short): found = True
             if not found: continue
         data =  any(x in short for x in "DoubleMu DoubleEl DoubleEG MuEG MuonEG SingleMu SingleEl".split()) # FIXME
+        print fname
+        #fname += "/tree.root"
         f = ROOT.TFile.Open(fname)
         t = f.Get(treename)
         if not t:
@@ -148,7 +164,7 @@ for D in glob(args[0]+"/*"):
         entries = t.GetEntries()
         f.Close()
         if options.newOnly:
-            fout = "%s/evVarFriend_%s.root" % (args[1],short)
+            fout = "%s.root" % (args[1])
             if os.path.exists(fout):
                 f = ROOT.TFile.Open(fname);
                 t = f.Get(treename)
@@ -163,12 +179,26 @@ for D in glob(args[0]+"/*"):
             #print options.onlyMC
             #print data
             if options.onlyMC and not data:
+                ##print "TAALLA"
                 print "  ",os.path.basename(D),("  DATA" if data else "  MC")," single chunk"
-                jobs.append((short,fname,"%s/evVarFriend_%s.root" % (args[1],short),data,xrange(entries),-1,None))
+                #jobs.append((short,fname,"%s/evVarFriend_%s.root" % (args[1],short),data,xrange(entries),-1,None))
+                jobs.append((short,fname,"%s.root" % (args[1]),data,xrange(entries),-1,None))
             elif not options.onlyMC:
+                #print "taallapas"
                 print "  ",os.path.basename(D),("  DATA" if data else "  MC")," single chunk"
-                jobs.append((short,fname,"%s/evVarFriend_%s.root" % (args[1],short),data,xrange(entries),-1,None))
+                #print args[i]
+                #print "short and fname and outname"
+                #print short
+                #print fname
+                #print outFile
+                if len(outFile)==0:
+                    jobs.append((short,fname,"%s/evVarFriend_%s.root" % (args[1],short),data,xrange(entries),-1,None))
+                else: 
+                    #print "moiku jaana"
+                    jobs.append((short,fname,"%s/%s" % (args[1],outFile),data,xrange(entries),-1,None))
+                #jobs.append((short,fname,outFile,data,xrange(entries),-1,None))
         else:
+            #print "eiku taalla"
             nchunk = int(ceil(entries/float(chunk)))
             print "  ",os.path.basename(D),("  DATA" if data else "  MC")," %d chunks" % nchunk
             for i in xrange(nchunk):
@@ -325,8 +355,10 @@ def _runIt(myargs):
 
 if options.jobs > 0:
     from multiprocessing import Pool
+    print "hei"
     pool = Pool(options.jobs)
     ret  = dict(pool.map(_runIt, jobs)) if options.jobs > 0 else dict([_runIt(j) for j in jobs])
+    print "juhu"
 else:
     ret = dict(map(_runIt, jobs))
 fulltime = maintimer.RealTime()

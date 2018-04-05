@@ -1,2 +1,3 @@
-muonFR_signal: muon_FR_reliso05 < 0.15 && muon_FR_muonid_loose>0 : 2,-0.5,1.5
+#denom: muon_FR_pt>10 && muon_FR_reliso05 < 1.0 && deltaR(eta_1,phi_1,muon_FR_eta,muon_FR_phi)>0.3 && deltaR(eta_2,phi_2,muon_FR_eta,muon_FR_phi)>0.3
+muonFR_signal: muon_FR_reliso05 < 0.15 && muon_FR_muonid_loose>0: 2,-0.5,1.5
 

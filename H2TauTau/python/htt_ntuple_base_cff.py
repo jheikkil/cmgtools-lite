@@ -208,7 +208,7 @@ commonSequence = cfg.Sequence([
     #triggerAna,  # First analyser that applies selections
     vertexAna,
     httGenAna, # only relies on gen quantities
-    httGenMatcher, # interpretation of event
+    #httGenMatcher, # interpretation of event
     jetAna,
     #vbfAna,
     recoilCorr,

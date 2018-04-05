@@ -66,6 +66,12 @@ event_vars = [
     Variable('met_py', lambda ev: ev.met.py()),
     Variable('met_px', lambda ev: ev.met.px()),
     Variable('met_phi', lambda ev: ev.met.phi()),
+    Variable('metcov00', lambda ev : ev.metcov00 if ev.metcov00 else -9999.),
+    Variable('metcov01', lambda ev : ev.metcov01 if ev.metcov01 else -9999.), # redundant
+    Variable('metcov10', lambda ev : ev.metcov10 if ev.metcov10 else -9999.),
+    Variable('metcov11', lambda ev : ev.metcov11 if ev.metcov11 else -9999.),
+    
+    #met().getSignificanceMatrix()
     Variable('weight', lambda ev : ev.eventWeight),
     Variable('weight_vertex', lambda ev : ev.puWeight),
     # # Add back for embedded samples once needed
@@ -97,20 +103,20 @@ event_vars = [
 
 # di-tau object variables
 ditau_vars = [
-    Variable('mvis', lambda dil : dil.mass()),
-    Variable('dil_pt', lambda dil : dil.p4().pt()),
-    Variable('dil_eta', lambda dil : dil.p4().eta()),
-    Variable('dil_phi', lambda dil : dil.p4().phi()),
-    Variable('mt_total', lambda dil : dil.mtTotal()),
+    #Variable('mvis', lambda dil : dil.mass()),
+    #Variable('dil_pt', lambda dil : dil.p4().pt()),
+    #Variable('dil_eta', lambda dil : dil.p4().eta()),
+    #Variable('dil_phi', lambda dil : dil.p4().phi()),
+    #Variable('mt_total', lambda dil : dil.mtTotal()),
     # Variable('sum_lepton_mt', lambda dil : dil.mtSumLeptons()),
     # Variable('sqsum_lepton_mt', lambda dil : dil.mtSqSumLeptons()),
-    Variable('pzeta_met', lambda dil : dil.pZetaMET()),
-    Variable('pzeta_vis', lambda dil : dil.pZetaVis()),
-    Variable('pzeta_disc', lambda dil : dil.pZetaDisc()),
-    Variable('mt', lambda dil : dil.mTLeg1()),
-    Variable('mt_leg2', lambda dil : dil.mTLeg2()),
+    #Variable('pzeta_met', lambda dil : dil.pZetaMET()),
+    #Variable('pzeta_vis', lambda dil : dil.pZetaVis()),
+    #Variable('pzeta_disc', lambda dil : dil.pZetaDisc()),
+    #Variable('mt', lambda dil : dil.mTLeg1()),
+    #Variable('mt_leg2', lambda dil : dil.mTLeg2()),
     # Variable('mt_leg1', lambda dil : dil.mTLeg1()), # redundant
-    Variable('met_cov00', lambda dil : dil.mvaMetSig(0, 0) if dil.mvaMetSig else 0.),
+    #Variable('met_cov00', lambda dil : dil.mvaMetSig(0, 0) if dil.mvaMetSig else 0.),
     # Variable('met_cov01', lambda dil : dil.mvaMetSig(0, 1) if dil.mvaMetSig else 0.), # redundant
     #Variable('met_cov10', lambda dil : dil.mvaMetSig(1, 0) if dil.mvaMetSig else 0.),
     #Variable('met_cov11', lambda dil : dil.mvaMetSig(1, 1) if dil.mvaMetSig else 0.),
@@ -118,19 +124,19 @@ ditau_vars = [
     # Variable('met_px', lambda dil : dil.met().px()),
     # Variable('met_py', lambda dil : dil.met().py()),
     # Variable('met_pt', lambda dil : dil.met().pt()),
-    Variable('pthiggs', lambda dil : (dil.leg1().p4() + dil.leg2().p4() + dil.met().p4()).pt()),
+    #Variable('pthiggs', lambda dil : (dil.leg1().p4() + dil.leg2().p4() + dil.met().p4()).pt()),
     # Variable('delta_phi_l1_l2', lambda dil : deltaPhi(dil.leg1().phi(), dil.leg2().phi())),
     # Variable('delta_eta_l1_l2', lambda dil : abs(dil.leg1().eta() - dil.leg2().eta())),
-    Variable('delta_r_l1_l2', lambda dil : deltaR(dil.leg1().eta(), dil.leg1().phi(), dil.leg2().eta(), dil.leg2().phi())),
+    #Variable('delta_r_l1_l2', lambda dil : deltaR(dil.leg1().eta(), dil.leg1().phi(), dil.leg2().eta(), dil.leg2().phi())),
     # Variable('delta_phi_l1_met', lambda dil : deltaPhi(dil.leg1().phi(), dil.met().phi())),
     # Variable('delta_phi_l2_met', lambda dil : deltaPhi(dil.leg2().phi(), dil.met().phi())),
 ]
 
 svfit_vars = [
-    Variable('svfit_mass', lambda dil : dil.svfitMass()),
-    Variable('svfit_transverse_mass', lambda dil : dil.svfitTransverseMass()),
-    Variable('svfit_mass_error', lambda dil : dil.svfitMassError()),
-    Variable('svfit_pt', lambda dil : dil.svfitPt()),
+    #Variable('svfit_mass', lambda dil : dil.svfitMass()),
+    #Variable('svfit_transverse_mass', lambda dil : dil.svfitTransverseMass()),
+    #Variable('svfit_mass_error', lambda dil : dil.svfitMassError()),
+    #Variable('svfit_pt', lambda dil : dil.svfitPt()),
     # Variable('svfit_pt_error', lambda dil : dil.svfitPtError()),
     # Variable('svfit_eta', lambda dil : dil.svfitEta()),
     # Variable('svfit_phi', lambda dil : dil.svfitPhi()),

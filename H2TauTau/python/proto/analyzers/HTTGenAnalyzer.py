@@ -53,7 +53,7 @@ class HTTGenAnalyzer(Analyzer):
         event.genmet_phi = -99.
         event.weight_gen = 1.
 
-   #        print "HTT GEENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+        print "HTT GEENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
 
         if self.cfg_comp.isData:
             return True

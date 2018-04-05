@@ -63,6 +63,14 @@ float getVLoose( float isoRaw, float pt ){
 }
 
 
+float electronIDZZ (float eta,float isoRaw){
+
+    if(abs(eta)<0.8 && isoRaw>-0.870) {return 1.0;}
+    else if(abs(eta)>=0.8 && abs(eta)<1.479 && isoRaw>-0.838){return 1.0;}
+    else if(abs(eta)>=1.479 && isoRaw>-0.763){return 1.0;}
+    else{ return 0.0;}
+}	
+
 /*float getVLoose( float isoRaw, float pt ){
     wpVVLoose = inFile->Get('DBoldDMwLTEff95');
     formula = inFile->Get('mvaOutput_normalization_DBoldDMwLT');

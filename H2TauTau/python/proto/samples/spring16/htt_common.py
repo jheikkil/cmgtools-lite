@@ -25,8 +25,8 @@ from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import mc_higgs_susy_gg
 
 from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsSUSYGG160 as ggh160
 from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsAZH300 as azh300
-from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsZZTo4lv1, HiggsZZTo4lv2, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZv1, HiggsWZv2, HiggsTT, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET
-from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsWZ_min01, WZJ, WZ, HiggsAZH260, HiggsAZH280, HiggsAZH320, HiggsAZH340, HiggsAZH350, HiggsAZH400, HiggsSM, HiggsttZ
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsZZTo4lv1, HiggsZZTo4lv2, HiggsGGToZZ2e2m, HiggsGGToZZ2e2t, HiggsGGToZZ2m2t, HiggsGGToZZ4m, HiggsGGToZZ4e, HiggsGGToZZ4t, HiggsWZv1, HiggsWZv2, HiggsTT, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsWZ_min01, WZJ, WZ, HiggsAZH260, HiggsAZH280, HiggsAZH320, HiggsAZH340, HiggsAZH350, HiggsAZH400, HiggsSM, HiggsttZ, HiggsWWW, HiggsWWZ, HiggsWZZ, HiggsZZZ
 
 
 # 21 July
@@ -178,7 +178,7 @@ sync_list = []
 #sync_list=[DYJetsToLL_M50, WZTo3LNu_amcatnlo]
 DY_sync_list = [HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
 WZ_sync_list = [HiggsWZv1, HiggsWZv2, HiggsWZ_min01, WZJ, WZ]
-#sync_list=[HiggsZZTo4lJaana, HiggsGGToZZ2e2mJaana, HiggsGGToZZ2e2tJaana, HiggsGGToZZ2m2tJaana, HiggsGGToZZ4mJaana, HiggsGGToZZ4eJaana, HiggsGGToZZ4tJaana, HiggsWZv1, HiggsWZv2, HiggsTTJaana, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
+#sync_list=[HiggsZZTo4l, HiggsGGToZZ2e2m, HiggsGGToZZ2e2t, HiggsGGToZZ2m2t, HiggsGGToZZ4m, HiggsGGToZZ4e, HiggsGGToZZ4t, HiggsWZv1, HiggsWZv2, HiggsTT, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
 #sync_list = [azh_bkg]
 
 
@@ -186,16 +186,21 @@ WZ_sync_list = [HiggsWZv1, HiggsWZv2, HiggsWZ_min01, WZJ, WZ]
 DY_control = [HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
 WZ_control = [HiggsWZ_min01]
 TT_control = [HiggsTT]
-ZZ_control = [HiggsZZTo4lv1]
+ZZ_control = [HiggsZZTo4lv1, HiggsZZTo4lv2]
 SM_control = [HiggsSM]
 ttZ_control = [HiggsttZ]
 DY_inc = [HiggsDY50v1, HiggsDY50v2]
 DY_all = DY_control + DY_inc
-ZZ_control2 = [HiggsZZTo4lv2]
-AZH_control = WZ_control + DY_control + TT_control + ZZ_control + ZZ_control2 ###+ SM_control #+ sync_list 
-AZH_tight = TT_control + ZZ_control + ZZ_control2
+GG2ZZ_control = [HiggsGGToZZ2e2m, HiggsGGToZZ2e2t, HiggsGGToZZ2m2t, HiggsGGToZZ4m, HiggsGGToZZ4e, HiggsGGToZZ4t]
+triboson = [HiggsWWW, HiggsWWZ, HiggsWZZ, HiggsZZZ]
+
+
+AZH_control = WZ_control + DY_control + TT_control + ZZ_control + SM_control + ttZ_control + GG2ZZ_control + triboson
+ ###+ SM_control #+ sync_list 
+
+AZH_tight = TT_control + ZZ_control #+ ZZ_control2
 AZH_data =  data_AZH + data_AZH_single
 AZH_data_single = data_AZH_single
 AZH_test = [HiggsDY50v1, azh300]
-AZH_masses = [azh300]#, #HiggsAZH260, HiggsAZH280, HiggsAZH320, HiggsAZH340, HiggsAZH350, HiggsAZH400]
-sync_list = AZH_control #+ AZH_masses
+AZH_masses = [azh300]#, HiggsAZH260, HiggsAZH280, HiggsAZH320, HiggsAZH340, HiggsAZH350, HiggsAZH400]
+sync_list = AZH_masses

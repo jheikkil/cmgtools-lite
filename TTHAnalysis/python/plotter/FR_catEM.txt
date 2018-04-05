@@ -9,9 +9,17 @@ cut-change: iso_4: 0.14
 
 ## define the FR weight
 #weight: fakeRateWeight_2lssBCat(LepGood1_pt,LepGood1_eta,LepGood1_pdgId,LepGood1_mva,LepGood2_pt,LepGood2_eta,LepGood2_pdgId,LepGood2_mva, 0.70, nBJetMedium25, 1.0,1.0,1.0,1.0)
-weight: (iso_3<2.0 && H_em_l1_eid_spring16>0 && iso_4<1.0)*fakeRateWeight_AZh(pt_3, eta_3, pt_4, eta_4, 1113)
+##weight: (iso_3<2.0 && H_em_l1_eid_spring16>0 && iso_4<1)*
+weight : (iso_3<0.6 && electronIDZZ(eta_3, IdRawMva_3)>0  && iso_4<1.0)*fakeRateWeight_AZh(pt_3, eta_3, pt_4, eta_4, 1113, -99, -99,  H_em_l1_eid_spring16_80>0 && iso_3<0.15, H_em_l2_muonid_loose>0 && iso_4 < 0.15 )
 
 ## load histograms 
-load-histo: FR_mu  : FR_3011.root : FR_muon
-load-histo: FR_el  : FR_3011.root : FR_ele
-load-histo: FR_tau  : FR_3011.root : FR_tau
+#load-histo: FR_mu  : FR0712.root : FR_muon_data
+#load-histo: FR_el  : FR0712.root : FR_ele_data
+#load-histo: FR_tau  : FR0712.root : FR_tau_data
+
+load-histo: FR_mu  : FR_Feb27.root : FR_muon
+load-histo: FR_el  : FR_Feb27.root : FR_ele
+
+#load-histo: FR_el1  : tyler0802.root : electron_AllEta_leptonPt_hist
+#load-histo: FR_mu1  : tyler0802.root : muon_AllEta_leptonPt_hist
+

@@ -1,71 +1,98 @@
-#Z_vis: m_vis: 10,60,120; LegendCutoff=1e-7
-#Z_Pt :  Z_Pt : 40,0,400; LegendCutoff=1e-7
-#H_vis : H_vis: 40,0,400; LegendCutoff=1e-7
-pt_3 : pt_3 : [20,25,30,40,50,70,100]; LegendCutoff=1e-7
-pt_4 : pt_4 : [20,25,30,40,50,70,100]; LegendCutoff=1e-7
-#abs(eta3) : abs(eta_3): 5,0, 2.3;  LegendCutoff=1e-7
-#abs(eta4) : abs(eta_4): 5,0, 2.3;  LegendCutoff=1e-7
-H_Pt : H_Pt : 20,0,200; LegendCutoff=1e-7
-#A_vis : Mass : 60,50,750; LegendCutoff=1e-7
-#A_Pt : A_Pt : 30,0,300; LegendCutoff=1e-7
-#A_scaled : scaledHpt: 35,100,800; LegendCutoff=1e-7
-#MET_pt : met_pt : 30,0,300;  LegendCutoff=1e-7
-#DeltaPhi(MET, H) : H_METphi: 8,-4,4 ;  LegendCutoff=1e-7
+
+Z_vis: m_vis: 10,60,120; LegendCutoff=1e-7,MoreY=2.4, Legend="TR"
+Z_vis_1bin : m_vis : 1,60,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+#Z_vis: m_vis: 10,60,120; LegendCutoff=1e-7,MoreY=2.4, Legend="TR"
+#Z_vis_1bin : m_vis : 1,60,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+#Z_Pt :  Z_Pt : 40,0,400; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#H_vis : H_vis: 10,0,200; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+H_LT : Hboson_tt_LT: 10,30,200; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+#run: run: 100, 0, 9e99
+#lumi: lumi: 100000, 0, 9e99
+#evt: evt: 10000000, 0, 9e99
+
+met_px : met_px: 100,0,100
+met_py : met_py: 100,0,100	
 
 
-#njetspt20: njetspt20 : 4,0,4; LegendCutoff=1e-7
-#njets : njets : 4,0,4 ; LegendCutoff=1e-7
+#Z_Pt :  Z_Pt : 40,0,400; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#H_vis : H_vis: 40,0,400; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+pt_3 : pt_3 : [20,30,40,50,60,70,100]; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+pt_4 : pt_4 : [20,30,40,50,60,70,100]; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#abs(eta3) : abs(eta_3): 5,0, 2.3;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#abs(eta4) : abs(eta_4): 5,0, 2.3;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#H_Pt : H_Pt : 20,0,200; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#A_vis : Mass : 60,50,750; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#A_Pt : A_Pt : 30,0,300; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#A_scaled : scaledHpt: 35,100,800; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#MET_pt : met_pt : 30,0,300;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#DeltaPhi(MET, H) : H_METphi: 8,-4,4 ;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+
+#njetspt20: njetspt20 : 4,0,4; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#njets : njets : 4,0,4 ; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
 #nbjets : nbtag : 4,0,4 ; LegendCutsoff=1e-7
-m_vis: m_vis: 6,60,120; LegendCutoff=1e-7, MoreY=1.7, Legend="TR"
-Z_Pt :  Z_Pt : 23,0,230; LegendCutoff=1e-7
-H_vis : H_vis: 40,0,400; LegendCutoff=1e-7
-pt_1 : pt_1 : 10,20,120; LegendCutoff=1e-7
-pt_2 : pt_2 : 10,20,120; LegendCutoff=1e-7
-
-H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT: H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT:2,0,1; LegendCutoff=1e-7
-H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT: H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT:2,0,1; LegendCutoff=1e-7
-
-lumi:lumi: 10,0,300000; LegendCutoff=1e-7
-run:run:10,0,300000; LegendCutoff=1e-7
-evt:evt:10,0,2000000; LegendCutoff=1e-7
-#tau1_jet_pt : H_tt_l1_jet_pt : [20,30,40,50,60,70,80,90,100,110,120]; LegendCutoff=1e-7
-#tau1_jet_pt_ratio : pt_3/H_tt_l1_jet_pt : 10,0,2; LegendCutoff=1e-7
-
-#tau2_jet_pt : H_tt_l2_jet_pt : [20,30,40,50,60,70,80,90,100,110,120]; LegendCutoff=1e-7
-#tau2_jet_pt_ratio : pt_4/H_tt_l2_jet_pt : 10,0,2; LegendCutoff=1e-7
-
-#tau1_decayMode : H_tt_l1_decayMode : 10,0,10; LegendCutoff=1e-7
-#tau2_decayMode : H_tt_l2_decayMode : 10,0,10; LegendCutoff=1e-7
-
-#pfmt_fix1:  mt_2(35.0, phi_3, met_pt, met_phi): 20,0,120; LegendCutoff=1e-7
-#pfmt_fix2:  mt_2(35.0, phi_4, met_pt, met_phi): 20,0,120; LegendCutoff=1e-7
-
-#abs(eta1) : abs(eta_1): 5,0, 2.5;  LegendCutoff=1e-7
-#abs(eta2) : abs(eta_2): 5,0, 2.5;  LegendCutoff=1e-7
-
-#abs(eta3) : abs(eta_3): 5,0, 2.3;  LegendCutoff=1e-7
-#abs(eta4) : abs(eta_4): 5,0, 2.3;  LegendCutoff=1e-7
-#H_Pt : H_Pt : 20,0,200; LegendCutoff=1e-7
-#A_vis : Mass : 60,50,750; LegendCutoff=1e-7
-#A_Pt : A_Pt : 30,0,300; LegendCutoff=1e-7
-#A_scaled : scaledHpt: 35,100,800; LegendCutoff=1e-7
-#MET_pt : met_pt : 30,0,300;  LegendCutoff=1e-7
-###DeltaPhi(MET, H) : abs(H_METphi): 10,0,3.2 ;  LegendCutoff=1e-7
-#DeltaPhi(MET, H) : abs(deltaPhi(met_phi, H_Phi)) :  10,0,3.2 ;  LegendCutoff=1e-7
-#DeltaPhi(MET, Z) : abs(deltaPhi(met_phi, Z_Phi)) :  10,0,3.2 ;  LegendCutoff=1e-7                               
-
-#iso1 : iso_1 : 10,0,0.15;  LegendCutoff=1e-7
-#iso2 : iso_2 : 10,0,0.15;  LegendCutoff=1e-7
-
-#iso3 : iso_3 : 14,-0.4,1;  LegendCutoff=1e-7
-#iso4 : iso_4 : 14,-0.4,1;  LegendCutoff=1e-7
+#m_vis: m_vis: 6,60,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR", MoreY=1.2, Legend="TR"
+#Z_Pt :  Z_Pt : 23,0,230; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+H_vis : H_vis: 40,0,400; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+pt_1 : pt_1 : 10,10,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+pt_2 : pt_2 : 10,10,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
 
 
-#worstIsoZ : max(iso_1, iso_2) : 10,0,0.15;  LegendCutoff=1e-7
-#worstIsoH : max(iso_3, iso_4) : 14,-0.4,1; LegendCutoff=1e-7
+#l3_medium: H_tt_l1_byMediumIsolationMVArun2v1DBoldDMwLT:2,0,1; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#l4_medium: H_tt_l2_byMediumIsolationMVArun2v1DBoldDMwLT:2,0,1; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
 
-#n_vertices : npv : 20,0,60; LegendCutoff=1e-7
-#puweight : puweight : 10,0,2; LegendCutoff=1e-7
+#lumi:lumi: 10,0,300000; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#run:run:10,0,300000; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#evt:evt:10,0,2000000; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#tau1_jet_pt : H_tt_l1_jet_pt : [20,30,40,50,60,70,80,90,100,110,120]; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#tau1_jet_pt_ratio : pt_3/H_tt_l1_jet_pt : 10,0,2; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+#tau2_jet_pt : H_tt_l2_jet_pt : [20,30,40,50,60,70,80,90,100,110,120]; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#tau2_jet_pt_ratio : pt_4/H_tt_l2_jet_pt : 10,0,2; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+decayMode_3 : H_tt_l1_decayMode : 10,0,10; LegendCutoff=1e-7,MoreY=2.2, Legend="TR"
+decayMode_4 : H_tt_l2_decayMode : 10,0,10; LegendCutoff=1e-7,MoreY=2.2, Legend="TR"
+
+#pfmt_fix1:  mt_2(35.0, phi_3, met_pt, met_phi): 20,0,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#pfmt_fix2:  mt_2(35.0, phi_4, met_pt, met_phi): 20,0,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+#abs(eta1) : abs(eta_1): 5,0, 2.5;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#abs(eta2) : abs(eta_2): 5,0, 2.5;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+eta_3 : eta_3: 5,0, 2.3;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+eta_4 : eta_4: 5,0, 2.3;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+phi_3 : phi_3: 5,0, 2.3;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+phi_4 : phi_4: 5,0, 2.3;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+m_3 : m_3: 5,0, 2.3;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+m_4 : m_4: 5,0, 2.3;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+
+#H_Pt : H_Pt : 20,0,200; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#A_vis : Mass : 60,50,750; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#A_Pt : A_Pt : 30,0,300; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#A_scaled : scaledHpt: 35,100,800; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#MET_pt : met_pt : 30,0,300;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+###DeltaPhi(MET, H) : abs(H_METphi): 10,0,3.2 ;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#DeltaPhi(MET, H) : abs(deltaPhi(met_phi, H_Phi)) :  10,0,3.2 ;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#DeltaPhi(MET, Z) : abs(deltaPhi(met_phi, Z_Phi)) :  10,0,3.2 ;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"                               
+
+#iso1 : iso_1 : 10,0,0.15;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#iso2 : iso_2 : 10,0,0.15;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+#iso3 : iso_3 : 14,-0.4,1;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#iso4 : iso_4 : 14,-0.4,1;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+
+#worstIsoZ : max(iso_1, iso_2) : 10,0,0.15;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#worstIsoH : max(iso_3, iso_4) : 14,-0.4,1; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+#n_vertices : npv : 20,0,60; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#puweight : puweight : 10,0,2; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
 
 
 #l1_Double : Z_mm_l1_matchedTrgObj_Double : 2,0,1

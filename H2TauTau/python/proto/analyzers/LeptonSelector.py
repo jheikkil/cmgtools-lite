@@ -59,6 +59,18 @@ class LeptonSelector(Analyzer):
         taus = map(Tau, self.handles['taus'].product())
         met = self.handles['met'].product()[0] 
 
+        fillMatrix = False
+        if hasattr(met, 'getSignificanceMatrix'):
+            mvaMetSig = met.getSignificanceMatrix()
+
+            metcov00 = mvaMetSig(0,0)
+            metcov01 = mvaMetSig(0,1)
+            metcov10 = mvaMetSig(1,0)
+            metcov11 = mvaMetSig(1,1)
+            fillMatrix=True
+ 
+        print "OK"
+
         #set vertex for each candidate
         setVertex = []
         setVertex += muons
@@ -126,6 +138,13 @@ class LeptonSelector(Analyzer):
         setattr(event, 'electrons', electrons)
         setattr(event, 'taus', taus)
         setattr(event, 'met', met)
+
+        if fillMatrix:
+            setattr(event, 'metcov00', metcov00)
+            setattr(event, 'metcov01', metcov01)
+            setattr(event, 'metcov10', metcov10)
+            setattr(event, 'metcov11', metcov11)
+        #setattr(event, 'mvaMetSig', mvaMetSig)
 
         setattr(event, 'muonsGOOD', muonsGOOD)
         setattr(event, 'electronsGOOD', electronsGOOD)

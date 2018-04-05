@@ -20,7 +20,7 @@ def addPolySystBands(tlist,amplitude,order):
     for b in xrange(1,ref.GetNbinsX()+1):
         xval = ref.GetXaxis().GetBinCenter(b)
         r = 1 + amplitude * funcs[order]((xval-xmin)/(xmax-xmin))
-        print "bin %d, hi poly syst band: %f , and low also: %f" %(b, ref.GetBinContent(b) * r, ref.GetBinContent(b) / r)
+        ##print "bin %d, hi poly syst band: %f , and low also: %f" %(b, ref.GetBinContent(b) * r, ref.GetBinContent(b) / r)
         hi.SetBinContent(b, ref.GetBinContent(b) * r)
         lo.SetBinContent(b, ref.GetBinContent(b) / r)
     tlist.Add(hi)
@@ -133,6 +133,12 @@ if __name__ == "__main__":
                 hists.append( (y,x2.xvar,x2.fvar,x2,report) )
     else:
         backup = options.globalRebin; options.globalRebin = 1
+        print backup
+        for y in ids:
+            for x2 in vars2d:
+                print y
+                print x2.xvar
+                print x2.fvar
         hists = [ (y,x2.xvar,x2.fvar,x2,makeEff(mca,cut,y,x2,returnSeparatePassFail=True,notDoProfile=True,mainOptions=options)) for y in ids for x2 in vars2d ]
         options.globalRebin = backup
         if options.bare:
@@ -144,7 +150,9 @@ if __name__ == "__main__":
             print "Output saved to %s. exiting." % outname
             exit()
     for (yspec,xspec,fspec,x2d,report) in hists:
-        for k,v in report.iteritems(): outfile.WriteTObject(v)
+        for k,v in report.iteritems():
+            print k, v 
+            outfile.WriteTObject(v.raw())
         myname = outname.replace(".root","_%s_%s.root" % (yspec.name,xspec.name))
         bindirname = myname.replace(".root","")+".dir";
         if not os.path.exists(bindirname):
@@ -403,8 +411,12 @@ if __name__ == "__main__":
                     print "also fewk and fqcd"
                     print fewk
                     print fqcd
+                    #Create an expression for nbkg
+                    kappa = 2
+                    w.factory("expr::N_bkg(\"@0*pow(@1, @2) \", %g, %g, theta[0,-5,5])" % (Newk,kappa))
                     w.factory("expr::Nsig_pass(\"@0* @1   \",N_sig[%g,0,%g], fsig[%g,0,1])" % (Nqcd,Ndata,fqcd))
-                    w.factory("expr::Nbkg_pass(\"@0* @1   \",N_bkg[%g,0,%g], fbkg[%g,0,1])" % (Newk,Ndata,fewk))
+                    w.factory("expr::Nbkg_pass(\"@0* @1   \",N_bkg, fbkg[%g,0,1])" % fewk)
+
                    ### w.factory("expr::Nbkg_pass(\"@0* @1   \",N_bkg[%g,0,%g], fbkg[%g,0,1])" % (Newk,1.2*Newk,fewk))
                     w.factory("expr::Nsig_fail(\"@0*(1-@1)\",N_sig, fsig)")
                     w.factory("expr::Nbkg_fail(\"@0*(1-@1)\",N_bkg, fbkg)")
@@ -413,22 +425,44 @@ if __name__ == "__main__":
                     for k,o in ('sig',options.shapeSystSig),('bkg',options.shapeSystBkg):
                         nuis[k] = [ (f[:1],float(f[2:])) for f in o.split(",") ]
                     nuislists = {}; constraints = []; allnuis = ROOT.RooArgSet()
+                    ##print allnuis
                     for (k,ns) in nuis.iteritems():
                         nuislists[k] = dict([ (s,ROOT.RooArgList()) for s in ('pass','fail') ])
                         for n,val in ns:
                             if n == "b": continue
+                            #print "k,n, val: ", k, n, val
+                            #print "k+n ", k+n
                             w.factory("Gaussian::nuis_{0}_shapePdf(nuis_{0}_shape[0,-3,3], 0, 1)".format(k+n))
                             constraints.append(w.pdf("nuis_{0}_shapePdf".format(k+n)))
                             for s in "pass","fail": nuislists[k][s].add(w.var("nuis_{0}_shape".format(k+n)))
 #                        allnuis.add(nuislists[k]["pass"], False)
                         for idx in xrange(nuislists[k]["pass"].getSize()):
                             allnuis.add(nuislists[k]["pass"].at(idx),False)
+                            #print idx
+                    #nuislists["bkg"] = dict([ (s,ROOT.RooArgList()) for s in ('pass','fail') ])
+                    #for zstateTheta in "pass", "fail":
+                    keyTheta = "theta_bkg"
+                    #print keyTheta
+                    w.factory("Gaussian::nuis_{0}_shapePdf(theta, 0, 1)".format(keyTheta))
+                    constraints.append(w.pdf("nuis_{0}_shapePdf".format(keyTheta)))
+                    thetaPre = w.var("theta")
+                    ##print "all things", nuislists
+                    ###nuislists["bkgTheta"] = dict([('pass',ROOT.RooArgList()) ])
+                    ##nuislists.update({'bkgTheta':{'pass':ROOT.RooArgList()}})
+                    ###print "try adding", nuislists
+                    ##nuislists['bkgTheta']['pass'].add(w.var("nuis_{0}_shape".format(keyTheta)))
+                    #p###rint nuislists["bkgTheta"]["pass"].getSize()
+                    #for idxTheta in xrange(nuislists["bkgTheta"]["pass"].getSize()):
+                    #    print "JIHUU"
+                    #    print idxTheta
+                    #allnuis.add(w.var("nuis_{0}_shape".format(keyTheta)))
+                    #allnuis.add(nuislists["bkgTheta"]["pass"].at(0), False)
                     for zstate in "pass", "fail":
                         rep = freport_num_den[zstate];  
                         # make nominal templates 
-                        print "----------------------LET US MAKE TEMPLATES--------------------------"
-                        print "ZSTATE"
-                        print zstate
+                        #print "----------------------LET US MAKE TEMPLATES--------------------------"
+                        #print "ZSTATE"
+                        #print zstate
                         signalsum = 0
                         backgroundsum = 0
                         if options.sameNDTemplates:
@@ -458,7 +492,7 @@ if __name__ == "__main__":
                                     print "WARNING, bin %d filled in data (%d/%d) and not in MC" % ( b, rep["data"].GetBinContent(b), Ndata )
                                     rep["data"].SetBinContent(b, 0) 
                                     rep["data"].SetBinError(b, 0) 
-                        print "total of signal and background: %d and %d" %(signalsum, backgroundsum)
+                        #print "total of signal and background: %d and %d" %(signalsum, backgroundsum)
                         rdh = ROOT.RooDataHist("data_"+zstate,"data",ROOT.RooArgList(w.var("f")), rep["data"])
                         combiner.addSetAny(zstate,rdh)
                         # make systematic histograms
@@ -467,28 +501,29 @@ if __name__ == "__main__":
                         print "-----------------Let us produce systematic histograms----------"
                         for what,tlist in [('sig',sighists),('bkg',bkghists)]:
                             #if what == "sig":
-                            print what 
-                            for b in xrange(1,tlist.At(0).GetNbinsX()+1):
-                                print "bin %d and content %f" %(b, tlist.At(0).GetBinContent(b))
+                            #print what 
+                            #for b in xrange(1,tlist.At(0).GetNbinsX()+1):
+                               # print "bin %d and content %f" %(b, tlist.At(0).GetBinContent(b))
                                 #print tlist.At(0).GetYaxis().GetBinContent(b)  
-                                #print tlist.At(0).GetY()[0]
+                                #print tlist.At(0).GetY()[0] 
                             for n,val in nuis[what]:
-                                print "n, val: %s, %g" %(n, val)
+                                #print "n, val: %s, %g" %(n, val)
                                 if n == "l": addPolySystBands(tlist, val, 1)
                                 if n == "q": addPolySystBands(tlist, val, 2)
                                 if n == "s": addStretchBands(tlist, val)
                                 if n == "b": 
                                     print "Adding bin-by-bin uncertainties on %s %s, threshold %g" % (what,zstate,val)
-                                    bins = addBbB(tlist,1e-3,val, verbose=True)
+                                    bins = addBbB(tlist,1e-3,val, verbose=False)
                                     for b in bins:
                                         key = "%s_%s_%s" % (what,zstate,b) 
-                                        print "key: %s" %key
+                                        #print "key: %s" %key
                                         w.factory("Gaussian::nuis_{0}_shapePdf(nuis_{0}_shape[0,-3,3], 0, 1)".format(key))
                                         nuislists[what][zstate].add(w.var("nuis_{0}_shape".format(key)))
                                         constraints.append(w.pdf("nuis_{0}_shapePdf".format(key)))
                                         allnuis.add(w.var("nuis_{0}_shape".format(key)))
                         # make summary plots of templates
                         lsig = mca.listSignals()[0]; lbkg = mca.listBackgrounds()[0]
+                        #print "OK2"
                         for what,label,tlist in [('sig',lsig,sighists),('bkg',lbkg,bkghists)]:
                             postfixes = ["_"+x+d for (x,v) in nuis[what] for d in "Up", "Dn" if x != "b"]
                             shiftrep = dict([(label+p, tlist.At(i)) for (i,p) in enumerate([""]+postfixes)])
@@ -514,11 +549,38 @@ if __name__ == "__main__":
             	    #minim.setPrintLevel(-1); 
                     minim.setStrategy(1);
 #                    nll.setZeroPoint()
+                    print "SECOND ROUNDS-----------------"
                     minim.minimize("Minuit2","migrad")
                     minim.hesse();
                     result = minim.save()
+                    w.allVars().assignValueOnly(result.floatParsFinal())
+                    thetaus = w.var("theta")
+                    thetaus_value = w.var("theta").getVal()
+                    thetaus_error = w.var("theta").getError()
+                    #print "KOKEILU!"
+                    #print result.Print(testingString)
+                    #hey = result.Print()
+                    #print "{0} ...\r\n moikka!".format(result.Print())
+                    #print "kokeilepas, hey: ", hey
+                    #print "THETA ENNEN:    ", thetaPre.getVal()
+                    listaus = ""
+                    iter = result.floatParsFinal().createIterator()
+                    var = iter.Next()
+                    while var :
+                        ##print "%s = %f +- %f" %(var.GetName(),var.getVal(), var.getError())
+                        listaus+=var.GetName()
+                        listaus+=" = "
+                        listaus+=str(var.getVal())
+                        listaus+=" +- "
+                        listaus+=str(var.getError())
+                        listaus+=" \n"
+                        var = iter.Next()
+                    #print "LISTAUS, ", listaus
+                    #for nuisance in allnuis:
+                    #   print nuisance.getVal()
+                    print "THETA ON:     ", thetaus.getVal()
                     # post-fit plots
-                    #print "-----------post-fit plots--------------"
+                    print "-----------post-fit plots--------------"
                     for zstate in "pass","fail":
                         pfrep = { 'data':freport_num_den[zstate]["data"] }
                         print pfrep
@@ -551,6 +613,17 @@ if __name__ == "__main__":
                                 hist.SetBinError(b, sqrt(sumw2s[b-1]/ntoys))
                             mca.stylePlot(label, hist, fspec)
                             pfrep[label] = hist
+                            ##print "THETA POST FIT PLOTS:     THETA ", w.var("theta").getVal()
+
+                        # listaus.append(var.GetName())
+                        #listaus.append(var.getVal())
+                        #listaus.append(var.getError())
+
+                        fspec.setLog("Fit information", ["%s" %(listaus)] )
+                        #thetaus = w.var("theta")
+                        #print thetaus.getVal()
+                        #w.allVars().assignValueOnly(result.floatParsFinal())
+                        #fspec.setLog("Theta", [ "Theta variable is %d pm %d" %(thetaus.getVal(), thetaus.getError() )] )
                         plotter.printOnePlot(mca, fspec, pfrep, printDir=bindirname, 
                                              outputName = "%s_for_%s%s_%s_%s_postfit" % (fspec.name,xspec.name,bxname,yspec.name,zstate)) 
                     # pre-fit plots
@@ -590,6 +663,11 @@ if __name__ == "__main__":
                                 hist.SetBinError(b, sqrt(sumw2s[b-1]/ntoys))
                             mca.stylePlot(label, hist, fspec)
                             pfrep[label] = hist
+                            #print "PREFIT PLOTSS:   THETAA  ", w.var("theta").getVal()	
+                        ##fspec.setLog("Theta", [ "Theta variable is %f pm %f" %(w.var("theta").getVal(), w.var("theta").getError() )] )
+                        ##w.allVars().assignValueOnly(result.floatParsFinal())
+                            #fspec.setLog("Theta", [ "Theta variable is %d pm %d" %(thetaus.getVal(), thetaus.getError() )] )
+                        ##f
                         plotter.printOnePlot(mca, fspec, pfrep, printDir=bindirname, 
                                              outputName = "%s_for_%s%s_%s_%s_prefit" % (fspec.name,xspec.name,bxname,yspec.name,zstate)) 
                     print "-----minos for the efficiency-----"
@@ -598,25 +676,36 @@ if __name__ == "__main__":
                     nll = sim.createNLL(data, cmdArgs)
 #                    nll.setZeroPoint()
                     var = w.var("fsig"); var.setConstant(True)
+                    thetaFitted = w.var("theta")
+                    thetas = []
+                    thetas.append(thetaFitted.getVal()); thetas.append(thetaFitted.getError())
                     minim = ROOT.RooMinimizer(nll)
-                    #minim.setPrintLevel(-1); 
-                    minim.setStrategy(0);
+                    minim.setPrintLevel(-1); 
+                    minim.setStrategy(1);
                     minim.minimize("Minuit2","migrad");
                     nll0 = nll.getVal(); f0 = var.getVal()
-                    print "some values"
-                    print nll0
-                    print f0
+                    print "some values, nll0 and f0:   ", nll0, f0
+                    thetas.append(thetaFitted.getVal()), thetas.append(thetaFitted.getError())
                     bounds = []; search = []
                     if f0 > 0: search.append((f0,max(0,f0-4*var.getError())))
                     if f0 < 1: search.append((f0,min(1,f0+4*var.getError())))
+                    print "SEARCHHHHHHHH", search
+                    kierros = 0
                     for x1,x2 in search:
+                        print "ALOITA ETSINATTTAAAAAAAAAAAAAAAAAAAA, kierros:                  ", kierros
                         for iTry in xrange(10):
+                            print "iTRYSSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                             var.setVal(x2)
                             minim.minimize("Minuit2","migrad");
                             y2 = 2*(nll.getVal()-nll0)
-                            if y2 > 1: break
+                            if y2 > 1: 
+                                print "Y2 onnkinnnn      ", y2
+                                break
                             if x2 > x1: x2 = min((x2+1)/2, x2+(x2-x1))
                             else:       x2 = max((x2+0)/2, x2-(x1-x2))
+                        print "iTry:   ", iTry
+                        print "ARVOT ENNEN: x1, x2, y2: ", x1, x2, y2
+                        ##thetas.append(thetaFitted.getVal()), thetas.append(thetaFitted.getError())
                         while abs(x1-x2) > 0.0005:
                             xc = 0.5*(x1+x2)
                             var.setVal(xc)
@@ -624,7 +713,15 @@ if __name__ == "__main__":
                             y = 2*(nll.getVal()-nll0)
                             if y < 1: x1 = xc
                             else:     x2 = xc
+                        print "ARVOT JALKEEEENNN: x1, x2, xc, y, y2: ", x1, x2, xc, y, y2   
+                        print "NYT OHIIIIIIIIIIIIIIIIIIIIIIII KATO THEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEETAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        print thetaFitted.getVal()
+                        print thetaFitted.getError()
+                        thetas.append(thetaFitted.getVal()), thetas.append(thetaFitted.getError())
                         bounds.append(x2)
+                        kierros = kierros + 1
+                    print "bounds::  ", bounds
+                    print thetaFitted.getVal(), thetaFitted.getError()
                     df = max(abs(b-f0) for b in bounds)
                     ilast = fr_fit.GetN()
                     fr_fit.Set(ilast+1)
@@ -636,6 +733,16 @@ if __name__ == "__main__":
                     print "MC fake rate: %.4f " % fqcd
                     print "Data fake rate: %.4f +- %.4f " % (f0, df)
         #print "\n"*5,"===== ALL BINS DONE ===== "
+        print "thetas: "
+        for i in xrange(1,len(thetas),2):
+             print thetas[i-1], "+-", thetas[i]
+        print "thetas: ", thetas
+        text_file = open("thetasHE.txt", "a")
+        for i in xrange(1,len(thetas),2):
+             print thetas[i-1], "+-", thetas[i]
+             text_file.write("Theta: %f pm %f \n" % (thetas[i-1], thetas[i]))
+        text_file.write("------------------")
+        text_file.close()        
         for rep in xzreport, xzreport0: 
             for p,h in rep.iteritems(): 
                 if p in [ "signal", "background", "total", "data_sub", "data" ] : continue
@@ -666,6 +773,7 @@ if __name__ == "__main__":
         stackEffs(myname,xspec,effs,options)
         ##w.writeToFile("tylleri.root")
         for p in procsToStack: outfile.WriteTObject(ereport[p], "%s_vs_%s_%s_%s" % (yspec.name,xspec.name,fspec.name,p))
+        
     outfile.Close()
 
 

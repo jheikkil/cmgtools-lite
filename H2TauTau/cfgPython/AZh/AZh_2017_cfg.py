@@ -39,7 +39,7 @@ from CMGTools.H2TauTau.proto.analyzers.SVfitProducer import SVfitProducer
 from PhysicsTools.Heppy.utils.cmsswPreprocessor import CmsswPreprocessor
 from CMGTools.H2TauTau.proto.analyzers.FileCleaner import FileCleaner
 
-from CMGTools.H2TauTau.proto.samples.spring16.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_single_muon, sync_list, DY_sync_list, WZ_sync_list, AZH_control, AZH_data, ZZ_control2, AZH_tight, AZH_test, AZH_masses, DY_inc, AZH_data_single
+from CMGTools.H2TauTau.proto.samples.spring16.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_single_muon, sync_list, DY_sync_list, WZ_sync_list, AZH_control, AZH_data, AZH_tight, AZH_test, AZH_masses, DY_inc, AZH_data_single
 from CMGTools.H2TauTau.proto.samples.spring16.htt_common import *
 
 
@@ -58,7 +58,7 @@ from CMGTools.H2TauTau.htt_ntuple_base_cff import commonSequence, httGenAna, tri
 production = getHeppyOption('production', False)
 pick_events = getHeppyOption('pick_events', False)
 syncntuple = getHeppyOption('syncntuple', True)
-cmssw = getHeppyOption('cmssw', False)
+cmssw = getHeppyOption('cmssw', True)
 computeSVfit = getHeppyOption('computeSVfit', False)
 data = getHeppyOption('data', False)
 reapplyJEC = getHeppyOption('reapplyJEC', True)
@@ -264,8 +264,8 @@ samples=[]
 #samples = DY_inc
 #samples = backgrounds_mu + sm_signals + mssm_signals + AZH_control
 ##samples = [inputSample]
-samples = AZH_control
-##samples = AZH_masses
+#samples = AZH_control
+samples = AZH_masses
 ##samples = sync_list
 #inputJaana = sync_list
 
@@ -287,7 +287,7 @@ if samples:
 # Additional samples
 
 # split_factor = 3e4
-split_factor = 2e5 
+split_factor = 1#2e5 
 
 
 sequence=commonSequence
@@ -321,6 +321,7 @@ if pick_events:
     eventSelector.toSelect = []
     sequence.insert(0, eventSelector)
 
+#if cmssw:
 if not cmssw:
     module = [s for s in sequence if s.name == 'MCWeighter'][0]
     sequence.remove(module)
@@ -378,7 +379,7 @@ if not production and not data and test == None:
     #for i in xrange(len(inputJaana)):
         #print inputJaana[i]
         #comp = inputJaana[i]
-        comp.splitFactor = 100
+        comp.splitFactor = 1#100
         #selectedComponents += [comp]
    # comp2 = inputJaana[1]
     #comp.splitFactor = 1#00
@@ -411,8 +412,11 @@ print sequence
 preprocessor = None
 if cmssw:
     sequence.append(fileCleaner)
-    preprocessor = CmsswPreprocessor(
-        "$CMSSW_BASE/src/CMGTools/H2TauTau/prod/h2TauTauMiniAOD_mumu_data_cfg.py" if data else "$CMSSW_BASE/src/CMGTools/H2TauTau/prod/h2TauTauMiniAOD_mumu_cfg.py", addOrigAsSecondary=False)
+    cfg_name = "$CMSSW_BASE/src/CMGTools/H2TauTau/prod/h2TauTauMiniAOD_AZh_data_cfg.py" if data else "$CMSSW_BASE/src/CMGTools/H2TauTau/prod/h2TauTauMiniAOD_AZh_cfg.py"
+    #print cfg_name
+    preprocessor = CmsswPreprocessor(cfg_name, addOrigAsSecondary=False)
+  
+
 
 #maxEvents=100
 

@@ -288,9 +288,16 @@ def makeDataSub(report,mca):
     for p in mca.listBackgrounds():
         if p not in report: continue
         b = report[p]
-        data_sub.Add(b, -1.0)
-        data_sub_syst.Add(b, -1.0)
-        syst = mca.getProcessOption(p,'NormSystematic',0.) 
+        print data_sub, b, type(b), b.__class__
+        ##print b.raw()
+        import CMGTools.TTHAnalysis.plotter.histoWithNuisances
+	if isinstance(b, CMGTools.TTHAnalysis.plotter.histoWithNuisances.HistoWithNuisances):
+            data_sub.Add(b.raw(), -1.0)
+            data_sub_syst.Add(b.raw(), -1.0)
+        else:
+            data_sub.Add(b, -1.0)
+            data_sub_syst.Add(b, -1.0)
+        syst = mca.getProcessOption(p,'NormSystematic',0.)
         #print "subtracting background %s from data with systematic %r" % (p,syst)
         if syst <= 0: continue
         if "TH1" in b.ClassName():

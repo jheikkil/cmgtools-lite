@@ -237,11 +237,13 @@ class MCAnalysis:
                 if "data" not in pname:
                     pckobj  = pickle.load(open(pckfile,'r'))
                     counters = dict(pckobj)
+                    #print "olaanko me talla"
                     if ('Sum Weights' in counters) and options.weight:
                         if (is_w==0): raise RuntimeError, "Can't put together a weighted and an unweighted component (%s)" % cnames
                         is_w = 1; 
                         total_w += counters['Sum Weights']
                         scale = "weight_gen*(%s)" % field[2]
+                        #print "SCALEEE: ",scale
                     else:
                         if (is_w==1): raise RuntimeError, "Can't put together a weighted and an unweighted component (%s)" % cnames
                         is_w = 0;
@@ -688,7 +690,7 @@ class MCAnalysis:
             raise KeyError, "Process %r not found" % process
     def _processTasks(self,func,tasks,name=None,chunkTasks=200):
         #timer = ROOT.TStopwatch()
-        #print "Starting job %s with %d tasks, %d threads" % (name,len(tasks),self._options.jobs)
+        print "Starting job %s with %d tasks, %d threads" % (name,len(tasks),self._options.jobs)
         if self._options.jobs == 0: 
             retlist = map(func, tasks)
         else:

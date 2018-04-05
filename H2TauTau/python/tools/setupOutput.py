@@ -15,7 +15,7 @@ from CMGTools.H2TauTau.eventContent.diMu_cff import diMuDebug as diMuDebugEventC
 
 def addOutput(process, type12, addDebugEventContent=False, addPreSel=True, oneFile=False):
 
-    allowedTypes = ['tauMu', 'tauEle', 'muEle', 'diTau', 'diMu']
+    allowedTypes = ['tauMu', 'tauEle', 'muEle', 'diTau', 'diMu', 'AZh']
     if type12 not in allowedTypes:
         raise ValueError(type12 + ' not in allowed types: ', allowedTypes)
 
@@ -57,16 +57,16 @@ def addOutput(process, type12, addDebugEventContent=False, addPreSel=True, oneFi
                                 muEleDebugEventContent +
                                 diTauDebugEventContent)
 
-    prePathVString = ['{type12}PreSelPath'.format(type12=type12)]
-    if oneFile:
-        prePathVString = ['{type12}PreSelPath'.format(type12=ctype) for ctype in allowedTypes]
+    #prePathVString = ['{type12}PreSelPath'.format(type12=type12)]
+    #if oneFile:
+    #    prePathVString = ['{type12}PreSelPath'.format(type12=ctype) for ctype in allowedTypes]
     out = cms.OutputModule(
         "PoolOutputModule",
         fileName=cms.untracked.string(basicName),
         # save only events passing the full path
-        SelectEvents=cms.untracked.PSet(
-            SelectEvents=cms.vstring(prePathVString)
-        ),
+        #SelectEvents=cms.untracked.PSet(
+        #    SelectEvents=cms.vstring(prePathVString)
+        #),
         # save PAT Layer 1 output; you need a '*' to
         # unpack the list of commands 'patEventContent'
         outputCommands=cms.untracked.vstring('drop *')
@@ -78,17 +78,19 @@ def addOutput(process, type12, addDebugEventContent=False, addPreSel=True, oneFi
 
     # full baseline selection    ------
 
-    pathVString = ['{type12}Path'.format(type12=type12)]
-    if oneFile:
-        pathVString = ['{type12}Path'.format(type12=ctype) for ctype in allowedTypes]
+    #pathVString = ['{type12}Path'.format(type12=type12)]
+    #if oneFile:
+    #    pathVString = ['{type12}Path'.format(type12=ctype) for ctype in allowedTypes]
     outBaseline = out.clone()
-    outBaseline.SelectEvents = cms.untracked.PSet(
-        SelectEvents=cms.vstring(pathVString)
-    )
+    #outBaseline.SelectEvents = cms.untracked.PSet(
+    #    SelectEvents=cms.vstring(pathVString)
+    #)
     baselineName = '{type12}_fullsel_tree_{ext}.root'.format(
         type12=mytype,
         ext=outFileNameExt
     )
+    #outBaseline = ""
+    #baselineName = ""
     outBaseline.fileName = baselineName
 
     setattr(process, os.path.splitext(baselineName)[0], outBaseline)
