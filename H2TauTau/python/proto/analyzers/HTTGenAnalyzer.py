@@ -6,6 +6,11 @@ from PhysicsTools.Heppy.analyzers.core.AutoHandle import AutoHandle
 from PhysicsTools.Heppy.analyzers.core.Analyzer import Analyzer
 from PhysicsTools.HeppyCore.utils.deltar import bestMatch
 
+from PhysicsTools.Heppy.physicsobjects.PhysicsObjects import Muon
+from PhysicsTools.Heppy.physicsobjects.Electron import Electron
+from PhysicsTools.Heppy.physicsobjects.Tau import Tau
+
+
 from PhysicsTools.Heppy.physicsobjects.PhysicsObject import PhysicsObject
 from PhysicsTools.Heppy.physicsobjects.GenParticle import GenParticle
 from PhysicsTools.Heppy.physicsutils.TauDecayModes import tauDecayModes
@@ -48,6 +53,8 @@ class HTTGenAnalyzer(Analyzer):
         event.genmet_phi = -99.
         event.weight_gen = 1.
 
+        print "HTT GEENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+
         if self.cfg_comp.isData:
             return True
 
@@ -59,7 +66,7 @@ class HTTGenAnalyzer(Analyzer):
         event.genJets = self.mchandles['genJets'].product()
         event.jets = self.handles['jets'].product()
         event.genParticles = self.mchandles['genParticles'].product()
-
+        
         event.genleps = [p for p in event.genParticles if abs(p.pdgId()) in [11, 13] and p.statusFlags().isPrompt()]
         event.gentauleps = [p for p in event.genParticles if abs(p.pdgId()) in [11, 13] and p.statusFlags().isDirectPromptTauDecayProduct()]
         event.gentaus = [p for p in event.genParticles if abs(p.pdgId()) == 15 and p.statusFlags().isPrompt() and not any(abs(self.getFinalTau(p).daughter(i_d).pdgId()) in [11, 13] for i_d in xrange(self.getFinalTau(p).numberOfDaughters()))]
@@ -96,9 +103,138 @@ class HTTGenAnalyzer(Analyzer):
         if hasattr(self.cfg_ana, 'genPtCut'):
             ptcut = self.cfg_ana.genPtCut
 
-        event.ptSelGentauleps = [lep for lep in event.gentauleps if lep.pt() > ptcut]
-        event.ptSelGenleps = [lep for lep in event.genleps if lep.pt() > ptcut]
-        event.ptSelGenSummary = []
+        self.ptSelGentauleps = [lep for lep in event.gentauleps if lep.pt() > ptcut]
+        self.ptSelGenleps = [lep for lep in event.genleps if lep.pt() > ptcut]
+        self.ptSelGenSummary = []
+        # self.ptSelGenSummary = [p for p in event.generatorSummary if p.pt() > ptcut and abs(p.pdgId()) not in [6, 11, 13, 15, 23, 24, 25, 35, 36, 37]]
+        # self.ptSelGentaus    = [ lep for lep in event.gentaus    if lep.pt()
+        # > ptcut ] # not needed
+
+        #self.l1 = event.diLepton.leg1()
+        #self.l2 = event.diLepton.leg2()
+
+        #self.genMatch(event, self.l1, self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+        #self.genMatch(event, self.l2, self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+
+        #self.attachGenStatusFlag(self.l1)
+        #self.attachGenStatusFlag(self.l2)
+ 
+        #fetch muons etc
+    #    muonsOrig = map(Muon, self.handles['muons'].product())
+    #    electronsOrig = map(Electron, self.handles['electrons'].product())
+    #    tausOrig = map(Tau, self.handles['taus'].product())
+    #    event.met = self.handles['met'].product()[0]	
+       
+        #baseline cut
+    #    event.muons = [ muon for muon in muonsOrig if muon.pt()>10 and abs(muon.eta())<2.4 and muon.muonID('POG_ID_Medium_ICHEP')]
+    #    event.electrons = [ electron for electron in electronsOrig if electron.pt()>10 and abs(electron.eta())<2.5]
+    #    event.taus = [ tau for tau in tausOrig if tau.pt()>10 and abs(tau.eta())<2.3]
+        
+        #match muons
+
+    #    for i in xrange( len(event.muons) ):
+        #for mu in event.muons: 
+        #    self.muo = mu
+    #        self.genMatch(event, event.muons[i], self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+    #        self.attachGenStatusFlag(event.muons[i])
+        #    print "TASSA OIS"
+        #    print event.muons[i].gen_match      
+
+    #    for el in event.electrons:
+    #        self.ele = el
+    #        self.genMatch(event, self.ele, self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+    #        self.attachGenStatusFlag(self.ele)
+
+    #    for ta in event.taus:
+    #        self.tal = ta
+    #        self.genMatch(event, self.tal, self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+    #        self.attachGenStatusFlag(self.tal)
+            
+           # if leg.gen_match == 2:
+           #     print "PROMPIIIIII"
+        #for leg
+
+        if hasattr(event, 'Hboson'):
+          #  print 'H OK, MATCH JALAT'
+            self.genMatch(event, event.Hboson[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.genMatch(event, event.Hboson[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.Hboson[0].leg1())
+            self.attachGenStatusFlag(event.Hboson[0].leg2())
+
+
+        if hasattr(event, 'Hboson_mt'):
+           # for i in xrange( len(event.Hboson_mt) ):
+           #     print 'H mt OK, MATCH JALAT'
+                self.genMatch(event, event.Hboson_mt[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.genMatch(event, event.Hboson_mt[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.attachGenStatusFlag(event.Hboson_mt[0].leg1())
+                self.attachGenStatusFlag(event.Hboson_mt[0].leg2())
+        if hasattr(event, 'Hboson_et'):
+          #  for i in xrange( len(event.Hboson_et) ):
+          #      print 'H et OK, MATCH JALAT'
+                self.genMatch(event, event.Hboson_et[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.genMatch(event, event.Hboson_et[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.attachGenStatusFlag(event.Hboson_et[0].leg1())
+                self.attachGenStatusFlag(event.Hboson_et[0].leg2())
+        if hasattr(event, 'Hboson_tt'):
+          #  for i in xrange( len(event.Hboson_tt) ):
+         #       print 'H tt OK, MATCH JALAT'
+                self.genMatch(event, event.Hboson_tt[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.genMatch(event, event.Hboson_tt[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.attachGenStatusFlag(event.Hboson_tt[0].leg1())
+                self.attachGenStatusFlag(event.Hboson_tt[0].leg2())
+        if hasattr(event, 'Hboson_em'):
+          #  for i in xrange( len(event.Hboson_em) ):
+        #        print 'H em OK, MATCH JALAT'
+                self.genMatch(event, event.Hboson_em[0].leg1(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.genMatch(event, event.Hboson_em[0].leg2(), self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.attachGenStatusFlag(event.Hboson_em[0].leg1())
+                self.attachGenStatusFlag(event.Hboson_em[0].leg2())  
+
+        if hasattr(event, 'Zboson'):
+        #    print 'Z OK, MATCH JALAT'
+            self.genMatch(event, event.Zboson[0].leg1(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.genMatch(event, event.Zboson[0].leg2(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.Zboson[0].leg1())
+       	    self.attachGenStatusFlag(event.Zboson[0].leg2())
+
+        if hasattr(event, 'Zboson_mm'):
+         #   for i in xrange( len(event.Zboson_mm) ):
+        #        print 'Z mm OK, MATCH JALAT'
+                self.genMatch(event, event.Zboson_mm[0].leg1(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.genMatch(event, event.Zboson_mm[0].leg2(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.attachGenStatusFlag(event.Zboson_mm[0].leg1())
+                self.attachGenStatusFlag(event.Zboson_mm[0].leg2())
+        elif hasattr(event, 'Zboson_ee'):
+        #    for i in xrange( len(event.Zboson_ee) ):
+        #        print 'Z ee OK, MATCH JALAT'
+                self.genMatch(event, event.Zboson_ee[0].leg1(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.genMatch(event, event.Zboson_ee[0].leg2(), self.ptSelGenleps, self.ptSelGenleps, self.ptSelGenSummary)
+                self.attachGenStatusFlag(event.Zboson_ee[0].leg1())
+                self.attachGenStatusFlag(event.Zboson_ee[0].leg2())
+        
+        if hasattr(event, 'tau_FR'):
+            self.genMatch(event, event.tau_FR[0], self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.tau_FR[0])
+
+        elif hasattr(event, 'muon_FR'):
+            self.genMatch(event, event.muon_FR[0], self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.muon_FR[0])
+
+        elif hasattr(event, 'electron_FR'):
+            self.genMatch(event, event.electron_FR[0], self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+            self.attachGenStatusFlag(event.electron_FR[0])
+
+
+        if hasattr(event, 'selectedTaus'):
+            for tau in event.selectedTaus:
+                self.genMatch(event, tau, self.ptSelGentauleps, self.ptSelGenleps, self.ptSelGenSummary)
+
+        if self.cfg_comp.name.find('TT') != -1 or self.cfg_comp.name.find('TTH') == -1:
+            self.getTopPtWeight(event)
+
+        if self.cfg_comp.name.find('DY') != -1:
+            self.getDYMassPtWeight(event)
 
         return True
 

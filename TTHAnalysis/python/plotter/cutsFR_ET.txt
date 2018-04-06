@@ -1,0 +1,5 @@
+denom: pt_3>10 && pt_2>20 && iso_3<2.0 && H_et_l1_eid_spring16>0
+num_leg3: H_et_l1_eid_spring16_80>0 && iso_3<0.15 
+##num_leg4: H_et_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && H_et_l2_againstMuon3>=2 && H_et_l2_againstElectronMVA6>=4
+mass: H_SS != 0 && m_vis>-1 && H_vis>-1
+#LT : Hboson_tt_LT > 80

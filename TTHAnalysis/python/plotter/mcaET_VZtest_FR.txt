@@ -1,0 +1,26 @@
+DY_FR   : HiggsDY50_1JET/H2TauTauTreeProducerAZhEEET:  1012.5*1.1638 : gen_match_3 == 6 || gen_match_4 == 6  ;  FillColor=ROOT.kBlue,  FakeRate='FR_catET_TEST.txt', Label='FR pred'
+DY_FR   : HiggsDY50_2JET/H2TauTauTreeProducerAZhEEET:  332.8*1.1638 : gen_match_3 == 6 || gen_match_4 == 6 ;  FillColor=ROOT.kBlue,  FakeRate='FR_catET_TEST.txt', Label='FR pred'
+DY_FR   : HiggsDY50_3JET/H2TauTauTreeProducerAZhEEET:  101.8*1.1638 : gen_match_3 == 6 || gen_match_4 == 6  ;  FillColor=ROOT.kBlue,  FakeRate='FR_catET_TEST.txt', Label='FR pred'
+DY_FR   : HiggsDY50_4JET/H2TauTauTreeProducerAZhEEET:  54.8*1.1638 : gen_match_3 == 6 || gen_match_4 == 6  ;  FillColor=ROOT.kBlue,  FakeRate='FR_catET_TEST.txt', Label='FR pred'
+
+DY_FR   : HiggsDY50_1JET/H2TauTauTreeProducerAZhMMET:  1012.5*1.1638 : gen_match_3 == 6 || gen_match_4 == 6  ;  FillColor=ROOT.kBlue,  FakeRate='FR_catET_TEST.txt', Label='FR pred'
+DY_FR   : HiggsDY50_2JET/H2TauTauTreeProducerAZhMMET:  332.8*1.1638 : gen_match_3 == 6 || gen_match_4 == 6  ;  FillColor=ROOT.kBlue,  FakeRate='FR_catET_TEST.txt', Label='FR pred'
+DY_FR   : HiggsDY50_3JET/H2TauTauTreeProducerAZhMMET:  101.8*1.1638 : gen_match_3 == 6 || gen_match_4 == 6  ;  FillColor=ROOT.kBlue,  FakeRate='FR_catET_TEST.txt', Label='FR pred'
+DY_FR   : HiggsDY50_4JET/H2TauTauTreeProducerAZhMMET:  54.8*1.1638 : gen_match_3 == 6 || gen_match_4 == 6  ;  FillColor=ROOT.kBlue,  FakeRate='FR_catET_TEST.txt', Label='FR pred'
+
+DY_FR: HiggsTT/H2TauTauTreeProducerAZhEEET : 831.76 : gen_match_3 == 6 || gen_match_4 == 6 ; FillColor=ROOT.kBlue,  FakeRate='FR_catET_TEST.txt', Label='FR pred'
+DY_FR: HiggsTT/H2TauTauTreeProducerAZhMMET : 831.76 : gen_match_3 == 6 || gen_match_4 == 6 ; FillColor=ROOT.kBlue,  FakeRate='FR_catET_TEST.txt', Label='FR pred'
+
+WZ1: HiggsWZ_min01/H2TauTauTreeProducerAZhEEET : 58.59*0.65 : gen_match_3 !=6 || gen_match_4 !=6  ; FillColor=ROOT.kViolet+5, Label='WZ (1)'
+WZ1: HiggsWZ_min01/H2TauTauTreeProducerAZhMMET : 58.59*0.65 : gen_match_3 !=6 || gen_match_4 !=6  ; FillColor=ROOT.kViolet+5, Label='WZ (1)'
+
+ZZ1 : HiggsZZTo4lv1/H2TauTauTreeProducerAZhEEET+HiggsZZTo4lv2/H2TauTauTreeProducerAZhEEET:  1.256*1.1 : (gen_match_3 != 6 && gen_match_4 == 6) || (gen_match_3 == 6 && gen_match_4 != 6) ; FillColor=ROOT.kYellow+1, Label='ZZ (1)'
+ZZ1 : HiggsZZTo4lv1/H2TauTauTreeProducerAZhMMET+HiggsZZTo4lv2/H2TauTauTreeProducerAZhMMET:  1.256*1.1 : (gen_match_3 != 6 && gen_match_4 == 6) || (gen_match_3 == 6 && gen_match_4 != 6)  ; FillColor=ROOT.kYellow+1, Label='ZZ (1)'
+
+ZZ2 : HiggsZZTo4lv1/H2TauTauTreeProducerAZhEEET+HiggsZZTo4lv2/H2TauTauTreeProducerAZhEEET:  1.256*1.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kGreen, Label='ZZ (2)'
+ZZ2 : HiggsZZTo4lv1/H2TauTauTreeProducerAZhMMET+HiggsZZTo4lv2/H2TauTauTreeProducerAZhMMET:  1.256*1.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kGreen, Label='ZZ (2)'
+
+
+AZh+: HiggsAZH300/H2TauTauTreeProducerAZhEEET : 0.02  ; FillColor=ROOT.kRed, Label='AZh 300'
+AZh+: HiggsAZH300/H2TauTauTreeProducerAZhMMET : 0.02  ; FillColor=ROOT.kRed, Label='AZh 300'
+

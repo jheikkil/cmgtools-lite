@@ -1,0 +1,7 @@
+abs(eta): abs(muon_FR_eta): 10,0,2.5; LegendCutoff=1e-7
+pt: muon_FR_pt : 7,10,80; LegendCutoff=1e-7
+cone_pt: conePt(muon_FR_pt, muon_FR_reliso05, 0.15): 7,10,80; LegendCutoff=1e-7
+
+#iso_1mu: max(iso_1, muon_FR_reliso05): 10,0,1.0; LegendCutoff=1e-7
+#iso_2mu: max(iso_2, muon_FR_reliso05): 10,0,1.0; LegendCutoff=1e-7
+

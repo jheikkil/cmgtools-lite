@@ -1,0 +1,9 @@
+# -- DY, usually to be used in jet bins
+
+WZold: HiggsWZv1+HiggsWZv2: 47.13; FillColor=ROOT.kRed
+#WZ: HiggsWZv2 : 4.42965; FillColor=ROOT.kViolet+5
+
+WZJ: WZJ: 4.708; FillColor=ROOT.kCyan
+WZ_min01: WZ_min01: 58.59*0.65; FillColor=ROOT.kViolet+5
+WZ: WZ: 4.42965; FillColor=ROOT.kAzure-9
+

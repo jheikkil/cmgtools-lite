@@ -5,19 +5,22 @@ import os.path
 
 MODULES = []
 
-from CMGTools.TTHAnalysis.tools.btagSFs_POG import bTagSFEvent3WPErrs as btagSFEvent
+#from CMGTools.TTHAnalysis.tools.btagSFs_POG import bTagSFEvent3WPErrs as btagSFEvent
 #MODULES += [ ('btag', btagSFEvent) ]
 
-from CMGTools.TTHAnalysis.tools.lepMVA_SF import AllLepSFs
-MODULES += [ ('lep',AllLepSFs())  ]
+#from CMGTools.TTHAnalysis.tools.lepMVA_SF import AllLepSFs
+#MODULES += [ ('lep',AllLepSFs())  ]
 
-from CMGTools.TTHAnalysis.tools.lepTrigger_SF import LepTriggerSF_Event
+from CMGTools.TTHAnalysis.tools.scaleFactors import scaleFactors
+MODULES += [ ('<scaleFactors', scaleFactors("EETT"))]
+
+#from CMGTools.TTHAnalysis.tools.lepTrigger_SF import LepTriggerSF_Event
 #MODULES += [ ('trig2l', LepTriggerSF_Event())  ]
 
-from CMGTools.TTHAnalysis.tools.metLD_reshape import MetLDReshaper
+#from CMGTools.TTHAnalysis.tools.metLD_reshape import MetLDReshaper
 #MODULES += [ ('metLD', MetLDReshaper()) ]
 
-from CMGTools.TTHAnalysis.tools.btagRWTs_ND import BTag_RWT_EventErrs
+#from CMGTools.TTHAnalysis.tools.btagRWTs_ND import BTag_RWT_EventErrs
 #MODULES += [ ('btagRwt', BTag_RWT_EventErrs()) ]
 
 class ScaleFactorProducer(Module):
@@ -66,6 +69,9 @@ parser.add_option("-V", "--vector",  dest="vectorTree",action="store_true", defa
 
 if len(args) != 2 or not os.path.isdir(args[0]) or not os.path.isdir(args[1]): 
     print "Usage: program <TREE_DIR> <OUT>"
+    #print len(args)
+    #print os.path.isdir(args[0])
+    #print os.path.isdir(args[1])
     exit()
 if len(options.chunks) != 0 and len(options.datasets) != 1:
     print "must specify a single dataset with -d if using -c to select chunks"
@@ -73,7 +79,7 @@ if len(options.chunks) != 0 and len(options.datasets) != 1:
 
 jobs = []
 for D in glob(args[0]+"/*"):
-    fname = D+"/"+options.tree+"/"+options.tree+"_tree.root"
+    fname = D+"/"+options.tree+"/tree.root"
     if os.path.exists(fname):
         short = os.path.basename(D)
         if options.datasets != []:
@@ -82,7 +88,7 @@ for D in glob(args[0]+"/*"):
         if data: continue
         f = ROOT.TFile.Open(fname);
         #t = f.Get("ttHLepTreeProducerTTH" if options.vectorTree else "ttHLepTreeProducerBase")
-        t = f.Get(options.tree)
+        t = f.Get("tree")
         entries = t.GetEntries()
         f.Close()
         chunk = options.chunkSize
@@ -120,7 +126,7 @@ def _runIt(myargs):
     (name,fin,fout,data,range,chunk) = myargs
     timer = ROOT.TStopwatch()
     fb = ROOT.TFile(fin)
-    tb = fb.Get(options.tree)
+    tb = fb.Get("tree")
     if options.vectorTree:
         tb.vectorTree = True
     else:

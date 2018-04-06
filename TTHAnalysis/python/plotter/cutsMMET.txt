@@ -1,0 +1,3 @@
+mass: m_vis && H_vis>0 && Hboson_et_charge != 0
+trigger: Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10
+

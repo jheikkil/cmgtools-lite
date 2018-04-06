@@ -15,6 +15,11 @@ from CMGTools.H2TauTau.proto.analyzers.FileCleaner import FileCleaner
 # common configuration and sequence
 from CMGTools.H2TauTau.htt_ntuple_base_cff import commonSequence, httGenAna, puFileData, puFileMC, eventSelector, recoilCorr
 
+import ROOT
+f = ROOT.TFile("../../data/htt_scalefactors_v5.root")
+w = f.Get("w")
+f.Close()
+
 # e-tau specific configuration settings
 
 # 'Nom', 'Up', 'Down', or None

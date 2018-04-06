@@ -1,0 +1,1 @@
+tauFR_numMM: tau_FR_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && tau_FR_againstMuon3>=2 : 2,-0.5,1.5

@@ -4,6 +4,112 @@ from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 
 creator = ComponentCreator()
 
+
+HiggsAZH340 = creator.makeMCComponent(
+     "HiggsAZH340", "/AToZhToLLTauTau_M-340_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM", "CMS", ".*root", 1.0) 
+
+
+HiggsAZH300 = creator.makeMCComponent(
+     "HiggsAZH300", "/AToZhToLLTauTau_M-300_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM", "CMS", ".*root", 1.0)
+
+
+HiggsAZH260 =  creator.makeMCComponent(
+     "HiggsAZH260", "/AToZhToLLTauTau_M-260_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 1.0)
+
+HiggsAZH280 =  creator.makeMCComponent(
+     "HiggsAZH280", "/AToZhToLLTauTau_M-280_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM", "CMS", ".*root", 1.0)
+
+HiggsAZH320 =  creator.makeMCComponent(
+     "HiggsAZH320", "/AToZhToLLTauTau_M-320_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM", "CMS", ".*root", 1.0)
+
+HiggsAZH350 =  creator.makeMCComponent(
+     "HiggsAZH350", "/AToZhToLLTauTau_M-350_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM", "CMS", ".*root", 1.0)
+
+HiggsAZH400 =  creator.makeMCComponent(
+     "HiggsAZH400", "/AToZhToLLTauTau_M-400_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM", "CMS", ".*root", 1.0)
+
+
+
+HiggsZZTo4lv1 = creator.makeMCComponent(
+     "HiggsZZTo4lv1", "/ZZTo4L_13TeV_powheg_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 1.256*1.1)
+
+HiggsZZTo4lv2 = creator.makeMCComponent(
+     "HiggsZZTo4lv2", "/ZZTo4L_13TeV_powheg_pythia8_ext1/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 1.256*1.1)
+
+HiggsDY50v1 = creator.makeMCComponent(
+     "HiggsDY50v1", "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v2/MINIAODSIM ", "CMS", ".*root", 4954*1.1638)
+
+HiggsDY50v2 = creator.makeMCComponent(
+     "HiggsDY50v2", "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext2-v1/MINIAODSIM", "CMS", ".*root", 4954*1.1638)
+
+
+HiggsDY50_1JET = creator.makeMCComponent(
+     "HiggsDY50_1JET", "/DY1JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 1012.5*1.1638) 	 
+
+HiggsDY50_2JET = creator.makeMCComponent(
+     "HiggsDY50_2JET", "/DY2JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 332.8*1.1638) 	 
+
+HiggsDY50_3JET = creator.makeMCComponent(
+     "HiggsDY50_3JET", "/DY3JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 101.8*1.1638) 	 
+
+HiggsDY50_4JET = creator.makeMCComponent(
+     "HiggsDY50_4JET", "/DY4JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 54.8*1.1638) 
+
+
+HiggsGGToZZ2e2m  = creator.makeMCComponent(
+     "HiggsGGToZZ2e2m", "/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00319*1.7)
+HiggsGGToZZ2e2t  = creator.makeMCComponent(
+     "HiggsGGToZZ2e2t", "/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00319*1.7)
+HiggsGGToZZ2m2t  = creator.makeMCComponent(
+     "HiggsGGToZZ2m2t", "/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00319*1.7)
+HiggsGGToZZ4m  = creator.makeMCComponent(
+     "HiggsGGToZZ4m", "/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00159*1.7)
+HiggsGGToZZ4e  = creator.makeMCComponent(
+     "HiggsGGToZZ4e", "/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM ", "CMS", ".*root", 0.00159*1.7)
+HiggsGGToZZ4t  = creator.makeMCComponent(
+     "HiggsGGToZZ4t", "/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.00159*1.7)
+
+HiggsWZv1 = creator.makeMCComponent(
+     "HiggsWZv1", "/WZ_TuneCUETP8M1_13TeV-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 47.13)
+HiggsWZv2 = creator.makeMCComponent(
+     "HiggsWZv2", "/WZ_TuneCUETP8M1_13TeV-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM", "CMS", ".*root", 47.13)
+
+WZJ = creator.makeMCComponent(
+     "WZJ", "/WZJToLLLNu_TuneCUETP8M1_13TeV-amcnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 4.708)
+HiggsWZ_min01 = creator.makeMCComponent(
+     "HiggsWZ_min01", "/WZTo3LNu_mllmin01_13TeV-powheg-pythia8_ext1/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM", "CMS", ".*root", 58.59*0.65)
+WZ = creator.makeMCComponent(
+     "WZ", "/WZTo3LNu_TuneCUETP8M1_13TeV-powheg-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 4.42965)
+
+HiggsTT = creator.makeMCComponent(
+     "HiggsTT", "/TT_TuneCUETP8M2T4_13TeV-powheg-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 831.76)
+
+HiggsSM = creator.makeMCComponent(
+     "HiggsSM", "/GluGluHToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.01212)
+
+
+HiggsttZ = creator.makeMCComponent(
+     "HiggsttZ", "/ttZJets_13TeV_madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.616)
+
+
+HiggsWWW = creator.makeMCComponent(
+     "HiggsWWW", "/WWW_4F_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.2086)
+
+HiggsWWZ = creator.makeMCComponent(
+     "HiggsWWZ", "/WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM" , "CMS", ".*root", 0.1651)
+
+HiggsWZZ = creator.makeMCComponent(
+     "HiggsWZZ", "/WZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.05565)
+
+HiggsZZZ = creator.makeMCComponent(
+     "HiggsZZZ", "/ZZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM", "CMS", ".*root", 0.01398)
+
+#/WWW_4F_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM 	  	  	0.2086 	 
+#/WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM 	  	  	0.1651 	 
+#/WZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM 	  	  	0.05565 	 
+#/ZZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM 	  	  	0.01398
+
+
 HiggsSUSYGG80 = creator.makeMCComponent(
     "HiggsSUSYGG80", "/SUSYGluGluToHToTauTau_M-80_TuneCUETP8M1_13TeV-pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_reHLT_80X_mcRun2_asymptotic_v14-v1/MINIAODSIM", "CMS", ".*root", 1.0)
 HiggsSUSYGG90 = creator.makeMCComponent(
@@ -131,6 +237,23 @@ HiggsSUSYBB2900 = creator.makeMCComponent(
 HiggsSUSYBB3200 = creator.makeMCComponent(
     "HiggsSUSYBB3200", "/SUSYGluGluToBBHToTauTau_M-3200_TuneCUETP8M1_13TeV-pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_reHLT_80X_mcRun2_asymptotic_v14-v1/MINIAODSIM", "CMS", ".*root", 1.0)
 
+mc_higgs_azh_bkg = [
+ #   HiggsZZTo4l,
+ #   HiggsDY50,
+    HiggsGGToZZ2e2m,
+    HiggsGGToZZ2e2t,
+    HiggsGGToZZ2m2t,
+    HiggsGGToZZ4m,
+    HiggsGGToZZ4e,
+    HiggsGGToZZ4t,
+ #   HiggsWZ,
+ #   HiggsTT,
+]
+
+mc_higgs_azh = [
+    HiggsAZH340,
+    HiggsAZH300,
+]
 
 mc_higgs_susy_gg = [
     # HiggsSUSYGG80,
@@ -202,3 +325,5 @@ mc_higgs_susy_bb = [
 
 mc_higgs_susy = copy.copy(mc_higgs_susy_gg)
 mc_higgs_susy.extend(mc_higgs_susy_bb)
+mc_higgs_susy.extend(mc_higgs_azh)
+#mc_higgs_susy.extend(mc_higgs_azh_bkg)

@@ -8,20 +8,32 @@ from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import SingleMuon_Run2016
 from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import SingleMuon_Run2016C_PromptReco_v2, SingleElectron_Run2016C_PromptReco_v2, MuonEG_Run2016C_PromptReco_v2, Tau_Run2016C_PromptReco_v2
 from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import SingleMuon_Run2016D_PromptReco_v2, SingleElectron_Run2016D_PromptReco_v2, MuonEG_Run2016D_PromptReco_v2, Tau_Run2016D_PromptReco_v2
 from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import SingleMuon_Run2016G_PromptReco_v1, SingleElectron_Run2016G_PromptReco_v1, MuonEG_Run2016G_PromptReco_v1, Tau_Run2016G_PromptReco_v1
-from CMGTools.RootTools.samples.samples_13TeV_RunIISpring16MiniAODv2 import ZZTo4L, WZTo1L3Nu, WWTo1L1Nu2Q, WZTo1L1Nu2Q, ZZTo2L2Q, WZTo2L2Q, VVTo2L2Nu, WZTo3LNu_amcatnlo
+from CMGTools.RootTools.samples.samples_13TeV_DATA2016_AZH import DoubleMuon_Run2016B_03Feb2017_v1, DoubleMuon_Run2016B_03Feb2017_v2, DoubleMuon_Run2016C_03Feb2017_v1, DoubleMuon_Run2016D_03Feb2017_v1, DoubleMuon_Run2016E_03Feb2017_v1, DoubleMuon_Run2016F_03Feb2017_v1, DoubleMuon_Run2016G_03Feb2017_v1, DoubleMuon_Run2016H_03Feb2017_v1, DoubleMuon_Run2016H_03Feb2017_v2
+from CMGTools.RootTools.samples.samples_13TeV_DATA2016_AZH import DoubleEG_Run2016B_03Feb2017_v1, DoubleEG_Run2016B_03Feb2017_v2, DoubleEG_Run2016C_03Feb2017_v1, DoubleEG_Run2016D_03Feb2017_v1, DoubleEG_Run2016E_03Feb2017_v1, DoubleEG_Run2016F_03Feb2017_v1, DoubleEG_Run2016G_03Feb2017_v1, DoubleEG_Run2016H_03Feb2017_v1, DoubleEG_Run2016H_03Feb2017_v2
+from CMGTools.RootTools.samples.samples_13TeV_DATA2016_AZH import *
+
+#dataSamples_DoubleMu_AZH, dataSamples_DoubleEl_AZH
+
+from CMGTools.RootTools.samples.samples_13TeV_RunIISpring16MiniAODv2 import ZZTo4L, WZTo1L3Nu, WWTo1L1Nu2Q, WZTo1L1Nu2Q, ZZTo2L2Q, WZTo2L2Q, VVTo2L2Nu, WZTo3LNu, WZTo3LNu_amcatnlo
+
 
 # from CMGTools.RootTools.samples.samples_13TeV_RunIISpring16MiniAODv2 import DYJetsToLL_M10to50_ext1
 # DY1JetsToLL_M50_LO, DY2JetsToLL_M50_LO, DY3JetsToLL_M50_LO, DY4JetsToLL_M50_LO,
 
-from CMGTools.H2TauTau.proto.samples.spring16.higgs import HiggsGGH125, HiggsVBF125, HiggsTTH125
-from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import mc_higgs_susy_gg, mc_higgs_susy_bb
+from CMGTools.H2TauTau.proto.samples.spring16.higgs import HiggsGGH125, HiggsVBF125, HiggsTTH125, HiggsZH125
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import mc_higgs_susy_gg, mc_higgs_susy_bb, mc_higgs_azh #, mc_higgs_azh_bkg
 
 from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsSUSYGG160 as ggh160
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsAZH300 as azh300
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsZZTo4lv1, HiggsZZTo4lv2, HiggsGGToZZ2e2m, HiggsGGToZZ2e2t, HiggsGGToZZ2m2t, HiggsGGToZZ4m, HiggsGGToZZ4e, HiggsGGToZZ4t, HiggsWZv1, HiggsWZv2, HiggsTT, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET
+from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsWZ_min01, WZJ, WZ, HiggsAZH260, HiggsAZH280, HiggsAZH320, HiggsAZH340, HiggsAZH350, HiggsAZH400, HiggsSM, HiggsttZ, HiggsWWW, HiggsWWZ, HiggsWZZ, HiggsZZZ
+
 
 # 21 July
 
 json = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-276811_13TeV_PromptReco_Collisions16_JSON.txt'
 lumi = 12918.1407
+
 
 # 15 November
 json = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-284044_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt'
@@ -30,6 +42,11 @@ json = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/C
 
 # lumi_2016G = 1659.026988066 # 2016 G
 lumi_2016G = 1080.463515944 # 2016 G HLT_IsoMu22_v3
+
+#AZH
+
+json_AZH = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/ReReco/Final/Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.txt'
+lumi_AZH = 35870.
 
 json_tt = json
 lumi_tt = lumi
@@ -126,11 +143,64 @@ data_muon_electron = [MuonEG_Run2016B_PromptReco_v2, MuonEG_Run2016C_PromptReco_
 data_tau = [Tau_Run2016B_PromptReco_v2, Tau_Run2016C_PromptReco_v2, Tau_Run2016D_PromptReco_v2] #, ]
 
 for sample in data_single_muon + data_single_electron + data_muon_electron + data_tau:
-    sample.json = json
-    sample.lumi = lumi if sample != SingleMuon_Run2016G_PromptReco_v1 else lumi_2016G
+    sample.json = json_AZH
+    sample.lumi = lumi_AZH if sample != SingleMuon_Run2016G_PromptReco_v1 else lumi_2016G
+    #print "JES"
+
+#Data AZH
+
+data_AZH = [DoubleMuon_Run2016B_03Feb2017_v1, DoubleMuon_Run2016B_03Feb2017_v2, DoubleMuon_Run2016C_03Feb2017_v1, DoubleMuon_Run2016D_03Feb2017_v1, DoubleMuon_Run2016E_03Feb2017_v1, DoubleMuon_Run2016F_03Feb2017_v1, DoubleMuon_Run2016G_03Feb2017_v1, DoubleMuon_Run2016H_03Feb2017_v1, DoubleMuon_Run2016H_03Feb2017_v2, DoubleEG_Run2016B_03Feb2017_v1, DoubleEG_Run2016B_03Feb2017_v2, DoubleEG_Run2016C_03Feb2017_v1, DoubleEG_Run2016D_03Feb2017_v1, DoubleEG_Run2016E_03Feb2017_v1, DoubleEG_Run2016F_03Feb2017_v1, DoubleEG_Run2016G_03Feb2017_v1, DoubleEG_Run2016H_03Feb2017_v1, DoubleEG_Run2016H_03Feb2017_v2]
+data_AZH_single = [SingleMuon_Run2016B_03Feb2017_v1,SingleMuon_Run2016B_03Feb2017_v2,SingleMuon_Run2016C_03Feb2017_v1,SingleMuon_Run2016D_03Feb2017_v1,SingleMuon_Run2016E_03Feb2017_v1,SingleMuon_Run2016F_03Feb2017_v1,SingleMuon_Run2016G_03Feb2017_v1,SingleMuon_Run2016H_03Feb2017_v1,SingleMuon_Run2016H_03Feb2017_v2,SingleEG_Run2016B_03Feb2017_v1,SingleEG_Run2016B_03Feb2017_v2,SingleEG_Run2016C_03Feb2017_v1,SingleEG_Run2016D_03Feb2017_v1,SingleEG_Run2016E_03Feb2017_v1,SingleEG_Run2016F_03Feb2017_v1,SingleEG_Run2016G_03Feb2017_v1,SingleEG_Run2016H_03Feb2017_v1,SingleEG_Run2016H_03Feb2017_v2]
+
+for sample in data_AZH + data_AZH_single:
+    sample.json = json_AZH
+    sample.lumi = lumi_AZH   
+    
+#for sample in data_AZH_single:
+#    print sample.json
+#    print sample.lumi
 
 # Signals
 sm_signals = [HiggsGGH125, HiggsVBF125, HiggsTTH125]
 mssm_signals = mc_higgs_susy_bb + mc_higgs_susy_gg
 
-sync_list = [ggh160, HiggsVBF125]
+#azh_bkg = mc_higgs_azh_bkg ##+ DYJetsToLL_M50
+
+sync_list = []
+
+
+#for sm sync
+#sync_list = [azh340] 
+#sync_list = [azh300]
+#for mssm sync
+#sync_list = [ggh160]
+#for background syncs
+#sync_list=[DYJetsToLL_M50, WZTo3LNu_amcatnlo]
+DY_sync_list = [HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
+WZ_sync_list = [HiggsWZv1, HiggsWZv2, HiggsWZ_min01, WZJ, WZ]
+#sync_list=[HiggsZZTo4l, HiggsGGToZZ2e2m, HiggsGGToZZ2e2t, HiggsGGToZZ2m2t, HiggsGGToZZ4m, HiggsGGToZZ4e, HiggsGGToZZ4t, HiggsWZv1, HiggsWZv2, HiggsTT, HiggsDY50v1, HiggsDY50v2, HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
+#sync_list = [azh_bkg]
+
+
+#control list
+DY_control = [HiggsDY50_1JET, HiggsDY50_2JET, HiggsDY50_3JET, HiggsDY50_4JET]
+WZ_control = [HiggsWZ_min01]
+TT_control = [HiggsTT]
+ZZ_control = [HiggsZZTo4lv1, HiggsZZTo4lv2]
+SM_control = [HiggsSM]
+ttZ_control = [HiggsttZ]
+DY_inc = [HiggsDY50v1, HiggsDY50v2]
+DY_all = DY_control + DY_inc
+GG2ZZ_control = [HiggsGGToZZ2e2m, HiggsGGToZZ2e2t, HiggsGGToZZ2m2t, HiggsGGToZZ4m, HiggsGGToZZ4e, HiggsGGToZZ4t]
+triboson = [HiggsWWW, HiggsWWZ, HiggsWZZ, HiggsZZZ]
+
+
+AZH_control = WZ_control + DY_control + TT_control + ZZ_control + SM_control + ttZ_control + GG2ZZ_control + triboson
+ ###+ SM_control #+ sync_list 
+
+AZH_tight = TT_control + ZZ_control #+ ZZ_control2
+AZH_data =  data_AZH + data_AZH_single
+AZH_data_single = data_AZH_single
+AZH_test = [HiggsDY50v1, azh300]
+AZH_masses = [azh300]#, HiggsAZH260, HiggsAZH280, HiggsAZH320, HiggsAZH340, HiggsAZH350, HiggsAZH400]
+sync_list = AZH_masses

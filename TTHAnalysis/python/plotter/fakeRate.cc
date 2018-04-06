@@ -1,9 +1,23 @@
+
 #include <TH2.h>
 #include <TFile.h>
 #include <cmath>
 #include <iostream>
 #include <string>
 #include <map>
+
+
+TH1 * FR_tau00 = 0;
+TH1 * FR_tau01 = 0;
+TH1 * FR_tau10 = 0;
+TH1 * FRi_tau1[6];
+
+TH1 * FR_el1 = 0;
+TH1 *FRi_el1[30];
+
+TH1 * FR_mu1 = 0;
+TH1 *FRi_mu1[30];
+
 
 TH2 * FR_mu = 0;
 TH2 * FR2_mu = 0;
@@ -56,88 +70,179 @@ TH2 * MUSF2 = 0;
 TH2 * MUSF3 = 0;
 
 bool loadFRHisto(const std::string &histoName, const char *file, const char *name) {
-  TH2 **histo = 0, **hptr2 = 0;
+  TH2 **histo1 = 0, **hptr2 = 0;
+  TH1 **histo = 0, **hptr1 = 0;
   TH2 * FR_temp = 0;
-    if      (histoName == "FR_tau") { histo = & FR_tau; hptr2 = & FRi_tau[0]; }
-    else if (histoName == "FR_mu")  { histo = & FR_mu;  hptr2 = & FRi_mu[0]; }
-    else if (histoName == "FR_el")  { histo = & FR_el;  hptr2 = & FRi_el[0]; }
-    else if (histoName == "FR2_mu") { histo = & FR2_mu; hptr2 = & FRi_mu[2]; }
-    else if (histoName == "FR2_el") { histo = & FR2_el; hptr2 = & FRi_el[2]; }
-    else if (histoName == "FR2_tau"){ histo = & FR2_tau; hptr2 = & FRi_tau[2]; }
-    else if (histoName == "FR3_mu") { histo = & FR3_mu; hptr2 = & FRi_mu[3]; }
-    else if (histoName == "FR3_el") { histo = & FR3_el; hptr2 = & FRi_el[3]; }
-    else if (histoName == "FR3_tau"){ histo = & FR3_tau; hptr2 = & FRi_tau[3]; }
-    else if (histoName == "FR4_mu") { histo = & FR4_mu; hptr2 = & FRi_mu[4]; }
-    else if (histoName == "FR4_el") { histo = & FR4_el; hptr2 = & FRi_el[4]; }
-    else if (histoName == "FR5_mu") { histo = & FR5_mu; hptr2 = & FRi_mu[5]; }
-    else if (histoName == "FR5_el") { histo = & FR5_el; hptr2 = & FRi_el[5]; }
-    else if (TString(histoName).BeginsWith("FR_mu_i")) {histo = & FR_temp; hptr2 = & FRi_mu[TString(histoName).ReplaceAll("FR_mu_i","").Atoi()];}
-    else if (TString(histoName).BeginsWith("FR_el_i")) {histo = & FR_temp; hptr2 = & FRi_el[TString(histoName).ReplaceAll("FR_el_i","").Atoi()];}
-    else if (histoName == "QF_el") histo = & QF_el;
-    else if (histoName == "FR_mu_FO1_QCD")  { histo = &FR_mu_FO1_QCD ;  hptr2 = & FRi_FO_mu[0]; }
-    else if (histoName == "FR_mu_FO1_insitu")  { histo = &FR_mu_FO1_insitu ;  hptr2 = & FRi_FO_mu[1]; }
-    else if (histoName == "FR_mu_FO2_QCD")  { histo = &FR_mu_FO2_QCD ;  hptr2 = & FRi_FO_mu[2]; }
-    else if (histoName == "FR_mu_FO2_insitu")  { histo = &FR_mu_FO2_insitu ;  hptr2 = & FRi_FO_mu[3]; }
-    else if (histoName == "FR_mu_FO3_QCD")  { histo = &FR_mu_FO3_QCD ;  hptr2 = & FRi_FO_mu[4]; }
-    else if (histoName == "FR_mu_FO3_insitu")  { histo = &FR_mu_FO3_insitu ;  hptr2 = & FRi_FO_mu[5]; }
-    else if (histoName == "FR_mu_FO4_QCD")  { histo = &FR_mu_FO4_QCD ;  hptr2 = & FRi_FO_mu[6]; }
-    else if (histoName == "FR_mu_FO4_insitu")  { histo = &FR_mu_FO4_insitu ;  hptr2 = & FRi_FO_mu[7]; }
-    else if (histoName == "FR_el_FO1_QCD")  { histo = &FR_el_FO1_QCD ;  hptr2 = & FRi_FO_el[0]; }
-    else if (histoName == "FR_el_FO1_insitu")  { histo = &FR_el_FO1_insitu ;  hptr2 = & FRi_FO_el[1]; }
-    else if (histoName == "FR_el_FO2_QCD")  { histo = &FR_el_FO2_QCD ;  hptr2 = & FRi_FO_el[2]; }
-    else if (histoName == "FR_el_FO2_insitu")  { histo = &FR_el_FO2_insitu ;  hptr2 = & FRi_FO_el[3]; }
-    else if (histoName == "FR_el_FO3_QCD")  { histo = &FR_el_FO3_QCD ;  hptr2 = & FRi_FO_el[4]; }
-    else if (histoName == "FR_el_FO3_insitu")  { histo = &FR_el_FO3_insitu ;  hptr2 = & FRi_FO_el[5]; }
-    else if (histoName == "FR_el_FO4_QCD")  { histo = &FR_el_FO4_QCD ;  hptr2 = & FRi_FO_el[6]; }
-    else if (histoName == "FR_el_FO4_insitu")  { histo = &FR_el_FO4_insitu ;  hptr2 = & FRi_FO_el[7]; }
-    else if (histoName == "FR_mu_QCD_iso")  { histo = &FR_mu_QCD_iso ;  hptr2 = & FRi_fHT_FO_mu[0]; }
-    else if (histoName == "FR_mu_QCD_noniso")  { histo = &FR_mu_QCD_noniso ;  hptr2 = & FRi_fHT_FO_mu[1]; }
-    else if (histoName == "FR_el_QCD_iso")  { histo = &FR_el_QCD_iso ;  hptr2 = & FRi_fHT_FO_el[0]; }
-    else if (histoName == "FR_el_QCD_noniso")  { histo = &FR_el_QCD_noniso ;  hptr2 = & FRi_fHT_FO_el[1]; }
-    else if (histoName == "BTAG"            )  { histo = &BTAG;  }
-    else if (histoName == "ELSF1"           )  { histo = &ELSF1; }
-    else if (histoName == "ELSF2"           )  { histo = &ELSF2; }
-    else if (histoName == "ELSF3"           )  { histo = &ELSF3; }
-    else if (histoName == "MUSF1"           )  { histo = &MUSF1; }
-    else if (histoName == "MUSF2"           )  { histo = &MUSF2; }
-    else if (histoName == "MUSF3"           )  { histo = &MUSF3; }
-    if (histo == 0)  {
+    if      (histoName == "FR_tau") { histo1 = & FR_tau; hptr2 = & FRi_tau[0]; }
+    else if (histoName == "FR_tau00") { histo = & FR_tau00; hptr1 = & FRi_tau1[0]; }
+    else if (histoName == "FR_tau01") { histo = & FR_tau01; hptr1 = & FRi_tau1[1]; }
+    else if (histoName == "FR_tau10") { histo = & FR_tau10; hptr1 = & FRi_tau1[2]; }
+    else if (histoName == "FR_el1")  { histo = & FR_el1;  hptr1 = & FRi_el1[0]; }
+    else if (histoName == "FR_mu1")  { histo = & FR_mu1;  hptr1 = & FRi_mu1[0]; }
+    else if (histoName == "FR_mu")  { histo1 = & FR_mu;  hptr2 = & FRi_mu[0]; }
+    else if (histoName == "FR_el")  { histo1 = & FR_el;  hptr2 = & FRi_el[0]; }
+    else if (histoName == "FR2_mu") { histo1 = & FR2_mu; hptr2 = & FRi_mu[2]; }
+    else if (histoName == "FR2_el") { histo1 = & FR2_el; hptr2 = & FRi_el[2]; }
+    else if (histoName == "FR2_tau"){ histo1 = & FR2_tau; hptr2 = & FRi_tau[2]; }
+    else if (histoName == "FR3_mu") { histo1 = & FR3_mu; hptr2 = & FRi_mu[3]; }
+    else if (histoName == "FR3_el") { histo1 = & FR3_el; hptr2 = & FRi_el[3]; }
+    else if (histoName == "FR3_tau"){ histo1 = & FR3_tau; hptr2 = & FRi_tau[3]; }
+    else if (histoName == "FR4_mu") { histo1 = & FR4_mu; hptr2 = & FRi_mu[4]; }
+    else if (histoName == "FR4_el") { histo1 = & FR4_el; hptr2 = & FRi_el[4]; }
+    else if (histoName == "FR5_mu") { histo1 = & FR5_mu; hptr2 = & FRi_mu[5]; }
+    else if (histoName == "FR5_el") { histo1 = & FR5_el; hptr2 = & FRi_el[5]; }
+    else if (TString(histoName).BeginsWith("FR_mu_i")) {histo1 = & FR_temp; hptr2 = & FRi_mu[TString(histoName).ReplaceAll("FR_mu_i","").Atoi()];}
+    else if (TString(histoName).BeginsWith("FR_el_i")) {histo1 = & FR_temp; hptr2 = & FRi_el[TString(histoName).ReplaceAll("FR_el_i","").Atoi()];}
+    else if (histoName == "QF_el") histo1 = & QF_el;
+    else if (histoName == "FR_mu_FO1_QCD")  { histo1 = &FR_mu_FO1_QCD ;  hptr2 = & FRi_FO_mu[0]; }
+    else if (histoName == "FR_mu_FO1_insitu")  { histo1 = &FR_mu_FO1_insitu ;  hptr2 = & FRi_FO_mu[1]; }
+    else if (histoName == "FR_mu_FO2_QCD")  { histo1 = &FR_mu_FO2_QCD ;  hptr2 = & FRi_FO_mu[2]; }
+    else if (histoName == "FR_mu_FO2_insitu")  { histo1 = &FR_mu_FO2_insitu ;  hptr2 = & FRi_FO_mu[3]; }
+    else if (histoName == "FR_mu_FO3_QCD")  { histo1 = &FR_mu_FO3_QCD ;  hptr2 = & FRi_FO_mu[4]; }
+    else if (histoName == "FR_mu_FO3_insitu")  { histo1 = &FR_mu_FO3_insitu ;  hptr2 = & FRi_FO_mu[5]; }
+    else if (histoName == "FR_mu_FO4_QCD")  { histo1 = &FR_mu_FO4_QCD ;  hptr2 = & FRi_FO_mu[6]; }
+    else if (histoName == "FR_mu_FO4_insitu")  { histo1 = &FR_mu_FO4_insitu ;  hptr2 = & FRi_FO_mu[7]; }
+    else if (histoName == "FR_el_FO1_QCD")  { histo1 = &FR_el_FO1_QCD ;  hptr2 = & FRi_FO_el[0]; }
+    else if (histoName == "FR_el_FO1_insitu")  { histo1 = &FR_el_FO1_insitu ;  hptr2 = & FRi_FO_el[1]; }
+    else if (histoName == "FR_el_FO2_QCD")  { histo1 = &FR_el_FO2_QCD ;  hptr2 = & FRi_FO_el[2]; }
+    else if (histoName == "FR_el_FO2_insitu")  { histo1 = &FR_el_FO2_insitu ;  hptr2 = & FRi_FO_el[3]; }
+    else if (histoName == "FR_el_FO3_QCD")  { histo1 = &FR_el_FO3_QCD ;  hptr2 = & FRi_FO_el[4]; }
+    else if (histoName == "FR_el_FO3_insitu")  { histo1 = &FR_el_FO3_insitu ;  hptr2 = & FRi_FO_el[5]; }
+    else if (histoName == "FR_el_FO4_QCD")  { histo1 = &FR_el_FO4_QCD ;  hptr2 = & FRi_FO_el[6]; }
+    else if (histoName == "FR_el_FO4_insitu")  { histo1 = &FR_el_FO4_insitu ;  hptr2 = & FRi_FO_el[7]; }
+    else if (histoName == "FR_mu_QCD_iso")  { histo1 = &FR_mu_QCD_iso ;  hptr2 = & FRi_fHT_FO_mu[0]; }
+    else if (histoName == "FR_mu_QCD_noniso")  { histo1 = &FR_mu_QCD_noniso ;  hptr2 = & FRi_fHT_FO_mu[1]; }
+    else if (histoName == "FR_el_QCD_iso")  { histo1 = &FR_el_QCD_iso ;  hptr2 = & FRi_fHT_FO_el[0]; }
+    else if (histoName == "FR_el_QCD_noniso")  { histo1 = &FR_el_QCD_noniso ;  hptr2 = & FRi_fHT_FO_el[1]; }
+    else if (histoName == "BTAG"            )  { histo1 = &BTAG;  }
+    else if (histoName == "ELSF1"           )  { histo1 = &ELSF1; }
+    else if (histoName == "ELSF2"           )  { histo1 = &ELSF2; }
+    else if (histoName == "ELSF3"           )  { histo1 = &ELSF3; }
+    else if (histoName == "MUSF1"           )  { histo1 = &MUSF1; }
+    else if (histoName == "MUSF2"           )  { histo1 = &MUSF2; }
+    else if (histoName == "MUSF3"           )  { histo1 = &MUSF3; }
+    if (histo1 == 0)  {
         std::cerr << "ERROR: histogram " << histoName << " is not defined in fakeRate.cc." << std::endl;
         return 0;
     }
 
     TFile *f = TFile::Open(file);
-    if (*histo != 0) {
-      if (std::string(name) != (*histo)->GetName()) {
-          std::cerr << "WARNING: overwriting histogram " << (*histo)->GetName() << std::endl;
+    if (*histo1 != 0) {
+      if (std::string(name) != (*histo1)->GetName()) {
+          std::cerr << "WARNING: overwriting histogram " << (*histo1)->GetName() << std::endl;
       } else {
           TH2* hnew = (TH2*) f->Get(name);
-          if (hnew == 0 || hnew->GetNbinsX() != (*histo)->GetNbinsX() || hnew->GetNbinsY() != (*histo)->GetNbinsY()) {
+          if (hnew == 0 || hnew->GetNbinsX() != (*histo1)->GetNbinsX() || hnew->GetNbinsY() != (*histo1)->GetNbinsY()) {
               std::cerr << "WARNING: overwriting histogram " << (*histo)->GetName() << std::endl;
           } else {
               bool fail = false;
-              for (int ix = 1; ix <= (*histo)->GetNbinsX(); ++ix) {
-                  for (int iy = 1; iy <= (*histo)->GetNbinsX(); ++iy) {
-                      if ((*histo)->GetBinContent(ix,iy) != hnew->GetBinContent(ix,iy)) {
+              for (int ix = 1; ix <= (*histo1)->GetNbinsX(); ++ix) {
+                  for (int iy = 1; iy <= (*histo1)->GetNbinsX(); ++iy) {
+                      if ((*histo1)->GetBinContent(ix,iy) != hnew->GetBinContent(ix,iy)) {
                           fail = true; break;
                       }
                   }
               }
-              if (fail) std::cerr << "WARNING: overwriting histogram " << (*histo)->GetName() << std::endl;
+              if (fail) std::cerr << "WARNING: overwriting histogram " << (*histo1)->GetName() << std::endl;
           }
       }
-      delete *histo;
+      delete *histo1;
     }
     if (f->Get(name) == 0) {
         std::cerr << "ERROR: could not find " << name << " in " << file << std::endl;
-        *histo = 0;
+        *histo1 = 0;
     } else {
-        *histo = (TH2*) f->Get(name)->Clone(name);
-        (*histo)->SetDirectory(0);
-        if (hptr2) *hptr2 = *histo;
+        *histo1 = (TH2*) f->Get(name)->Clone(name);
+        (*histo1)->SetDirectory(0);
+        if (hptr1) *hptr1 = *histo1;
     }
     f->Close();
-    return histo != 0;
+    return histo1 != 0;
+}
+
+
+float fakeRateWeight_AZh(float pt1, float eta1, float pt2, float eta2, int channel, int DM1, int DM2, float leg3, float leg4)
+{
+    //std::cout<<"Hei JAANA: "<<FFOnly<<endl;
+    //cout<<"---------NEW EVENT--------"<<endl;
+    //ocout<<"Run, lumi"<<run<<" "<<lumi<<endl; 
+    //if (run==275319 && lumi==193){ cout<<"MOI JAANA"<<endl;}
+    TH1 *hist1=nullptr, *hist2=nullptr;
+    float ret = 1.0f;
+    double fr1=0.0, fr2=0.0;
+    int l1_failed=0, l2_failed=0, both_failed=0, passed=0;
+    if (channel==1115){
+        hist1 = FR_el;
+        hist2 = FR_tau;
+        //if (DM2 == 0) { hist2 = FR_tau00;}
+        //else if (DM2 == 1) { hist2 = FR_tau01;}
+        //else if (DM2 == 10) { hist2 = FR_tau10;}
+        //if (pt1 > 140 && pt2 > 63) { cout<<"I think we have it now! "<<endl; both_failed=1;}
+        if (pt1 >= 60.0) {pt1 = 59.99;}
+        if (pt2 >= 90.0) {pt2 = 89.99;}
+    }
+    else if (channel==1315){
+        hist1 = FR_mu;
+        hist2 = FR_tau;
+        //if (DM2 == 0) { hist2 = FR_tau00;}
+        //else if (DM2 == 1) { hist2 = FR_tau01;}
+        //else if (DM2 == 10) { hist2 = FR_tau10;}
+
+        if (pt1 >= 60.0) {pt1 = 59.99;}
+        if (pt2 >= 90.0) {pt2 = 89.99;}
+    }
+    else if (channel==1113){
+        hist1 = FR_el;
+        hist2 = FR_mu;
+        if (pt1 >= 60.0) {pt1 = 59.99;}
+        if (pt2 >= 60.0) {pt2 = 59.99;}
+    }
+    else if (channel==1515){
+        //if (DM1 == 0) { hist1 = FR_tau00;}
+        //else if (DM1 == 1) { hist1 = FR_tau01;}
+        //else if (DM1 == 10) { hist1 = FR_tau10;}
+        //if (DM2 == 0) { hist2 = FR_tau00;}
+       //	else if	(DM2 == 1) { hist2 = FR_tau01;}
+       //	else if	(DM2 == 10) { hist2 = FR_tau10;}
+        hist1 = FR_tau;
+        hist2 = FR_tau;
+        if (pt1 >= 90.0) {pt1 = 89.99;}
+        if (pt2 >= 90.0) {pt2 = 89.99;}
+    }
+    //cout<<leg4<<endl;
+    //double fr1 = hist1->GetBinContent( hist1->FindBin(pt1, std::abs(eta1)) );
+    //double fr2 = hist2->GetBinContent( hist2->FindBin(pt2, std::abs(eta2)) );
+
+    //std::cout<<"Run number:"<<run<<endl;
+    if (channel==1515){
+        fr1 = hist1->GetBinContent( hist1->FindBin(pt1, DM1) );
+        fr2 = hist2->GetBinContent( hist2->FindBin(pt2, DM2) );
+    }
+    else if (channel==1113){
+    //else{
+        fr1 = hist1->GetBinContent( hist1->FindBin(pt1, std::abs(eta1)) );
+        fr2 = hist2->GetBinContent( hist2->FindBin(pt2, std::abs(eta2)) );
+    }
+    else{
+        fr1 = hist1->GetBinContent( hist1->FindBin(pt1, std::abs(eta1)) );
+        fr2 = hist2->GetBinContent( hist2->FindBin(pt2, DM2) );
+    }
+    if (fr1 <= 0)  { std::cerr << "WARNING, FR is " << fr1 << std::endl; if (fr1<0) std::abort(); }
+    if (fr2 <= 0)  { std::cerr << "WARNING, FR is " << fr2 << std::endl; if (fr2<0) std::abort(); }
+
+    ////if (leg3 == 1 and leg4==1) {cout<<"YASS"<<endl;}
+    //cout<<"Our legs are: "<<leg3<<" and "<<leg4<<endl;
+    //cout<<"pt1, DM1, pt2, DM2: "<<pt1<<" "<<DM1<<" "<<pt2<<" "<<DM2<<endl;
+    //cout<<"Fr1 and fr2 are: "<<fr1<<" and "<<fr2<<endl;
+    if (leg3 > 0.5 and leg4 > 0.5) {ret *= 0.0f;}
+    else if (leg3<0.5 and leg4>0.5) {ret *= fr1/(1.0f-fr1);}
+    else if (leg3>0.5 and leg4<0.5) {ret *= fr2/(1.0f-fr2);}
+    else if (leg3<0.5 and leg4<0.5) {ret *= +fr1*fr2/((1.0f-fr1)*(1.0f-fr2));}
+  
+    //cout<<"Weight: "<<ret<<endl;
+    if (ret == 1.0f) ret = 0.0f;
+    //std::cout<<"ret: "<<ret<<std::endl;    
+    return ret;
 }
 
 float fakeRateWeight_2lssMVA(float l1pt, float l1eta, int l1pdgId, float l1mva,

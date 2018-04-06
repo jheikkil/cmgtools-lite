@@ -1,0 +1,8 @@
+abs(eta)  : abs(electron_FR_eta): 10,0,2.5; LegendCutoff=1e-7
+pt  : electron_FR_pt : 6,0,120; LegendCutoff=1e-7
+Z_pt_1   : pt_1 : 6,0,120; LegendCutoff=1e-7
+Z_pt_2  : pt_2 : 6,0,120; LegendCutoff=1e-7
+Z_vis  : m_vis: 10,50,150; LegendCutoff=1e-7
+Z_Pt  :  Z_Pt : 40,0,400; LegendCutoff=1e-7
+	
+

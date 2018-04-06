@@ -1,0 +1,16 @@
+# luminosity
+lumi     : .*AZH.*|.*ZZ.*|.*SM.* : .* : 1.02
+
+#leptons
+muon_eff : .*AZH.*|.*ZZ.*|.*SM.*  : .*EM.*|.*MT.* : 1.02
+
+ele_eff  : .*AZH.*|.*ZZ.*|.*SM.* : .*EM.*|.*ET.* : 1.02
+
+tau_eff  : .*AZH.*|.*ZZ.*|.*SM.*  : .*ET.*|.*MT.* : 1.06
+tau_eff  : .*AZH.*|.*ZZ.*|.*SM.*  : .*TT.* : 1.12
+
+#backgrouns
+red_bkg    : .*DY.*|.*TT.*|.*WZ.* : .* : 1.40
+irred_bkg  : .*ZZ.*|.*SM.*        : .* : 1.20
+
+	

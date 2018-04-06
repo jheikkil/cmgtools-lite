@@ -1,0 +1,39 @@
+# -- DY, usually to be used in jet bins
+DYjets   : HiggsDY50_1JET/H2TauTauTreeProducerAZhEETT:  1012.5*1.1638: Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ;  FillColor=ROOT.kBlue
+DYjets   : HiggsDY50_2JET/H2TauTauTreeProducerAZhEETT:  332.8*1.1638: Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)  ;  FillColor=ROOT.kBlue
+DYjets   : HiggsDY50_3JET/H2TauTauTreeProducerAZhEETT:  101.8*1.1638: Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ;  FillColor=ROOT.kBlue
+DYjets   : HiggsDY50_4JET/H2TauTauTreeProducerAZhEETT:  54.8*1.1638: Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)  ;  FillColor=ROOT.kBlue
+
+DYjets   : HiggsDY50_1JET/H2TauTauTreeProducerAZhMMTT:  1012.5*1.1638: Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10);  FillColor=ROOT.kBlue
+DYjets   : HiggsDY50_2JET/H2TauTauTreeProducerAZhMMTT:  332.8*1.1638: Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ;  FillColor=ROOT.kBlue
+DYjets   : HiggsDY50_3JET/H2TauTauTreeProducerAZhMMTT:  101.8*1.1638: Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ;  FillColor=ROOT.kBlue
+DYjets   : HiggsDY50_4JET/H2TauTauTreeProducerAZhMMTT:  54.8*1.1638 : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ;  FillColor=ROOT.kBlue
+
+
+#############WZ
+WZ: HiggsWZ_min01/H2TauTauTreeProducerAZhEETT : 58.59*0.65: Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13); FillColor=ROOT.kViolet+5
+WZ: HiggsWZ_min01/H2TauTauTreeProducerAZhMMTT : 58.59*0.65: Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ; FillColor=ROOT.kViolet+5
+
+
+##############TT
+TT: HiggsTT/H2TauTauTreeProducerAZhEETT : 831.76: Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ; FillColor=ROOT.kGreen
+TT: HiggsTT/H2TauTauTreeProducerAZhMMTT : 831.76: Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ; FillColor=ROOT.kGreen
+
+
+##############ZZ
+ZZ: HiggsZZTo4lv1/H2TauTauTreeProducerAZhEETT+HiggsZZTo4lv2/H2TauTauTreeProducerAZhEETT:  1.256*1.1: Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13); FillColor=ROOT.kYellow
+ZZ: HiggsZZTo4lv1/H2TauTauTreeProducerAZhMMTT+HiggsZZTo4lv2/H2TauTauTreeProducerAZhMMTT:  1.256*1.1: Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ; FillColor=ROOT.kYellow
+
+
+##############AZH
+
+#AZH260+: HiggsAZH260/H2TauTauTreeProducerAZhEETT: 45.4173*0.0711847*0.267732*3*0.033658: ; FillColor=ROOT.kRed+2
+AZH300+: HiggsAZH300/H2TauTauTreeProducerAZhEETT: 45.4173*0.0711847*0.267732*3*0.033658: Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ; FillColor=ROOT.kRed
+AZH350+: HiggsAZH350/H2TauTauTreeProducerAZhEETT: 45.4173*0.0711847*0.267732*3*0.033658: ; FillColor=ROOT.kBlack
+#AZH260+: HiggsAZH260/H2TauTauTreeProducerAZhMMTT: 45.4173*0.0711847*0.267732*3*0.033658: ; FillColor=ROOT.kRed+2
+AZH300+: HiggsAZH300/H2TauTauTreeProducerAZhMMTT: 45.4173*0.0711847*0.267732*3*0.033658: Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10); FillColor=ROOT.kRed
+AZH350+: HiggsAZH350/H2TauTauTreeProducerAZhMMTT: 45.4173*0.0711847*0.267732*3*0.033658: ; FillColor=ROOT.kBlack
+
+
+
+

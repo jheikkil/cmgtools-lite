@@ -1,0 +1,88 @@
+# -- fakes, usually to be used in jet bins
+
+fakes : HiggsDY50v1/H2TauTauTreeProducerAZhEE_FR + HiggsDY50v2/H2TauTauTreeProducerAZhEE_FR: 4954*1.1638: tau_FR_gen_match == 6 &&   Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ;  FillColor=ROOT.kBlue
+fakes : HiggsDY50v1/H2TauTauTreeProducerAZhMM_FR + HiggsDY50v2/H2TauTauTreeProducerAZhMM_FR: 4954*1.1638: tau_FR_gen_match == 6 &&   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10);  FillColor=ROOT.kBlue
+
+#############WZ
+VZ: HiggsWZ_min01/H2TauTauTreeProducerAZhEE_FR : 58.59*0.65: tau_FR_gen_match != 6 &&   Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13); FillColor=ROOT.kViolet+5
+VZ: HiggsWZ_min01/H2TauTauTreeProducerAZhMM_FR : 58.59*0.65: tau_FR_gen_match != 6 &&   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ; FillColor=ROOT.kViolet+5
+
+
+##############TT
+fakes: HiggsTT/H2TauTauTreeProducerAZhEE_FR : 831.76: tau_FR_gen_match == 6 &&   Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ; FillColor=ROOT.kBlue 
+fakes: HiggsTT/H2TauTauTreeProducerAZhMM_FR : 831.76: tau_FR_gen_match == 6 &&   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ; FillColor=ROOT.kBlue
+
+
+##############ZZ
+VZ : HiggsZZTo4lv1/H2TauTauTreeProducerAZhEE_FR:  1.256*1.1: tau_FR_gen_match != 6 &&   Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13); FillColor=ROOT.kYellow 
+VZ: HiggsZZTo4lv1/H2TauTauTreeProducerAZhMM_FR:  1.256*1.1: tau_FR_gen_match != 6 &&   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ; FillColor=ROOT.kYellow 
+
+
+
+data : DoubleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+
+data : DoubleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+
+fakes_prefit : - ; FillColor=ROOT.kPink-2, Label="fakes MC"
+fakes_prefit : - ; FillColor=ROOT.kPink-2, Label="fakes MC"
+data_sub         : - ; FillColor=ROOT.kGray+1, Label="Data - VZ"
+data_sub_prefit  : - ; FillColor=ROOT.kAzure+1, Label="(stat only)"
+data_sub_syst         : - ; FillColor=ROOT.kGray+1, Label="Data - VZ"
+data_sub_syst_prefit  : - ; FillColor=ROOT.kViolet+1, Label="Data - VZ"
+data_prefit      : - ; FillColor=ROOT.kBlack, Label="Data"
+total            : - ; FillColor=ROOT.kBlue+1, Label="fakes+VZ fit"
+total_prefit     : - ; FillColor=ROOT.kGreen+2, Label="fakes+VZ MC"
+data_fqcd        : - ; FillColor=ROOT.kGray+2, Label="Data unfolded"
+data_fit         : - ; FillColor=ROOT.kGreen+2, Label="fakes sim fit"
+data_prefit : - ; FillColor=ROOT.kBlack, Label="Data"
+
+
+
+fakes_lUp : - ; FillColor=ROOT.kBlue-7, Label="Lin Up"
+fakes_lUp : - ; FillColor=ROOT.kBlue-7, Label="Lin Up"
+fakes_lDn : - ; FillColor=ROOT.kBlue+1, Label="Lin Up"
+fakes_lDn : - ; FillColor=ROOT.kBlue+1, Label="Lin Up"
+VZ_lUp : - ; FillColor=ROOT.kBlue-7, Label="Lin Down"
+VZ_lDn : - ; FillColor=ROOT.kBlue+1, Label="Lin Down"
+
+fakes_qUp : - ; FillColor=ROOT.kRed-7, Label="Quad Up"
+fakes_qDn : - ; FillColor=ROOT.kRed+1, Label="Quad Up"
+fakes_qUp : - ; FillColor=ROOT.kRed-7, Label="Quad Up"
+fakes_qDn : - ; FillColor=ROOT.kRed+1, Label="Quad Up"
+VZ_qUp : - ; FillColor=ROOT.kRed-7, Label="Quad Down"
+VZ_qDn : - ; FillColor=ROOT.kRed+1, Label="Quad Down"
+
+fakes_sUp : - ; FillColor=ROOT.kGreen-0, Label="Stretch Up"
+fakes_sDn : - ; FillColor=ROOT.kGreen+3, Label="Stretch Up"
+fakes_sUp : - ; FillColor=ROOT.kGreen-0, Label="Stretch Up"
+fakes_sDn : - ; FillColor=ROOT.kGreen+3, Label="Stretch Up"
+VZ_sUp : - ; FillColor=ROOT.kGreen-0, Label="Stretch Down"
+VZ_sDn : - ; FillColor=ROOT.kGreen+3, Label="Stretch Down"
+
+#WZ_sUp : - ; FillColor=ROOT.kGreen-0, Label="Stretch Down"
+#WZ_sDn : - ; FillColor=ROOT.kGreen+3, Label="Stretch Down"
+#WZ_lUp : - ; FillColor=ROOT.kBlue-7, Label="Lin Down"
+#WZ_lDn : - ; FillColor=ROOT.kBlue+1, Label="Lin Down"
+
+fakes_pass : - ; FillColor=ROOT.kGreen+2, Label="Pass"
+fakes_fail : - ; FillColor=ROOT.kRed+0, Label="Fail"
+fakes_pass : - ; FillColor=ROOT.kGreen+2, Label="Pass"
+fakes_fail : - ; FillColor=ROOT.kRed+0, Label="Fail"
+VZ_pass : - ; FillColor=ROOT.kGreen+2, Label="Pass"
+VZ_fail : - ; FillColor=ROOT.kRed+0, Label="Fail"
