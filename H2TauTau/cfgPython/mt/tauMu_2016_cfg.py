@@ -28,6 +28,10 @@ from CMGTools.H2TauTau.proto.samples.spring16.triggers_tauMu import data_trigger
 # common configuration and sequence
 from CMGTools.H2TauTau.htt_ntuple_base_cff import commonSequence, puFileData, puFileMC, eventSelector, httGenAna, jetAna, triggerAna, recoilCorr
 
+import ROOT
+f = ROOT.TFile("../../data/htt_scalefactors_v3.root")
+w = f.Get("w")
+f.Close()
 
 # Get all heppy options; set via "-o production" or "-o production=True"
 

@@ -10,6 +10,8 @@ if "/bin2Dto1Dlib_cc.so" not in ROOT.gSystem.GetLibraries():
 
 def addMCEfficiencyOptions(parser):
     addMCAnalysisOptions(parser)
+    #addPlotMakerOptions(parser)
+    #parser.add_option("--pdir", "--print-dir", dest="printDir", type="string", default="plots", help="print out plots in this directory");
     parser.add_option("--select-plot", "--sP", dest="plotselect", action="append", default=[], help="Select only these plots out of the full file")
     parser.add_option("--exclude-plot", "--xP", dest="plotexclude", action="append", default=[], help="Exclude these plots from the full file")
     parser.add_option("-o", "--out", dest="out", default=None, help="Output file name. by default equal to plots -'.txt' +'.root'");
@@ -286,9 +288,16 @@ def makeDataSub(report,mca):
     for p in mca.listBackgrounds():
         if p not in report: continue
         b = report[p]
-        data_sub.Add(b, -1.0)
-        data_sub_syst.Add(b, -1.0)
-        syst = mca.getProcessOption(p,'NormSystematic',0.) 
+        print data_sub, b, type(b), b.__class__
+        ##print b.raw()
+        import CMGTools.TTHAnalysis.plotter.histoWithNuisances
+	if isinstance(b, CMGTools.TTHAnalysis.plotter.histoWithNuisances.HistoWithNuisances):
+            data_sub.Add(b.raw(), -1.0)
+            data_sub_syst.Add(b.raw(), -1.0)
+        else:
+            data_sub.Add(b, -1.0)
+            data_sub_syst.Add(b, -1.0)
+        syst = mca.getProcessOption(p,'NormSystematic',0.)
         #print "subtracting background %s from data with systematic %r" % (p,syst)
         if syst <= 0: continue
         if "TH1" in b.ClassName():
@@ -372,11 +381,15 @@ if __name__ == "__main__":
     ids   = PlotFile(args[2],options).plots()
     xvars = PlotFile(args[3],options).plots()
     outname  = options.out if options.out else (args[2].replace(".txt","")+".root")
+    #outpath = options.printDir if options.printDir else ""
     if os.path.dirname(outname) != "":
         dirname = os.path.dirname(outname)
         if not os.path.exists(dirname):
             os.system("mkdir -p "+dirname)
+            print dirname
+            print outname
             if os.path.exists("/afs/cern.ch"): os.system("cp /afs/cern.ch/user/g/gpetrucc/php/index.php "+os.path.dirname(outname))
+            #if os.path.exists("/eos/user"): os.system("cp /afs/cern.ch/user/g/gpetrucc/php/index.php "+os.path.dirname(outname))
     outfile  = ROOT.TFile(outname,"RECREATE")
     ROOT.gROOT.ProcessLine(".x tdrstyle.cc")
     ROOT.gStyle.SetErrorX(0.5)
@@ -444,7 +457,7 @@ if __name__ == "__main__":
         for proc in procs:
             for x in xvars:
                 effs = []
-                myname = outname.replace(".root","_%s_%s.root" % (proc,x.name))
+                myname = outname.replace(".root","_%s_%s.root" % (proc, x.name))
                 for y,ex,pmap in effplots:
                     if ex != x: continue
                     eff = pmap[proc]

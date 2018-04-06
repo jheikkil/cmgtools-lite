@@ -1,0 +1,4 @@
+Z_vis: m_vis: 8,50,130; LegendCutoff=1e-7
+Z_Pt :  Z_Pt : 10,0,200; LegendCutoff=1e-7
+H_vis : H_vis: 10,0,200; LegendCutoff=1e-7
+H_Pt : H_Pt : 10,0,200; LegendCutoff=1e-7

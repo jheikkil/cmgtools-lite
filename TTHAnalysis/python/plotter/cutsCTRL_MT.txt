@@ -1,0 +1,1 @@
+mass: H_SS == 0 && m_vis>-1 && H_vis>-1 && Hboson_mt_LT>40 && iso_3<0.15 && H_mt_l2_againstMuon3>=2 && H_mt_l1_muonid_loose > 0.5 && H_mt_l2_byMediumIsolationMVArun2v1DBoldDMwLT>0.5

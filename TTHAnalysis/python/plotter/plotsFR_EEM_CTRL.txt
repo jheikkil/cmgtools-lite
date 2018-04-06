@@ -1,0 +1,10 @@
+abs(eta)_EEM_pfmt_MET_dz   : abs(muon_FR_eta): 10,0,2.4; LegendCutoff=1e-7
+pt_EEM_pfmt_MET_dz   : muon_FR_pt : 11,10,120; LegendCutoff=1e-7
+Z_pt_1_EEM_pfmt_MET_dz      : pt_1 : 11,10,120; LegendCutoff=1e-7
+Z_pt_2_EEM_pfmt_MET_dz     : pt_2 : 11,10,120; LegendCutoff=1e-7
+Z_vis_EEM_pfmt_MET_dz     : m_vis: 6,60,120; LegendCutoff=1e-7
+Z_Pt_EEM_pfmt_MET_dz     :  Z_Pt : 20,30,230; LegendCutoff=1e-7
+Z_iso_max_EEM_pfmt_MET_dz   : max(iso_1,iso_2) : 10,0,0.5; LegendCutoff=1e-7	
+dz_max_EEM_pfmt_MET_dz   : abs(max( max(Z_ee_l1_dz, Z_ee_l2_dz), muon_FR_dz )): 10, 0, 0.2; LegendCutoff=1e-7 
+pfmt_EEM_pfmt_MET_dz  : mt_2(muon_FR_pt, muon_FR_phi, met_pt, met_phi): 20,0,200; LegendCutoff=1e-7
+met_pt_EEM_pfmt_MET_dz  : met_pt: 20,0,200; LegendCutoff=1e-7

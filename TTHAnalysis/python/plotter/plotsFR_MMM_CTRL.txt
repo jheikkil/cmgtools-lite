@@ -1,0 +1,10 @@
+abs(eta)_MMM     : abs(muon_FR_eta): 10,0,2.4; LegendCutoff=1e-7
+pt_MMM     : muon_FR_pt : 11,10,120; LegendCutoff=1e-7
+Z_pt_1_MMM        : pt_1 : 11,10,120; LegendCutoff=1e-7
+Z_pt_2_MMM       : pt_2 : 11,10,120; LegendCutoff=1e-7
+Z_vis_MMM       : m_vis: 6,60,120; LegendCutoff=1e-7
+Z_Pt_MMM       :  Z_Pt : 20,30,230; LegendCutoff=1e-7
+Z_iso_max_MMM     : max(iso_1,iso_2) : 10,0,0.5; LegendCutoff=1e-7	
+dz_max_MMM     : abs(max( max(Z_mm_l1_dz, Z_mm_l2_dz), muon_FR_dz )): 10, 0, 0.2; LegendCutoff=1e-7 
+pfmt_MMM    : mt_2(muon_FR_pt, muon_FR_phi, met_pt, met_phi): 20,0,200; LegendCutoff=1e-7
+met_pt_MMM    : met_pt: 20,0,200; LegendCutoff=1e-7

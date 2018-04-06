@@ -1,0 +1,1 @@
+tauFR_numEE: tau_FR_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && tau_FR_againstElectronMVA6>=4 : 2,-0.5,1.5

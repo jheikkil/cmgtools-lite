@@ -1,0 +1,36 @@
+# -- DY, usually to be used in jet bins
+
+#DYinc	 : HiggsDY50v1+HiggsDY50v2 : 4954*1.1638      ;  FillColor=ROOT.kCyan
+#########DY jet
+DYjets   : HiggsDY50_1JET:  1012.5*1.1638 ;  FillColor=ROOT.kBlue
+DYjets   : HiggsDY50_2JET:  332.8*1.1638  ;  FillColor=ROOT.kBlue
+DYjets   : HiggsDY50_3JET:  101.8*1.1638  ;  FillColor=ROOT.kBlue
+DYjets   : HiggsDY50_4JET:  54.8*1.1638   ;  FillColor=ROOT.kBlue
+
+#############WZ
+WZ: WZ_min01 : 58.59*0.65; FillColor=ROOT.kViolet+5
+
+##############TT
+TT: HiggsTT : 831.76; FillColor=ROOT.kGreen
+
+##############ZZ
+ZZ: HiggsZZTo4lv1: 1.256*1.1; FillColor=ROOT.kYellow
+
+##############AZH
+
+AZH+: HiggsAZH300: 45.4173*0.0711847*0.267732*3*0.033658; FillColor=ROOT.kRed
+
+############AZH
+
+data: DoubleEG_Run2016B_03Feb2017_v1
+data: DoubleEG_Run2016B_03Feb2017_v2
+data: DoubleEG_Run2016C_03Feb2017_v1
+data: DoubleEG_Run2016D_03Feb2017_v1
+data: DoubleEG_Run2016E_03Feb2017_v1
+data: DoubleEG_Run2016F_03Feb2017_v1
+data: DoubleEG_Run2016G_03Feb2017_v1
+data: DoubleEG_Run2016H_03Feb2017_v1
+data: DoubleEG_Run2016H_03Feb2017_v2
+
+
+

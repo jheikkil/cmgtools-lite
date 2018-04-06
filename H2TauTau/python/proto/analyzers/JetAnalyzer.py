@@ -59,6 +59,7 @@ class JetAnalyzer(Analyzer):
         mcGT = getattr(cfg_ana, 'mcGT', '80X_mcRun2_asymptotic_2016_TrancheIV_v8')
         dataGT = getattr(cfg_ana, 'dataGT', '80X_dataRun2_2016SeptRepro_v7')
 
+
         if self.recalibrateJets:
             doResidual = getattr(cfg_ana, 'applyL2L3Residual', 'Data')
             if doResidual == "MC":
@@ -116,6 +117,7 @@ class JetAnalyzer(Analyzer):
         leptons = []
         if hasattr(event, 'selectedLeptons'):
             leptons = event.selectedLeptons
+            #print "FOUNDFOUND"
         if hasattr(self.cfg_ana, 'toClean'):
             leptons = getattr(event, self.cfg_ana.toClean)
             
@@ -159,10 +161,10 @@ class JetAnalyzer(Analyzer):
 
         event.cleanJets, dummy = cleanObjectCollection(event.jets,
                                                        masks=leptons,
-                                                       deltaRMin=0.5)
+                                                       deltaRMin=0.4)
         event.cleanBJets, dummy = cleanObjectCollection(event.bJets,
                                                         masks=leptons,
-                                                        deltaRMin=0.5)
+                                                        deltaRMin=0.4)
 
         event.cleanBJetsLoose, dummy = cleanObjectCollection(event.bJetsLoose,
                                                         masks=leptons,

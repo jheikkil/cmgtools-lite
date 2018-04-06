@@ -1,0 +1,5 @@
+#eleFR: electron_FR_eid_spring16_80>0 && electron_FR_reliso05<0.15 && electron_FR_pt>10 : 2,-0.5,1.5
+muonFR_signal: muon_FR_pt>10 && (muon_FR_gen_match!=2 && muon_FR_gen_match !=4) && muon_FR_muonid_loose>0 && muon_FR_reliso05 < 0.15 : 2,-0.5,1.5
+muonFR_medium: muon_FR_pt>10 && (muon_FR_gen_match!=2 && muon_FR_gen_match !=4) && muon_FR_muonid_medium>0 && muon_FR_reliso05 < 0.15 : 2,-0.5,1.5
+muonFR_tight: muon_FR_pt>10 && (muon_FR_gen_match!=2 && muon_FR_gen_match !=4) && muon_FR_muonid_tight>0 && muon_FR_reliso05 < 0.15 : 2,-0.5,1.5
+

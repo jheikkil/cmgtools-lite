@@ -1,0 +1,9 @@
+Z_vis: m_vis: 10,50,150; LegendCutoff=1e-7
+Z_Pt :  Z_Pt : 40,0,400; LegendCutoff=1e-7
+H_vis : H_vis: 40,0,400; LegendCutoff=1e-7
+H_Pt : H_Pt : 20,0,200; LegendCutoff=1e-7
+A_vis : Mass : 20,100,700; LegendCutoff=1e-7
+A_Pt : A_Pt : 30,0,300; LegendCutoff=1e-7
+A_scaled : scaledHpt: 25,100,800; LegendCutoff=1e-7
+MET_pt : met_pt : 30,0,300;  LegendCutoff=1e-7
+DeltaPhi(MET, H) : H_METphi: 8,-4,9 ;  LegendCutoff=1e-7

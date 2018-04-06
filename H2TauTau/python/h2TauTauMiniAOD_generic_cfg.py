@@ -135,6 +135,7 @@ def createProcess(runOnMC=True, channel='tau-mu', runSVFit=False, runMVAETmiss=F
         process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
         process.load('Configuration.StandardSequences.MagneticField_38T_cff')
 
+        ##this one?  
         from PhysicsTools.PatAlgos.producersLayer1.jetUpdater_cff import updatedPatJetCorrFactors
         process.patJetCorrFactorsReapplyJEC = updatedPatJetCorrFactors.clone(
             src=cms.InputTag("slimmedJets"),
@@ -166,7 +167,7 @@ def createProcess(runOnMC=True, channel='tau-mu', runSVFit=False, runMVAETmiss=F
 
     # loadLocalSqlite(process, 'Spring16_25nsV3_DATA.db') #os.environ['CMSSW_BASE'] + '/src/CMGTools/RootTools/data/jec/'
 
-    process.maxEvents = cms.untracked.PSet(input=cms.untracked.int32(-1))
+    process.maxEvents = cms.untracked.PSet(input=cms.untracked.int32(10))
 
     numberOfFilesToProcess = -1
     numberOfFilesToProcess = 1
@@ -187,12 +188,13 @@ def createProcess(runOnMC=True, channel='tau-mu', runSVFit=False, runMVAETmiss=F
     # dataset_files = 'miniAOD-prod_PAT_.*root'
 
     if runOnMC:
-        from CMGTools.H2TauTau.proto.samples.summer16.higgs_susy import HiggsSUSYGG160 as ggh160
+        from CMGTools.H2TauTau.proto.samples.spring16.higgs_susy import HiggsAZH300 as azh300 
+        ### from CMGTools.H2TauTau.proto.samples.summer16.higgs_susy import HiggsSUSYGG160 as ggh160
         process.source = cms.Source(
             "PoolSource",
             noEventSort=cms.untracked.bool(True),
             duplicateCheckMode=cms.untracked.string("noDuplicateCheck"),
-            fileNames=cms.untracked.vstring(ggh160.files)
+            fileNames=cms.untracked.vstring(azh300.files)
         )
     else:
         # from CMGTools.RootTools.samples.samples_13TeV_DATA2015 import SingleMuon_Run2015D_Promptv4

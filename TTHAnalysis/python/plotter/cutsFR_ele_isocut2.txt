@@ -1,0 +1,1 @@
+eleFR_isocut2: electron_FR_pt>10 && electron_FR_gen_match!=1 && electron_FR_gen_match!=3 && electron_FR_reliso05<0.25 && deltaR(eta_1,phi_1,electron_FR_eta,electron_FR_phi)>0.3 && deltaR(eta_2,phi_2,electron_FR_eta,electron_FR_phi)>0.3	

@@ -1,0 +1,41 @@
+Z_vis: m_vis: 10,60,120; LegendCutoff=1e-7,MoreY=2.4, Legend="TR"
+Z_vis_1bin : m_vis : 1,60,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+#Z_vis: m_vis: 10,60,120; LegendCutoff=1e-7,MoreY=2.4, Legend="TR"
+#Z_vis_1bin : m_vis : 1,60,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+#Z_Pt :  Z_Pt : 40,0,400; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+H_vis : H_vis: 10,0,200; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+H_LT : Hboson_et_LT: 10,30,200; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+pt_1 : pt_1 : 10,10,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+pt_2 : pt_2 : 10,10,120; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+l4_decayMode : H_et_l2_decayMode : 10,0,10; LegendCutoff=1e-7,MoreY=2.2, Legend="TR"
+
+#run: run: 100, 0, 9e99
+#lumi: lumi: 100000, 0, 9e99
+#evt: evt: 10000000, 0, 9e99
+
+
+#Z_Pt :  Z_Pt : 40,0,400; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#H_vis : H_vis: 40,0,400; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+pt3 : pt_3 : [10,20,40,60,70,80,90]; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+pt4 : pt_4 : [20,30,40,50,60,70,80,90,100]; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#abs(eta3) : abs(eta_3): 5,0, 2.5;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#abs(eta4) : abs(eta_4): 5,0, 2.3;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#H_Pt : H_Pt : 20,0,200; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#A_vis : Mass : 60,50,750; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#A_Pt : A_Pt : 30,0,300; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#A_scaled : scaledHpt: 35,100,800; LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#MET_pt : met_pt : 30,0,300;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+#DeltaPhi(MET, H) : H_METphi: 8,-4,4 ;  LegendCutoff=1e-7,MoreY=1.2, Legend="TR"
+
+
+#iso_3 : iso_3 : 10, 0, 0.15
+#l3_80 : H_et_l1_eid_spring16_80 : 10, 0, 1
+#l4_againstEle : H_et_l2_againstElectronMVA6 : 10, 0, 10
+#l4_id : H_et_l2_byMediumIsolationMVArun2v1DBoldDMwLT : 10, 0 ,1
+#run: run: 10, 0, 20000000
+#lumi: lumi: 10, 0, 10000
+

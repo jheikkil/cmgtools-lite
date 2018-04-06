@@ -1,0 +1,54 @@
+# -- DY
+#DY   : HiggsDY50_1JET/H2TauTauTreeProducerAZhEE_FR:  1012.5*1.1638: Z_Pt>40  &&  Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ;  FillColor=ROOT.kBlue,Label='DY+TT'
+#DY   : HiggsDY50_2JET/H2TauTauTreeProducerAZhEE_FR:  332.8*1.1638: Z_Pt>40  &&   Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)  ;  FillColor=ROOT.kBlue,Label='DY+TT'
+#DY   : HiggsDY50_3JET/H2TauTauTreeProducerAZhEE_FR:  101.8*1.1638: Z_Pt>40  &&   Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ;  FillColor=ROOT.kBlue,Label='DY+TT'
+#DY   : HiggsDY50_4JET/H2TauTauTreeProducerAZhEE_FR:  54.8*1.1638: Z_Pt>40  &&  Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)  ;  FillColor=ROOT.kBlue,Label='DY+TT'
+
+#DY   : HiggsDY50_1JET/H2TauTauTreeProducerAZhMM_FR:  1012.5*1.1638: Z_Pt>40  &&   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10);  FillColor=ROOT.kBlue,Label='DY+TT'
+#DY   : HiggsDY50_2JET/H2TauTauTreeProducerAZhMM_FR:  332.8*1.1638:Z_Pt>40  &&   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ;  FillColor=ROOT.kBlue,Label='DY+TT'
+#DY   : HiggsDY50_3JET/H2TauTauTreeProducerAZhMM_FR:  101.8*1.1638: Z_Pt>40  &&   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ;  FillColor=ROOT.kBlue,Label='DY+TT'
+#DY   : HiggsDY50_4JET/H2TauTauTreeProducerAZhMM_FR:  54.8*1.1638 : Z_Pt>40  &&   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ;  FillColor=ROOT.kBlue,Label='DY+TT'
+
+
+#DY : HiggsDY50v1/H2TauTauTreeProducerAZhEE_FR + HiggsDY50v2/H2TauTauTreeProducerAZhEE_FR: 4954*1.1638: Z_Pt<=40  &&  Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ;  FillColor=ROOT.kBlue,Label='DY+TT'
+#DY : HiggsDY50v1/H2TauTauTreeProducerAZhMM_FR + HiggsDY50v2/H2TauTauTreeProducerAZhMM_FR: 4954*1.1638: Z_Pt<=40  && Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10);  FillColor=ROOT.kBlue,Label='DY+TT'
+
+DY : HiggsDY50v1/H2TauTauTreeProducerAZhEE_FR + HiggsDY50v2/H2TauTauTreeProducerAZhEE_FR: 4954*1.1638: Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ;  FillColor=ROOT.kBlue,Label='DY+TT'
+DY : HiggsDY50v1/H2TauTauTreeProducerAZhMM_FR + HiggsDY50v2/H2TauTauTreeProducerAZhMM_FR: 4954*1.1638: Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10);  FillColor=ROOT.kBlue,Label='DY+TT'
+
+
+DY: HiggsTT/H2TauTauTreeProducerAZhEE_FR : 831.76:   Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13) ; FillColor=ROOT.kBlue,Label='DY+TT'
+DY: HiggsTT/H2TauTauTreeProducerAZhMM_FR : 831.76:   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ; FillColor=ROOT.kBlue,Label='DY+TT'
+
+
+#############WZ
+VZ: HiggsWZ_min01/H2TauTauTreeProducerAZhEE_FR : 58.59*0.65:   Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13); FillColor=ROOT.kViolet+5
+VZ: HiggsWZ_min01/H2TauTauTreeProducerAZhMM_FR : 58.59*0.65:   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ; FillColor=ROOT.kViolet+5
+
+
+##############ZZ
+VZ : HiggsZZTo4lv1/H2TauTauTreeProducerAZhEE_FR:  1.256*1.1:   Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13); FillColor=ROOT.kViolet 
+VZ: HiggsZZTo4lv1/H2TauTauTreeProducerAZhMM_FR:  1.256*1.1:   Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10) ; FillColor=ROOT.kViolet
+
+
+
+data : DoubleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+data : DoubleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEE_FR : Z_ee_l1_eid_spring16 >0 && Z_ee_l2_eid_spring16 > 0  && (Z_ee_l1_matchedTrgObj==1 && Z_ee_l2_matchedTrgObj==1 && pt_1>24 && pt_2>13)
+
+data : DoubleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+data : DoubleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMM_FR : Z_mm_l1_muonid_loose>0 && iso_1 < 0.25 && Z_mm_l2_muonid_loose>0 && iso_2 < 0.25 && (Z_mm_l1_matchedTrgObj==1 && Z_mm_l2_matchedTrgObj==1 && pt_1>18 && pt_2>10)
+

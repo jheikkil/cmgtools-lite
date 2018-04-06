@@ -17,17 +17,43 @@ def default():
 
 # event variables
 event_vars = [
+    Variable('XSecLumiWeight'),
     Variable('run', type=int),
+    Variable('Z_mm_aligned', type=int),
+    Variable('Z_ee_aligned', type=int),
     Variable('lumi', type=int),
+    Variable('nMuons', type=int),
+    Variable('nElectrons', type=int),
+    Variable('nTaus', type=int),
+    Variable('nMuonsBEFORE', type=int),
+    Variable('nElectronsBEFORE', type=int),
+    Variable('nTausBEFORE', type=int),
+    Variable('nMuonsGOOD', type=int),
+    Variable('nElectronsGOOD', type=int),
+    Variable('nTausPtEtaGOOD', type=int),
+    Variable('nMuonsPtEtaIso', type=int),
+    Variable('nElectronsPtEtaIso', type=int),
+    Variable('nTausPtEtaIso', type=int),
+    Variable('nCleanedTaus', type=int),
+    Variable('allLeptonsOK', type=int),
+    Variable('fourLeptons', type=int),
+    Variable('Z_mm_len', type=int),
+    Variable('Z_ee_len', type=int),
+    Variable('H_tt_len', type=int),
+    Variable('H_mt_len', type=int),
+    Variable('H_et_len', type=int),
+    Variable('H_em_len', type=int),
+    Variable('allLeptons', type=int),
+    Variable('allLeptonsFinal', type=int),
     Variable('event', lambda ev : ev.eventId, type=int, storageType="l"),
     Variable('bx', lambda ev : (ev.input.eventAuxiliary().bunchCrossing() * ev.input.eventAuxiliary().isRealData()), type=int),
     Variable('orbit_number', lambda ev : (ev.input.eventAuxiliary().orbitNumber() * ev.input.eventAuxiliary().isRealData()), type=int),
     Variable('is_data', lambda ev: ev.input.eventAuxiliary().isRealData(), type=int),
     Variable('nPU', lambda ev : -99 if getattr(ev, 'nPU', -1) is None else getattr(ev, 'nPU', -1)),
-    Variable('pass_leptons', lambda ev : ev.isSignal, type=int),
-    Variable('veto_dilepton', lambda ev : not ev.leptonAccept, type=int),
-    Variable('veto_thirdlepton', lambda ev : not ev.thirdLeptonVeto, type=int),
-    Variable('veto_otherlepton', lambda ev : not ev.otherLeptonVeto, type=int),
+    #Variable('pass_leptons', lambda ev : ev.isSignal, type=int),
+    #Variable('veto_dilepton', lambda ev : not ev.leptonAccept, type=int),
+    #Variable('veto_thirdlepton', lambda ev : not ev.thirdLeptonVeto, type=int),
+    #Variable('veto_otherlepton', lambda ev : not ev.otherLeptonVeto, type=int),
     Variable('n_jets', lambda ev : len(ev.cleanJets30), type=int),
     Variable('n_jets_puid', lambda ev : sum(1 for j in ev.cleanJets30 if j.puJetId()), type=int),
     Variable('n_jets_20', lambda ev : len(ev.cleanJets), type=int),
@@ -36,12 +62,22 @@ event_vars = [
     Variable('n_bjets_loose', lambda ev : len(ev.cleanBJetsLoose), type=int),
     Variable('n_vertices', lambda ev : len(ev.vertices), type=int),
     Variable('rho', lambda ev : ev.rho),
+    Variable('met_pt', lambda ev: ev.met.pt()),
+    Variable('met_py', lambda ev: ev.met.py()),
+    Variable('met_px', lambda ev: ev.met.px()),
+    Variable('met_phi', lambda ev: ev.met.phi()),
+    Variable('metcov00', lambda ev : ev.metcov00 if ev.metcov00 else -9999.),
+    Variable('metcov01', lambda ev : ev.metcov01 if ev.metcov01 else -9999.), # redundant
+    Variable('metcov10', lambda ev : ev.metcov10 if ev.metcov10 else -9999.),
+    Variable('metcov11', lambda ev : ev.metcov11 if ev.metcov11 else -9999.),
+    
+    #met().getSignificanceMatrix()
     Variable('weight', lambda ev : ev.eventWeight),
     Variable('weight_vertex', lambda ev : ev.puWeight),
     # # Add back for embedded samples once needed
     # Variable('weight_embed', lambda ev : getattr(ev, 'embedWeight', 1.)),
-    Variable('weight_njet', lambda ev : ev.NJetWeight),
-    Variable('weight_dy', lambda ev : getattr(ev, 'dy_weight', 1.)),
+    #Variable('weight_njet', lambda ev : ev.NJetWeight),
+    #Variable('weight_dy', lambda ev : getattr(ev, 'dy_weight', 1.)),
     # # Add back the following only for ggH samples once needed
     # Variable('weight_hqt', lambda ev : getattr(ev, 'higgsPtWeight', 1.)),
     # Variable('weight_hqt_up', lambda ev : getattr(ev, 'higgsPtWeightUp', 1.)),
@@ -66,42 +102,43 @@ event_vars = [
     Variable('passcloneGlobalMuonFilter', type=int)
 ]
 
+
 # di-tau object variables
 ditau_vars = [
-    Variable('mvis', lambda dil : dil.mass()),
-    Variable('dil_pt', lambda dil : dil.p4().pt()),
-    Variable('dil_eta', lambda dil : dil.p4().eta()),
-    Variable('dil_phi', lambda dil : dil.p4().phi()),
-    Variable('mt_total', lambda dil : dil.mtTotal()),
+    #Variable('mvis', lambda dil : dil.mass()),
+    #Variable('dil_pt', lambda dil : dil.p4().pt()),
+    #Variable('dil_eta', lambda dil : dil.p4().eta()),
+    #Variable('dil_phi', lambda dil : dil.p4().phi()),
+    #Variable('mt_total', lambda dil : dil.mtTotal()),
     # Variable('sum_lepton_mt', lambda dil : dil.mtSumLeptons()),
     # Variable('sqsum_lepton_mt', lambda dil : dil.mtSqSumLeptons()),
-    Variable('pzeta_met', lambda dil : dil.pZetaMET()),
-    Variable('pzeta_vis', lambda dil : dil.pZetaVis()),
-    Variable('pzeta_disc', lambda dil : dil.pZetaDisc()),
-    Variable('mt', lambda dil : dil.mTLeg1()),
-    Variable('mt_leg2', lambda dil : dil.mTLeg2()),
+    #Variable('pzeta_met', lambda dil : dil.pZetaMET()),
+    #Variable('pzeta_vis', lambda dil : dil.pZetaVis()),
+    #Variable('pzeta_disc', lambda dil : dil.pZetaDisc()),
+    #Variable('mt', lambda dil : dil.mTLeg1()),
+    #Variable('mt_leg2', lambda dil : dil.mTLeg2()),
     # Variable('mt_leg1', lambda dil : dil.mTLeg1()), # redundant
-    Variable('met_cov00', lambda dil : dil.mvaMetSig(0, 0) if dil.mvaMetSig else 0.),
+    #Variable('met_cov00', lambda dil : dil.mvaMetSig(0, 0) if dil.mvaMetSig else 0.),
     # Variable('met_cov01', lambda dil : dil.mvaMetSig(0, 1) if dil.mvaMetSig else 0.), # redundant
-    Variable('met_cov10', lambda dil : dil.mvaMetSig(1, 0) if dil.mvaMetSig else 0.),
-    Variable('met_cov11', lambda dil : dil.mvaMetSig(1, 1) if dil.mvaMetSig else 0.),
-    Variable('met_phi', lambda dil : dil.met().phi()),
+    #Variable('met_cov10', lambda dil : dil.mvaMetSig(1, 0) if dil.mvaMetSig else 0.),
+    #Variable('met_cov11', lambda dil : dil.mvaMetSig(1, 1) if dil.mvaMetSig else 0.),
+    #Variable('met_phi', lambda dil : dil.met().phi()),
     # Variable('met_px', lambda dil : dil.met().px()),
     # Variable('met_py', lambda dil : dil.met().py()),
-    Variable('met_pt', lambda dil : dil.met().pt()),
-    Variable('pthiggs', lambda dil : (dil.leg1().p4() + dil.leg2().p4() + dil.met().p4()).pt()),
+    # Variable('met_pt', lambda dil : dil.met().pt()),
+    #Variable('pthiggs', lambda dil : (dil.leg1().p4() + dil.leg2().p4() + dil.met().p4()).pt()),
     # Variable('delta_phi_l1_l2', lambda dil : deltaPhi(dil.leg1().phi(), dil.leg2().phi())),
     # Variable('delta_eta_l1_l2', lambda dil : abs(dil.leg1().eta() - dil.leg2().eta())),
-    Variable('delta_r_l1_l2', lambda dil : deltaR(dil.leg1().eta(), dil.leg1().phi(), dil.leg2().eta(), dil.leg2().phi())),
+    #Variable('delta_r_l1_l2', lambda dil : deltaR(dil.leg1().eta(), dil.leg1().phi(), dil.leg2().eta(), dil.leg2().phi())),
     # Variable('delta_phi_l1_met', lambda dil : deltaPhi(dil.leg1().phi(), dil.met().phi())),
     # Variable('delta_phi_l2_met', lambda dil : deltaPhi(dil.leg2().phi(), dil.met().phi())),
 ]
 
 svfit_vars = [
-    Variable('svfit_mass', lambda dil : dil.svfitMass()),
-    Variable('svfit_transverse_mass', lambda dil : dil.svfitTransverseMass()),
-    Variable('svfit_mass_error', lambda dil : dil.svfitMassError()),
-    Variable('svfit_pt', lambda dil : dil.svfitPt()),
+    #Variable('svfit_mass', lambda dil : dil.svfitMass()),
+    #Variable('svfit_transverse_mass', lambda dil : dil.svfitTransverseMass()),
+    #Variable('svfit_mass_error', lambda dil : dil.svfitMassError()),
+    #Variable('svfit_pt', lambda dil : dil.svfitPt()),
     # Variable('svfit_pt_error', lambda dil : dil.svfitPtError()),
     # Variable('svfit_eta', lambda dil : dil.svfitEta()),
     # Variable('svfit_phi', lambda dil : dil.svfitPhi()),
@@ -113,11 +150,16 @@ svfit_vars = [
 
 # generic particle
 particle_vars = [
+    Variable('LT', lambda p: p.LT() if hasattr(p, 'LT') else 0),
+    Variable('DR', lambda p: p.DR() if hasattr(p, 'DR') else 0),
     Variable('pt', lambda p: p.pt()),
+    #Variable('pdgId', lambda p: p.pdgId()),
     Variable('eta', lambda p: p.eta()),
     Variable('phi', lambda p: p.phi()),
     Variable('charge', lambda p: p.charge() if hasattr(p, 'charge') else 0), # charge may be non-integer for gen particles
+    Variable('SS', lambda p: 0 if hasattr(p, 'charge') and p.charge()==0 else 1),
     Variable('mass', lambda p: p.mass()),
+    Variable('METphi', lambda p: p.METphi() if hasattr(p, 'METphi') else -999),
 ]
 
 # generic lepton
@@ -139,8 +181,12 @@ lepton_vars = [
 # electron
 electron_vars = [
     # Variable('eid_nontrigmva_loose', lambda ele : ele.mvaIDRun2("NonTrigPhys14", "Loose")),
+    Variable('eid_spring16MVAraw', lambda ele: ele.mvaRun2('Spring16GP')),
     Variable('eid_nontrigmva_loose', lambda ele : ele.mvaRun2('NonTrigSpring15MiniAOD')),
     Variable('eid_nontrigmva_tight', lambda ele : ele.mvaIDRun2("NonTrigSpring15MiniAOD", "POG80")),
+    Variable('eid_nontrigmva_medium', lambda ele : ele.mvaIDRun2("NonTrigSpring15MiniAOD", "POG90")),
+    Variable('eid_spring16', lambda ele: ele.mvaIDRun2('Spring16', 'POG90')),
+    Variable('eid_spring16_80', lambda ele: ele.mvaIDRun2('Spring16', 'POG80')),
     Variable('eid_veto', lambda ele : ele.cutBasedId('POG_SPRING15_25ns_v1_Veto')),
     Variable('eid_loose', lambda ele : ele.cutBasedId('POG_SPRING15_25ns_v1_Loose')),
     Variable('eid_medium', lambda ele : ele.cutBasedId('POG_SPRING15_25ns_v1_Medium')),
@@ -151,6 +197,9 @@ electron_vars = [
     Variable('reliso05_04', lambda lep : lep.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0)),
     Variable('reliso05_04', lambda lep : lep.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0)),
     Variable('weight_tracking', lambda lep : getattr(lep, 'weight_tracking', 1.)),
+    Variable('matchedTrgObj', lambda lep: 1 if hasattr(lep,'matchedTrgObjEls') else 0, int),
+    Variable('matchedTrgObj_Double', lambda lep: 1 if hasattr(lep,'matchedTrgObjEls_Double') else 0, int),
+    Variable('matchedTrgObj_Single', lambda lep: 1 if hasattr(lep,'matchedTrgObjEls_Single') else 0, int),
 ]
 
 # muon
@@ -165,6 +214,13 @@ muon_vars = [
     Variable('dxy_innertrack', lambda muon : muon.innerTrack().dxy(muon.associatedVertex.position())),
     Variable('dz_innertrack', lambda muon : muon.innerTrack().dz(muon.associatedVertex.position())),
     Variable('weight_tracking', lambda muon : getattr(muon, 'weight_tracking', 1.)),
+    Variable('trackerMuon', lambda muon : muon.isTrackerMuon()),
+    Variable('globalMuon', lambda muon : muon.isGlobalMuon()),
+    Variable('PFMuon', lambda muon : muon.isPFMuon()),
+    Variable('matchedTrgObj', lambda muon: 1 if hasattr(muon,'matchedTrgObjMus') else 0, int),
+    Variable('matchedTrgObj_Double', lambda lep: 1 if hasattr(lep,'matchedTrgObjMus_Double') else 0, int),
+    Variable('matchedTrgObj_Single', lambda lep: 1 if hasattr(lep,'matchedTrgObjMus_Single') else 0, int),
+
 ]
 
 # tau

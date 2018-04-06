@@ -1,0 +1,11 @@
+# -- DY, usually to be used in jet bins
+
+DYold	 : DY : 4954*1.1638      ;  FillColor=ROOT.kCyan
+DYnew1    : DYnew1 : 4954*1.1638      ;  FillColor=ROOT.kRed
+DYnew2   : DYnew2 : 4954*1.1638      ;  FillColor=ROOT.kRed
+
+#DY       : DYJetsM50 : 3503.7   ;  FillColor=ROOT.kCyan
+#DY      : DY1JetsM50 : 666.3   ;  FillColor=ROOT.kViolet-4
+#DY      : DY2JetsM50 : 215.0   ;  FillColor=ROOT.kViolet-4
+#DY      : DY3JetsM50 :  60.7   ;  FillColor=ROOT.kViolet-4
+#DY      : DY4JetsM50 :  27.4   ;  FillColor=ROOT.kViolet-4

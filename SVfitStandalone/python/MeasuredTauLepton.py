@@ -16,4 +16,5 @@ class measuredTauLepton( svFitStandalone.MeasuredTauLepton ):
     '''
     
     def __init__(self, decayType, pt, eta, phi, mass, decayMode=-1):        
+        #print "VOI PEURA"
         super(measuredTauLepton, self).__init__(decayType, pt, eta, phi, mass, decayMode) 

@@ -1,0 +1,124 @@
+Sync for AZh (MC)
+  
+  Using AZh sample: /AToZhToLLTauTau_M-300_13TeV_madgraph_4f_LO/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/MINIAODSIM
+
+
+26 January 2018:
+  - Update ntuples, include new single lepton triggers
+    
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/eeem.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/eett.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/eeet.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/eemt.root
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/mmem.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/mmtt.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/mmmt.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2018/mmet.root
+
+
+16 October 2017:
+  - Bug fix for implementing trigger cuts
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1510TRG/EEEM_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1510TRG/EETT_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1510TRG/EEET_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1510TRG/EEMT_1510.root
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1510TRG/MMEM_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1510TRG/MMTT_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1510TRG/MMMT_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1510TRG/MMET_1510.root
+    
+  - Later on, same day: use Z mass 91.1876 instead of 91.2
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/EEEM_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/EETT_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/EEET_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/EEMT_1610.root
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/MMEM_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/MMTT_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/MMMT_1610.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/1610/MMET_1610.root
+
+
+15 October 2017:
+
+  - Require pt 10 GeV for el and mu when reconstructing Higgs candidates
+    
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct15/EEEM_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct15/EETT_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct15/EEET_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct15/EEMT_1510.root
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct15/MMEM_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct15/MMTT_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct15/MMMT_1510.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct15/MMET_1510.root
+ 
+
+13 October 2017:
+  - Use selection process OS+MASS+IDISO
+  - Baseline cut for electron and muon pts 9 GeV, but require 10 GeV for all legs after selections.
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct13/EEEM_1310.root  
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct13/EETT_1310.root 
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct13/EEET_1310.root  
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct13/EEMT_1310.root  
+
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct13/MMEM_1310.root  
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct13/MMTT_1310.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct13/MMMT_1310.root
+     /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Oct13/MMET_1310.root
+
+
+22 September 2017:
+  - Modify Z selection process from (OS, IDISO, MASS) to (OS, MASS, IDISO)
+  - For Z->ee, remove isolation. Use Spring 16 WP 90 as id.
+
+      /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Sep22/EEEM_sep22_sync_trigger_idiso.root
+      /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Sep22/EEET_sep22_sync_trigger_idiso.root
+      /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Sep22/EEMT_sep22_sync_trigger_idiso.root
+      /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Sep22/EETT_sep22_sync_trigger_idiso.root
+
+      /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Sep22/MMEM_sep22_sync_trigger_idiso.root
+      /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Sep22/MMTT_sep22_sync_trigger_idiso.root
+      /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Sep22/MMET_sep22_sync_trigger_idiso.root
+      /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/Sep22/MMMT_sep22_sync_trigger_idiso.root
+      
+
+10 August 2017:
+  - Sync trees for all eight channels. No electron regression. Includes trigger cuts.
+       /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/EEMT_sync_noElecReg.root 
+       /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/EEET_sync_noElecReg.root
+       /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/EETT_sync_noElecReg.root
+       /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/EEEM_sync_noElecReg.root
+
+       /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/MMMT_sync_noElecReg.root
+       /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/MMET_sync_noElecReg.root
+       /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/MMTT_sync_noElecReg.root
+       /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/MMEM_sync_noElecReg.root	
+
+8 August 2017:
+  - Fixed the MVA values for Spring16
+    a) Without trigger cuts:
+       /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/EEMT_sync_spring16FIXED.root
+    b) With trigger cuts:
+       /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/EEMT_sync_spring16FIXED_trgCuts.root      
+ 
+27 July 2017:
+ - Use spring 16 electron mvaID (old trees had spring 15)
+   /afs/cern.ch/user/j/jheikkil/public/AZHSync2017/EEMT_sync_spring16.root
+  
+18 July 2017:
+ tree #1:
+ - first sync tree, based on the current twiki
+ - no trigger information applied yet
+      /afs/cern.ch/user/j/jheikkil/Public/AZHSync2017/EEMT.root
+ tree #2:
+ - correct tau eta cut
+ - remove requirement on Higgs charge
+     /afs/cern.ch/user/j/jheikkil/Public/AZHSync2017/EEMT_fixed.root
+
+
