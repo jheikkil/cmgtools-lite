@@ -178,6 +178,9 @@ def createProcess(runOnMC=True, verbose=False):
     )
 
     runMetCorAndUncFromMiniAOD(process, isData=not runOnMC)
+    
+    ##process.correctMET=cms.Path(process.fullPatMetSequence)
+    #process.schedule.append(process.correctMET)
     process.selectedVerticesForPFMEtCorrType0.src = cms.InputTag("offlineSlimmedPrimaryVertices")	 
 
     if runOnMC:
