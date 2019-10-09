@@ -37,10 +37,6 @@ class H2TauTauTreeProducerAZhMMET(H2TauTauTreeProducer):
             Zmu1_mm = event.Zboson_mm[0].leg1()
             Zmu2_mm = event.Zboson_mm[0].leg2()
 
-          #  print 'Z JALAT'
-          #  print event.Zboson_mm[0].leg1()
-          #  print event.Zboson_mm[0].leg2()
-
             self.fillMuon(self.tree, 'Z_mm_l1', Zmu1_mm)
             self.fillMuon(self.tree, 'Z_mm_l2', Zmu2_mm)
             self.fillParticle(self.tree, 'Zboson_mm', Zboson_mm)
@@ -53,15 +49,9 @@ class H2TauTauTreeProducerAZhMMET(H2TauTauTreeProducer):
         #et
 
         if hasattr(event, 'Hboson_et'):
-           # for i in xrange( len(event.Hboson_et) ):
-                #if event.Hboson_et[i].leg1().gen_match==3 and event.Hboson_et[i].leg2().gen_match==5:
                 Hboson_et = event.Hboson_et[0]
                 H_et_el1 = event.Hboson_et[0].leg1()
                 H_et_tau2 = event.Hboson_et[0].leg2()
-
-                 #   print 'H JALAT'
-                 #   print event.Hboson_et[i].leg1()
-                 #   print event.Hboson_et[i].leg2()
 
                 self.fillEle(self.tree, 'H_et_l1', H_et_el1)
                 self.fillTau(self.tree, 'H_et_l2', H_et_tau2)

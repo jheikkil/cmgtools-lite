@@ -39,10 +39,6 @@ class H2TauTauTreeProducerAZhEETT(H2TauTauTreeProducer):
             Zel1_ee = event.Zboson_ee[0].leg1()
             Zel2_ee = event.Zboson_ee[0].leg2()
 
-           # print 'Z JALAT'
-           # print event.Zboson_ee[0].leg1()
-           # print event.Zboson_ee[0].leg2()
-
             self.fillEle(self.tree, 'Z_ee_l1', Zel1_ee)
             self.fillEle(self.tree, 'Z_ee_l2', Zel2_ee)
             self.fillParticle(self.tree, 'Zboson_ee', Zboson_ee)
@@ -55,16 +51,9 @@ class H2TauTauTreeProducerAZhEETT(H2TauTauTreeProducer):
         #tt
 
         if hasattr(event, 'Hboson_tt'):
-           # for i in xrange( len(event.Hboson_tt) ):
-                #if event.Hboson_tt[i].leg1().gen_match==5 and event.Hboson_tt[i].leg2().gen_match==5:
                 Hboson_tt = event.Hboson_tt[0]
                 H_tt_tau1 = event.Hboson_tt[0].leg1()
                 H_tt_tau2 = event.Hboson_tt[0].leg2()
-
-                 #   print 'H JALAT'
-                 #   print 'INDEKSI ON %d' %i
-                 #   print event.Hboson_tt[i].leg1()
-                 #   print event.Hboson_tt[i].leg2()
 
                 self.fillTau(self.tree, 'H_tt_l1', H_tt_tau1)
                 self.fillTau(self.tree, 'H_tt_l2', H_tt_tau2)
@@ -75,8 +64,6 @@ class H2TauTauTreeProducerAZhEETT(H2TauTauTreeProducer):
                     self.fillGenParticle(self.tree, 'H_tt_l1_gen', H_tt_tau1.genp)
                 if hasattr(H_tt_tau2, 'genp') and H_tt_tau2.genp:
                     self.fillGenParticle(self.tree, 'H_tt_l2_gen', H_tt_tau2.genp) 
-                #else:
-                #    print 'NO PASS'
 
         if hasattr(event, 'Aboson_tt'):
             Aboson_tt = event.Aboson_tt[0]
