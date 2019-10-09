@@ -1,3 +1,4 @@
+
 import ROOT
 
 import math
@@ -130,7 +131,7 @@ class AZhAnalyzer(Analyzer):
         dR = deltaR(leg1.eta(), leg1.phi(),
                     leg2.eta(), leg2.phi())
         #if abs(leg2.pdgId() ) == 15:
-        #    print "dR onkin nyt:::"
+        ##print "dR onkin nyt:::",dR
         #    print dR
         return dR > dR_value
 
@@ -167,18 +168,25 @@ class AZhAnalyzer(Analyzer):
                 resonances.append( Zbosoni )
 
                 #check muon id iso
-                m1OK = abs(Zbosoni.leg1().pdgId())==13 and leg1.muonID('POG_ID_Loose') and leg1.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.25 and leg1.pt()>10
-                m2OK = abs(Zbosoni.leg2().pdgId())==13 and leg2.muonID('POG_ID_Loose') and leg2.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.25 and leg2.pt()>10
+                #m1OK = abs(Zbosoni.leg1().pdgId())==13 and leg1.muonID('POG_ID_Loose') and leg1.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.25 and leg1.pt()>10
+                #m2OK = abs(Zbosoni.leg2().pdgId())==13 and leg2.muonID('POG_ID_Loose') and leg2.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.25 and leg2.pt()>10
 
                 #check ele id iso
-                e1OK = abs(Zbosoni.leg1().pdgId())==11 and leg1.mvaIDRun2('Spring16', 'POG90') and leg1.pt()>10 # and leg1.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.3
-                e2OK = abs(Zbosoni.leg2().pdgId())==11 and leg2.mvaIDRun2('Spring16', 'POG90') and leg2.pt()>10 # and leg2.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.3
+                #e1OK = abs(Zbosoni.leg1().pdgId())==11 and leg1.mvaIDRun2('Spring16', 'POG90') and leg1.pt()>10 # and leg1.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.3
+                #e2OK = abs(Zbosoni.leg2().pdgId())==11 and leg2.mvaIDRun2('Spring16', 'POG90') and leg2.pt()>10 # and leg2.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.3
+
+                ##for FR studies, use these
+                m1OK = abs(Zbosoni.leg1().pdgId())==13 and leg1.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 1.5 and leg1.pt()>10
+                m2OK = abs(Zbosoni.leg2().pdgId())==13 and leg2.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 1.5 and leg2.pt()>10
+
+                ##for FR studies
+                e1OK = abs(Zbosoni.leg1().pdgId())==11 and leg1.pt()>10 and leg1.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 1.5
+                e2OK = abs(Zbosoni.leg2().pdgId())==11 and leg2.pt()>10 and leg2.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 1.5
+
 
                 if m1OK and m2OK:
-                   #print "MU OK"
                    resonances_id.append( Zbosoni )
                 elif e1OK and e2OK:
-                   #print "ELE OK"
                    resonances_id.append( Zbosoni ) 
     
         nominal_mass = mass[23]
@@ -204,7 +212,6 @@ class AZhAnalyzer(Analyzer):
     def constructHbosonLepTau(self, leg1, leg2, deltaR_min, event):
         '''Constructs all possible H bosons using the given collections for leptons and taus, and returns the candidate that has the mass the closest to the H mass.'''
 
-        #print "HERE WE ARE"
         H_bosons=[]
 
         event.goodVertices = event.vertices
@@ -221,36 +228,23 @@ class AZhAnalyzer(Analyzer):
 
         tauOK = False
 
-        if tau.pt()>20:
+        if tau.pt()>18:
             #print tau.pt()
             lepton.associatedVertex = event.goodVertices[0]
             tau.associatedVertex = event.goodVertices[0]
             #print "tau id"
             #print tau.tauID('againstElectronTightMVA6')
             if abs(lepton.pdgId() ) == 13 and tau.tauID('againstMuonTight3') > 0.5: 
-             #   print "tauok MU"
                 tauOK=True
             elif abs(lepton.pdgId() ) == 11 and tau.tauID('againstElectronTightMVA6') > 0.5:
-             #   print "tauOK ELS"
                 tauOK=True 
             di_tau = Resonance(lepton, tau, met, 25, 3)
             di_tau.mvaMetSig = None
-            #print "deltar:"
-            #print self.testDeltaR(lepton, tau, deltaR_min)
-            #print "for lepton:"
-            #print abs(lepton.dxy())
-            #print abs(lepton.dz())
-            #print "tauOK"
-            #print tauOK
-            #print "getting to the initial check:"
             if self.testDeltaR(lepton, tau, deltaR_min) and abs(lepton.dxy()) < 0.045 and abs(lepton.dz()) < 0.2 and tauOK: #di_tau.charge()==0 remove for fakerate
                 #print "JEEJEEE"
                 H_bosons.append(di_tau)
                                   
         H_bosons.sort(key=lambda x: x.pt(), reverse=True)
-        #for bosoni in H_bosons:
-        #    print "MASSA"
-        #    print bosoni.mass()
 
         return H_bosons
 
@@ -261,7 +255,7 @@ class AZhAnalyzer(Analyzer):
         event.goodVertices = event.vertices
         met=event.met
  
-        if leg1.pt()>20 and leg2.pt()>20:
+        if leg1.pt()>18 and leg2.pt()>18:
             if leg2.pt()>leg1.pt():
                leg_dummy=leg1
                leg1=leg2
@@ -313,13 +307,6 @@ class AZhAnalyzer(Analyzer):
 
         event.goodVertices = event.vertices
 
-        #print "AZHANALYZER-----------------------------------------"
-        #print "Meidan kommpis onkin talla kertaa"
-        #print self.dataName
-
-        #if "Single" not in self.dataName:
-        #    print "Minusta meni oikein!"
-
         muons = [ muon for muon in event.muons ] #event.muons #map(Muon, self.handles['muons'].product())  
         electrons = event.electrons #map(Electron, self.handles['electrons'].product())
         taus = event.taus #map(Tau, self.handles['taus'].product())
@@ -329,10 +316,9 @@ class AZhAnalyzer(Analyzer):
         electronsGOOD = event.electronsGOOD
         tausGOOD = event.tausGOOD
 
-        #ADD LATER ON: electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1
+        goodLeptons = event.goodLeptons
 
         if self.cfg_ana.MC:
-           #print "CROSS"
            XSecLumiWeight = 1.0
            setattr(event, 'XSecLumiWeight', XSecLumiWeight)
 
@@ -361,55 +347,51 @@ class AZhAnalyzer(Analyzer):
 
         #Throw away events with EEMM
         if (Z_muons and Z_electrons and event.Z_mm_aligned>0 and event.Z_ee_aligned>0):
-            #print "THERE WAS TOO"
             Z_resonance = []
             Z_muons = []
             Z_electrons = []
         elif Z_muons and event.Z_mm_aligned>0:
-            #print "MUONS"
             Z_electrons=[]
             Z_resonance.append(Z_muons[0])
             #high pt legs
-            if Z_muons[0].leg1().pt()>27 and Z_muons[0].leg2().pt()>27:
-                #print "HIGH PT"
+            if Z_muons[0].leg1().pt()>25 and Z_muons[0].leg2().pt()>25:
                 if (hasattr(Z_muons[0].leg1(),'matchedTrgObjMus_Double') and hasattr(Z_muons[0].leg2(),'matchedTrgObjMus_Double')) and "Single" not in self.dataName:
                     Z_matched = 1
                 elif (hasattr(Z_muons[0].leg1(),'matchedTrgObjMus_Single') or hasattr(Z_muons[0].leg2(),'matchedTrgObjMus_Single')):
                     Z_matched = 1
             #medium pt legs
-            elif Z_muons[0].leg1().pt()>27 and Z_muons[0].leg2().pt()<27 and Z_muons[0].leg2().pt()>10:
-                #print "MEDIUM"
+            elif Z_muons[0].leg1().pt()>25 and Z_muons[0].leg2().pt()<25 and Z_muons[0].leg2().pt()>10:
                 if (hasattr(Z_muons[0].leg1(),'matchedTrgObjMus_Double') and hasattr(Z_muons[0].leg2(),'matchedTrgObjMus_Double')) and "Single" not in self.dataName:
-                    ##print "DINGIDN"
        	       	    Z_matched = 1
        	       	elif (hasattr(Z_muons[0].leg1(),'matchedTrgObjMus_Single')):
-                    ##print "DINGDIN"
        	       	    Z_matched = 1
             #low pt
-            elif Z_muons[0].leg1().pt()<27 and Z_muons[0].leg1().pt()>19 and Z_muons[0].leg2().pt()<27 and Z_muons[0].leg2().pt()>10:
-                #print "LOW"
+            elif Z_muons[0].leg1().pt()<25 and Z_muons[0].leg1().pt()>18 and Z_muons[0].leg2().pt()<25 and Z_muons[0].leg2().pt()>10:
                 if (hasattr(Z_muons[0].leg1(),'matchedTrgObjMus_Double') and hasattr(Z_muons[0].leg2(),'matchedTrgObjMus_Double')) and "Single" not in self.dataName:
        	       	    Z_matched = 1
         elif Z_electrons and event.Z_ee_aligned>0:
-            #print "ELS"
             Z_muons=[]
             Z_resonance.append(Z_electrons[0])
             #high pt
-            if Z_electrons[0].leg1().pt()>32 and Z_electrons[0].leg2().pt()>32:
+            if Z_electrons[0].leg1().pt()>28 and Z_electrons[0].leg2().pt()>28:
                 if (hasattr(Z_electrons[0].leg1(),'matchedTrgObjEls_Double') and hasattr(Z_electrons[0].leg2(),'matchedTrgObjEls_Double')) and "Single" not in self.dataName:
                     Z_matched = 1
                 elif (hasattr(Z_electrons[0].leg1(),'matchedTrgObjEls_Single') or hasattr(Z_electrons[0].leg2(),'matchedTrgObjEls_Single')):
                     Z_matched = 1
             #medium
-            elif Z_electrons[0].leg1().pt()>32 and Z_electrons[0].leg2().pt()>17.5 and Z_electrons[0].leg2().pt()<32:
+            elif Z_electrons[0].leg1().pt()>28 and Z_electrons[0].leg2().pt()>13 and Z_electrons[0].leg2().pt()<28:
                 if (hasattr(Z_electrons[0].leg1(),'matchedTrgObjEls_Double') and hasattr(Z_electrons[0].leg2(),'matchedTrgObjEls_Double')) and "Single" not in self.dataName:
                     Z_matched = 1
                 elif (hasattr(Z_electrons[0].leg1(),'matchedTrgObjEls_Single')):
                     Z_matched = 1
             #low pt
-            elif Z_electrons[0].leg1().pt()<32 and Z_electrons[0].leg1().pt()>27.5 and Z_electrons[0].leg2().pt()>17.5 and Z_electrons[0].leg2().pt()<32:
+            elif Z_electrons[0].leg1().pt()<28 and Z_electrons[0].leg1().pt()>24 and Z_electrons[0].leg2().pt()>13 and Z_electrons[0].leg2().pt()<28:
                 if (hasattr(Z_electrons[0].leg1(),'matchedTrgObjEls_Double') and hasattr(Z_electrons[0].leg2(),'matchedTrgObjEls_Double')) and "Single" not in self.dataName:
                     Z_matched = 1
+            elif Z_electrons[0].leg1().pt()>28 and Z_electrons[0].leg2().pt()>10 and Z_electrons[0].leg2().pt()<13:
+                if (hasattr(Z_electrons[0].leg1(),'matchedTrgObjEls_Single')):
+                    Z_matched = 1
+
 
         #construct the H boson here if there is a good Z candidate:
 
@@ -457,10 +439,8 @@ class AZhAnalyzer(Analyzer):
             return True
 
         if Z_resonance and not self.cfg_ana.FAKERATE and Z_matched:
-            #print "RAKENNA H"
             Zleg1=Z_resonance[0].leg1()
             Zleg2=Z_resonance[0].leg2()
-
 
             if Zleg1 in allLeptonsFinal:
                 allLeptonsFinal.remove(Zleg1)
@@ -473,41 +453,21 @@ class AZhAnalyzer(Analyzer):
                     if leg1 in taus and leg2 in taus:
                         H_diTau = self.constructHbosondiTau(leg1, leg2, 0.5, event)
                         if H_diTau and self.testDeltaR(Zleg1, leg1, 0.5) and self.testDeltaR(Zleg1, leg2, 0.5) and self.testDeltaR(Zleg2, leg1, 0.5) and self.testDeltaR(Zleg2, leg2, 0.5):
-                        #if H_diTau and Z1_matched==1 and Z2_matched==1 and self.testDeltaR(Zleg1, leg1, 0.5) and self.testDeltaR(Zleg1, leg2, 0.5) and self.testDeltaR(Zleg2, leg1, 0.5) and self.testDeltaR(Zleg2, leg2, 0.5):
                             H_tt.append(H_diTau[0])
-                        #H_resonance.append(H_diTau[0])
                     elif (leg1 in taus) or (leg2 in taus):
                         if (leg1 in muons) or (leg2 in muons):
                             H_muTau = self.constructHbosonLepTau(leg1, leg2, 0.5, event)
                             if H_muTau and self.testDeltaR(Zleg1, H_muTau[0].leg1(), 0.3) and self.testDeltaR(Zleg1, H_muTau[0].leg2(), 0.5) and self.testDeltaR(Zleg2, H_muTau[0].leg1(), 0.3) and self.testDeltaR(Zleg2, H_muTau[0].leg2(), 0.5):
-                                ##if Z1_matched==1 and Z2_matched==1:
                                 H_mt.append(H_muTau[0])
-                                #elif (Z1_matched==0 or Z2_matched==0) and hasattr(H_muTau[0].leg1(),'matchedTrgObjMus'):
-                                #    H_mt.append(H_muTau[0])
-
-                         #   print "OKEI TOSI JEES"
-                         #   H_resonance.append(H_muTau[0])
                         if (leg1 in electrons) or (leg2 in electrons):
-                        #print "----------------------------"
-                        #print "OIS ET"
                             H_eleTau = self.constructHbosonLepTau(leg1, leg2, 0.5, event)
                             if H_eleTau and self.testDeltaR(Zleg1, H_eleTau[0].leg1(), 0.3) and self.testDeltaR(Zleg1, H_eleTau[0].leg2(), 0.5) and self.testDeltaR(Zleg2, H_eleTau[0].leg1(), 0.3) and self.testDeltaR(Zleg2, H_eleTau[0].leg2(), 0.5):
-                                #print "LISAA LISTAAN"
-                                ##if Z1_matched==1 and Z2_matched==1:
                                 H_et.append(H_eleTau[0])
-                               	##elif (Z1_matched==0 or Z2_matched==0) and hasattr(H_eleTau[0].leg1(),'matchedTrgObjEls'):
-                                ##    H_et.append(H_eleTau[0])
-                        #    H_resonance.append(H_eleTau[0])
                     else:
                         if (abs( leg1.pdgId() ) + abs( leg2.pdgId() )) not in [22,26]:   
                             H_eleMu = self.constructHbosonEleMu(leg1, leg2, 0.3, event)
                             if H_eleMu and self.testDeltaR(Zleg1, leg1, 0.3) and self.testDeltaR(Zleg1, leg2, 0.3) and self.testDeltaR(Zleg2, leg1, 0.3) and self.testDeltaR(Zleg2, leg2, 0.3):
-                                  	       	       	### CHECK THAT TWO TAUS	DO NOT OVERLAP WITH Z LEGS
-                                ###if Z1_matched==1 and Z2_matched==1:
                                 H_em.append(H_eleMu[0])
-                                ##elif (Z1_matched==0 or Z2_matched==0) and (hasattr(H_eleMu[0].leg1(),'matchedTrgObjEls') or hasattr(H_eleMu[0].leg2(),'matchedTrgObjMus') ): 
-                                ##    H_em.append(H_eleMu[0])
-                        #    H_resonance.append(H_eleMu[0])
         
         if (Z_muons):
             if H_tt and ( len(muonsGOOD) != 2 or len(electronsGOOD) != 0 ):
@@ -519,22 +479,13 @@ class AZhAnalyzer(Analyzer):
             if H_em and ( 2>len(muonsGOOD) or len(muonsGOOD)>3 or len(electronsGOOD) > 1 ):
                 H_em=[]
         elif (Z_electrons):
-            #print "OK"
             if H_tt and ( len(muonsGOOD) != 0 or len(electronsGOOD) != 2 ):
-                #print "HYLKY HTT"
                 H_tt=[]
        	    if H_et and ( len(muonsGOOD) != 0 or 2>len(electronsGOOD) or len(electronsGOOD)>3 ):
-                #print len(muonsGOOD)
-                #print len(electronsGOOD)
-                #print "HYLKY HET"
                 H_et=[]
        	    if H_mt and ( len(muonsGOOD) > 1 or len(electronsGOOD) != 2 ):
-                #print "HYLKAA"
-                #print len(muonsGOOD)
-                #print len(electronsGOOD)
                 H_mt=[]
        	    if H_em and ( len(muonsGOOD) > 1 or 2>len(electronsGOOD) or len(electronsGOOD)>3 ):
-                #print "HYLKY HEM"
                 H_em=[]
       
         
@@ -545,76 +496,29 @@ class AZhAnalyzer(Analyzer):
         H_em.sort(key=lambda x: x.LT(), reverse=True)
 
         if H_tt:
-         #   print "HTT: "
-         #   print len(H_tt)
-       	 #   print H_tt[0].LT()
-         #   print H_tt[0].pt()
             H_resonance.append(H_tt[0])
         if H_et:
-           # print "HET"
-           # print "HeT: "
-           # print len(H_et)
-       	   # print H_et[0].LT()
        	    H_resonance.append(H_et[0])
         if H_mt:
-         #   print "HmT: "
-         #   print len(H_mt)
-         #   print H_mt[0].pt()
-          #  print H_mt[0].LT()
-          #  print H_mt[0].leg1().pt()
-          #  print H_mt[1].LT()
-          #  print H_mt[1].leg1().pt()
-
        	    H_resonance.append(H_mt[0])
         if H_em:
        	    H_resonance.append(H_em[0]) 
 
         H_resonance.sort(key=lambda x: x.pt(), reverse=True)
 
-        #print "len resonances"
-        #print len(H_resonance)
-
-       #another check
+         #another check
         if self.cfg_ana.applyIDISO and len(H_resonance)>1:
             H_resonance = []
   
-        #If more than one Higgs, take the one with the largest LT
-       # if (len(H_em) + len(H_et) + len(H_tt) + len(H_mt) > 1):
-       #     H_resonance=H_resonance[:1]
-       #     Hleg1=H_resonance[0].leg1()
-       #     Hleg2=H_resonance[0].leg2()
-       #     if H_tt:              
-       #         if Hleg1 == H_tt[0].leg1() and Hleg2 == H_tt[0].leg2():
-       #             #print "KORKEIN LT"
-       #             H_tt=H_tt[:1]                
-       #             H_em=[]
-       #             H_mt=[]
-       #             H_et=[]
-       #     if H_et:
-       #	        if Hleg1 == H_et[0].leg1() and Hleg2 == H_et[0].leg2():
-       #             H_et=H_et[:1]
-       #             H_em=[]
-       #	       	    H_mt=[]
-       #	       	    H_tt=[]
-       #     if H_mt:
-       #	        if Hleg1 == H_mt[0].leg1() and Hleg2 == H_mt[0].leg2():
-       #             #print "MT"
-       #             H_mt=H_mt[:1]
-       #             H_em=[]
-       #	       	    H_tt=[]
-       #	       	    H_et=[]
-       #     if H_em:
-       #	        if Hleg1 == H_em[0].leg1() and Hleg2 == H_em[0].leg2():
-       #             H_em=H_em[:1]
-       #             H_tt=[]
-       #	       	    H_mt=[]
-       #	       	    H_et=[]
-
                
         setattr(event, 'allLeptonsFinal', len(allLeptonsFinal))
+ 
 
+        leptons_tt = []
+        leptons_et = []
+        leptons_mt = []
+        leptons_em = []
         if (H_resonance and Z_resonance):
-           # print "MOLEMMAT OLI"
             if (Z_muons):
                 setattr(event, 'Z_mm_len', len(Z_muons))
                 setattr(event, 'Zboson_mm', Z_muons)
@@ -623,7 +527,13 @@ class AZhAnalyzer(Analyzer):
                 setattr(event, 'Zboson_ee', Z_electrons)
             setattr(event, 'Zboson', Z_resonance)
             setattr(event, 'Hboson', H_resonance)
+            Zleg1 = Z_resonance[0].leg1()
+            Zleg2 = Z_resonance[0].leg2()
             if (H_em):
+                leptons_em.append(Zleg1)
+                leptons_em.append(Zleg2)
+                leptons_em.append( H_em[0].leg1())
+                leptons_em.append( H_em[0].leg2())
                 setattr(event, 'H_em_len', len(H_em))
                 setattr(event, 'Hboson_em', H_em)#H_eleMu)
                 Aboson = Resonance(H_em[0], Z_resonance[0], met, 36, 3)
@@ -631,13 +541,16 @@ class AZhAnalyzer(Analyzer):
                 A_resonance.append(Aboson)
                 setattr(event, 'Aboson_em', A_resonance)
             if (H_et):
-                #print "JEEE, LOPPU"
                 setattr(event, 'Hboson_et', H_et)#H_eleTau)
                 setattr(event, 'H_et_len', len(H_et))
                 Aboson = Resonance(H_et[0], Z_resonance[0], met, 36, 3)
        	       	A_resonance=[]
                 A_resonance.append(Aboson)
                 setattr(event, 'Aboson_et', A_resonance)
+                leptons_et.append(Zleg1)
+                leptons_et.append(Zleg2)
+                leptons_et.append( H_et[0].leg1())
+                leptons_et.append( H_et[0].leg2())
             if (H_mt):
                 setattr(event, 'H_mt_len', len(H_mt))
                 setattr(event, 'Hboson_mt', H_mt)#H_muTau)
@@ -645,6 +558,10 @@ class AZhAnalyzer(Analyzer):
        	       	A_resonance=[]
                 A_resonance.append(Aboson)
                 setattr(event, 'Aboson_mt', A_resonance)
+                leptons_mt.append(Zleg1)
+                leptons_mt.append(Zleg2)
+                leptons_mt.append( H_mt[0].leg1())
+                leptons_mt.append( H_mt[0].leg2())
             if (H_tt):
                 setattr(event, 'H_tt_len', len(H_tt))
                 setattr(event, 'Hboson_tt', H_tt)
@@ -652,19 +569,16 @@ class AZhAnalyzer(Analyzer):
        	       	A_resonance=[]
                 A_resonance.append(Aboson)
                 setattr(event, 'Aboson_tt', A_resonance)
+                leptons_tt.append(Zleg1)
+                leptons_tt.append(Zleg2)
+                leptons_tt.append( H_tt[0].leg1())
+                leptons_tt.append( H_tt[0].leg2())
+            setattr(event, 'leptons_tt', leptons_tt)
+            setattr(event, 'leptons_em', leptons_em)
+            setattr(event, 'leptons_mt', leptons_mt)
+            setattr(event, 'leptons_et', leptons_et)
             return True
         else:
             return False
 
-        #construct the A boson here
 
-       # A_resonance=[]
-
-       # if Z_resonance and H_resonance:
-       #     Aboson = Resonance(H_resonance[0], Z_resonance[0], met, 36, 3)
-           # if 220<=Aboson.mass()<=350:
-       #     A_resonance.append(Aboson)
-       #     setattr(event, 'Aboson', A_resonance)
-       #     return True
-       # else:
-       #     return False  
