@@ -64,7 +64,7 @@ from CMGTools.H2TauTau.htt_ntuple_base_cff import commonSequence, httGenAna, tri
 production = getHeppyOption('production', False)
 pick_events = getHeppyOption('pick_events', False)
 syncntuple = getHeppyOption('syncntuple', True)
-cmssw = getHeppyOption('cmssw', False)
+cmssw = getHeppyOption('cmssw', True)
 computeSVfit = getHeppyOption('computeSVfit', False)
 data = getHeppyOption('data', False)
 reapplyJEC = getHeppyOption('reapplyJEC', True)

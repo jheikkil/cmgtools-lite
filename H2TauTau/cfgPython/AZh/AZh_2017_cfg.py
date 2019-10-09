@@ -8,10 +8,11 @@ from PhysicsTools.Heppy.analyzers.core.all import TriggerMatchAnalyzer
 from PhysicsTools.Heppy.analyzers.core.all import TriggerBitFilter
 
 from CMGTools.H2TauTau.proto.analyzers.MuMuAnalyzer import MuMuAnalyzer
-from CMGTools.H2TauTau.proto.analyzers.CountEvents import CountEvents
+##from CMGTools.H2TauTau.proto.analyzers.CountEvents import CountEvents
 from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzerMuons import AZhAnalyzerMuons
 from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzerZboson import AZhAnalyzerZboson      
 from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzer import AZhAnalyzer
+from CMGTools.H2TauTau.proto.analyzers.TauScaler import TauScaler
 from CMGTools.H2TauTau.proto.analyzers.AZhAnalyzerHboson import AZhAnalyzerHboson
 from CMGTools.H2TauTau.proto.analyzers.LeptonSelector import LeptonSelector
 from CMGTools.H2TauTau.proto.analyzers.H2TauTauTreeProducerAZh import H2TauTauTreeProducerAZh
@@ -39,7 +40,7 @@ from CMGTools.H2TauTau.proto.analyzers.SVfitProducer import SVfitProducer
 from PhysicsTools.Heppy.utils.cmsswPreprocessor import CmsswPreprocessor
 from CMGTools.H2TauTau.proto.analyzers.FileCleaner import FileCleaner
 
-from CMGTools.H2TauTau.proto.samples.spring16.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_single_muon, sync_list, DY_sync_list, WZ_sync_list, AZH_control, AZH_data, AZH_tight, AZH_test, AZH_masses, DY_inc, AZH_data_single
+from CMGTools.H2TauTau.proto.samples.spring16.htt_common import backgrounds_mu, sm_signals, mssm_signals, data_single_muon, sync_list, DY_sync_list, WZ_sync_list, AZH_control, AZH_data, AZH_tight, AZH_test, AZH_masses, DY_inc, AZH_data_single, AZH_FR
 from CMGTools.H2TauTau.proto.samples.spring16.htt_common import *
 
 
@@ -68,8 +69,8 @@ FAKERATE = getHeppyOption('FAKERATE', False)
 
 #inputSample = cfg.MCComponent(
 #    'test_component',
-#    files = '/afs/cern.ch/work/j/jheikkil/MSSM2017/CMSSW_8_0_25/src/CMGTools/H2TauTau/cfgPython/AZh/pickevents.root'  # returns a list of file for this release
-#    # a list of local or xrootd files can be specified by hand.
+#    files = 'root://cms-xrd-global.cern.ch//store/mc/RunIISummer16MiniAODv2/AToZhToLLTauTau_M-220_13TeV_madgraph_4f_LO/MINIAODSIM/PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext1-v1/60000/8A590B2F-DDD0-E611-83A6-002590D9D8C2.root'  # returns a list of file for this release
+    # a list of local or xrootd files can be specified by hand.
 #)
 
 
@@ -98,6 +99,11 @@ LepSelector = cfg.Analyzer(
     doElectronScaleCorrections=False,
     #ofakeRate = True if FAKERATE else False,
     #isMC = False if data else True,
+)
+
+TauScaler = cfg.Analyzer(
+    TauScaler,
+    name='TauScaler',
 )
 
 
@@ -259,13 +265,15 @@ fileCleaner = cfg.Analyzer(
 
 # Minimal list of samples
 samples=[]
+#samples = ZZ_control ####TTW_control
 #samples = DY_all
 #samples = ttZ_control
 #samples = DY_inc
 #samples = backgrounds_mu + sm_signals + mssm_signals + AZH_control
-##samples = [inputSample]
+#samples = [inputSample]
 #samples = AZH_control
-samples = AZH_masses
+##samples = AZH_masses
+samples = AZH_FR
 ##samples = sync_list
 #inputJaana = sync_list
 
@@ -283,15 +291,16 @@ if samples:
         # mc.puFileData = '$CMSSW_BASE/src/CMGTools/H2TauTau/data/data_pu_25-07-2016_69p2mb_60.root'
                 mc.puFileMC = '$CMSSW_BASE/src/CMGTools/H2TauTau/data/MC_Spring16_PU25_Startup_800.root'
 
-
 # Additional samples
 
 # split_factor = 3e4
-split_factor = 1#2e5 
+split_factor = 100 
 
 
 sequence=commonSequence
 sequence.insert(sequence.index(httGenAna), LepSelector)
+if not data:
+    sequence.insert(sequence.index(httGenAna), TauScaler)
 sequence.insert(sequence.index(httGenAna), trigMatcherEls)
 sequence.insert(sequence.index(httGenAna), trigMatcherMusDouble)
 sequence.insert(sequence.index(httGenAna), trigMatcherMusSingle)
@@ -329,7 +338,7 @@ if not cmssw:
 
 #selectedComponents=ZZ_control2
 #selectedComponents=AZH_tight
-#selectedComponents=AZH_control
+##selectedComponents=AZH_control
 #selectedComponents=[inputSample]
 selectedComponents=samples
 #selectedComponents=AZH_data
@@ -348,6 +357,13 @@ if test == '1':
     selectedComponents = [ comp ]
     #print "Component name:"
     #print comp.name
+
+    #if data:
+    #   comp.isMC = False
+    #   comp.isData = True
+    #   module = [s for s in sequence if s.name == 'JSONAnalyzer'][0]
+    #   sequence.remove(module) 
+
 elif test == '2':
     #from CMGTools.Production.promptRecoRunRangeFilter import filterWithCollection
     #selectedComponents = []
@@ -379,7 +395,7 @@ if not production and not data and test == None:
     #for i in xrange(len(inputJaana)):
         #print inputJaana[i]
         #comp = inputJaana[i]
-        comp.splitFactor = 1#100
+        comp.splitFactor = 100
         #selectedComponents += [comp]
    # comp2 = inputJaana[1]
     #comp.splitFactor = 1#00
