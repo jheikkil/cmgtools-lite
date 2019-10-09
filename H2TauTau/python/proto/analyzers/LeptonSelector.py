@@ -43,6 +43,11 @@ class LeptonSelector(Analyzer):
                 'std::vector<pat::MET>'
             )
 
+        self.handles['metCov'] = AutoHandle(
+                'METSignificance:METCovariance:H2TAUTAU',
+                'ROOT::Math::SMatrix<double,2,2,ROOT::Math::MatRepSym<double,2>>'
+            )
+
 
     def process(self, event):
 
@@ -52,25 +57,22 @@ class LeptonSelector(Analyzer):
 
         event.goodVertices = event.vertices
 
-        #print "LEPTON SELECTOOOORRRRRRRRRrrr"
-
         muons = map(Muon, self.handles['muons'].product())  
         electrons = map(Electron, self.handles['electrons'].product())
         taus = map(Tau, self.handles['taus'].product())
         met = self.handles['met'].product()[0] 
+        METSignificance = self.handles['metCov'].product()
 
         fillMatrix = False
-        if hasattr(met, 'getSignificanceMatrix'):
-            mvaMetSig = met.getSignificanceMatrix()
-
-            metcov00 = mvaMetSig(0,0)
-            metcov01 = mvaMetSig(0,1)
-            metcov10 = mvaMetSig(1,0)
-            metcov11 = mvaMetSig(1,1)
-            fillMatrix=True
+        #if hasattr(met, 'getSignificanceMatrix'):
+            #mvaMetSig = met.getSignificanceMatrix()
+            #
+        metcov00 = METSignificance[0][0]#mvaMetSig(0,0)
+        metcov01 = METSignificance[0][1]#mvaMetSig(0,1)
+        metcov10 = METSignificance[0][1] #met.getSignificanceMatrix[1][0]#mvaMetSig(1,0)
+        metcov11 = METSignificance[1][1] #met.getSignificanceMatrix[1][1] #mvaMetSig(1,1)
+        fillMatrix=True
  
-        print "OK"
-
         #set vertex for each candidate
         setVertex = []
         setVertex += muons
@@ -79,10 +81,8 @@ class LeptonSelector(Analyzer):
 
         for leptoni in setVertex:
             leptoni.associatedVertex = event.goodVertices[0]
-            #print "ASETA VERTEX"
 
         if self.cfg_ana.doElectronScaleCorrections:
-            print "LET US DO IT"
             conf = self.cfg_ana.doElectronScaleCorrections
             print conf['isSync']
             print conf['isMC']
@@ -95,14 +95,10 @@ class LeptonSelector(Analyzer):
 
         for lep in electrons:
             lep.event = event.input.object()
-        #    print "pt before"
-        #    print lep.pt()
         
         if self.cfg_ana.doElectronScaleCorrections:
             for lep in electrons:
                 self.electronEnergyCalibrator.correct(lep, event.run)          
-                print "pt after"  
-                print lep.pt()
 
         setattr(event, 'nMuonsBEFORE', len(muons))
         setattr(event, 'nElectronsBEFORE', len(electrons))
@@ -113,18 +109,16 @@ class LeptonSelector(Analyzer):
         #define good leptons, remove iso
         muonsGOOD = [ muon for muon in muons if muon.pt()>10 and abs(muon.eta())<2.4 and  abs(muon.dxy()) < 0.045 and abs(muon.dz()) < 0.2 and muon.muonID('POG_ID_Loose') and muon.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.25]
         electronsGOOD = [ electron for electron in electrons if electron.pt()>10 and abs(electron.eta())<2.5 and abs(electron.dxy()) < 0.045 and abs(electron.dz()) < 0.2 and electron.mvaIDRun2('Spring16', 'POG90') and electron.passConversionVeto() and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1]
-        tausGOOD = [ tau for tau in taus if tau.pt()>20 and abs(tau.eta())<2.3 and tau.tauID('decayModeFinding') > 0.5 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('byMediumIsolationMVArun2v1DBoldDMwLT') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonLoose3') > 0.5]
+        tausGOOD = [ tau for tau in taus if tau.pt()>18 and abs(tau.eta())<2.3 and tau.tauID('decayModeFinding') > 0.5 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('byMediumIsolationMVArun2v1DBoldDMwLT') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonLoose3') > 0.5]
 
         if self.cfg_ana.applyIDISO:
-            #print "OKOKOK"
             muons = [ muon for muon in muonsGOOD]
             electrons = [ electron for electron in electronsGOOD] # if electron.pt()>9 and abs(electron.eta())<2.5 and abs(electron.dxy()) < 0.045 and abs(electron.dz()) < 0.2 and electron.mvaIDRun2('Spring16', 'POG90') and electron.passConversionVeto() and electron.relIsoR(R=0.3, dBetaFactor=0.5, allCharged=0) < 0.3 and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1]
             taus = [ tau for tau in tausGOOD] #if tau.pt()>20 and abs(tau.eta())<2.3 and tau.tauID('decayModeFinding') > 0.5 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('byMediumIsolationMVArun2v1DBoldDMwLT') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonLoose3') > 0.5]     
         else:
-            #print "LET US NOT USE IDISO YET!"
             muons = [ muon for muon in muons if muon.pt()>9 and abs(muon.eta())<2.4 and abs(muon.dxy()) < 0.045 and abs(muon.dz()) < 0.2 and ( muon.isGlobalMuon() or muon.isTrackerMuon() )]
             electrons = [ electron for electron in electrons if electron.pt()>9 and abs(electron.eta())<2.5 and abs(electron.dxy()) < 0.045 and abs(electron.dz()) < 0.2 and electron.passConversionVeto() and electron.gsfTrack().hitPattern().numberOfHits(ROOT.reco.HitPattern.MISSING_INNER_HITS) <= 1]
-            taus = [ tau for tau in taus if tau.pt()>20 and abs(tau.eta())<2.3 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('decayModeFinding') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonLoose3') > 0.5]
+            taus = [ tau for tau in taus if tau.pt()>18 and abs(tau.eta())<2.3 and abs(tau.leadChargedHadrCand().dz()) < 0.2 and tau.tauID('decayModeFinding') > 0.5 and tau.tauID('againstElectronVLooseMVA6') > 0.5 and tau.tauID('againstMuonLoose3') > 0.5]
 
         leptons_me = []
         leptons_me += muons
@@ -173,8 +167,14 @@ class LeptonSelector(Analyzer):
         allLeptons += electrons
         allLeptons += taus
 
+        goodLeptons = []
+        goodLeptons += muonsGOOD
+        goodLeptons += electronsGOOD
+        goodLeptons += tausGOOD
+
         setattr(event, 'allLeptons', len(allLeptons))
         setattr(event, 'selectedLeptons', allLeptons)
+        setattr(event, 'goodLeptons', goodLeptons)
 
         #if len(allLeptons)!=3:
         #    fourLeptons = True
