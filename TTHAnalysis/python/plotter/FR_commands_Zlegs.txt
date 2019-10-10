@@ -1,0 +1,40 @@
+python ttH-multilepton/dataFakeRate.py mcaFR_LL_muons.txt cutsFR_muon_CTRL.txt cutsFR_muon_num_Zleg.txt plotsFR_muon_CTRL.txt pfmt_fix -P /afs/cern.ch/work/j/jheikkil/MSSM2017/CMSSW_8_0_25/src/CMGTools/H2TauTau/cfgPython/AZh/Batch_CTRL_3L_0911/ --skimPath --s2v -j 6 --s2v -o /eos/user/j/jheikkil/www/FR_Zlegs_final/FR_muon_1p2.root -f -W weight_gen*puweight -l 35.9 -p fakes,VZ,data  --flp VZ,fakes --groupBy cut --compare fakes_prefit,data_fit --sp fakes --algo=fitSimND --shapeSystSignal=l:0.2,s:0.1,b:0.01 --shapeSystBackground=l:0.1,s:0.05,b:0.01 --yrange 0 0.50 --showRatio --maxRatioRange 0 2  --ratioRange 0 2 -A "entry point" etacut "abs(muon_FR_eta)<1.2 && m_vis>81.2 && mass_3_cheap(pt_1,eta_1,pt_2,eta_2,phi_2-phi_1,muon_FR_pt, muon_FR_eta, muon_FR_phi-phi_1) < 250 && met_pt<55"
+
+
+and leg1.muonID('POG_ID_Loose') and leg1.relIsoR(R=0.4, dBetaFactor=0.5, allCharged=0) < 0.25 and leg1.pt()>10
+
+
+iso_1
+
+
+
+
+python ttH-multilepton/dataFakeRate.py mcaFR_LL_muons.txt cutsFR_muon_CTRL.txt cutsFR_muon_num_Zleg.txt plotsFR_muon_CTRL.txt pfmt_fix -P /afs/cern.ch/work/j/jheikkil/MSSM2017/CMSSW_8_0_25/src/CMGTools/H2TauTau/cfgPython/AZh/Batch_CTRL_3L_0911/ --skimPath --s2v -j 6 --s2v -o /eos/user/j/jheikkil/www/FR_Zboson/FR_muon_1p2.root -f -W weight_gen*puweight -l 35.9 -p fakes,VZ,data  --flp VZ,fakes --groupBy cut --compare fakes_prefit,data_fit --sp fakes --algo=fitSimND --shapeSystSignal=l:0.2,s:0.1,b:0.01 --shapeSystBackground=l:0.1,s:0.05,b:0.01 --yrange 0 0.50 --showRatio --maxRatioRange 0 2  --ratioRange 0 2 -A "entry point" etacut "abs(muon_FR_eta)<1.2 && m_vis>81.2 && mass_3_cheap(pt_1,eta_1,pt_2,eta_2,phi_2-phi_1,muon_FR_pt, muon_FR_eta, muon_FR_phi-phi_1) < 250 && met_pt<55"
+
+- for electrons, use other cuts cutsFR_muon_num_Zleg.txt but otherwise the same
+
+
+
+--- Additional constraint on the fbkg; 10%
+
+muons
+
+-denom iso 1.5
+
+ 1p2
+python ttH-multilepton/dataFakeRate.py mcaFR_LL_muons.txt cutsFR_muon_CTRL.txt cutsFR_muon_num_Zleg.txt plotsFR_muon_CTRL.txt pfmt_fix -P /afs/cern.ch/work/j/jheikkil/MSSM2017/CMSSW_8_0_25/src/CMGTools/H2TauTau/cfgPython/AZh/Batch_CTRL_3L_0911/ --skimPath --s2v -j 6 --s2v -o /eos/user/j/jheikkil/www/FR_Zlegs_final/FR_muon_1p2.root -f -W weight_gen*puweight -l 35.9 -p fakes,VZ,data  --flp VZ,fakes --groupBy cut --compare fakes_prefit,data_fit --sp fakes --algo=fitSimND --shapeSystSignal=l:0.2,s:0.1,b:0.01 --shapeSystBackground=l:0.1,s:0.05,b:0.01 --yrange 0 0.50 --showRatio --maxRatioRange 0 2  --ratioRange 0 2 -A "entry point" etacut "abs(muon_FR_eta)<1.2 && m_vis>81.2 && mass_3_cheap(pt_1,eta_1,pt_2,eta_2,phi_2-phi_1,muon_FR_pt, muon_FR_eta, muon_FR_phi-phi_1) < 250 && met_pt<55"
+
+2p4
+
+python ttH-multilepton/dataFakeRate.py mcaFR_LL_muons.txt cutsFR_muon_CTRL.txt cutsFR_muon_num_Zleg.txt plotsFR_muon_CTRL.txt pfmt_fix -P /afs/cern.ch/work/j/jheikkil/MSSM2017/CMSSW_8_0_25/src/CMGTools/H2TauTau/cfgPython/AZh/Batch_CTRL_3L_0911/ --skimPath --s2v -j 6 --s2v -o /eos/user/j/jheikkil/www/FR_Zlegs_final/FR_muon_2p4.root -f -W weight_gen*puweight -l 35.9 -p fakes,VZ,data  --flp VZ,fakes --groupBy cut --compare fakes_prefit,data_fit --sp fakes --algo=fitSimND --shapeSystSignal=l:0.2,s:0.1,b:0.01 --shapeSystBackground=l:0.1,s:0.05,b:0.01 --yrange 0 0.50 --showRatio --maxRatioRange 0 2  --ratioRange 0 2 -A "entry point" etacut "abs(muon_FR_eta)>=1.2 && m_vis>81.2 && mass_3_cheap(pt_1,eta_1,pt_2,eta_2,phi_2-phi_1,muon_FR_pt, muon_FR_eta, muon_FR_phi-phi_1) < 250 "
+
+
+electrons 
+
+-- denom iso 1.5
+python ttH-multilepton/dataFakeRate.py mcaFR_LL_2proc_ELE_v2.txt cutsFR_ele_isocut200_CTRL.txt cutsFR_ele_num_Zleg.txt plotsFR_ele_CTRL.txt pfmt_fix -P /afs/cern.ch/work/j/jheikkil/MSSM2017/CMSSW_8_0_25/src/CMGTools/H2TauTau/cfgPython/AZh/Batch_CTRL_3L_0911/ --skimPath --s2v -j 6 --s2v -o /eos/user/j/jheikkil/www/FR_Zlegs_final/electron_1p5.root -f -W weight_gen*puweight -l 35.9 -p fakes,VZ,data  --flp fakes --groupBy cut --compare fakes_prefit,data_fit --sp fakes --algo=fitSimND --shapeSystSignal=l:0.2,s:0.1,b:0.01 --shapeSystBackground=l:0.1,s:0.05,b:0.01 --same-nd-templates  --yrange 0 0.50 --showRatio --maxRatioRange 0 2  --ratioRange 0 2 -A "entry point" etacut "abs(electron_FR_eta)<1.479 && m_vis > 81.2 && min(abs(mass_2(pt_1, eta_1, phi_1, m_1, electron_FR_pt, electron_FR_eta, electron_FR_phi, electron_FR_mass)  - m_vis), abs(mass_2(pt_2, eta_2, phi_2, m_2, electron_FR_pt, electron_FR_eta, electron_FR_phi, electron_FR_mass) -m_vis)) > 5 && max(iso_1,iso_2)<0.14 && met_pt<55" 
+
+
+python ttH-multilepton/dataFakeRate.py mcaFR_LL_2proc_ELE_v2.txt cutsFR_ele_isocut200_CTRL.txt cutsFR_ele_num_Zleg.txt plotsFR_ele_CTRL.txt pfmt_fix -P /afs/cern.ch/work/j/jheikkil/MSSM2017/CMSSW_8_0_25/src/CMGTools/H2TauTau/cfgPython/AZh/Batch_CTRL_3L_0911/ --skimPath --s2v -j 6 --s2v -o /eos/user/j/jheikkil/www/FR_Zlegs_final/electron_2p5.root -f -W weight_gen*puweight -l 35.9 -p fakes,VZ,data  --flp fakes --groupBy cut --compare fakes_prefit,data_fit --sp fakes --algo=fitSimND --shapeSystSignal=l:0.2,s:0.1,b:0.01 --shapeSystBackground=l:0.1,s:0.05,b:0.01 --same-nd-templates  --yrange 0 0.50 --showRatio --maxRatioRange 0 2  --ratioRange 0 2 -A "entry point" etacut "abs(electron_FR_eta)>=1.479 && m_vis > 81.2 && min(abs(mass_2(pt_1, eta_1, phi_1, m_1, electron_FR_pt, electron_FR_eta, electron_FR_phi, electron_FR_mass)  - m_vis), abs(mass_2(pt_2, eta_2, phi_2, m_2, electron_FR_pt, electron_FR_eta, electron_FR_phi, electron_FR_mass) -m_vis)) > 5 && max(iso_1,iso_2)<0.14" 
+
+
