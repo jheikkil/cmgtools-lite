@@ -175,6 +175,8 @@ class svFit_classic:
         cov01 = event.metcov01
         cov11 = event.metcov11
 
+
+        #In reality this should never happen, and might cause issues if it does..
         if cov00 == -9999:
             cov00 = 0
         if cov01 == -9999:
