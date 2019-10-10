@@ -1,0 +1,13 @@
+cut-change: l3_eid_80:1
+cut-change: iso_3: 0.14
+
+cut-change: l4_muonid_loose : 1
+cut-change: iso_4: 0.14
+
+weight : (iso_3<0.6   && iso_4<1.0 && ( (l3_eid_80<1 || iso_3>=0.15) || (l4_muonid_loose<1 || iso_4 >= 0.15) ))*fakeRateWeight_AZhUW(shiftedPt_3, eta_3, shiftedPt_4, eta_4, 111310, -99, -99,  l3_eid_80>0 && iso_3<0.15, l4_muonid_loose>0 && iso_4 < 0.15 )
+
+
+load-histo: FR_em_m_eup  : FR_Sep25.root : FR_muon_data
+load-histo: FR_em_e_eup  : FR_Sep25.root : FR_ele_data_up
+
+

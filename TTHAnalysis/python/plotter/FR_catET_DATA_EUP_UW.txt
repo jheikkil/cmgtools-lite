@@ -1,0 +1,11 @@
+cut-change: l3_eid_80:1
+cut-change: iso_3: 0.14
+
+cut-change: l4_byMediumIsolationMVArun2v1DBoldDMwLT: 1
+cut-change: l4_againstElectron : 4
+
+weight: (getVVLoose( iso_4, shiftedPt_4 ) > 0 && iso_3<0.6  && ( (l3_eid_80<1 || iso_3>=0.15) || (l4_byMediumIsolationMVArun2v1DBoldDMwLT<1 ||  l4_againstElectron<4) ))*fakeRateWeight_AZhUW(shiftedPt_3, eta_3, shiftedPt_4, eta_4, 111510, -99, decayMode_4, l3_eid_80>0 && iso_3<0.15, l4_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && l4_againstElectron>=4)
+
+load-histo: FR_et_e_eup   : FR_Sep25.root : FR_ele_data_up
+load-histo: FR_et_t_eup   : FR_Sep25.root : FR_tau_data
+
