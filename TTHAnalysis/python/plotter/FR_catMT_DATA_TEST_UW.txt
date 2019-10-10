@@ -1,0 +1,11 @@
+cut-change: l3_muonid_loose : 1
+cut-change: iso_3: 0.14
+
+cut-change: l4_byMediumIsolationMVArun2v1DBoldDMwLT: 1
+cut-change: l4_againstMuon : 2
+
+weight: ( getVVLoose( iso_4, shiftedPt_4 ) > 0 && iso_3<1.0 && ( (iso_3 >= 0.15 || l3_muonid_loose < 1)  || ( l4_byMediumIsolationMVArun2v1DBoldDMwLT<1 || l4_againstMuon<2) ))*fakeRateWeight_AZhUW(shiftedPt_3, eta_3, shiftedPt_4, eta_4, 131500,  -99, decayMode_4, iso_3 < 0.15 && l3_muonid_loose > 0, l4_byMediumIsolationMVArun2v1DBoldDMwLT>0.5 && l4_againstMuon>=2)
+
+load-histo: FR_mu  : FR_Sep25.root : FR_muon_data
+load-histo: FR_tau  : FR_Sep25.root : FR_tau_data
+

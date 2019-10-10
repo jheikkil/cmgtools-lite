@@ -1,0 +1,16 @@
+## Let the first and second leshiftedPton always pass the MVA cuts (set the value to 1)
+cut-change: l3_byMediumIsolationMVArun2v1DBoldDMwLT: 1
+cut-change: l4_byMediumIsolationMVArun2v1DBoldDMwLT: 1
+
+#cut-change: H_tt_l1_againstMuon3 : 2
+#cut-change: H_tt_l2_againstMuon3 : 2
+#cut-change: H_tt_l1_againstElectronMVA6 : 4
+#cut-change: H_tt_l2_againstElectronMVA6 : 4
+
+
+## define the FR weight
+weight: (getVVLoose( iso_3, shiftedPt_3 ) > 0 && getVVLoose( iso_4, shiftedPt_4 ) > 0  )*fakeRateWeight_AZhUW(shiftedPt_3, eta_3, shiftedPt_4, eta_4, 151500, decayMode_3, decayMode_4, l3_byMediumIsolationMVArun2v1DBoldDMwLT, l4_byMediumIsolationMVArun2v1DBoldDMwLT)
+###&& (l3_byMediumIsolationMVArun2v1DBoldDMwLT<1 || l4_byMediumIsolationMVArun2v1DBoldDMwLT<1) )*fakeRateWeight_AZhUW(shiftedPt_3, eta_3, shiftedPt_4, eta_4, 151500, decayMode_3, decayMode_4, l3_byMediumIsolationMVArun2v1DBoldDMwLT, l4_byMediumIsolationMVArun2v1DBoldDMwLT)
+
+load-histo: FR_tau  : FR_Sep25.root : FR_tau_data
+
