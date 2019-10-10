@@ -1,0 +1,394 @@
+##Double electron
+data : DoubleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0 ; FillColor=ROOT.kBlack
+data : DoubleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0 ; FillColor=ROOT.kBlack
+data : DoubleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0 ; FillColor=ROOT.kBlack
+data : DoubleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0 ; FillColor=ROOT.kBlack
+data : DoubleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0 ; FillColor=ROOT.kBlack
+data : DoubleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0 ; FillColor=ROOT.kBlack
+data : DoubleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0 ; FillColor=ROOT.kBlack
+data : DoubleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0 ; FillColor=ROOT.kBlack
+data : DoubleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0 ; FillColor=ROOT.kBlack
+
+##Double muon
+data : DoubleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0  ;  FillColor=ROOT.kBlack
+data : DoubleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0  ;  FillColor=ROOT.kBlack
+data : DoubleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0  ;  FillColor=ROOT.kBlack
+data : DoubleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0  ;  FillColor=ROOT.kBlack
+data : DoubleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0  ;  FillColor=ROOT.kBlack
+data : DoubleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0  ;  FillColor=ROOT.kBlack
+data : DoubleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0  ;  FillColor=ROOT.kBlack
+data : DoubleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0  ;  FillColor=ROOT.kBlack
+data : DoubleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0  ;  FillColor=ROOT.kBlack
+
+##Single electron
+data :SingleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1 ; FillColor=ROOT.kBlack
+data :SingleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1 ; FillColor=ROOT.kBlack
+data :SingleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1 ; FillColor=ROOT.kBlack
+data :SingleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1 ; FillColor=ROOT.kBlack
+data :SingleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1 ; FillColor=ROOT.kBlack
+data :SingleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1 ; FillColor=ROOT.kBlack
+data :SingleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1 ; FillColor=ROOT.kBlack
+data :SingleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1 ; FillColor=ROOT.kBlack
+data :SingleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1 ; FillColor=ROOT.kBlack
+
+##Single muon
+data : SingleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1 ;  FillColor=ROOT.kBlack
+data : SingleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1 ;  FillColor=ROOT.kBlack
+data : SingleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1 ;  FillColor=ROOT.kBlack
+data : SingleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1 ;  FillColor=ROOT.kBlack
+data : SingleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1 ;  FillColor=ROOT.kBlack
+data : SingleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1 ;  FillColor=ROOT.kBlack
+data : SingleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1 ;  FillColor=ROOT.kBlack
+data : SingleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1 ;  FillColor=ROOT.kBlack
+data : SingleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1 ;  FillColor=ROOT.kBlack
+
+
+
+##Fake rate double electron
+
+data_FR : DoubleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+
+##Fake rate double muon
+
+data_FR : DoubleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : DoubleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+
+
+##Single electron
+data_FR : SingleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+
+##Single muon
+data_FR : SingleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+data_FR : SingleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FillColor=ROOT.kGreen+1,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='FR_data'
+
+WZ: HiggsWZ_min01/H2TauTauTreeProducerAZhEEEM : 58.59*0.65 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kViolet+5, Label='WZ'
+WZ: HiggsWZ_min01/H2TauTauTreeProducerAZhMMEM : 58.59*0.65 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kViolet+5, Label='WZ'
+
+ZZ : HiggsZZTo4lv1/H2TauTauTreeProducerAZhEEEM+HiggsZZTo4lv2/H2TauTauTreeProducerAZhEEEM:  1.256*1.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kGreen, Label='ZZ'
+ZZ : HiggsZZTo4lv1/H2TauTauTreeProducerAZhMMEM+HiggsZZTo4lv2/H2TauTauTreeProducerAZhMMEM:  1.256*1.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kGreen, Label='ZZ'
+
+#ZZ_FR: HiggsZZTo4lv1/H2TauTauTreeProducerAZhEEEM+HiggsZZTo4lv2/H2TauTauTreeProducerAZhEEEM:  1.256*1.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kGreen,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='ZZ_FR'
+#ZZ_FR: HiggsZZTo4lv1/H2TauTauTreeProducerAZhMMEM+HiggsZZTo4lv2/H2TauTauTreeProducerAZhMMEM:  1.256*1.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kGreen,  FakeRate='FR_catEM_DATA_TEST_UW.txt', Label='ZZ_FR'
+
+ggZZ: HiggsGGToZZ2e2m/H2TauTauTreeProducerAZhEEEM: 0.00319*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+ggZZ: HiggsGGToZZ2e2m/H2TauTauTreeProducerAZhMMEM: 0.00319*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+
+ggZZ: HiggsGGToZZ2e2t/H2TauTauTreeProducerAZhEEEM: 0.00319*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+ggZZ: HiggsGGToZZ2e2t/H2TauTauTreeProducerAZhMMEM: 0.00319*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+
+ggZZ: HiggsGGToZZ2m2t/H2TauTauTreeProducerAZhEEEM: 0.00319*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+ggZZ: HiggsGGToZZ2m2t/H2TauTauTreeProducerAZhMMEM: 0.00319*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+
+ggZZ: HiggsGGToZZ4e/H2TauTauTreeProducerAZhEEEM: 0.00159*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+ggZZ: HiggsGGToZZ4e/H2TauTauTreeProducerAZhMMEM: 0.00159*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+
+ggZZ: HiggsGGToZZ4m/H2TauTauTreeProducerAZhEEEM: 0.00159*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+ggZZ: HiggsGGToZZ4m/H2TauTauTreeProducerAZhMMEM: 0.00159*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+
+ggZZ: HiggsGGToZZ4t/H2TauTauTreeProducerAZhEEEM: 0.00159*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+ggZZ: HiggsGGToZZ4t/H2TauTauTreeProducerAZhMMEM: 0.00159*2.1 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow+2, Label='GGToZZ'
+
+ggH_hzz125: HiggsSM/H2TauTauTreeProducerAZhEEEM: 0.01212 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow, Label='SM HZZ'
+ggH_hzz125: HiggsSM/H2TauTauTreeProducerAZhMMEM: 0.01212 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kYellow, Label='SM HZZ'
+
+
+
+triboson: HiggsWWW/H2TauTauTreeProducerAZhEEEM: 0.2086 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kMagenta+1, Label='triboson'
+triboson: HiggsWWW/H2TauTauTreeProducerAZhMMEM: 0.2086 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kMagenta+1, Label='triboson'
+
+triboson: HiggsWWZ/H2TauTauTreeProducerAZhEEEM: 0.1651 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kMagenta+1, Label='triboson'
+triboson: HiggsWWZ/H2TauTauTreeProducerAZhMMEM: 0.1651 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kMagenta+1, Label='triboson'
+
+triboson: HiggsWZZ/H2TauTauTreeProducerAZhEEEM: 0.05565 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kMagenta+1, Label='triboson'
+triboson: HiggsWZZ/H2TauTauTreeProducerAZhMMEM: 0.05565 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kMagenta+1, Label='triboson'
+
+triboson: HiggsZZZ/H2TauTauTreeProducerAZhEEEM: 0.01398 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kMagenta+1, Label='triboson'
+triboson: HiggsZZZ/H2TauTauTreeProducerAZhMMEM: 0.01398 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kMagenta+1, Label='triboson'
+
+ttZ: HiggsttZ/H2TauTauTreeProducerAZhEEEM:  0.616 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kGreen+4, Label='ttZ'
+ttZ: HiggsttZ/H2TauTauTreeProducerAZhMMEM:  0.616 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kGreen+4, Label='ttZ'
+
+
+ttW: HiggsTTW/H2TauTauTreeProducerAZhEEEM: 0.2043 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kCyan-5 , Label='ttW'
+ttW: HiggsTTW/H2TauTauTreeProducerAZhMMEM: 0.2043 :  gen_match_3 !=6 && gen_match_4 !=6 ; FillColor=ROOT.kCyan-5 , Label='ttW'
+
+WH_htt125: WHminv1/H2TauTauTreeProducerAZhEEEM+WHminv2/H2TauTauTreeProducerAZhEEEM: 0.5328*0.0627 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kBlue-2 , Label='VH'
+WH_htt125: WHminv1/H2TauTauTreeProducerAZhMMEM+WHminv2/H2TauTauTreeProducerAZhMMEM: 0.5328*0.0627 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kBlue-2 , Label='VH'
+
+WH_htt125: WHplusv1/H2TauTauTreeProducerAZhEEEM+WHplusv2/H2TauTauTreeProducerAZhEEEM: 0.8400*0.0627 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kBlue-2 , Label='VH'
+WH_htt125: WHplusv1/H2TauTauTreeProducerAZhMMEM+WHplusv2/H2TauTauTreeProducerAZhMMEM: 0.8400*0.0627 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kBlue-2 , Label='VH'
+
+
+ZH_htt125: ZHv1/H2TauTauTreeProducerAZhEEEM+ZHv2/H2TauTauTreeProducerAZhEEEM: 0.884*0.0627 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kBlue-2 , Label='VH'
+ZH_htt125: ZHv1/H2TauTauTreeProducerAZhMMEM+ZHv2/H2TauTauTreeProducerAZhMMEM: 0.884*0.0627 : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kBlue-2, Label='VH'
+
+ttHnonBB125: ttH/H2TauTauTreeProducerAZhEEEM: 0.5085*(1-0.577) : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kCyan-1, Label='ttH'
+ttHnonBB125: ttH/H2TauTauTreeProducerAZhMMEM: 0.5085*(1-0.577) : gen_match_3 !=6 && gen_match_4 !=6  ; FillColor=ROOT.kCyan-1, Label='ttH'
+
+
+AZH220+: HiggsAZH220/H2TauTauTreeProducerAZhEEEM: 2.37*0.01 : genMass>219 && genMass < 221 ; FillColor=ROOT.kRed
+AZH240+: HiggsAZH240/H2TauTauTreeProducerAZhEEEM: 1.53*0.01 : genMass>239 && genMass < 241 ; FillColor=ROOT.kRed
+AZH260+: HiggsAZH260/H2TauTauTreeProducerAZhEEEM: 1.46*0.01 : genMass>259 && genMass < 261 ; FillColor=ROOT.kRed
+
+AZH220+: HiggsAZH220/H2TauTauTreeProducerAZhMMEM: 2.37*0.01 : genMass>219 && genMass < 221 ; FillColor=ROOT.kRed
+AZH240+: HiggsAZH240/H2TauTauTreeProducerAZhMMEM: 1.53*0.01 : genMass>239 && genMass < 241 ; FillColor=ROOT.kRed
+AZH260+: HiggsAZH260/H2TauTauTreeProducerAZhMMEM: 1.46*0.01 : genMass>259 && genMass < 261 ; FillColor=ROOT.kRed
+
+AZH280+: HiggsAZH280/H2TauTauTreeProducerAZhEEEM: 1.44*0.01 : genMass>279 && genMass < 281 ; FillColor=ROOT.kBlack
+AZH300+: HiggsAZH300/H2TauTauTreeProducerAZhEEEM: 1.44*0.01 : genMass>299 && genMass < 301 ; FillColor=ROOT.kRed
+AZH320+: HiggsAZH320/H2TauTauTreeProducerAZhEEEM: 1.43*0.01 : genMass>319 && genMass < 321 ; FillColor=ROOT.kRed
+AZH340+: HiggsAZH340/H2TauTauTreeProducerAZhEEEM: 1.44*0.01 : genMass>339 && genMass < 341 ; FillColor=ROOT.kBlack
+
+AZH350+: HiggsAZH350/H2TauTauTreeProducerAZhEEEM: 0.01 ; FillColor=ROOT.kBlack
+AZH400+: HiggsAZH400/H2TauTauTreeProducerAZhEEEM: 0.01 ; FillColor=ROOT.kRed
+
+AZH280+: HiggsAZH280/H2TauTauTreeProducerAZhMMEM: 1.44*0.01 : genMass>279 && genMass < 281  ; FillColor=ROOT.kBlack
+AZH300+: HiggsAZH300/H2TauTauTreeProducerAZhMMEM: 1.44*0.01 : genMass>299 && genMass < 301 ; FillColor=ROOT.kRed
+AZH320+: HiggsAZH320/H2TauTauTreeProducerAZhMMEM: 1.43*0.01 : genMass>319 && genMass < 321 ; FillColor=ROOT.kRed
+AZH340+: HiggsAZH340/H2TauTauTreeProducerAZhMMEM: 1.44*0.01 : genMass>339 && genMass < 341 ; FillColor=ROOT.kBlack
+
+AZH350+: HiggsAZH350/H2TauTauTreeProducerAZhMMEM: 0.01 ; FillColor=ROOT.kBlack
+AZH400+: HiggsAZH400/H2TauTauTreeProducerAZhMMEM: 0.01 ; FillColor=ROOT.kRed
+
+
+###0.02
+
+
+
+###ELE DOWN SYST
+#DOWN
+data_FR : DoubleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+
+##Fake rate double muon
+
+data_FR : DoubleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : DoubleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+
+
+##Single electron
+data_FR : SingleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+
+##Single muon
+data_FR : SingleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+data_FR : SingleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EDOWN_UW.txt', SkipMe=True, PostFix='_FRel_norm_Dn'
+
+###MUON DOWN SYS
+#DOWN
+data_FR : DoubleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+
+##Fake rate double muon
+
+data_FR : DoubleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : DoubleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+
+
+##Single electron
+data_FR : SingleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+
+##Single muon
+data_FR : SingleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+data_FR : SingleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MDOWN_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Dn'
+
+
+
+##ELE UP SYST
+#DOWN
+data_FR : DoubleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+
+##Fake rate double muon
+
+data_FR : DoubleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : DoubleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+
+
+##Single electron
+data_FR : SingleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+
+##Single muon
+data_FR : SingleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+data_FR : SingleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_EUP_UW.txt', SkipMe=True, PostFix='_FRel_norm_Up'
+
+
+###MUON UP SYST
+#DOWN
+data_FR : DoubleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM : (Z_ee_l1_matchedTrgObj_Double>0 && Z_ee_l2_matchedTrgObj_Double>0)  ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+
+##Fake rate double muon
+
+data_FR : DoubleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : DoubleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double>0 && Z_mm_l2_matchedTrgObj_Double>0)  ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+
+
+##Single electron
+data_FR : SingleEG_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleEG_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleEG_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleEG_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleEG_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleEG_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleEG_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleEG_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleEG_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhEEEM :  (Z_ee_l1_matchedTrgObj_Double<1 || Z_ee_l2_matchedTrgObj_Double<1) ; FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+
+##Single muon
+data_FR : SingleMuon_Run2016B_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleMuon_Run2016B_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleMuon_Run2016C_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleMuon_Run2016D_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleMuon_Run2016E_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleMuon_Run2016F_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleMuon_Run2016G_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleMuon_Run2016H_03Feb2017_v1/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+data_FR : SingleMuon_Run2016H_03Feb2017_v2/H2TauTauTreeProducerAZhMMEM : (Z_mm_l1_matchedTrgObj_Double<1 || Z_mm_l2_matchedTrgObj_Double<1) ;  FakeRate='FR_catEM_DATA_MUP_UW.txt', SkipMe=True, PostFix='_FRmu_norm_Up'
+
+
+incl_jec_Up : + ; IncludeMca="mcaEM_MC2.txt", FakeRate="fr_jec_up.txt", SkipMe=True, PostFix="_jec_Up"
+incl_jec_Dn : + ; IncludeMca="mcaEM_MC2.txt", FakeRate="fr_jec_dn.txt", SkipMe=True, PostFix="_jec_Dn"
+
+incl_uec_Up : + ; IncludeMca="mcaEM_MC2.txt", FakeRate="fr_uec_up.txt", SkipMe=True, PostFix="_uec_Up"
+incl_uec_Dn : + ; IncludeMca="mcaEM_MC2.txt", FakeRate="fr_uec_dn.txt", SkipMe=True, PostFix="_uec_Dn"
+
+incl_tes0_Up : + ; IncludeMca="mcaEM_MC2.txt", FakeRate="fr_tes0_up_em.txt", SkipMe=True, PostFix="_tes0_Up"
+incl_tes0_Dn : + ; IncludeMca="mcaEM_MC2.txt", FakeRate="fr_tes0_dn_em.txt", SkipMe=True, PostFix="_tes0_Dn"
+
+incl_tes1_Up : + ; IncludeMca="mcaEM_MC2.txt", FakeRate="fr_tes1_up_em.txt", SkipMe=True, PostFix="_tes1_Up"
+incl_tes1_Dn : + ; IncludeMca="mcaEM_MC2.txt", FakeRate="fr_tes1_dn_em.txt", SkipMe=True, PostFix="_tes1_Dn"
+
+incl_tes10_Up : + ; IncludeMca="mcaEM_MC2.txt", FakeRate="fr_tes10_up_em.txt", SkipMe=True, PostFix="_tes10_Up"
+incl_tes10_Dn : + ; IncludeMca="mcaEM_MC2.txt", FakeRate="fr_tes10_dn_em.txt", SkipMe=True, PostFix="_tes10_Dn"
+

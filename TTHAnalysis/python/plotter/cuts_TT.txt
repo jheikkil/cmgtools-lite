@@ -1,0 +1,4 @@
+denom : H_SS == 0 && shiftedPt_3>20 && shiftedPt_4>20 && getVVLoose( iso_3, pt_3 ) > 0 && getVVLoose( iso_4, pt_4 ) > 0 
+btag: bjetCISVVeto20Medium_tt == 0 
+LT: Hboson_tt_LT > 60 
+num : l3_byMediumIsolationMVArun2v1DBoldDMwLT>0 && l4_byMediumIsolationMVArun2v1DBoldDMwLT>0

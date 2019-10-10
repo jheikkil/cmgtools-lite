@@ -1,0 +1,4 @@
+denom : H_SS==0 && shiftedPt_3 > 10 && shiftedPt_4 > 10 && iso_3<0.6 && iso_4<1.0 
+btag: bjetCISVVeto20Medium_em == 0 
+num : (l3_eid_80>0 && iso_3<0.15) && (iso_4 < 0.15 &&  l4_muonid_loose > 0)
+
