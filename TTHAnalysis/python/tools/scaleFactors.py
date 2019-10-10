@@ -11,6 +11,27 @@ import ROOT
 
 class scaleFactors:
     def __init__(self,channel):
+        from sys import argv
+ 
+        self.chunk = argv[1].split("/")[-2]
+        print self.chunk
+
+        self.massFile = ROOT.TFile('gen_mass_SFs.root', 'r')
+        self.mass350 = self.massFile.Get( 'mA350_SF' )
+        self.mass400 = self.massFile.Get( 'mA400_SF' )
+
+
+        #if wp == 'IdIso0p10' :
+        #    self.elecSFFile = ROOT.TFile("%s/src/CMGTools/H2TauTau/data/Electron_IdIso_IsoLt0p1_eff.root" % os.environ['CMSSW_BASE'])
+        #if wp == 'IdIso0p15' :
+        self.elecSFFile = ROOT.TFile("%s/src/CMGTools/H2TauTau/data/Electron_IdIso_IsoLt0p15_eff.root" % os.environ['CMSSW_BASE'])
+        self.mcBarrel = self.elecSFFile.Get( 'ZMassEtaLt1p48_MC' )
+        self.mcMid = self.elecSFFile.Get( 'ZMassEta1p48to2p1_MC' )
+        self.mcEndcap = self.elecSFFile.Get( 'ZMassEtaGt2p1_MC' )
+        self.dataBarrel = self.elecSFFile.Get( 'ZMassEtaLt1p48_Data' )
+        self.dataMid = self.elecSFFile.Get( 'ZMassEta1p48to2p1_Data' )
+        self.dataEndcap = self.elecSFFile.Get( 'ZMassEtaGt2p1_Data' )
+
 
         #electrons
         self.f_el = ROOT.TFile("%s/src/CMGTools/TTHAnalysis/data/2016Electron_GSF_EG2D.root" % os.environ['CMSSW_BASE']) 
@@ -71,15 +92,71 @@ class scaleFactors:
 
         self.channel = channel
         #print self.channel
+
+
+        self.ptMax = 199.0
+        self.nvtxMax = 49
+
+        ### Load the zhSF for the appropriate zType
+        if self.channel in ['EETT', 'EEMT', 'EEET', 'EEEM'] :
+            print "JEEJEE EETT EEMT EET EEEM"
+            self.etaMax = 2.49
+            self.singleTrigThreshold = 28.0
+            self.subleadingDoubleTrigThreshold = 13.0
+            self.singleMin = 27.1
+            self.doubleSubleadingMin = 7.1
+            self.doubleLeadingMin = 23.1
+            self.singleName = 'HLT_Ele27_WPTight_Gsf'
+            self.doubleLeadingName = 'HLT_Ele23_CaloIdL_TrackIdL_IsoVL'
+            self.doubleSubleadingName = 'HLT_Ele12_CaloIdL_TrackIdL_IsoVL_and_DZ'
+
+        if self.channel in ['MMTT', 'MMMT', 'MMET', 'MMEM'] :
+            print "JUHJUHJUH"
+            self.etaMax = 2.39
+            self.singleTrigThreshold = 25.0
+            self.subleadingDoubleTrigThreshold = 10.0
+            self.singleMin = 23.1
+            self.doubleSubleadingMin = 7.1
+            self.doubleLeadingMin = 15.1
+            self.singleName = 'HLT_Mu24'
+            self.doubleLeadingName = 'HLT_Mu17_TrkIsoVVL'
+            self.doubleSubleadingName = 'HLT_Mu8_and_DZ'
+
+        self.sfFile = ROOT.TFile( 'zhTriggerSFs_2016Full_extended.root', 'r' )
+        self.singleTriggerData = self.sfFile.Get( self.singleName+'_data' )
+        self.doubleLeadingData = self.sfFile.Get( self.doubleLeadingName+'_data' )
+        self.doubleSubleadingData = self.sfFile.Get( self.doubleSubleadingName+'_data' )
+        self.singleTriggerMC = self.sfFile.Get( self.singleName+'_MC' )
+        self.doubleLeadingMC = self.sfFile.Get( self.doubleLeadingName+'_MC' )
+        self.doubleSubleadingMC = self.sfFile.Get( self.doubleSubleadingName+'_MC' )
+
+        ###self.branches = [ "triggerSF" ]
+
+
         self.branches = [ "electronSF_1", "electronSF_2", "electronSF_3", "electronSF_4",
                           "muonSF_1", "muonSF_2", "muonSF_3", "muonSF_4",
-                          "tauSF_3", "tauSF_4" ]
+                          "tauSF_3", "tauSF_4", "zhTrigWeight", "massSF"]
 
     def listBranches(self):
         return self.branches[:]
 
+    def getIDAndIsoScaleFactor( self, pt, eta ) :
+        #print wp
+        # Make sure we stay on our histograms
+        if pt > 99 : pt = 99
+        elif pt < 11 : pt = 11
+        absEta = abs(eta)
+
+        if absEta <= 1.48 :
+            return self.dataBarrel.Eval( pt ) / self.mcBarrel.Eval( pt )
+        elif absEta <= 2.1 :
+            return self.dataMid.Eval( pt ) / self.mcMid.Eval( pt )
+        else :
+            return self.dataEndcap.Eval( pt ) / self.mcEndcap.Eval( pt )
+
+
+
     def getGSFAndWPScaleFactor( self, wp, pt, eta ) :
-        #print "TULTIIN TNNE"
        	assert( wp in ['WP90', 'WP80', 'TrkOnly'] ), "Given WP (%s) is not supported" % wp
         #print wp
         # Make sure we stay on our histograms
@@ -95,7 +172,7 @@ class scaleFactors:
         if wp == 'WP90' :
             SF *= self.wp90SF.GetBinContent(self.wp90SF.FindBin( eta, pt ) )
             return SF
-        #elif wp == 'WP80' :
+        elif wp == 'WP80' :
             SF *= self.wp80SF.GetBinContent( self.wp80SF.FindBin( eta, pt ) )
             return SF
         else :
@@ -134,7 +211,6 @@ class scaleFactors:
     def getRelIsoScaleFactor( self, Iso, pt, eta, vtx ) :
         #print "Iso",Iso
         SF = 1.
-        #print "JEE ISO"
         # Make sure we stay on our histograms
         if pt > 199 : pt = 199
         elif pt < 20 : pt = 21
@@ -164,21 +240,163 @@ class scaleFactors:
 
     def getTkScaleFactor( self, eta, vtx ) :
         #print "Tk",Tk
-        SF = 1.
+        SF = 0.995
         # Make sure we stay on our histograms
-        if eta > 2.39 : eta = 2.39
-        elif eta < -2.39 : eta = -2.39
-        if vtx > 45 : vtx = 45
-        elif vtx < 1 : vtx = 1
-        SF = self.Tk_eta.Eval( eta )
-        SF *= self.Tk_vtx.Eval( vtx )
+        #if eta > 2.39 : eta = 2.39
+        #elif eta < -2.39 : eta = -2.39
+        #if vtx > 45 : vtx = 45
+        #elif vtx < 1 : vtx = 1
+        #SF = self.Tk_eta.Eval( eta )
+        #SF *= self.Tk_vtx.Eval( vtx )
         return SF
 
+    def getZHTriggerSF( self, nvtx, pt1, eta1, pt2, eta2 ) :
+        assert( pt1 >= pt2 ), "Lepton pTs must be ordered"
+
+        # Make sure we stay on our histograms
+        if pt1 > self.ptMax : pt1 = self.ptMax
+        elif pt1 < self.doubleLeadingMin : pt1 = self.doubleLeadingMin
+        if pt2 > self.ptMax : pt2 = self.ptMax
+        elif pt2 < self.doubleSubleadingMin : pt2 = self.doubleSubleadingMin
+
+        if eta1 > self.etaMax : eta1 = self.etaMax
+        elif eta1 < -1 * self.etaMax : eta1 = -1 * self.etaMax
+
+        if eta2 > self.etaMax : eta2 = self.etaMax
+        elif eta2 < -1 * self.etaMax : eta2 = -1 * self.etaMax
+
+        if nvtx > self.nvtxMax : nvtx = self.nvtxMax
+
+        #print nvtx, pt1, eta1, pt2, eta2
+
+        # In Z->EE it is possible to not fire the double trigger b/c
+        # of low pT subleading with high pT leading firing single E
+        ineff_data = 1.0
+        ineff_mc = 1.0
+        # Check double lep thresholds
+        if pt2 > self.subleadingDoubleTrigThreshold :
+            ineff_data *= (1. - self.doubleLeadingData.GetBinContent( self.doubleLeadingData.FindBin( pt1, eta1 ) ) \
+                    * self.doubleSubleadingData.GetBinContent( self.doubleSubleadingData.FindBin( pt2, nvtx ) ) )
+            ineff_mc *= (1. - self.doubleLeadingMC.GetBinContent( self.doubleLeadingMC.FindBin( pt1, eta1 ) ) \
+                    * self.doubleSubleadingMC.GetBinContent( self.doubleSubleadingMC.FindBin( pt2, nvtx ) ) )
+            #print self.doubleLeadingMC.GetBinContent( self.doubleLeadingMC.FindBin( pt1, eta1 ) )
+            #print self.doubleSubleadingMC.GetBinContent( self.doubleSubleadingMC.FindBin( pt2, nvtx ) )
+            #print 1, ineff_mc
+
+        # second "region"
+        if pt1 > self.singleTrigThreshold :
+            ineff_data *= (1. - self.singleTriggerData.GetBinContent( self.singleTriggerData.FindBin( pt1, eta1 ) ) )
+            ineff_mc *= (1. - self.singleTriggerMC.GetBinContent( self.singleTriggerMC.FindBin( pt1, eta1 ) ) )
+            #print 2, ineff_mc
+
+            # third "region" only possible if second region is true
+            if pt2 > self.singleTrigThreshold :
+                ineff_data *= (1. - self.singleTriggerData.GetBinContent( self.singleTriggerData.FindBin( pt2, eta2 ) ) )
+                ineff_mc *= (1. - self.singleTriggerMC.GetBinContent( self.singleTriggerMC.FindBin( pt2, eta2 ) ) )
+                #print 3, ineff_mc
+
+        #print 4, ineff_mc
+        eff_data = 1.0 - ineff_data
+        eff_mc = 1.0 - ineff_mc
+        return eff_data / eff_mc
+
+
+    def getZHTriggerDataEff( self, nvtx, pt1, eta1, pt2, eta2 ) :
+        assert( pt1 >= pt2 ), "Lepton pTs must be ordered"
+
+        # Make sure we stay on our histograms
+        if pt1 > self.ptMax : pt1 = self.ptMax
+        elif pt1 < self.doubleLeadingMin : pt1 = self.doubleLeadingMin
+        if pt2 > self.ptMax : pt2 = self.ptMax
+        elif pt2 < self.doubleSubleadingMin : pt2 = self.doubleSubleadingMin
+
+        if eta1 > self.etaMax : eta1 = self.etaMax
+        elif eta1 < -1 * self.etaMax : eta1 = -1 * self.etaMax
+
+        if eta2 > self.etaMax : eta2 = self.etaMax
+        elif eta2 < -1 * self.etaMax : eta2 = -1 * self.etaMax
+
+        if nvtx > self.nvtxMax : nvtx = self.nvtxMax
+
+        # In Z->EE it is possible to not fire the double trigger b/c
+        # of low pT subleading with high pT leading firing single E
+        ineff_data = 1.0
+        # Check double lep thresholds
+        if pt2 > self.subleadingDoubleTrigThreshold :
+            ineff_data *= (1. - self.doubleLeadingData.GetBinContent( self.doubleLeadingData.FindBin( pt1, eta1 ) ) \
+                    * self.doubleSubleadingData.GetBinContent( self.doubleSubleadingData.FindBin( pt2, nvtx ) ) )
+
+        # second "region"
+        if pt1 > self.singleTrigThreshold :
+            ineff_data *= (1. - self.singleTriggerData.GetBinContent( self.singleTriggerData.FindBin( pt1, eta1 ) ) )
+
+            # third "region" only possible if second region is true
+            if pt2 > self.singleTrigThreshold :
+                ineff_data *= (1. - self.singleTriggerData.GetBinContent( self.singleTriggerData.FindBin( pt2, eta2 ) ) )
+
+        eff_data = 1.0 - ineff_data
+        return eff_data
+
+
+    def getZHTriggerMCEff( self, nvtx, pt1, eta1, pt2, eta2 ) :
+        assert( pt1 >= pt2 ), "Lepton pTs must be ordered"
+
+        # Make sure we stay on our histograms
+        if pt1 > self.ptMax : pt1 = self.ptMax
+        elif pt1 < self.doubleLeadingMin : pt1 = self.doubleLeadingMin
+        if pt2 > self.ptMax : pt2 = self.ptMax
+        elif pt2 < self.doubleSubleadingMin : pt2 = self.doubleSubleadingMin
+
+        if eta1 > self.etaMax : eta1 = self.etaMax
+        elif eta1 < -1 * self.etaMax : eta1 = -1 * self.etaMax
+
+        if eta2 > self.etaMax : eta2 = self.etaMax
+        elif eta2 < -1 * self.etaMax : eta2 = -1 * self.etaMax
+
+        if nvtx > self.nvtxMax : nvtx = self.nvtxMax
+
+        # In Z->EE it is possible to not fire the double trigger b/c
+        # of low pT subleading with high pT leading firing single E
+        ineff_mc = 1.0
+        # Check double lep thresholds
+        if pt2 > self.subleadingDoubleTrigThreshold :
+            ineff_mc *= (1. - self.doubleLeadingMC.GetBinContent( self.doubleLeadingMC.FindBin( pt1, eta1 ) ) \
+                    * self.doubleSubleadingMC.GetBinContent( self.doubleSubleadingMC.FindBin( pt2, nvtx ) ) )
+
+        # second "region"
+        if pt1 > self.singleTrigThreshold :
+            ineff_mc *= (1. - self.singleTriggerMC.GetBinContent( self.singleTriggerMC.FindBin( pt1, eta1 ) ) )
+
+            # third "region" only possible if second region is true
+            if pt2 > self.singleTrigThreshold :
+                ineff_mc *= (1. - self.singleTriggerMC.GetBinContent( self.singleTriggerMC.FindBin( pt2, eta2 ) ) )
+
+        eff_mc = 1.0 - ineff_mc
+        return eff_mc
+
+
+    def massScaling(self, genMass, chunk) :
+        SF = 1.0
+        ###print "we are getting the massScale"
+        if "350" in chunk:
+            if genMass>=360:
+                genMass = 359
+            elif genMass<340:
+                genMass = 340
+            ###print "genMass: ", genMass
+            SF =  self.mass350.GetBinContent( self.mass350.FindBin(genMass) )
+            #print "scaleFactor: ", SF  
+        elif "400" in chunk:
+            if genMass>=410:
+       	       	genMass	= 409 
+       	    elif genMass<390:
+       	       	genMass	= 390
+            SF =  self.mass400.GetBinContent( self.mass400.FindBin(genMass) )
+ 
+        return SF
 
     def __call__(self,event):
         #(met, metphi)  = event.met, event.met_phi
-        # prepare output
-        #print "EKA OSUUS"
         ret = dict([(name,0.0) for name in self.branches])
 
         #Z legs
@@ -189,10 +407,10 @@ class scaleFactors:
         eta2 = event.eta_2
 
         #H legs
-        pt3 = event.pt_3
+        pt3 = event.shiftedPt_3
         eta3 = event.eta_3
 
-        pt4 = event.pt_4
+        pt4 = event.shiftedPt_4
         eta4 = event.eta_4
 
         vtx = event.npv
@@ -200,12 +418,24 @@ class scaleFactors:
         match_t1 = 1
         match_t2 = 1
 
+        genMass = event.genMass
+        scaleMass = 1.0
+        #print self.chunk
+        if "350" in self.chunk or "400" in self.chunk:
+            scaleMass = self.massScaling(genMass, self.chunk)
+        ret["massSF"] = scaleMass
+
+        ##ret["evt"] = event.evt
+        SF = self.getZHTriggerSF( vtx, pt1, eta1, pt2, eta2 )
+        ret["zhTrigWeight"] = SF
+
+            
 
         if self.channel == "EEMT":
             ret["electronSF_1"] = self.getGSFAndWPScaleFactor( 'WP90', pt1, eta1 )
             ret["electronSF_2"] = self.getGSFAndWPScaleFactor( 'WP90', pt2, eta2 )
 
-            ret["muonSF_3"] = self.getIDScaleFactor( 'Loose', pt3, eta3, vtx )*self.getRelIsoScaleFactor( 'Loose', pt3, eta3, vtx )*self.getTkScaleFactor( eta3, vtx )
+            ret["muonSF_3"] = self.getIDScaleFactor( 'Loose', pt3, eta3, vtx )*self.getRelIsoScaleFactor( 'Tight', pt3, eta3, vtx )*self.getTkScaleFactor( eta3, vtx )
             match_t2 = event.gen_match_4
 
             ret["electronSF_3"] = 1.0
@@ -218,7 +448,7 @@ class scaleFactors:
             ret["electronSF_1"] = self.getGSFAndWPScaleFactor( 'WP90', pt1, eta1 )
             ret["electronSF_2"] = self.getGSFAndWPScaleFactor( 'WP90', pt2, eta2 )
 
-            ret["electronSF_3"] = self.getGSFAndWPScaleFactor( 'WP80', pt3, eta3 )
+            ret["electronSF_3"] = self.getGSFAndWPScaleFactor( 'TrkOnly', pt3, eta3 )*self.getIDAndIsoScaleFactor( pt3, eta3 )
             match_t2 = event.gen_match_4
 
             ret["muonSF_1"] = 1.0
@@ -230,8 +460,8 @@ class scaleFactors:
             ret["electronSF_1"] = self.getGSFAndWPScaleFactor( 'WP90', pt1, eta1 )
             ret["electronSF_2"] = self.getGSFAndWPScaleFactor( 'WP90', pt2, eta2 )
 
-            ret["electronSF_3"] = self.getGSFAndWPScaleFactor( 'WP80', pt3, eta3 )
-            ret["muonSF_4"] = self.getIDScaleFactor( 'Loose', pt4, eta4, vtx )*self.getRelIsoScaleFactor( 'Loose', pt4, eta4, vtx )*self.getTkScaleFactor( eta4, vtx )
+            ret["electronSF_3"] = self.getGSFAndWPScaleFactor( 'TrkOnly', pt3, eta3 )*self.getIDAndIsoScaleFactor( pt3, eta3 )
+            ret["muonSF_4"] = self.getIDScaleFactor( 'Loose', pt4, eta4, vtx )*self.getRelIsoScaleFactor( 'Tight', pt4, eta4, vtx )*self.getTkScaleFactor( eta4, vtx )
 
             ret["muonSF_1"] = 1.0
             ret["muonSF_2"] = 1.0
@@ -256,7 +486,7 @@ class scaleFactors:
             ret["muonSF_1"] = self.getIDScaleFactor( 'Loose', pt1, eta1, vtx )*self.getRelIsoScaleFactor( 'Loose', pt1, eta1, vtx )*self.getTkScaleFactor( eta1, vtx )
             ret["muonSF_2"] = self.getIDScaleFactor( 'Loose', pt2, eta2, vtx )*self.getRelIsoScaleFactor( 'Loose', pt2, eta2, vtx )*self.getTkScaleFactor( eta2, vtx )
 
-            ret["muonSF_3"] = self.getIDScaleFactor( 'Loose', pt3, eta3, vtx )*self.getRelIsoScaleFactor( 'Loose', pt3, eta3, vtx )*self.getTkScaleFactor( eta3, vtx )
+            ret["muonSF_3"] = self.getIDScaleFactor( 'Loose', pt3, eta3, vtx )*self.getRelIsoScaleFactor( 'Tight', pt3, eta3, vtx )*self.getTkScaleFactor( eta3, vtx )
             match_t2 = event.gen_match_4
 
             ret["electronSF_1"] = 1.0
@@ -269,7 +499,7 @@ class scaleFactors:
             ret["muonSF_1"] = self.getIDScaleFactor( 'Loose', pt1, eta1, vtx )*self.getRelIsoScaleFactor( 'Loose', pt1, eta1, vtx )*self.getTkScaleFactor( eta1, vtx )
             ret["muonSF_2"] = self.getIDScaleFactor( 'Loose', pt2, eta2, vtx )*self.getRelIsoScaleFactor( 'Loose', pt2, eta2, vtx )*self.getTkScaleFactor( eta2, vtx )
 
-            ret["electronSF_3"] = self.getGSFAndWPScaleFactor( 'WP80', pt3, eta3 )
+            ret["electronSF_3"] = self.getGSFAndWPScaleFactor( 'TrkOnly', pt3, eta3 )*self.getIDAndIsoScaleFactor( pt3, eta3 )
             match_t2 = event.gen_match_4
 
             ret["muonSF_3"] = 1.0
@@ -282,10 +512,10 @@ class scaleFactors:
             ret["muonSF_1"] = self.getIDScaleFactor( 'Loose', pt1, eta1, vtx )*self.getRelIsoScaleFactor( 'Loose', pt1, eta1, vtx )*self.getTkScaleFactor( eta1, vtx )
             ret["muonSF_2"] = self.getIDScaleFactor( 'Loose', pt2, eta2, vtx )*self.getRelIsoScaleFactor( 'Loose', pt2, eta2, vtx )*self.getTkScaleFactor( eta2, vtx )
 
-            ret["electronSF_3"] = self.getGSFAndWPScaleFactor( 'WP80', pt3, eta3 )
+            ret["electronSF_3"] = self.getGSFAndWPScaleFactor( 'TrkOnly', pt3, eta3 )*self.getIDAndIsoScaleFactor( pt3, eta3 )
             ret["muonSF_3"] = 1.0	
 
-            ret["muonSF_4"] = self.getIDScaleFactor( 'Loose', pt3, eta3, vtx )*self.getRelIsoScaleFactor( 'Loose', pt3, eta3, vtx )*self.getTkScaleFactor( eta3, vtx )
+            ret["muonSF_4"] = self.getIDScaleFactor( 'Loose', pt4, eta4, vtx )*self.getRelIsoScaleFactor( 'Tight', pt4, eta4, vtx )*self.getTkScaleFactor( eta4, vtx )
 
             ret["electronSF_1"] = 1.0
             ret["electronSF_2"] = 1.0
@@ -308,11 +538,11 @@ class scaleFactors:
         ret["electronSF_4"] = 1.0       
 
         if match_t1 == 5:
-            ret["tauSF_3"] = 0.95
+            ret["tauSF_3"] = 0.97
         else:
             ret["tauSF_3"] = 1.0
         if match_t2 == 5:
-            ret["tauSF_4"] = 0.95
+            ret["tauSF_4"] = 0.97
         else:
             ret["tauSF_4"] = 1.0
 
@@ -332,8 +562,10 @@ MODULES = [
 
 if __name__ == '__main__':
     from sys import argv
+    #filename = argv[1]
     file = ROOT.TFile(argv[1])
     tree = file.Get("tree")
+    #chunk = argv[2]
     class Tester(Module):
         def __init__(self, name):
             Module.__init__(self,name,None)

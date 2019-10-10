@@ -27,8 +27,7 @@ from CMGTools.TTHAnalysis.treeReAnalyzer import *
 class svFit_classic:
     def __init__(self, channel):
         self.branches = [ "A_vis", "A_Hscaled", "A_svFit", "A_svFit_scaled", "A_svFit_constrained",
-                          "H_vis", "H_scaled", "H_svFit", "H_svFit_scaled" , "H_svFit_constrained" ]
-
+                          "H_vis", "H_scaled", "H_svFit", "H_svFit_scaled" , "H_svFit_constrained", "H_LT"]
         self.channel = channel
     def listBranches(self):
         return self.branches[:]
@@ -57,6 +56,8 @@ class svFit_classic:
 
         return lorentz3
 
+
+
     def __call__(self,event):
         #(met, metphi)  = event.met, event.met_phi
         # prepare output
@@ -71,29 +72,23 @@ class svFit_classic:
         Zunscaled = ROOT.TLorentzVector( 0.,0.,0.,0. )
         Zunscaled.SetPtEtaPhiM( ptZ, etaZ, phiZ, mZ )
 
-        ptZ2 = ptZ + 100
-
-       	ZTESTI = ROOT.TLorentzVector( 0.,0.,0.,0. )
-        ZTESTI.SetPtEtaPhiM( ptZ2, etaZ, phiZ, mZ )
-
-
-        print "Testing: mZ and Zunscaled", mZ, Zunscaled.M(), ptZ, ptZ2, ZTESTI.M()
-
-
         #Fetch Higgs legs 
-        pt3 = event.pt_3
+        pt3 = event.shiftedPt_3
         eta3 = event.eta_3
         phi3 = event.phi_3
         m3 = event.m_3
+        genmatch3 = event.gen_match_3
         
-
-        pt4 = event.pt_4
+        pt4 = event.shiftedPt_4
         eta4 = event.eta_4
         phi4 = event.phi_4
         m4 = event.m_4
+        genmatch4 = event.gen_match_4
 
         DM3 = -1
         DM4 = -1
+
+
 
         if self.channel=="EETT" or self.channel=="MMTT":
             DM3 = int(event.decayMode_3)
@@ -102,26 +97,36 @@ class svFit_classic:
             DM3 = -1                    
             DM4 = int(event.decayMode_4)
 
+
+        ##print "masses of taus", m3, m4
         #Add here the final state if sentences... for types
         if self.channel=="EETT" or self.channel=="MMTT":
             l1type = 1
             l2type = 1
+            if DM3 == 0 and genmatch3 == 5:
+                m3 = 0.1395699 
+            if DM4 == 0 and genmatch4 == 5:
+                m4 = 0.1395699
         if self.channel=="EEET" or self.channel=="MMET":
             l1type = 2
             l2type = 1
        	    m3 = 0.51100e-3  # PDG mass [GeV]
+            if DM4 == 0 and genmatch4 == 5:
+                m4 = 0.1395699
         if self.channel=="EEMT" or self.channel=="MMMT":
             l1type = 3
             l2type = 1
-       	    m3 = 0.10566 # PDG mass [GeV]        
+       	    m3 = 0.105658# PDG mass [GeV]
+            if DM4 == 0 and genmatch4 == 5:
+       	        m4 = 0.1395699        
         if self.channel=="EEEM" or self.channel=="MMEM":
             l1type = 2
             l2type = 3
             m3 = 0.51100e-3  # PDG mass [GeV]
-       	    m4 = 0.10566    # PDG mass [GeV]
+       	    m4 = 0.105658    # PDG mass [GeV]
 	
-        
 
+        
         ptH = event.H_Pt
         etaH = event.H_Eta
         phiH = event.H_Phi
@@ -129,9 +134,9 @@ class svFit_classic:
         #unscaled values
         mH = event.H_vis
         mA = event.Mass
-        ##print "Okayokay"
         ret["H_vis"] = mH
         ret["A_vis"] = mA
+        ret["H_LT"] = pt3+pt4
 
         #Get 4-vectors and fill output
         scalePT = True
@@ -142,43 +147,39 @@ class svFit_classic:
         #print "moi"
         ret["A_Hscaled"] = (Zunscaled+Hscaledpt).M()
 
-        #H legs
-        #print "OKOK"
-        #catch types
-
  
+        #BASIC SVFIT
         #print "JEP"
         leg1 = MeasuredTauLepton(l1type, pt3, eta3, phi3, m3, DM3)
         leg2 = MeasuredTauLepton(l2type, pt4, eta4, phi4, m4, DM4)
 
         measuredLeptons = std.vector('classic_svFit::MeasuredTauLepton')()
 
-        ## RIC: not really needed since SVfit internally sorts the inputs
-        #if hasattr(self.cfg_ana, 'order') and self.cfg_ana.order == '12':
-        #    measuredLeptons.push_back(leg1)
-        #    measuredLeptons.push_back(leg2)
-        #else:
-        measuredLeptons.push_back(leg2)
         measuredLeptons.push_back(leg1)
-
-        #      print measuredLeptons        
+        measuredLeptons.push_back(leg2)
 
         #Here you take the covariance matrix   
         cov00 = event.metcov00
         cov01 = event.metcov01
         cov11 = event.metcov11
+ 
+        if cov00 == -9999:
+            cov00 = 0
+        if cov01 == -9999:
+            cov01 = 0
+        if cov11 == -9999:
+            cov11 = 0
 
-
-        metcov = TMatrixD(2, 2)
-    
+        metcov = TMatrixD(2, 2)    
         a_metcov = array('d', [cov00, cov01, cov01, cov11])
-        
-        #print "matrix toimi"
         metcov.SetMatrixArray(a_metcov)
 
+        #fetch met
         mex = event.met_px
         mey = event.met_py
+        metpt = event.met
 
+        #initialize svfit
         svfit = SVfitAlgo(0)
 
         if self.channel=="EETT" or self.channel=="MMTT":      
@@ -188,26 +189,10 @@ class svFit_classic:
         elif self.channel=="EEEM" or self.channel=="MMEM":
             svfit.addLogM_fixed(True, 3.)
 
+        svfit.setDiTauMassConstraint(-1)
         svfit.integrate(measuredLeptons, mex, mey, metcov)
+  
 
-        #elif self.cfg_ana.integration == 'MarkovChain':
-        #    svfit.integrateMarkovChain()
-        #else:
-        #    print 'The integration method must be defined in the cfg as "integration".'
-        #    print 'Options: [VEGAS, MarkovChain]'
-        #    raise
-
-        # debug
-        #if self.cfg_ana.verbose:
-        #    if abs(event.diLepton.svfitMass()-svfit.mass()) > 0.01:
-        #        print 'WARNING: run {RUN}, lumi {LUMI}, event {EVT}'.format(RUN=str(event.run),
-        #                                                                    LUMI=str(event.lumi),
-        #                                                                    EVT=str(event.eventId))
-        #        print 'precomputed svfit mass   ', event.diLepton.svfitMass()
-        #        print 'svfit mass computed here ', svfit.mass()
-
-        # method override
-        ##print "uuusi"
         m_sV = svfit.getHistogramAdapter().getMass()
         pt_sV = svfit.getHistogramAdapter().getPt()
         eta_sV = svfit.getHistogramAdapter().getEta()
@@ -215,12 +200,10 @@ class svFit_classic:
 
         HsvFit = ROOT.TLorentzVector( 0.,0.,0.,0. )
         HsvFit.SetPtEtaPhiM( pt_sV, eta_sV, phi_sV, m_sV )
-      
-        ##print "m_SV and HsFIT:", m_sV, HsvFit.M()
 
+      
         ret["H_svFit"] = HsvFit.M()
         ret["A_svFit"] = (Zunscaled+HsvFit).M()
-
 
         #scale mass here
         if m_sV!=0.0:
@@ -235,7 +218,7 @@ class svFit_classic:
 
 
         massConstraint = 125.06
-        svfit.setDiTauMassConstraint(massConstraint);
+        svfit.setDiTauMassConstraint(massConstraint)
         svfit.integrate(measuredLeptons, mex, mey, metcov)
 
         H_constrained = svfit.getHistogramAdapter().getMass()
