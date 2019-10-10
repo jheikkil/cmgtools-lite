@@ -415,9 +415,7 @@ if __name__ == "__main__":
                     kappa = 2
                     w.factory("expr::N_bkg(\"@0*pow(@1, @2) \", %g, %g, theta[0,-5,5])" % (Newk,kappa))
                     w.factory("expr::Nsig_pass(\"@0* @1   \",N_sig[%g,0,%g], fsig[%g,0,1])" % (Nqcd,Ndata,fqcd))
-                    w.factory("expr::Nbkg_pass(\"@0* @1   \",N_bkg, fbkg[%g,0,1])" % fewk)
-
-                   ### w.factory("expr::Nbkg_pass(\"@0* @1   \",N_bkg[%g,0,%g], fbkg[%g,0,1])" % (Newk,1.2*Newk,fewk))
+                    w.factory("expr::Nbkg_pass(\"@0* @1   \",N_bkg, fbkg[%g,0,1])" % fewk)  	
                     w.factory("expr::Nsig_fail(\"@0*(1-@1)\",N_sig, fsig)")
                     w.factory("expr::Nbkg_fail(\"@0*(1-@1)\",N_bkg, fbkg)")
                     combiner = ROOT.CombDataSetFactory(ROOT.RooArgSet(w.var("f")), w.cat("num"))
@@ -442,9 +440,14 @@ if __name__ == "__main__":
                     #nuislists["bkg"] = dict([ (s,ROOT.RooArgList()) for s in ('pass','fail') ])
                     #for zstateTheta in "pass", "fail":
                     keyTheta = "theta_bkg"
+                    #keyFRpull = "pullFR_bkg"
                     #print keyTheta
-                    w.factory("Gaussian::nuis_{0}_shapePdf(theta, 0, 1)".format(keyTheta))
+                    w.factory("Gaussian::nuis_{0}_shapePdf(theta, 0, 1.0)".format(keyTheta)) #originally 1
                     constraints.append(w.pdf("nuis_{0}_shapePdf".format(keyTheta)))
+                    ##ADD CONSTRAINTS
+                    #JAANAREMOVE THIS
+                       #w.factory("Gaussian::nuis_{0}_shapePdf(fbkg, {1}, {2})".format("pullFR", fewk, 0.1)) #originally 0.1
+                       #constraints.append(w.pdf("nuis_{0}_shapePdf".format("pullFR")))
                     thetaPre = w.var("theta")
                     ##print "all things", nuislists
                     ###nuislists["bkgTheta"] = dict([('pass',ROOT.RooArgList()) ])
@@ -699,12 +702,12 @@ if __name__ == "__main__":
                             minim.minimize("Minuit2","migrad");
                             y2 = 2*(nll.getVal()-nll0)
                             if y2 > 1: 
-                                print "Y2 onnkinnnn      ", y2
+                                #print "Y2 onnkinnnn      ", y2
                                 break
                             if x2 > x1: x2 = min((x2+1)/2, x2+(x2-x1))
                             else:       x2 = max((x2+0)/2, x2-(x1-x2))
-                        print "iTry:   ", iTry
-                        print "ARVOT ENNEN: x1, x2, y2: ", x1, x2, y2
+                        #print "iTry:   ", iTry
+                        #print "ARVOT ENNEN: x1, x2, y2: ", x1, x2, y2
                         ##thetas.append(thetaFitted.getVal()), thetas.append(thetaFitted.getError())
                         while abs(x1-x2) > 0.0005:
                             xc = 0.5*(x1+x2)
@@ -713,15 +716,15 @@ if __name__ == "__main__":
                             y = 2*(nll.getVal()-nll0)
                             if y < 1: x1 = xc
                             else:     x2 = xc
-                        print "ARVOT JALKEEEENNN: x1, x2, xc, y, y2: ", x1, x2, xc, y, y2   
-                        print "NYT OHIIIIIIIIIIIIIIIIIIIIIIII KATO THEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEETAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                        print thetaFitted.getVal()
-                        print thetaFitted.getError()
+                        #print "ARVOT JALKEEEENNN: x1, x2, xc, y, y2: ", x1, x2, xc, y, y2   
+                        #print "NYT OHIIIIIIIIIIIIIIIIIIIIIIII KATO THEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEETAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        #print thetaFitted.getVal()
+                        #print thetaFitted.getError()
                         thetas.append(thetaFitted.getVal()), thetas.append(thetaFitted.getError())
                         bounds.append(x2)
                         kierros = kierros + 1
-                    print "bounds::  ", bounds
-                    print thetaFitted.getVal(), thetaFitted.getError()
+                    #print "bounds::  ", bounds
+                    #print thetaFitted.getVal(), thetaFitted.getError()
                     df = max(abs(b-f0) for b in bounds)
                     ilast = fr_fit.GetN()
                     fr_fit.Set(ilast+1)
@@ -733,10 +736,10 @@ if __name__ == "__main__":
                     print "MC fake rate: %.4f " % fqcd
                     print "Data fake rate: %.4f +- %.4f " % (f0, df)
         #print "\n"*5,"===== ALL BINS DONE ===== "
-        print "thetas: "
+        #print "thetas: "
         for i in xrange(1,len(thetas),2):
              print thetas[i-1], "+-", thetas[i]
-        print "thetas: ", thetas
+        #print "thetas: ", thetas
         text_file = open("thetasHE.txt", "a")
         for i in xrange(1,len(thetas),2):
              print thetas[i-1], "+-", thetas[i]
