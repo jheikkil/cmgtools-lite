@@ -29,6 +29,7 @@ class Uncertainty:
 
     def prepFR(self):
 
+        print self.unc_type
         if self.unc_type=='templateAsymm':
             if 'FakeRates' in self.extra:
                 self._nontrivialSelectionChange = True

@@ -135,6 +135,7 @@ class HistoWithNuisances:
         if self._rooFit or self._postFit or self._usePostFit: return False
         return True
     def Clone(self,newname):
+        ####print "histo with nuisances CLONE"
         h = HistoWithNuisances(self.central)
         h.central.SetName(newname)
         for v,p in self.variations.iteritems():
@@ -247,13 +248,22 @@ class HistoWithNuisances:
             if toadd == None: toadd = list(self.variations.keys())
             iup2, idown2 = 0., 0.
             for var in toadd:
+                ##print "HEY VAR TO ADD", var
                 shifts = [self.variations[var][i].Integral()-i0 for i in (0,1)]
+                ##for i in (0,1):
+                ##    print i0, i
+                ##    print self.variations[var][i].Integral()
+                #3    print self.variations[var][i].Integral()-i0
+                #print "HERRE ARE SHIFTS", shifts, max(shifts), -min(shifts)
                 iup2   += max(0, max(shifts))**2
                 idown2 += max(0,-min(shifts))**2
             iup, idown = sqrt(iup2), sqrt(idown2)
         if cropAtZero: idown = min(idown,i0)
         if relative:
+            #print "RELATIVE"
             iup /= i0; idown /= i0
+            ##print iup, idown
+        #print "here we go: iup, idown, and the statError", iup, idown, sqrt(0.5*(iup**2+idown**2))
         return sqrt(0.5*(iup**2+idown**2)) if symmetrize else (-idown,iup)
     def graphAsymmTotalErrors(self,toadd=None,relative=False):
         h = self.raw()
@@ -290,6 +300,7 @@ class HistoWithNuisances:
     def getVariationList(self):
         return self.variations.keys()
     def addVariation(self,name,sign,histo_varied):
+        #####print "ADDDDDDDDDDDDDDDDDDD VARIATIOOOOOOOOOOOOOOOOOOONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
         idx = 0 if sign=='up' else 1
         if name not in self.variations: self.variations[name] = [None,None]
         self.variations[name][idx] = histo_varied.Clone('')
@@ -341,6 +352,7 @@ class HistoWithNuisances:
             print "WARNING, discarding already existing RooFit context"
         self._rooFit = { "context":roofitContext, "workspace":roofitContext.workspace }
     def _makePdfAndNorm(self):
+        ##print "makePDF and NORM------------------------------HISTOWITHNUISANCES"
         roofitContext = self._rooFit["context"]
         templates = ROOT.TList()
         nuisances = ROOT.RooArgList()

@@ -55,27 +55,16 @@ def _runIt(args):
         timer = ROOT.TStopwatch(); timer.Start()
         # now we do
         os.system("mkdir -p "+myoutpath)
-        print mysource, myoutpath
-        if options.skimpath:
-            mysource2 = mysource.split('/', 8)
-            mysource2 = "/".join(mysource.split('/')[:-1])
-            myoutpath2 = myoutpath.split('/', 8)
-            myoutpath2 = "/".join(myoutpath.split('/')[:-1])
-            os.system("cp -r %s/MCWeighter %s/" % (mysource2,myoutpath2))
-        else:
-           os.system("cp -r %s/SkimAnalyzerCount %s/" % (mysource,myoutpath))
+        os.system("cp -r %s/skimAnalyzerCount %s/" % (mysource,myoutpath))
         os.system("mkdir -p %s/%s" % (myoutpath,options.tree))
         histo = ROOT.gROOT.FindObject("Count")
         histo_w = ROOT.gROOT.FindObject("SumGenWeights")
         if not options.oldstyle:
-            fout = ROOT.TFile("%s/%s.root" % (myoutpath,options.tree), "RECREATE", "", options.compression);
+            fout = ROOT.TFile("%s/%s/tree.root" % (myoutpath,options.tree), "RECREATE", "", options.compression);
         else:
             fout = ROOT.TFile("%s/%s/%s_tree.root" % (myoutpath,options.tree,options.tree), "RECREATE", "", options.compression);
-        print "mycut"
-        print mycut
         mytree.Draw('>>elist',mycut)
         elist = ROOT.gDirectory.Get('elist')
-        #print elist
         if not elist:
             elist = ROOT.TEventList('elist')
         if len(selectors)>0:
@@ -102,6 +91,7 @@ def _runIt(args):
         if options.justcount:
             print "  As if it were Done   %-40s: %8d/%8d" % (tty.cname(), elist.GetN(), ntot)
             return
+
         # drop and keep branches
         for drop in options.drop: mytree.SetBranchStatus(drop,0)
         for keep in options.keep: mytree.SetBranchStatus(keep,1)
@@ -139,7 +129,6 @@ if __name__ == "__main__":
     parser.add_option("--vf", "--vars-files", dest="varfiles",  type="string", default=[], action="append",  help="File from which to get a list of possibly-used branches; globs are allowed")
     parser.add_option("--skim-friends",  dest="skimFriends", default=False, action="store_true",  help="Also run skimFTrees") 
     parser.add_option("--compression",   dest="compression", type="int", default=1, help="Compression for output ROOT file")
-    
     addMCAnalysisOptions(parser)
     (options, args) = parser.parse_args()
     options.weight = False
@@ -155,6 +144,7 @@ if __name__ == "__main__":
     selectors=[CheckEventVetoList(fname) for fname in options.vetoevents]
     if options.json: selectors.append(JSONSelector(options.json))
 
+    options.lazyKeeps = []
     if options.varfiles:
         mykeeps = set(["run","lumi","evt","genWeight","xsec","isData"])
         def _process(vfname,_norecurse=set()):
@@ -179,7 +169,6 @@ if __name__ == "__main__":
                         ttys.append(vtty)
                 for tty in ttys:
                     mycut = tty.adaptExpr(cut.allCuts(),cut=True)
-                    #mycut += " && ("+tty.getScaleFactor()+")"
                     if options.doS2V: mycut  = scalarToVector(mycut)
                     mykeeps.update(re.findall(r"[A-Za-z_]\w+",tty.getWeightForCut("1")))
         if options.doS2V:
@@ -188,9 +177,8 @@ if __name__ == "__main__":
                 keeps2.add(re.sub(r"\[\d+\]","",scalarToVector(k)))
             mykeeps = keeps2
         options.lazyKeeps = list(mykeeps)
-        print "lazy"
-        print options.lazyKeeps
-    options.lazyKeeps= []    
+        #print sorted(options.lazyKeeps); exit();
+        
     tasks = []
     fname2cuts = defaultdict(set)
     fname2out  = {}
@@ -203,7 +191,6 @@ if __name__ == "__main__":
             myoutpath = outdir+"/"+tty.cname()
             for path in options.path:
                 mysource  = path+"/"+tty.cname()
-                ##mysource2 = path
                 if os.path.exists(mysource): break
             ttys = [ tty ]
             for (var,vdir,vtty) in tty.getTTYVariations():
@@ -211,12 +198,10 @@ if __name__ == "__main__":
                     ttys.append(vtty)
             for tty in ttys:
                 mycut = tty.adaptExpr(cut.allCuts(),cut=True)
-                ##mycut += " && ("+tty.getScaleFactor()+")"	
                 if options.doS2V: mycut  = scalarToVector(mycut)
                 fname2cuts[mysource].add(mycut)
             fname2out[mysource] = myoutpath
             fname2tty[mysource] = ttys[0]
-            
     for fname,cuts in fname2cuts.iteritems():
         if len(cuts) > 1: mycut = "(" + (")||(".join(cuts)) + ")"
         else:             mycut = cuts.pop()

@@ -27,7 +27,7 @@ if "/functions_cc.so" not in ROOT.gSystem.GetLibraries():
 def scalarToVector(x):
     x0 = x
     x = re.sub(r"(LepGood|Lep|JetFwd|Jet|GenTop|SV|PhoGood|TauGood|Tau)(\d)_(\w+)", lambda m : "%s_%s[%d]" % (m.group(1),m.group(3),int(m.group(2))-1), x)
-    x = re.sub(r"\bmet\b", "met_pt", x)
+    x = re.sub(r"\bmet\b", "met", x)
     return x
 
 class PlotSpec:
@@ -167,6 +167,7 @@ class TreeToYield:
                 self._mcCorrSourceList.append( (cfile,MCCorrections(cfile)) )            
         if 'FakeRate' in settings:
             self._FRSourceList.append( (settings['FakeRate'], FakeRate(settings['FakeRate'],self._options.lumi) ) )
+            #print self._FRSourceList
         for macro in self._options.loadMacro:
             libname = macro.replace(".cc","_cc.so").replace(".cxx","_cxx.so")
             if libname not in ROOT.gSystem.GetLibraries():
@@ -180,6 +181,7 @@ class TreeToYield:
             self._variations.append(_var)
         self._makeMCCAndScaleFactor()
     def _makeMCCAndScaleFactor(self):
+       ### print "TANNEKIN TULTIIN"
         self._scaleFactor = self._scaleFactor0 # before any MCC
         mcCorrs = []
         for (fname,mcc) in self._mcCorrSourceList:
@@ -190,6 +192,7 @@ class TreeToYield:
             self._scaleFactor = self.adaptExpr(self._scaleFactor, cut=True)
         self._weightString = self.adaptExpr(self._weightString0, cut=True)
         for (fname,FR) in self._FRSourceList:
+            ##print fname, FR
             self.applyFR(FR)
         if self._options.forceunweight: self._weight = False
     def getVariations(self):
@@ -204,17 +207,21 @@ class TreeToYield:
         ttys = []
         for (var,direction),tty in self._ttyVariations.iteritems():
             ttys.append((var,direction,tty))
+        #print "APUA TREETOYIELD",ttys
         return ttys
     def makeTTYVariations(self):
         ttyVariations = {}
+       #### print "MINUA KUTSUTTIIN"
         for var in self.getVariations():
             for direction in ['up','dn']:
                 tty2 = copy(self)
                 tty2._name = tty2._name + '_%s_%s'%(var.name,direction)
+                ##print "HEI KATSO TATA", tty2._name, var, direction
+                ##print "toimiiko integral  ", self._variations[var][direction].Integral()
                 tty2._isVariation = (var,direction)
                 tty2._variations = []
                 if var.getFRToRemove() != None:
-                    #print "Passa di qui"
+           ###         print "Passa di qui"
                     tty2._FRSourceList = []
                     found = False
                     for fname,FR in self._FRSourceList:
@@ -225,26 +232,33 @@ class TreeToYield:
                     if not found: 
                         raise RuntimeError, "Variation %s%s for %s %s would want to remove a FR %s which is not found" % (var.name,direction,self._name,self._cname,var.getFRToRemove())
                     tty2._makeMCCAndScaleFactor()
+              ##  print "applyFR"
                 tty2.applyFR(var.getFR(direction))
                 tty2._maintty = self
                 ttyVariations[(var,direction)] = tty2
+        ##print ttyVariations
         self._ttyVariations = ttyVariations
     def variationName(self):
         return "%s %s" % (self._isVariation[0].name,self._isVariation[1]) if self._isVariation else "-"
     def isVariation(self):
         return self._isVariation
     def applyFR(self,FR):
+        ##print "PAIVAA"
         if FR==None: return
+        ###print "HYVASTI"
         self._ttyVariations = None # invalidate
         ## add additional weight correction.
         ## note that the weight receives the other mcCorrections, but not itself
         frweight = self.adaptExpr(FR.weight(), cut=True, mcCorrList=self._mcCorrsInit)
+        ##print frweight
         ## modify cuts to get to control region. order is important
         self._weightString = self.adaptExpr(self._weightString, cut=True, mcCorrList=(FR.cutMods()+FR.mods())) + "* (" + frweight + ")"
+        ##print self._weightString
         self._mcCorrs = self._mcCorrs[:] + FR.cutMods()  + FR.mods()
         self._weight = True
         if self._options.forceunweight: self._weight = False
     def setScaleFactor(self,scaleFactor,mcCorrs=True):
+        ##print "setScaleFactor"
         if (not self._options.forceunweight) and scaleFactor != 1: 
             self._weight = True
         if mcCorrs and self._mcCorrs and scaleFactor and scaleFactor != 1.0:
@@ -304,22 +318,31 @@ class TreeToYield:
         if "root://" in self._fname: self._tree.SetCacheSize()
         self._friends = []
         friendOpts = self._options.friendTrees[:]
-        friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in self._options.friendTreesSimple]
+        #friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in self._options.friendTreesSimple]
+        friendOpts += (self._options.friendTreesSimple)
         friendOpts += (self._options.friendTreesData if self._isdata else self._options.friendTreesMC)
         friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in (self._options.friendTreesDataSimple if self._isdata else self._options.friendTreesMCSimple) ]
         if 'Friends' in self._settings: friendOpts += self._settings['Friends']
         if 'FriendsSimple' in self._settings: friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in self._settings['FriendsSimple'] ]
         for tf_tree,tf_file in friendOpts:
-#            print 'Adding friend',tf_tree,tf_file
+            #print 'Adding friend',tf_tree,tf_file
             basepath = None
+            for files in self._options.path:
+               	if "/" in self._cname:
+                    cnames = self._cname.split("/")[0]
+                else:
+                    cnames = self._cname
+                if cnames in os.listdir(files):
+                    basepath = files
+                    break
             for treepath in getattr(self._options, 'path', []):
                 if self._cname in os.listdir(treepath):
                     basepath = treepath
                     break
             if not basepath:
                 raise RuntimeError("%s -- ERROR: %s process not found in paths (%s)" % (__name__, cname, repr(options.path)))
-
-            tf_filename = tf_file.format(name=self._name, cname=self._cname, P=basepath)
+            cname2 = self._cname
+            tf_filename = tf_file.format(name=self._name, cname=cname2, P=basepath)
             tf = self._tree.AddFriend(tf_tree, tf_filename),
             self._friends.append(tf)
         self._isInit = True
@@ -453,22 +476,28 @@ class TreeToYield:
             nominal = self.getPlot(plotspec,cut,fsplit=fsplit,closeTreeAfter=False,noUncertainties=True)
             ret = HistoWithNuisances( nominal )
             variations = {}
+            ###print "-----------------nyt getplot------------"
             for var,sign,tty2 in self.getTTYVariations():
                 if var.name not in variations: variations[var.name] = [var,None,None]
                 isign = (1 if sign == "up" else 2)
                 if not var.isTrivial(sign):
+          #####          print "heippa"
                     tty2._isInit = True; tty2._tree = self.getTree()
                     variations[var.name][isign] = tty2.getPlot(plotspec,cut,fsplit=fsplit,closeTreeAfter=False,noUncertainties=True)
                     tty2._isInit = False; tty2._tree = None
             for (var,up,down) in variations.itervalues():
+                ###print "HEI JAANA", var,up,down
                 if up   == None: up   = var.getTrivial("up",  [nominal,None,None])
                 if down == None: down = var.getTrivial("down",[nominal,up,  None])
+               ##### print "HEI JAANA", var.name,up,down
                 var.postProcess(nominal, up, down)
                 ret.addVariation(var.name, "up",   up)
                 ret.addVariation(var.name, "down", down)
             if closeTreeAfter: self._close()
             return ret
+            ##print "OKRA"
         ret = self.getPlotRaw(plotspec.name, plotspec.expr, plotspec.bins, cut, plotspec, fsplit=fsplit, closeTreeAfter=closeTreeAfter)
+       ### print "TANNEKO JATKETTIIN?"
         # fold overflow
         if ret.ClassName() in [ "TH1F", "TH1D" ] :
             n = ret.GetNbinsX()
@@ -659,7 +688,7 @@ def addTreeToYieldOptions(parser):
     parser.add_option("--obj", "--objname",    dest="obj", default='tree', help="Pattern for the name of the TTree inside the file");
     parser.add_option("-G", "--no-fractions",  dest="fractions",action="store_false", default=True, help="Don't print the fractions");
     parser.add_option("-F", "--add-friend",    dest="friendTrees",  action="append", default=[], nargs=2, help="Add a friend tree (treename, filename). Can use {name}, {cname} patterns in the treename") 
-    parser.add_option("--Fs", "--add-friend-simple",    dest="friendTreesSimple",  action="append", default=[], nargs=1, help="Add friends in a directory. The rootfile must be called evVarFriend_{cname}.root and tree must be called 't' in a subdir 'sf' inside the rootfile.") 
+    parser.add_option("--Fs", "--add-friend-simple",    dest="friendTreesSimple",  action="append", default=[], nargs=2, help="Add friends in a directory. The rootfile must be called evVarFriend_{cname}.root and tree must be called 't' in a subdir 'sf' inside the rootfile.") 
     parser.add_option("--FMC", "--add-friend-mc",    dest="friendTreesMC",  action="append", default=[], nargs=2, help="Add a friend tree (treename, filename) to MC only. Can use {name}, {cname} patterns in the treename") 
     parser.add_option("--FD", "--add-friend-data",    dest="friendTreesData",  action="append", default=[], nargs=2, help="Add a friend tree (treename, filename) to data trees only. Can use {name}, {cname} patterns in the treename") 
     parser.add_option("--FMCs", "--add-friend-mc-simple",    dest="friendTreesMCSimple",  action="append", default=[], nargs=1, help="Add friends in a directory to MC only. The rootfile must be called evVarFriend_{cname}.root and tree must be called 't' in a subdir 'sf' inside the rootfile.") 
@@ -674,6 +703,7 @@ def addTreeToYieldOptions(parser):
 
 def mergeReports(reports):
     import copy
+    "nYT OIS MERGEREPOTS"
     one = copy.deepcopy(reports[0])
     for i,(c,x) in enumerate(one):
         one[i][1][1] = pow(one[i][1][1], 2)

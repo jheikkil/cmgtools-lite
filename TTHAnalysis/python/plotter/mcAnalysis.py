@@ -65,6 +65,7 @@ class MCAnalysis:
             if ";" in line:
                 (line,more) = line.split(";")[:2]
                 for setting in [f.replace(';',',').strip() for f in more.replace('\\,',';').split(',')]:
+                    #print setting
                     if setting == "": continue
                     if "=" in setting: 
                         (key,val) = [f.strip() for f in setting.split("=",1)]
@@ -147,9 +148,33 @@ class MCAnalysis:
 
             # Load variations if matching this process name
             variations={}
+
+            #print "HEI TASSA ON FIELD 1", field[1]
+            chunkName = field[1]
+
+            manyBins=[]
+            if options.manyBins:
+                #print "JEE HEI ONNISTUU"
+                #print options.manyBins
+                manyBins = options.manyBins[0].split(',')
             if self.variationsFile:
+                print "-.-----------------------found variationsFile"
                 for var in self.variationsFile.uncertainty():
-                    if var.procmatch().match(pname) and var.binmatch().match(options.binname): 
+                    if manyBins:
+                        ####print "---manyBins---"
+                        for bin in manyBins:
+                            if var.procmatch().match(pname) and var.binmatch().match(bin) and bin in chunkName:
+                                #print "OK, NYTPAS BIN ON", bin, pname, bin, chunkName
+                                ###print "HYVA, TASSA NIMI", var.name, var
+                                if var.name in variations:
+                                    print "Variation %s overriden for process %s, new process pattern %r, bin %r (old had %r, %r)" % (
+                                        var.name, pname, var.procpattern(), var.binpattern(), variations[var.name].procpattern(), variations[var.name].binpattern())
+                                variations[var.name] = var
+                    elif var.procmatch().match(pname) and var.binmatch().match(options.binname):
+                        #print "moi jaana"
+                        #print pname
+                        #print options.binname
+                        #print var 
                         if var.name in variations:
                             print "Variation %s overriden for process %s, new process pattern %r, bin %r (old had %r, %r)" % (
                                     var.name, pname, var.procpattern(), var.binpattern(), variations[var.name].procpattern(), variations[var.name].binpattern())
@@ -164,10 +189,11 @@ class MCAnalysis:
                 if not hasattr(options, '_deprecation_warning_NormSystematic'):
                     print 'Added normalization uncertainty %s to %s, %s. Please migrate away from using the deprecated NormSystematic option.'%(extra['NormSystematic'],pname,field[1])
                     options._deprecation_warning_NormSystematic = False
-
+            #print variations[0].values()
             cnames = [ x.strip() for x in field[1].split("+") ]
             total_w = 0.; to_norm = False; ttys = [];
             is_w = -1
+            to_norm_FR = False
             pname0 = pname
             for cname in cnames:
                 skipMe = False
@@ -189,7 +215,10 @@ class MCAnalysis:
                 if not basepath:
                     raise RuntimeError("%s -- ERROR: %s process not found in paths (%s)" % (__name__, cname, repr(options.path)))
 
-                rootfile = "%s/%s/%s/%s_tree.root" % (basepath, cname, treename, treename)
+
+                #rootfile = "%s/%s/%s/%s_tree.root" % (basepath, cname, treename, treename)
+                rootfile = "%s/%s/tree.root" % (basepath, cname)
+                ##print rootfile
                 if options.remotePath:
                     rootfile = "root:%s/%s/%s_tree.root" % (options.remotePath, cname, treename)
                 elif os.path.exists(rootfile+".url"): #(not os.path.exists(rootfile)) and :
@@ -201,8 +230,26 @@ class MCAnalysis:
                     # Heppy calls the tree just 'tree.root'
                     rootfile = "%s/%s/%s/tree.root" % (basepath, cname, treename)
                     rootfile = open(rootfile+".url","r").readline().strip()
-                pckfile = basepath+"/%s/skimAnalyzerCount/SkimReport.pck" % cname
+                if options.skimpath:
+                    skimpath = cname.split('/', 1)
+                    pckfile = basepath+"/%s/MCWeighter/SkimReport.pck" % skimpath[0]
+                    #pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % skimpath[0]
+                else:
+                    pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % cname
+                #pckfile = basepath+"/%s/skimAnalyzerCount/SkimReport.pck" % cname
+                #print pckfile
 
+                #if options.skimpath:
+                #    skimpath = cname.split('/', 1)
+                #    #print skimpath
+                #    pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % skimpath[0]
+                    ##print pckfile
+                #else:
+                #    pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % cname
+
+
+                #print cname
+                #print "viela ok"
                 tty = TreeToYield(rootfile, options, settings=extra, name=pname, cname=cname, objname=objname, variation_inputs=variations.values()); ttys.append(tty)
                 if signal: 
                     self._signals.append(tty)
@@ -214,24 +261,49 @@ class MCAnalysis:
                     self._backgrounds.append(tty)
                 if pname in self._allData: self._allData[pname].append(tty)
                 else                     : self._allData[pname] =     [tty]
+
                 if "data" not in pname:
                     pckobj  = pickle.load(open(pckfile,'r'))
                     counters = dict(pckobj)
                     if ('Sum Weights' in counters) and options.weight:
+                        ##print "jes"
                         if (is_w==0): raise RuntimeError, "Can't put together a weighted and an unweighted component (%s)" % cnames
                         is_w = 1; 
                         total_w += counters['Sum Weights']
-                        scale = "genWeight*(%s)" % field[2]
+                        #print total_w
+                        #scale = "genWeight*(%s)" % field[2] -> "weight_gen*
+                        scale = "weight_gen*(%s)" % field[2]
                     else:
+                        #print "hmm"
                         if (is_w==1): raise RuntimeError, "Can't put together a weighted and an unweighted component (%s)" % cnames
                         is_w = 0;
-                        total_w += counters['All Events']
+                        total_w += counters['Sum Weights'] #['All Events']
                         scale = "(%s)" % field[2]
                     if len(field) == 4: scale += "*("+field[3]+")"
                     for p0,s in options.processesToScale:
+                        ##print "HURRAAA"
                         for p in p0.split(","):
-                            if re.match(p+"$", pname): scale += "*("+s+")"
+                            ##print p+"$"
+                            #rint pname
+                            if re.match(p+"$", pname): 
+                                scale += "*("+s+")" 
+                                ##print "HEP SCALE, ",scale
                     to_norm = True
+                elif "data_FR" in pname or "_norm_" in pname:
+                    scale = "1*(%s)" % field[2]
+                    ##print scale
+                    for p0,s in options.processesToScale:
+                        ##print "HURRAAA"
+                        for p in p0.split(","):
+                            ##print p+"$"
+                            ##print pname
+                            if re.match(p+"$", pname):
+                                if "*("+s+")" not in scale:
+                                    scale += "*("+s+")"
+                                else:
+                                    scale = scale
+                                ##print "HEP SCALE, ",scale
+                    to_norm_FR = True
                 elif len(field) == 2:
                     pass
                 elif len(field) == 3:
@@ -270,7 +342,12 @@ class MCAnalysis:
                 if pname not in self._rank: self._rank[pname] = len(self._rank)
             if to_norm: 
                 for tty in ttys: tty.setScaleFactor("%s*%g" % (scale, 1000.0/total_w))
-            for tty in ttys: tty.makeTTYVariations()
+            if to_norm_FR:
+                for tty in ttys: tty.setScaleFactor("%s" % (scale)) 
+            for tty in ttys: 
+                ##print "TASSA TTY NAME", tty.name()
+                tty.makeTTYVariations()
+        ##print "tAAS MENNAAN"
         #if len(self._signals) == 0: raise RuntimeError, "No signals!"
         #if len(self._backgrounds) == 0: raise RuntimeError, "No backgrounds!"
     def listProcesses(self,allProcs=False):
@@ -428,6 +505,7 @@ class MCAnalysis:
             for regexp in rescales:
                 if re.match(regexp[0],p): v.Scale(regexp[1])
 
+
         regroups = [] # [(compiled regexp,target)]
         self.compilePlotMergeMap(self._options.plotmergemap,regroups)
         for regexp in regroups: ret = self.regroupPlots(ret,regexp,plotspec)
@@ -470,9 +548,11 @@ class MCAnalysis:
                     if self._options.altExternalFitResultLabels:
                         self._altPostFits[resalias].label = self._options.altExternalFitResultLabels[i]
         if getattr(self, '_postFit', None):
+            print "OKEI, OLI POSTFITx"
             roofit = roofitizeReport(ret)
             for k,h in ret.iteritems():
                 if k != "data" and h.Integral() > 0:
+                    #print "OK OK OK"
                     h.setPostFitInfo(self._postFit,True)
             if self._options.externalFitResult and not getattr(self._options, 'externalFitResult_checked', False):
                 notfound = False
@@ -484,7 +564,11 @@ class MCAnalysis:
                     print "Available nuisances: ",; self._postFit.params.Print("")
                 self._options.externalFitResult_checked = True
                 # sanity check of the nuisances
-        #print "DONE getPlots at %.2f" % (0.001*(long(ROOT.gSystem.Now()) - _T0))
+            for k,h in ret.iteritems():
+                if "data_FR" in k:
+                    print "YES", k, h
+                    print h.Integral()
+        ##print "DONE getPlots at %.2f" % (0.001*(long(ROOT.gSystem.Now()) - _T0))
         return ret
     def prepareForSplit(self):
         fname2tty = defaultdict(list)
@@ -758,11 +842,14 @@ def addMCAnalysisOptions(parser,addTreeToYieldOnesToo=True):
     parser.add_option("-t", "--tree",          dest="tree", default='ttHLepTreeProducerTTH', help="Pattern for tree name");
     parser.add_option("--fom", "--figure-of-merit", dest="figureOfMerit", type="string", default=[], action="append", help="Add this figure of merit to the output table (S/B, S/sqrB, S/sqrSB)")
     parser.add_option("--binname", dest="binname", type="string", default='default', help="Bin name for uncertainties matching and datacard preparation [default]")
+    parser.add_option("--multipleBins", dest="manyBins", type="string", default=[], action="append", help="Give multiple bin names for uncertainties matching and datacard preparation [default]")
     parser.add_option("--unc", dest="variationsFile", type="string", default=None, help="Uncertainty file to be loaded")
     parser.add_option("--xu", "--exclude-uncertainty", dest="uncertaintiesToExclude", type="string", default=[], action="append", help="Uncertainties to exclude (comma-separated list of regexp, can specify multiple ones)");
     parser.add_option("--efr", "--external-fitResult", dest="externalFitResult", type="string", default=None, nargs=2, help="External fitResult")
     parser.add_option("--aefr", "--alt-external-fitResults", dest="altExternalFitResults", type="string", default=[], nargs=2, action="append", help="External fitResult")
     parser.add_option("--aefrl", "--alt-external-fitResult-labels", dest="altExternalFitResultLabels", type="string", default=[], nargs=1, action="append", help="External fitResult")
+    parser.add_option("--skimPath", dest="skimpath", action="store_true", default=False, help="Give different path for skimAnalyzer files")
+
 
 if __name__ == "__main__":
     from optparse import OptionParser

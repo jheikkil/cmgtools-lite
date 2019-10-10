@@ -82,6 +82,7 @@ if len(options.infile)>0:
     for inf in options.infile:
         thefile = ROOT.TFile(inf,"read")
         for p in mca.listSignals(True)+mca.listBackgrounds(True)+['data']:
+            ##print "PROCESS, ", p
             n = p if options.infilepfx==None else options.infilepfx+"_"+p
             h = copy.deepcopy(thefile.Get(n))
             if h: report[p] = h
@@ -94,15 +95,18 @@ if len(options.infile)>0:
         report.update(mca.getPlotsRaw("x", args[2], args[3], cuts.allCuts(), nodata=options.asimov, process=p, closeTreeAfter=True))
 ## no infile given, process all histos
 else:
+    #print "JEPPIS"
     report = mca.getPlotsRaw("x", args[2], args[3], cuts.allCuts(), nodata=options.asimov, closeTreeAfter=True)
 
 
 
 if options.hardZero:
+    #print "HARDZERO"
     for key,hist in report.iteritems():
-        for bin in range(1,hist.GetNbinsX()+1):
-            if hist.GetBinContent(bin) <= 0:
-                hist.SetBinContent(bin, 0.0001)
+        if hist.Integral()<=0:
+            for bin in range(1,hist.GetNbinsX()+1):
+                if hist.GetBinContent(bin) <= 0: #was <= 0
+                    hist.SetBinContent(bin, 0.00000001)
 
 
 for post in postfixes:
@@ -138,15 +142,21 @@ for i,s in enumerate(mca.listSignals()):
 for i,b in enumerate(mca.listBackgrounds()):
     if (b not in allyields) or allyields[b] == 0: continue
     backgrounds.append(b)
+    #if "AZH" not in b:
     procs.append(b); iproc[b] = i+1
+
+#procs.append("data")
+print "procs", procs
 
 systs = {}
 systsU = {}
 systsEnv = {}
 for sysfile in args[4:]:
     for line in open(sysfile, 'r'):
+        #print line
         if re.match("\s*#.*", line): continue
         line = re.sub("#.*","",line).strip()
+        #print line
         if len(line) == 0: continue
         field = [f.strip() for f in line.split(':')]
         if len(field) < 4:
@@ -156,6 +166,11 @@ for sysfile in args[4:]:
             if re.match(binmap+"$",binname) == None: continue
             if name not in systs: systs[name] = []
             systs[name].append((re.compile(procmap+"$"),amount))
+            #print "here you go"
+            #print name
+            #print procmap
+            #print binmap
+            #print amount
         elif field[4] == "lnU":
             (name, procmap, binmap, amount) = field[:4]
             if re.match(binmap+"$",binname) == None: continue
@@ -184,7 +199,11 @@ for name in systs.keys():
     for p in procs:
         effect = "-"
         for (procmap,amount) in systs[name]:
+            #print procmap
             if re.match(procmap, p): effect = amount
+            #print procmap
+            #print amount
+        #print name,p,effect
         effmap[p] = effect
     systs[name] = effmap
 for name in systsU.keys():
@@ -195,6 +214,13 @@ for name in systsU.keys():
             if re.match(procmap, p): effect = amount
         effmap[p] = effect
     systsU[name] = effmap
+
+#print "JOOPA JOO"
+#for p in procs:
+#    if p=="EEMT_WZ":
+#        effmap[p]
+#    elif p=="MMMT_WZ":
+#        effmap[p]
 
 for name in systsEnv.keys():
     effmap0  = {}
@@ -248,8 +274,13 @@ for name in systsEnv.keys():
             for h in p2up, p2dn: h.SetLineColor(2)
         elif mode in ["templates"]:
             nominal = report[p]
+            #print nominal, p
+            #print report
+            #print "%s_%s_Up" % (p, effect)
+            #print report["%s_%s_Up" % (p, effect)] 
             p0Up = report["%s_%s_Up" % (p, effect)]
             p0Dn = report["%s_%s_Dn" % (p, effect)]
+            #print "jee"
             if not p0Up or not p0Dn: 
                 raise RuntimeError, "Missing templates %s_%s_(Up,Dn) for %s" % (p,effect,name)
             if options.noNegVar:
@@ -257,6 +288,7 @@ for name in systsEnv.keys():
                 p0Dn = fixNegVariations(p0Dn, report[p])
             p0Up.SetName("%s_%sUp"   % (nominal.GetName(),name))
             p0Dn.SetName("%s_%sDown" % (nominal.GetName(),name))
+            #print p0Up, p0Dn
             report[str(p0Up.GetName())[2:]] = p0Up
             report[str(p0Dn.GetName())[2:]] = p0Dn
             effect0  = "1"
@@ -348,6 +380,8 @@ for name in systsEnv.keys():
 for signal in mca.listSignals():
     myout = outdir
     myout += "%s/" % signal 
+    if "AZH350_bkg" in backgrounds:
+        backgrounds.remove("AZH350_bkg")
     myprocs = ( backgrounds + [ signal ] ) if signal in signals else backgrounds
     if not os.path.exists(myout): os.system("mkdir -p "+myout)
     myyields = dict([(k,v) for (k,v) in allyields.iteritems()]) 
@@ -402,7 +436,7 @@ if not os.path.exists(myout): os.system("mkdir -p "+myout)
 workspace = ROOT.TFile.Open(myout+filename+".input.root", "RECREATE")
 for n,h in report.iteritems():
     if options.verbose > 0: print "\t%s (%8.3f events)" % (h.GetName(),h.Integral())
-    workspace.WriteTObject(h,h.GetName())
+    workspace.WriteTObject(h.raw(),h.GetName())
 workspace.Close()
 
 if options.verbose > -1:

@@ -330,6 +330,7 @@ def doNormFit(pspec,pmap,mca,saveScales=False):
             procNormMap[p] = norm.getVal()
         elif pmap[p].hasVariations():
             procNormMap[p] = norm.getVal()
+            ##print "JEPPIS JOOO"
         pdfs.add(pdf)
         coeffs.add(norm)
     addpdf = ROOT.RooAddPdf("tot","",pdfs,coeffs,False)
@@ -351,6 +352,9 @@ def doNormFit(pspec,pmap,mca,saveScales=False):
            norm0 = procNormMap[p]
            sf    = pmap[p].Integral()/norm0
            sferr = pmap[p].integralSystError()/norm0
+           #print "HEI JAANA"
+           #print norm0
+           #print sferr
            fitlog.append("Process %s scaled by %.3f +/- %.3f [ rel: %.3f ]" % (p,sf,sferr,sferr/sf if sf else 0))
            if saveScales: print fitlog[-1]
         # no need to recompute totals as they are also roofitized
@@ -635,6 +639,7 @@ class PlotMaker:
         if self._options.perBin and not "txt" in self._options.printPlots: raise RuntimeError, "Error: cannot print yields per bin if txt option not given" 
  
     def run(self,mca,cuts,plots,makeStack=True,makeCanvas=True):
+        #print "TASTA SE ALKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         if self._options.wideplot: ROOT.gStyle.SetTitleYOffset(0.55)
         sets = [ (None, 'all cuts', cuts.allCuts()) ]
         if not self._options.final:
@@ -663,13 +668,61 @@ class PlotMaker:
                 matchspec = [ p for p in pspecs if p.name == self._options.preFitData ]
                 if not matchspec: raise RuntimeError, "Error: plot %s not found" % self._options.preFitData
                 pspecs = matchspec + [ p for p in pspecs if p.name != self._options.preFitData ]
+                #print "Here we are ",pspecs
             for pspec in pspecs:
+                #print "JIHUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
                 print "    plot: ",pspec.name
                 pmap = mca.getPlots(pspec,cut,makeSummary=True,closeTreeAfter=True)
                 #
                 # blinding policy
                 blind = pspec.getOption('Blinded','None') if 'data' in pmap else 'None'
                 if self._options.unblind == True: blind = 'None'
+                blindedBins = []
+                #xblindB2B = [9e99, -9e99]
+                if self._options.unblindB2B == True:
+                    ##print "--------------------Unblinding bin-by-bin"
+                    hdata = pmap['data']
+                    hsignal = pmap['signal']
+                    hbkg = pmap['background']
+                    databins = []
+                    signalbins = []
+                    bkgbins = []
+                    for b in xrange(1,hsignal.GetNbinsX()+1):
+                        #print hsignal.GetBinContent(b)
+                        signalbins.append(hsignal.GetBinContent(b))
+                    for b in xrange(1,hdata.GetNbinsX()+1):
+                        #print hdata.GetBinContent(b)
+                        databins.append(hdata.GetBinContent(b))
+                    #print "now bkg"
+                    for b in xrange(1,hbkg.GetNbinsX()+1):
+                        #print hbkg.GetBinContent(b)
+                        #hbkg.GetBinContent(b)
+                        bkgbins.append(hbkg.GetBinContent(b))
+                    for i in xrange(0, len(databins)):
+                        ###print "Let us check the significance in MC to unblind bin-by-bin"
+                        if bkgbins[i]>0.000001:
+                            #print "bkgbins: ", bkgbins[i]
+                            #print signalbins[i]/(sqrt(bkgbins[i]))
+                            if ( signalbins[i]/(sqrt(bkgbins[i])) >= 0.5):
+                                #print "Unblinding bin %.0f - MC signal significance is %.1f" %(i+1, signalbins[i]/(sqrt(bkgbins[i])) )
+                                #MCblindB2B.append(i+1)
+                                blindedBins.append(i+1)
+                                blindedBins.append(hdata.GetXaxis().GetBinLowEdge(i+1))
+                                blindedBins.append(hdata.GetXaxis().GetBinUpEdge(i+1))
+                                hdata.SetBinContent(i+1,0)
+                                hdata.SetBinError(i+1,0)
+                        else:
+                            #print "backgroudn zewro"
+                            blindedBins.append(i+1)
+                            blindedBins.append(hdata.GetXaxis().GetBinLowEdge(i+1))
+                            blindedBins.append(hdata.GetXaxis().GetBinUpEdge(i+1))
+                            hdata.SetBinContent(i+1,0)
+                            hdata.SetBinError(i+1,0)
+                            #hdata.SetBinContent(i+1,0)
+                            #hdata.SetBinError(i+1,0)
+
+                #print "blindedBins ", blindedBins
+                ##xblind = [9e99,-9e99]
                 xblind = [9e99,-9e99]
                 if re.match(r'(bin|x)\s*([<>]?)\s*(\+|-)?\d+(\.\d+)?|(\+|-)?\d+(\.\d+)?\s*<\s*(bin|x)\s*<\s*(\+|-)?\d+(\.\d+)?', blind):
                     xfunc = (lambda h,b: b)             if 'bin' in blind else (lambda h,b : h.GetXaxis().GetBinCenter(b));
@@ -712,6 +765,7 @@ class PlotMaker:
                             raise RuntimeError, "Can't make pseudo-data for %s" % pdata.ClassName()
                     pmap["data"] = pdata
                 #
+                ##print "SEURAAVAKSI NO MAKESTACK"
                 if not makeStack: 
                     for k,v in pmap.iteritems():
                         if hasattr(v,'writeToFile'):
@@ -719,8 +773,10 @@ class PlotMaker:
                         else:
                             if v.InheritsFrom("TH1"): v.SetDirectory(dir) 
                             dir.WriteTObject(v.raw())
+                    ##print "about to say continue"
                     continue
                 #
+                ###print "HMMMMMMMMMMMMMMMMMMMMMM"
                 if self._options.scaleSignalToData: 
                     self._sf = doScaleSigNormData(pspec,pmap,mca)
                 elif self._options.scaleBackgroundToData != []: 
@@ -728,21 +784,27 @@ class PlotMaker:
                 elif self._options.fitData: 
                     doNormFit(pspec,pmap,mca)
                 elif self._options.preFitData and pspec.name == self._options.preFitData:
+                    ####print "tehdaan NormFit"
                     doNormFit(pspec,pmap,mca,saveScales=True)
                 #
+                ##print "YRITAN UUDESTAAN"
                 for k,v in pmap.iteritems():
+                    #####print k,v
                     if hasattr(v,'writeToFile'):
                         v.writeToFile(dir)
                     else:
                         if v.InheritsFrom("TH1"): v.SetDirectory(dir) 
                         dir.WriteTObject(v.raw())
                 #
+                #print "--------------------------printataan plotti seuraavaksi"
                 self.printOnePlot(mca,pspec,pmap,
                                   xblind=xblind,
+                                  blindedBins = blindedBins,
                                   makeCanvas=makeCanvas,
                                   outputDir=dir,
                                   printDir=self._options.printDir+(("/"+subname) if subname else ""))
                 if getattr(mca,'_altPostFits',None):
+                    ###print "OKEI OKEI OKEI"
                     roofit = roofitizeReport(pmap)
                     if self._options.processesToPeg == []:
                         addDefaultPOI(roofit,pmap,mca,"r")
@@ -751,6 +813,7 @@ class PlotMaker:
                     for key,pfs in mca._altPostFits.iteritems():
                         for k,h in pmap.iteritems():
                             if k != "data":
+                        ###        print "moikkelis"
                                 h.setPostFitInfo(pfs,True)
                         subdir = dir.GetDirectory("post_"+key);
                         if not subdir: subdir = dir.mkdir("post_"+key)
@@ -759,6 +822,7 @@ class PlotMaker:
                             self._options.legendHeader = pfs.label
                         self.printOnePlot(mca,pspec,pmap,
                                           xblind=xblind,
+                                          blindedBins=blindedBins,
                                           makeCanvas=makeCanvas,
                                           outputDir=subdir,
                                           printDir=self._options.printDir+(("/"+subname) if subname else "")+"/post_"+key)
@@ -777,11 +841,11 @@ class PlotMaker:
                                 print "%s goes in style for %s" % (k, h.GetName())
                                 stylePlot(h,pspec_slice, lambda opt, deft: mca.getProcessOption(k, opt, deft))
                         self.printOnePlot(mca,pspec_slice,pmap_slice,
-                                          xblind=xblind, makeCanvas=makeCanvas, outputDir=dir,
+                                          xblind=xblind, blindedBins=blindedBins, makeCanvas=makeCanvas, outputDir=dir,
                                           printDir=self._options.printDir+(("/"+subname) if subname else ""))
             if elist: mca.clearCut()
 
-    def printOnePlot(self,mca,pspec,pmapIn,mytotal=None,makeCanvas=True,outputDir=None,printDir=None,xblind=[9e99,-9e99],extraProcesses=[],plotmode="auto",outputName=None):
+    def printOnePlot(self,mca,pspec,pmapIn,mytotal=None,makeCanvas=True,outputDir=None,printDir=None,xblind=[9e99,-9e99],blindedBins=[],extraProcesses=[],plotmode="auto",outputName=None):
                 pmap = dict( (k, h if isinstance(h,HistoWithNuisances) else HistoWithNuisances(h)) for (k,h) in pmapIn.iteritems() )
                 options = self._options
                 if printDir == None: printDir=self._options.printDir
@@ -932,12 +996,36 @@ class PlotMaker:
                 is2D = total.InheritsFrom("TH2")
                 if 'data' in pmap: 
                     if options.poisson and not is2D:
+                        ###print "jeeejee"
                         pdata = getDataPoissonErrors(pmap['data'], True, True)
+                        if blindedBins:
+                           for k in reversed(xrange(0,len(blindedBins),3)):
+                               pdata.RemovePoint(blindedBins[k]-1)
                         pdata.Draw("PZ SAME")
                         pmap['data'].poissonGraph = pdata ## attach it so it doesn't get deleted
                     else:
+                        ###print "else juuhuu"
                         pmap['data'].Draw("E SAME")
                     reMax(total,pmap['data'],islog,doWide=doWide)
+                    ##3print "HURRAHURRAHURRA"
+                    ###print "blindedBins: ", blindedBins 
+                    if blindedBins:
+                        ####print "BlindedBins: ", blindedBins
+                        minim = 9e99
+                        maxim = -9e99
+                        blindBoxes = []
+                        for j in xrange(0,len(blindedBins),3):
+                            #print blindedBins[j]
+                            lowEdge = blindedBins[j+1]
+                            upEdge = blindedBins[j+2]
+                            #print pmap['data'].GetXaxis().GetBinLowEdge(j+1)
+                            #print pmap['data'].GetXaxis().GetBinUpEdge(j+1)
+                            blindbox = ROOT.TBox(min(minim,lowEdge),total.GetYaxis().GetXmin(),max(maxim,upEdge),total.GetMaximum())
+                            blindbox.SetFillColor(ROOT.kBlue+3)
+                            blindbox.SetFillStyle(3944)
+                            blindbox.Draw()
+                            blindBoxes.append(blindbox) # so it doesn't get deleted
+                        blindedBins+=blindBoxes
                     if xblind[0] < xblind[1]:
                         blindbox = ROOT.TBox(xblind[0],total.GetYaxis().GetXmin(),xblind[1],total.GetMaximum())
                         blindbox.SetFillColor(ROOT.kBlue+3)
@@ -984,7 +1072,7 @@ class PlotMaker:
                     signorms = doStackSignalNorm(pspec,pmap,options.showIndivSigShapes or options.showIndivSigs,extrascale=options.signalPlotScale, norm=not options.showIndivSigs)
                     for signorm in signorms:
                         if outputDir: 
-                            signorm.SetDirectory(outputDir); outputDir.WriteTObject(signorm)
+                            signorm.SetDirectory(outputDir); outputDir.WriteTObject(signorm.raw())
                         reMax(total,signorm,islog,doWide=doWide)
                 if options.showDatShape: 
                     datnorm = doDataNorm(pspec,pmap)
@@ -1069,6 +1157,12 @@ class PlotMaker:
                             dump = open("%s/%s.%s" % (fdir, outputName, ext), "w")
                             maxlen = max([len(mca.getProcessOption(p,'Label',p)) for p in mca.listSignals(allProcs=True) + mca.listBackgrounds(allProcs=True)]+[10])
                             fmt    = "%%-%ds %%9.2f +/- %%9.2f (stat)" % (maxlen+1)
+                            ##print "HURRAA"
+                            signalAmount = 0.0
+                            bkgAmount = 0.0
+                            signalB2B = []
+                            bkgB2B = []
+                            dataB2B = []
                             for p in mca.listSignals(allProcs=True) + mca.listBackgrounds(allProcs=True) + ["signal", "background","total"]:
                                 if p not in pmap: continue
                                 plot = pmap[p]
@@ -1077,17 +1171,43 @@ class PlotMaker:
                                 if p not in ["signal","background","total"] and mca.isSignal(p): norm /= options.signalPlotScale # un-scale what was scaled
                                 stat = sqrt(sum([plot.GetBinError(b)**2 for b in xrange(1,plot.GetNbinsX()+1)]))
                                 syst = plot.integralSystError(symmetrize=True)
-                                if p == "signal": dump.write(("-"*(maxlen+45))+"\n");
+                                #print "JUHUUU"
+                                #print stat
+                                #print syst
+                                #if p == "data_FR": print "JEP"
+                                if p == "signal": 
+                                        dump.write(("-"*(maxlen+45))+"\n")                                     
+                                        for b in xrange(1,plot.GetNbinsX()+1):
+                                            signalB2B.append(plot.GetBinContent(b))
                                 dump.write(fmt % (_unTLatex(mca.getProcessOption(p,'Label',p) if p not in ["signal", "background","total"] else p.upper()), norm, stat))
+                                if p == "background":
+                                    bkgAmount = norm
+                                    for b in xrange(1,plot.GetNbinsX()+1):
+                                        bkgB2B.append(plot.GetBinContent(b))
                                 if syst: dump.write(" +/- %9.2f (syst)"  % syst)
                                 dump.write("\n")
                             if 'data' in pmap: 
                                 dump.write(("-"*(maxlen+45))+"\n");
                                 dump.write(("%%-%ds %%7.0f\n" % (maxlen+1)) % ('DATA', pmap['data'].Integral()))
+                                for b in xrange(1,plot.GetNbinsX()+1):
+                                   ##print plot.GetBinContent(b)
+                                   dataB2B.append(plot.GetBinContent(b))
                             for logname, loglines in pspec.allLogs():
                                 dump.write("\n\n --- %s --- \n" % logname)
                                 for line in loglines: dump.write("%s\n" % line)
                                 dump.write("\n")
+                            dump.write("\n Bin-by-bin significance for MC signal is: \n")
+                            #if 'data' not in pmap:
+                            #for b in xrange(1,plot.GetNbinsX()+1):
+                            for i in xrange(0, len(signalB2B)):
+                                if bkgB2B[i]>0:
+                                    if (signalB2B[i]/(sqrt(bkgB2B[i]))>= 0.5 and self._options.unblindB2B == True):
+                                        dump.write("Bin %.0f:  %5.2f/sqrt(%.2f) = %.1f --- BLINDED \n" %(i+1,signalB2B[i],bkgB2B[i],(signalB2B[i]/(sqrt(bkgB2B[i])))))
+                                    else:
+                                        dump.write("Bin %.0f:  %5.2f/sqrt(%.2f) = %.1f \n" %(i+1,signalB2B[i],bkgB2B[i],(signalB2B[i]/(sqrt(bkgB2B[i])))))
+
+                                else:
+                                    dump.write("Bin %.0f:  %5.2f/sqrt(%.2f) = NAN \n" %(i+1,signalB2B[i],bkgB2B[i]))
                             dump.close()
                         if ext != "txt":
                             savErrorLevel = ROOT.gErrorIgnoreLevel; ROOT.gErrorIgnoreLevel = ROOT.kWarning;
@@ -1132,6 +1252,7 @@ class PlotMaker:
 
 def addPlotMakerOptions(parser, addAlsoMCAnalysis=True):
     if addAlsoMCAnalysis: addMCAnalysisOptions(parser)
+    parser.add_option("--unblindB2B", dest="unblindB2B", action="store_true", default=False, help="Unblind data bins with less than 0.5 significance.");
     parser.add_option("--ss",  "--scale-signal", dest="signalPlotScale", default=1.0, type="float", help="scale the signal in the plots by this amount");
     #parser.add_option("--lspam", dest="lspam",   type="string", default="CMS Simulation", help="Spam text on the right hand side");
     parser.add_option("--lspam", dest="lspam",   type="string", default="#bf{CMS} #it{Preliminary}", help="Spam text on the right hand side");
@@ -1197,6 +1318,7 @@ if __name__ == "__main__":
     addPlotMakerOptions(parser)
     parser.add_option("-o", "--out", dest="out", default=None, help="Output file name. by default equal to plots -'.txt' +'.root'");
     (options, args) = parser.parse_args()
+    ##print "ALOITUS"
     mca  = MCAnalysis(args[0],options)
     cuts = CutsFile(args[1],options)
     plots = PlotFile(args[2],options)
@@ -1208,6 +1330,8 @@ if __name__ == "__main__":
         if os.path.exists("/afs/cern.ch"): os.system("cp /afs/cern.ch/user/g/gpetrucc/php/index.php "+os.path.dirname(outname))
         elif os.path.exists("/pool/ciencias/"): os.system("cp /pool/ciencias/HeppyTrees/RA7/additionalReferenceCode/index.php "+os.path.dirname(outname))
     print "Will save plots to ",outname
+    if options.unblindB2B == True:
+        print "Unblinding bin-by-bin"
     fcmd = open(re.sub("\.root$","",outname)+"_command.txt","w")
     fcmd.write("%s\n\n" % " ".join(sys.argv))
     fcmd.write("%s\n%s\n" % (args,options))
