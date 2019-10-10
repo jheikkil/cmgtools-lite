@@ -148,8 +148,11 @@ class MCAnalysis:
             # Load variations if matching this process name
             variations={}
             if self.variationsFile:
+                print "we have file for variations"
                 for var in self.variationsFile.uncertainty():
                     if var.procmatch().match(pname) and var.binmatch().match(options.binname): 
+                        print pname
+                        print options.binname
                         if var.name in variations:
                             print "Variation %s overriden for process %s, new process pattern %r, bin %r (old had %r, %r)" % (
                                     var.name, pname, var.procpattern(), var.binpattern(), variations[var.name].procpattern(), variations[var.name].binpattern())
@@ -219,7 +222,7 @@ class MCAnalysis:
                     skimpath = cname.split('/', 1)
                     #print skimpath
                     pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % skimpath[0]
-                    #print pckfile
+                    ##print pckfile
                 else:
                     pckfile = basepath+"/%s/SkimAnalyzerCount/SkimReport.pck" % cname
                 #print pckfile 

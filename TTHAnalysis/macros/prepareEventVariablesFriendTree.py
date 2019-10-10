@@ -82,9 +82,11 @@ parser.add_option("--bk",   dest="bookkeeping",  action="store_true", default=Fa
 parser.add_option("--tra2",  dest="useTRAv2", action="store_true", default=False, help="Use the new experimental version of treeReAnalyzer");
 (options, args) = parser.parse_args()
 
+outFile=""
 if options.outName:
     #print "olkoon nimi"
-    outFile=options.outName[0]
+    outFile=options.outName[0]+".root"
+    outName = options.outName[0]
     #print outFile
 
 if options.imports:
@@ -155,7 +157,10 @@ for D in glob(args[0]+"/*"):
             if not found: continue
         data =  any(x in short for x in "DoubleMu DoubleEl DoubleEG MuEG MuonEG SingleMu SingleEl".split()) # FIXME
         print fname
+        #print treename
         #fname += "/tree.root"
+        if os.path.isdir(fname): continue
+        if ".root" not in fname: continue
         f = ROOT.TFile.Open(fname)
         t = f.Get(treename)
         if not t:
@@ -175,11 +180,12 @@ for D in glob(args[0]+"/*"):
                     print "Component %s exists already and has matching number of entries (%d)" % (short, entries)
                     continue
         chunk = options.chunkSize
+        print "entries and chunk", entries, chunk
         if entries < chunk:
             #print options.onlyMC
             #print data
             if options.onlyMC and not data:
-                ##print "TAALLA"
+                #print "TAALLA"
                 print "  ",os.path.basename(D),("  DATA" if data else "  MC")," single chunk"
                 #jobs.append((short,fname,"%s/evVarFriend_%s.root" % (args[1],short),data,xrange(entries),-1,None))
                 jobs.append((short,fname,"%s.root" % (args[1]),data,xrange(entries),-1,None))
@@ -192,6 +198,7 @@ for D in glob(args[0]+"/*"):
                 #print fname
                 #print outFile
                 if len(outFile)==0:
+                    ###jobs.append((short,fname,"%s/%s_%s.root" % (args[1],outFile,short),data,xrange(entries),-1,None))
                     jobs.append((short,fname,"%s/evVarFriend_%s.root" % (args[1],short),data,xrange(entries),-1,None))
                 else: 
                     #print "moiku jaana"
@@ -207,6 +214,8 @@ for D in glob(args[0]+"/*"):
                 if not options.fineSplit:
                     r = xrange(int(i*chunk),min(int((i+1)*chunk),entries))
                     jobs.append((short,fname,"%s/evVarFriend_%s.chunk%d.root" % (args[1],short,i),data,r,i,None))
+                    ####jobs.append((short,fname,"%s/%s_%s.chunk%d.root" % (args[1],outName,short,i),data,r,i,None))
+                    ####jobs.append((short,fname,"%s/%s_chunk%d.root" % (args[1],outName,i),data,r,i,None))
                 else:
                     ev_per_fs = int(ceil(chunk/float(options.fineSplit)))
                     for ifs in xrange(options.fineSplit):

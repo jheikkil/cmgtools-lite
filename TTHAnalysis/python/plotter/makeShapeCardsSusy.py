@@ -74,6 +74,7 @@ filename = options.outname # name of the card file
 binname  = options.binname if options.binname else os.path.basename(args[1]).replace(".txt","") # name of the bin in the card
 outdir   = options.outdir+"/" if options.outdir else ""
 
+print binname
 report={}
 todo = []
 
@@ -144,16 +145,25 @@ systs = {}
 systsU = {}
 systsEnv = {}
 for sysfile in args[4:]:
+    #print sysfile
     for line in open(sysfile, 'r'):
         if re.match("\s*#.*", line): continue
         line = re.sub("#.*","",line).strip()
+        #print line
         if len(line) == 0: continue
         field = [f.strip() for f in line.split(':')]
+        #print field
+        ###print binmap
         if len(field) < 4:
             raise RuntimeError, "Malformed line %s in file %s"%(line.strip(),sysfile)
         elif len(field) == 4 or field[4] == "lnN":
+            #print "JEPPIS"
             (name, procmap, binmap, amount) = field[:4]
-            if re.match(binmap+"$",binname) == None: continue
+            if re.match(binmap+"$", binname) == None: 
+                #print binmap+"$"
+                #print binname
+                continue
+            #if binname not in binmap: continue
             if name not in systs: systs[name] = []
             systs[name].append((re.compile(procmap+"$"),amount))
         elif field[4] == "lnU":
@@ -400,9 +410,20 @@ for signal in mca.listSignals():
 myout = outdir+"/common/";
 if not os.path.exists(myout): os.system("mkdir -p "+myout)
 workspace = ROOT.TFile.Open(myout+filename+".input.root", "RECREATE")
+import CMGTools.TTHAnalysis.plotter.histoWithNuisances
+
 for n,h in report.iteritems():
-    if options.verbose > 0: print "\t%s (%8.3f events)" % (h.GetName(),h.Integral())
-    workspace.WriteTObject(h,h.GetName())
+    if isinstance(h, CMGTools.TTHAnalysis.plotter.histoWithNuisances.HistoWithNuisances):
+       #print "JEPJEP"
+       #print h.GetName()
+       #print h.raw().GetName()
+       name = "x_"+n
+       #print "name", name
+       if options.verbose > 0: print "\t%s (%8.3f events)" % (h.raw().GetName(),h.raw().Integral())
+       workspace.WriteTObject(h.raw(), name)
+    else:
+       if options.verbose > 0: print "\t%s (%8.3f events)" % (h.GetName(),h.Integral())
+       workspace.WriteTObject(h,h.GetName())
 workspace.Close()
 
 if options.verbose > -1:

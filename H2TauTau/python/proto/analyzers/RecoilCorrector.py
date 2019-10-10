@@ -44,6 +44,8 @@ class RecoilCorrector(Analyzer):
 
         taus_prompt_vis = [p for p in taus_prompt if abs(p.pdgId()) not in [12, 14, 16]]
 
+        aboson = [p for p in event.genParticles if abs(p.pdgId()) == 36 and not any(abs(self.getFinalBoson(p).daughter(i_d).pdgId()) in [36] for i_d in xrange(self.getFinalBoson(p).numberOfDaughters()))] 
+
         if 'DY' in self.cfg_comp.name or ('Higgs' in self.cfg_comp.name and 'TTH' not in self.cfg_comp.name) or 'WJ' in self.cfg_comp.name:
             if len(leptons_prompt) != 2 and len(taus_prompt) < 2:
                 print 'ERROR: No 2 prompt leptons found'
@@ -68,11 +70,23 @@ class RecoilCorrector(Analyzer):
 
         p4 = p4sum(all)
         p4_vis = p4sum(vis)
-
+  
+        
+        
         event.parentBoson = p4
+        if aboson:
+            event.parentBoson.genMass = aboson[0].mass()      
+
         event.parentBoson.detFlavour = 0
 
         return p4.px(), p4.py(), p4_vis.px(), p4_vis.py()
+
+    @staticmethod
+    def getFinalBoson(boson):
+        for i_d in xrange(boson.numberOfDaughters()):
+            if boson.daughter(i_d).pdgId() == boson.pdgId():
+                return RecoilCorrector.getFinalBoson(boson.daughter(i_d))
+        return boson
 
 
     def process(self, event):

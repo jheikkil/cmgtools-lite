@@ -343,13 +343,12 @@ def doNormFit(pspec,pmap,mca,saveScales=False):
         model = ROOT.RooProdPdf("prod","",constraints)
     print "CONSTRAINTS"
     result = model.fitTo( roodata, ROOT.RooFit.Save(1) )
-    #print result.getValue()
+    print result
     print "NYT TULEE POSTFIT"
     postfit = PostFitSetup(fitResult=result)
     print "VALMIS"
     for k,h in pmap.iteritems():
         if k != "data" and h.Integral() > 0:
-            print "heippa"
             h.setPostFitInfo(postfit,True)
     if saveScales:
         postfit._roofitContext = roofit # so it's not deleted
@@ -357,7 +356,6 @@ def doNormFit(pspec,pmap,mca,saveScales=False):
     fitlog = []
     for p in mca.listBackgrounds(allProcs=True) + mca.listSignals(allProcs=True):
         if p in pmap and p in procNormMap:
-           print "okei"
            norm0 = procNormMap[p]
            sf    = pmap[p].Integral()/norm0
            sferr = pmap[p].integralSystError()/norm0
@@ -377,7 +375,6 @@ def doNormFit(pspec,pmap,mca,saveScales=False):
            fitlog.append("%-*s : % .3f +/- %.3f" % (nuisancelength, nuis, w.var(nuis).getVal(), w.var(nuis).getError()))
     pspec.setLog("Fitting", fitlog)
     ROOT.RooMsgService.instance().setGlobalKillBelow(gKill)
-    print "valmis"
     return postfit
 
 def doRatioHists(pspec,pmap,total,maxRange,fixRange=False,fitRatio=None,errorsOnRef=True,ratioNums="signal",ratioDen="background",ylabel="Data/pred.",yndiv=505,doWide=False,showStatTotLegend=False,textSize=0.035):

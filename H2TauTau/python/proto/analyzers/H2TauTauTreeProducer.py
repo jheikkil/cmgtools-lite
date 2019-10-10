@@ -71,7 +71,7 @@ class H2TauTauTreeProducer(H2TauTauTreeProducerBase):
         # PhysicsTools.Heppy.analyzers.core.Analyzer
         self.readCollections(event.input)
 
-        print "JEPJEP"
+#        print "JEPJEP"
         self.tree.reset()
 
         if not eval(self.skimFunction):

@@ -76,7 +76,7 @@ class NJetsAnalyzer(Analyzer):
         if not self.hasMCProduct:
             return True
 
-        print "nJETS ANALS"
+ #       print "nJETS ANALS"
         self.readCollections(event.input)
 
         self.mchandles['source'].ReallyLoad(event.input)

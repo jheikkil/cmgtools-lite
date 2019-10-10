@@ -46,22 +46,29 @@ def make2D(out,name,xedges,yedges):
 
 def makeVariants(h):
     shifters = [
-        ("up"  ,  lambda pt,eta,fr,err : min(fr+err, 1.0) ),
-        ("down",  lambda pt,eta,fr,err : max(fr-err, 0.0) ),
-        ("pt1" ,  lambda pt,eta,fr,err : min(max( fr + err * (log(pt/30)/log(3.)), 0.0),1.0) ),
-        ("pt2" ,  lambda pt,eta,fr,err : min(max( fr - err * (log(pt/30)/log(3.)), 0.0),1.0) ),
-        ("b1"  ,  lambda pt,eta,fr,err : min(max( fr + err if eta < 1.3 else fr, 0.0),1.0) ), 
-        ("b2"  ,  lambda pt,eta,fr,err : min(max( fr - err if eta < 1.3 else fr, 0.0),1.0) ),
-        ("ec1" ,  lambda pt,eta,fr,err : min(max( fr + err if eta > 1.3 else fr, 0.0),1.0) ), 
-        ("ec2" ,  lambda pt,eta,fr,err : min(max( fr - err if eta > 1.3 else fr, 0.0),1.0) ),
+       ("up"  ,  lambda pt,eta,fr,err : min(fr+err, 1.0) ),
+       ("down",  lambda pt,eta,fr,err : max(fr-err, 0.0) ),
+       # ("up"  ,  lambda pt,DM,fr,err : min(fr+err, 1.0) ),
+       # ("down",  lambda pt,DM,fr,err : max(fr-err, 0.0) ),
+       # ("pt1" ,  lambda pt,eta,fr,err : min(max( fr + err * (log(pt/30)/log(3.)), 0.0),1.0) ),
+       # ("pt2" ,  lambda pt,eta,fr,err : min(max( fr - err * (log(pt/30)/log(3.)), 0.0),1.0) ),
+       # ("b1"  ,  lambda pt,eta,fr,err : min(max( fr + err if eta < 1.3 else fr, 0.0),1.0) ), 
+       # ("b2"  ,  lambda pt,eta,fr,err : min(max( fr - err if eta < 1.3 else fr, 0.0),1.0) ),
+       # ("ec1" ,  lambda pt,eta,fr,err : min(max( fr + err if eta > 1.3 else fr, 0.0),1.0) ), 
+       # ("ec2" ,  lambda pt,eta,fr,err : min(max( fr - err if eta > 1.3 else fr, 0.0),1.0) ),
     ]
     ret = []
     for s,func in shifters:
+        ##print h.GetNbinsX()+1
+        ##print h.GetNbinsY()+1	
         hsyst = h.Clone(h.GetName()+"_"+s)
         for bx in xrange(1,h.GetNbinsX()+1):
+            ##print bx
             x = h.GetXaxis().GetBinCenter(bx) 
             for by in xrange(1,h.GetNbinsY()+1):
                 y = h.GetYaxis().GetBinCenter(by) 
+                ##print by, y
+                ##print x, y
                 fr0 = h.GetBinContent(bx,by)
                 err = h.GetBinError(bx,by)
                 fr = func(x,y,fr0,err)
@@ -139,7 +146,7 @@ if __name__ == "__main__":
        etaslices_tau = [ (0.4,"1p5"), (1.8,"2p3") ]
        etaslices_mu = [ (0.4,"1p2"), (1.8,"2p4") ]
  
-       DMbins_tau = [0, 1, 10]
+       DMbins_tau = [0, 0.5, 10, 15]
        DMslices_tau = [ (0.4,"0"), (1.8,"1"), (10, "10") ]
 
        el    = [ "eleFR_signal_vs_pt_signal_2d_prefit_graph", "eleFR_signal_vs_pt_signal_2d_prefit_graph" ]
@@ -190,8 +197,8 @@ if __name__ == "__main__":
        QCD="qcd1l/v3.1"
 
        #### Electrons: 
-       readMany2D(el, h2d_el,    "/".join([Plots, "electron_%s.root"]), "%s", etaslices_el, (5,999) )
-       readMany2D(el_data, h2d_elD,    "/".join([Plots, "electron_%s.root"]), "%s", etaslices_el, (5,999) )
+       readMany2D(el, h2d_el,    "/".join([Plots, "electron_%s_noid.root"]), "%s", etaslices_el, (5,999) )
+       readMany2D(el_data, h2d_elD,    "/".join([Plots, "electron_%s_noid.root"]), "%s", etaslices_el, (5,999) )
        #if Z3l:
        #   readMany2D(XsD, h2d_el_DY, "/".join([Plots, Z3l, "el/fakerates-mtW3R/fr_sub_eta_%s_comp.root"]), "%s", etaslices_el, (5,999) )
 
@@ -241,6 +248,10 @@ if __name__ == "__main__":
        for h in h2d_el + h2d_mu + h2d_tau + h2d_elD + h2d_muD + h2d_tauD: outfile.WriteTObject(h) #+ h2d_el_DY + h2d_mu + h2d_mu_DY:    outfile.WriteTObject(h)
        #for h in h2d_el_WJ + h2d_mu_WJ: outfile.WriteTObject(h)
        #for h in h2d_el_PB + h2d_mu_PB: outfile.WriteTObject(h)
+
+       for h in h2d_el + h2d_mu + h2d_tau + h2d_elD + h2d_muD + h2d_tauD:
+           variants = makeVariants(h)
+           for v in variants: outfile.WriteTObject(v, v.GetName())
 
        # Plot
        if options.outdir:

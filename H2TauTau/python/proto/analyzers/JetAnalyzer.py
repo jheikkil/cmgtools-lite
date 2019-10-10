@@ -114,15 +114,22 @@ class JetAnalyzer(Analyzer):
         event.cleanBJets = []
         event.cleanBJetsLoose = []
 
-        leptons = []
-        if hasattr(event, 'selectedLeptons'):
-            leptons = event.selectedLeptons
-            #print "FOUNDFOUND"
+        event.cleanBJets_tt = []
+        event.cleanBJets_et = []
+        event.cleanBJets_mt = []
+        event.cleanBJets_em = []
+
+
+        leptons = event.goodLeptons
+        #if hasattr(event, 'A_leptons'):
+        #    leptons = event.A_leptons
+        #    print "FOUNDFOUND"
         if hasattr(self.cfg_ana, 'toClean'):
             leptons = getattr(event, self.cfg_ana.toClean)
             
 
         if hasattr(self.cfg_ana, 'leptonCollections'):
+            print "hm"
             for coll in self.cfg_ana.leptonCollections:
                 leptons += self.handles[coll].product()
 
@@ -159,12 +166,42 @@ class JetAnalyzer(Analyzer):
 
         self.counters.counter('jets').inc('all events')
 
+        leptons_tt = []
+        leptons_et = []
+        leptons_mt = []
+        leptons_em = []
+        if event.leptons_tt:
+            print "JES"
+            leptons_tt = event.leptons_tt
+            print "len is ", len(leptons_tt)
+        if event.leptons_mt:
+            leptons_mt = event.leptons_mt
+       	if event.leptons_et:
+            leptons_et = event.leptons_et
+       	if event.leptons_em:
+            leptons_em = event.leptons_em       	   
+
         event.cleanJets, dummy = cleanObjectCollection(event.jets,
                                                        masks=leptons,
                                                        deltaRMin=0.4)
         event.cleanBJets, dummy = cleanObjectCollection(event.bJets,
                                                         masks=leptons,
-                                                        deltaRMin=0.4)
+                                                        deltaRMin=0.5)
+        event.cleanBJets_mt, dummy = cleanObjectCollection(event.bJets,
+                                                        masks=leptons_mt,
+                                                        deltaRMin=0.5)
+
+        event.cleanBJets_tt, dummy = cleanObjectCollection(event.bJets,
+                                                        masks=leptons_tt,
+                                                        deltaRMin=0.5)
+
+        event.cleanBJets_et, dummy = cleanObjectCollection(event.bJets,
+                                                        masks=leptons_et,
+                                                        deltaRMin=0.5)
+
+        event.cleanBJets_em, dummy = cleanObjectCollection(event.bJets,
+                                                        masks=leptons_em,
+                                                        deltaRMin=0.5)
 
         event.cleanBJetsLoose, dummy = cleanObjectCollection(event.bJetsLoose,
                                                         masks=leptons,
@@ -172,6 +209,7 @@ class JetAnalyzer(Analyzer):
 
         # Attach matched jets to selected + other leptons
         if hasattr(event, 'otherLeptons'):
+            print "HEHHE"
             leptons += event.otherLeptons
             
         pairs = matchObjectCollection(leptons, allJets, 0.5 * 0.5)
@@ -264,7 +302,7 @@ class JetAnalyzer(Analyzer):
             self.testJetID(jet)
 
     def testBJet(self, jet, csv_cut=0.8484, wp='medium'):
-        # medium csv working point
+        # medium csv working point   #0.8484
         # https://twiki.cern.ch/twiki/bin/viewauth/CMS/BtagRecommendation74X
         jet.btagMVA = jet.btag('pfCombinedInclusiveSecondaryVertexV2BJetTags')
         # jet.btagFlag = jet.btagMVA > csv_cut
@@ -280,8 +318,9 @@ class JetAnalyzer(Analyzer):
                 csv_cut=csv_cut
             )
         )
-
+          #2.4
         return self.testJet(jet) and \
             abs(jet.eta()) < 2.4 and \
             getattr(jet, 'btagFlag'+wp) and \
             self.testJetID(jet)
+ 

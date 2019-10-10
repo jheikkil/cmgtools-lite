@@ -54,9 +54,24 @@ event_vars = [
     #Variable('veto_dilepton', lambda ev : not ev.leptonAccept, type=int),
     #Variable('veto_thirdlepton', lambda ev : not ev.thirdLeptonVeto, type=int),
     #Variable('veto_otherlepton', lambda ev : not ev.otherLeptonVeto, type=int),
+    Variable('n_jets', lambda ev : len(ev.cleanJets30), type=int),
+    Variable('n_jets_puid', lambda ev : sum(1 for j in ev.cleanJets30 if j.puJetId()), type=int),
+    Variable('n_jets_20', lambda ev : len(ev.cleanJets), type=int),
+    Variable('n_jets_20_puid', lambda ev : sum(1 for j in ev.cleanJets if j.puJetId()), type=int),
+    Variable('n_bjets', lambda ev : len(ev.cleanBJets), type=int),
+    Variable('n_bjets_tt', lambda ev : len(ev.cleanBJets_tt), type=int),
+    Variable('n_bjets_et', lambda ev : len(ev.cleanBJets_et), type=int),
+    Variable('n_bjets_mt', lambda ev : len(ev.cleanBJets_mt), type=int),
+    Variable('n_bjets_em', lambda ev : len(ev.cleanBJets_em), type=int),
+
+    Variable('n_bjets_loose', lambda ev : len(ev.cleanBJetsLoose), type=int),
 
     Variable('n_vertices', lambda ev : len(ev.vertices), type=int),
     Variable('rho', lambda ev : ev.rho),
+    Variable('met_pt', lambda ev: ev.met.pt()),
+    Variable('met_py', lambda ev: ev.met.py()),
+    Variable('met_px', lambda ev: ev.met.px()),
+    Variable('met_phi', lambda ev: ev.met.phi()),
     #met variables for MC
     Variable('met_px_DM0_up', lambda ev: ev.met_px_DM0_up if hasattr(ev, 'met_px_DM0_up')  else -999.),  
     Variable('met_py_DM0_up', lambda ev: ev.met_py_DM0_up if hasattr(ev, 'met_py_DM0_up') else -999.), 
@@ -98,6 +113,10 @@ event_vars = [
     Variable('met_py_UncEnDown', lambda ev: ev.met_py_UncEnDown if hasattr(ev, 'met_py_UncEnDown')  else -999.),
     Variable('met_pt_UncEnDown',  lambda ev: ev.met_pt_UncEnDown if hasattr(ev, 'met_pt_UncEnDown') else -999.),
     Variable('met_phi_UncEnDown', lambda ev: ev.met_phi_UncEnDown if hasattr(ev, 'met_phi_UncEnDown')  else -999.),
+    Variable('metcov00', lambda ev : ev.metcov00 if ev.metcov00 else 0.0),
+    Variable('metcov01', lambda ev : ev.metcov01 if ev.metcov01 else 0.0), # redundant
+    Variable('metcov10', lambda ev : ev.metcov10 if ev.metcov10 else 0.0),
+    Variable('metcov11', lambda ev : ev.metcov11 if ev.metcov11 else 0.0),
     
     #met().getSignificanceMatrix()
     Variable('weight', lambda ev : ev.eventWeight),

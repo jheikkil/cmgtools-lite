@@ -22,6 +22,7 @@ def addMCEfficiencyOptions(parser):
     if not parser.has_option("--yrange"): parser.add_option("--yrange", dest="yrange", default=None, nargs=2, type='float', help="Y axis range");
     parser.add_option("--logy", dest="logy", default=False, action='store_true', help="Do y axis in log scale");
     parser.add_option("--ytitle", dest="ytitle", default="Efficiency", type='string', help="Y axis title");
+    parser.add_option("--xtitle", dest="xtitle", default="p_{T}", type='string', help="X axis title");
     parser.add_option("--fontsize", dest="fontsize", default=0.045, type='float', help="Legend font size");
     parser.add_option("--grid", dest="showGrid", action="store_true", default=False, help="Show grid lines")
     parser.add_option("--groupBy",  dest="groupBy",  default="process",  type="string", help="Group by: cut, process")
@@ -126,6 +127,7 @@ def stackEffs(outname,x,effs,options):
     frame.GetYaxis().SetRangeUser(0,ymax)
     frame.GetYaxis().SetDecimals()
     frame.GetYaxis().SetTitle(options.ytitle)
+    frame.GetXaxis().SetTitle(options.xtitle)
 
     doRatio = options.showRatio and len(effs) > 1
     # define aspect ratio
@@ -268,6 +270,7 @@ def doEffRatio(x,effs,frame,options):
     cframe.GetYaxis().SetDecimals(True)
     cframe.GetYaxis().SetTitle("X / "+effs[0][0])
     cframe.GetYaxis().SetTitleOffset(0.52);
+    cframe.GetXaxis().SetTitle(options.xtitle)
     line = ROOT.TLine(cframe.GetXaxis().GetXmin(),1,cframe.GetXaxis().GetXmax(),1)
     line.SetLineWidth(3);
     line.SetLineColor(effs[0][1].GetLineColor());
