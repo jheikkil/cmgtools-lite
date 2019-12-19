@@ -1,0 +1,1 @@
+eval "$(python sos_plots.py --lep 2los --reg sr --bin low --signal your_output_directory 2018)"
