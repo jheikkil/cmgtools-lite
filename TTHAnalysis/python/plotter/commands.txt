@@ -1,1 +1,12 @@
-eval "$(python sos_plots.py --lep 2los --reg sr --bin low --signal your_output_directory 2018)"
+README: How to run susy_plots.py
+
+1. Regions
+
+2. Cuts
+
+3. Enable cuts
+
+4. ETC?
+
+
+eval "$(python sos_plots.py --lep 2los --reg sr --bin low --signal SOS 2016)"
