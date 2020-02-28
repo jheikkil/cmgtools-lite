@@ -58,6 +58,36 @@ class MCAnalysis:
             for k in fro.split(","):
                 self._premap.append((re.compile(k.strip()+"$"), to))
         self.variationsFile = UncertaintyFile(options.variationsFile,options) if options.variationsFile else None
+        if ',' in options.year:
+            self._subMcas = []
+            rankoffset = 0
+            years, lumis = options.year.split(','), options.lumi.split(',')
+            if len(years) != len(lumis): raise RuntimeError("Mismatch between number of years and of luminosities")
+            for year,lumi in zip(years,lumis):
+                suboptions = deepcopy(options)
+                suboptions.year = year
+                suboptions.lumi = lumi
+                suboptions.path = [ path  + '/' + year for path in options.path ]
+                self._subMcas.append( MCAnalysis(samples, suboptions))
+                for pname,tty in self._subMcas[-1]._allData.iteritems():
+                    if pname in self._allData:
+                        self._allData[pname].extend( tty )
+                    else:
+                        self._allData[pname] = tty
+                for tty in self._subMcas[-1]._data: self._data.append(tty)
+                for tty in self._subMcas[-1]._signals: self._signals.append(tty)
+                for tty in self._subMcas[-1]._backgrounds: self._backgrounds.append(tty)
+                for key, issig in self._subMcas[-1]._isSignal.iteritems():
+                    if key not in self._isSignal: self._isSignal[key] = issig
+                for key, rank in self._subMcas[-1]._rank.iteritems():
+                    self._rank[key] = rank + rankoffset
+                for key, opt in self._subMcas[-1]._optionsOnlyProcesses:
+                    self._optionsOnlyProcesses[key] = opt
+                for proc in self._subMcas[-1]._groupsToNormalize:
+                    self._groupsToNormalize.append(proc)
+            rankoffset = len( self._rank )
+            return
+
         if os.path.isfile(samples): 
             self.readMca(open(samples,'r'),options)
         elif os.path.isdir(samples) and options.tree == "NanoAOD":
@@ -155,8 +185,9 @@ class MCAnalysis:
                 extra_to_pass = copy(extra)
                 del extra_to_pass['IncludeMca']
                 selectProcesses = None
-                if 'Processes' in extra_to_pass: 
-                    selectProcesses = extra_to_pass['Processes']
+                if 'Processes' in extra_to_pass:
+                    if not options.allProcesses: 
+                        selectProcesses = extra_to_pass['Processes']
                     del extra_to_pass['Processes']
                 self.readMca(open(extra['IncludeMca'],'r'),options,addExtras=extra_to_pass,selectProcesses=selectProcesses) # call readMca recursively on included mca files
                 continue
@@ -188,7 +219,7 @@ class MCAnalysis:
             variations={}
             if self.variationsFile:
                 for var in self.variationsFile.uncertainty():
-                    if var.procmatch().match(pname) and var.binmatch().match(options.binname): 
+                    if var.procmatch().match(pname) and var.binmatch().match(options.binname) and ( var.year() == None or options.year == var.year()) : 
                         #if var.name in variations:
                         #    print "Variation %s overriden for process %s, new process pattern %r, bin %r (old had %r, %r)" % (
                         #            var.name, pname, var.procpattern(), var.binpattern(), variations[var.name].procpattern(), variations[var.name].binpattern())
@@ -199,7 +230,7 @@ class MCAnalysis:
                        options._warning_NormSystematic_variationsFile = [pname] + getattr(options, '_warning_NormSystematic_variationsFile',[])
                        print "Using both a NormSystematic and a variationFile is not supported. Will disable the NormSystematic for process %s" % pname
             if 'NormSystematic' in extra:
-                variations['_norm'] = Uncertainty('norm_%s'%pname,pname,options.binname,'normSymm',[1+float(extra['NormSystematic'])])
+                variations['_norm'] = Uncertainty('norm_%s'%pname,pname,options.binname,'normSymm',[1+float(extra['NormSystematic'])], options=options)
                 if not hasattr(options, '_deprecation_warning_NormSystematic'):
                     print 'Added normalization uncertainty %s to %s, %s. Please migrate away from using the deprecated NormSystematic option.'%(extra['NormSystematic'],pname,field[1])
                     options._deprecation_warning_NormSystematic = False
@@ -207,7 +238,7 @@ class MCAnalysis:
             cnames = [ x.strip() for x in field[1].split("+") ]
             total_w = 0.; to_norm = False; ttys = [];
             genWeightName = extra["genWeightName"] if "genWeightName" in extra else "genWeight"
-            genSumWeightName = extra["genSumWeightName"] if "genSumWeightName" in extra else "genEventSumw"
+            genSumWeightName = extra["genSumWeightName"] if "genSumWeightName" in extra else "genEventSumw_"
             is_w = -1
             pname0 = pname
             for cname in cnames:
@@ -342,7 +373,6 @@ class MCAnalysis:
                 else:
                     if total_w != 0: raise RuntimeError, "Weights from pck file shoulnd't be there for NanoAOD for %s " % pname
                     self._groupsToNormalize.append( (ttys, genSumWeightName if is_w == 1 else "genEventCount", scale) )
-                    
             #for tty in ttys: tty.makeTTYVariations()
         #if len(self._signals) == 0: raise RuntimeError, "No signals!"
         #if len(self._backgrounds) == 0: raise RuntimeError, "No backgrounds!"
@@ -357,6 +387,8 @@ class MCAnalysis:
     def isSignal(self,process):
         return self._isSignal[process]
     def listSignals(self,allProcs=False):
+        if self._options.allProcesses:
+            allProcs = self._options.allProcesses
         ret = [ p for p in self._allData.keys() if p != 'data' and self._isSignal[p] and (self.getProcessOption(p, 'SkipMe') != True or allProcs) ]
         ret.sort(key = lambda n : self._rank[n])
         return ret
@@ -478,7 +510,6 @@ class MCAnalysis:
                         unc[var] = (up.Integral(),dn.Integral())
                     thisret[k].append(copy(unc))
             formatted_report.append((cn,copy(thisret)))
-        print formatted_report
         return formatted_report
     def getPlotsRaw(self,name,expr,bins,cut,process=None,nodata=False,makeSummary=False,closeTreeAfter=False):
         return self.getPlots(PlotSpec(name,expr,bins,{}),cut,process=process,nodata=nodata,makeSummary=makeSummary,closeTreeAfter=closeTreeAfter)
@@ -846,7 +877,8 @@ class MCAnalysis:
     def _normalizeGroups(self):
         tasks = []
         for igroup, (ttys, genWName, scale) in enumerate(self._groupsToNormalize):
-            for tty in ttys: tasks.append( (igroup, tty, genWName) )
+            for tty in ttys: 
+                tasks.append( (igroup, tty, genWName) )
         retlist = self._processTasks(_runSumW, tasks, name="sumw")
         mergemap = defaultdict(float)
         for (igroup,w) in retlist:

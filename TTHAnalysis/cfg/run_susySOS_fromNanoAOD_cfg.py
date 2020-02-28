@@ -16,51 +16,45 @@ if getHeppyOption("nanoPreProcessor"):
     if year == 2018:
         from CMGTools.RootTools.samples.samples_13TeV_RunIIAutumn18MiniAOD import samples as mcSamples_
         from CMGTools.RootTools.samples.samples_13TeV_DATA2018_MiniAOD import samples as allData
-        from CMGTools.RootTools.samples.triggers_13TeV_DATA2018 import all_triggers as triggers
     elif year == 2017:
         from CMGTools.RootTools.samples.samples_13TeV_RunIIFall17MiniAOD import samples as mcSamples_
         from CMGTools.RootTools.samples.samples_13TeV_DATA2017 import dataSamples_31Mar2018 as allData
-        from CMGTools.RootTools.samples.triggers_13TeV_DATA2017 import all_triggers as triggers
     elif year == 2016:
         from CMGTools.RootTools.samples.samples_13TeV_RunIISummer16MiniAODv3 import samples as mcSamples_
         from CMGTools.RootTools.samples.samples_13TeV_DATA2016 import dataSamples_17Jul2018 as allData
-        from CMGTools.RootTools.samples.triggers_13TeV_DATA2016 import all_triggers as triggers
 else:
     if year == 2018:
-        from CMGTools.RootTools.samples.samples_13TeV_RunIIAutumn18NanoAODv5 import samples as mcSamples_
-        from CMGTools.RootTools.samples.samples_13TeV_DATA2018_NanoAOD import dataSamples_1June2019 as allData
-        from CMGTools.RootTools.samples.triggers_13TeV_DATA2018 import all_triggers as triggers
+        from CMGTools.RootTools.samples.samples_13TeV_RunIIAutumn18NanoAODv6 import samples as mcSamples_
+        from CMGTools.RootTools.samples.samples_13TeV_DATA2018_NanoAOD import dataSamples_25Oct2019 as allData
     elif year == 2017:
-        from CMGTools.RootTools.samples.samples_13TeV_RunIIFall17NanoAODv5 import samples as mcSamples_
-        from CMGTools.RootTools.samples.samples_13TeV_DATA2017_NanoAOD import dataSamples_1June2019 as allData
-        from CMGTools.RootTools.samples.triggers_13TeV_DATA2017 import all_triggers as triggers
+        from CMGTools.RootTools.samples.samples_13TeV_RunIIFall17NanoAODv6 import samples as mcSamples_
+        from CMGTools.RootTools.samples.samples_13TeV_DATA2017_NanoAOD import dataSamples_25Oct2019 as allData
     elif year == 2016:
-        from CMGTools.RootTools.samples.samples_13TeV_RunIISummer16NanoAODv5 import samples as mcSamples_
-        from CMGTools.RootTools.samples.samples_13TeV_DATA2016_NanoAOD import dataSamples_1June2019 as allData
-        from CMGTools.RootTools.samples.triggers_13TeV_DATA2016 import all_triggers as triggers
-
+        from CMGTools.RootTools.samples.samples_13TeV_RunIISummer16NanoAODv6 import samples as mcSamples_
+        from CMGTools.RootTools.samples.samples_13TeV_DATA2016_NanoAOD import dataSamples_25Oct2019 as allData
 
 DatasetsAndTriggers = []
 if year == 2018:
+#    from CMGTools.RootTools.samples.triggers_13TeV_DATA2018 import all_triggers as triggers
     if analysis == "main":
         mcSamples = byCompName(mcSamples_, [
 
             ## low Mll Samples
-            # "ZZTo4L_M1toInf",
-            # "VVTo2L2Nu_M1toInf",
-            # "DYJetsToLL_M1to4_HT70to100",
-            # "DYJetsToLL_M1to4_HT100to200",
-            # "DYJetsToLL_M1to4_HT200to400",
-            # "DYJetsToLL_M1to4_HT400to600",
-            # "DYJetsToLL_M1to4_HT600toInf",
+            "ZZTo4L_M1toInf",
+            "VVTo2L2Nu_M1toInf",
+            "DYJetsToLL_M1to4_HT70to100",
+            "DYJetsToLL_M1to4_HT100to200",
+            "DYJetsToLL_M1to4_HT200to400",
+            "DYJetsToLL_M1to4_HT400to600",
+            "DYJetsToLL_M1to4_HT600toInf",
 
 ##            "DYJetsToLL_M10to50_LO",
-            "DYJetsToLL_M50_LO", # for Tag and Probe studies
+            #"DYJetsToLL_M50_LO", # for Tag and Probe studies
 ##            "DYJetsToLL_M50_LO_ext",
 
 
-            "T_tWch_noFullyHad$",
-            "TBar_tWch_noFullyHad$",
+            "T_tWch_noFullyHad",
+            "TBar_tWch_noFullyHad",
 
             "DYJetsToLL_M4to50_HT70to100",
             "DYJetsToLL_M4to50_HT100to200",
@@ -70,8 +64,7 @@ if year == 2018:
 
             "DYJetsToLL_M50_HT100to200",
             "DYJetsToLL_M50_HT200to400",
-            "DYJetsToLL_M50_HT400to600," 
-##            "DYJetsToLL_M50_HT400to600_ext2",
+            "DYJetsToLL_M50_HT400to600",
             "DYJetsToLL_M50_HT600to800",
             "DYJetsToLL_M50_HT800to1200",
             "DYJetsToLL_M50_HT1200to2500",
@@ -80,8 +73,9 @@ if year == 2018:
             "TTJets_DiLepton$",
 
             #check if VVTo2L2Nu is there
-            "WWTo2L2Nu$",
-            "ZZTo2L2Nu",
+            "VVTo2L2Nu",
+#            "WWTo2L2Nu$",
+#            "ZZTo2L2Nu",
             "TTJets_SingleLeptonFromT$", "TTJets_SingleLeptonFromTbar$", 
             
             "WJetsToLNu_HT100to200",
@@ -103,7 +97,7 @@ if year == 2018:
             "T_tch$",
             "TBar_tch$",
             "T_sch_lep$",
-            #"WWTo2L2Nu_DPS_hpp",           
+            "WW_DPS",
             "TTWToLNu_fxfx$",
             "TTZToLLNuNu_amc$",
             "TTZToLLNuNu_m1to10$",
@@ -111,15 +105,18 @@ if year == 2018:
             "TGJets_lep", 
 
             #missing tbc
-#            "ZZTo2L2Q", 
+            "ZZTo2L2Q", 
             "WpWpJJ",
 #            "WZTo1L3Nu",
-#            "WGToLNuG_amcatnlo_ext",
-#            "ZGTo2LG_ext",
-#            "WZTo2L2Q",
+            "WGToLNuG",
+            "ZGTo2LG",
+            "WZTo2L2Q",
+            "TZQToLL",
+            "tWll",
+            "WZTo3LNu_mllmin01",
 
             ##signal SUSY
-            "SMS_TChiWZ"
+            "SMS_TChiWZ",
             
 ###relics from tth             
 ###            "TT[WZ]_LO$",
@@ -134,27 +131,27 @@ if year == 2018:
 
     if analysis == "main":
 ##        DatasetsAndTriggers.append( ("DoubleMuon", triggers["mumu_iso"] + triggers["3mu"]) )
-        DatasetsAndTriggers.append( ("DoubleMuon",  triggers["SOS_doublemulowMET"] + triggers["mumu_iso"] + triggers["3mu"]) )
-        DatasetsAndTriggers.append( ("MET",         triggers["SOS_highMET"] ) )
-        DatasetsAndTriggers.append( ("EGamma",      triggers["SOS_eleTnP"] ) )
-        DatasetsAndTriggers.append( ("SingleMuon",  triggers["SOS_muTnP"] ) )
+        DatasetsAndTriggers.append( ("MET",         ["%s_v*"%x for x in ['HLT_PFMETNoMu120_PFMHTNoMu120_IDTight','HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60']] ) )
+        DatasetsAndTriggers.append( ("DoubleMuon",  ["%s_v*"%x for x in ['HLT_DoubleMu3_DZ_PFMET50_PFMHT60','HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8']]) )
+        DatasetsAndTriggers.append( ("SingleMuon",  ["%s_v*"%x for x in ['HLT_Mu3er1p5_PFJet100er2p5_PFMET80_PFMHT80_IDTight',
+                                                                         'HLT_Mu3er1p5_PFJet100er2p5_PFMET90_PFMHT90_IDTight',
+                                                                         'HLT_Mu3er1p5_PFJet100er2p5_PFMET100_PFMHT100_IDTight']] ) )
+#        DatasetsAndTriggers.append( ("EGamma",      triggers["SOS_eleTnP"] ) )
+#        DatasetsAndTriggers.append( ("SingleMuon",  triggers["SOS_muTnP"] ) )
 ##        DatasetsAndTriggers.append( ("SingleMuon", triggers["1mu_iso"]) ) ##which one?? ##PD SingleMuon o MET?
 ##conf db e cercare stream dato il nome del trigger
 
 elif year == 2017:
+#    from CMGTools.RootTools.samples.triggers_13TeV_DATA2017 import all_triggers as triggers
     mcSamples = byCompName(mcSamples_, [
 
         ## low Mll Samples
-        # "ZZTo4L_M1toInf",
-        # "VVTo2L2Nu_M1toInf",
-        # "DYJetsToLL_M1to4_HT70to100",
-        # "DYJetsToLL_M1to4_HT100to200",
-        # "DYJetsToLL_M1to4_HT200to400",
-        # "DYJetsToLL_M1to4_HT400to600",
-        # "DYJetsToLL_M1to4_HT600toInf",
+        "ZZTo4L_M1toInf",
+        "VVTo2L2Nu_M1toInf",
+        "DYJetsToLL_M1to4_HT",
 
-        "DYJetsToLL_M50_LO", # for Tag and Probe studies
-        "DYJetsToLL_M10to50_LO_ext,"
+#        "DYJetsToLL_M50_LO", # for Tag and Probe studies
+#        "DYJetsToLL_M10to50_LO_ext,"
 ##        "DYJetsToLL_M50$", "TT(Lep|Semi)_pow", "TTHnobb_pow",
 
         ##main bkgs
@@ -184,8 +181,9 @@ elif year == 2017:
         "TTJets_DiLepton",
 
         #main VV
-        "WWTo2L2Nu",
-        "ZZTo2L2Nu",
+#        "WWTo2L2Nu",
+#        "ZZTo2L2Nu",
+        "VVTo2L2Nu",
 
         #fakesbkg
         "TTJets_SingleLeptonFromT",
@@ -204,53 +202,57 @@ elif year == 2017:
         "WWToLNuQQ",
         "WZTo1L1Nu2Q",
         "ZZTo4L",
-        "WWW", #_4F
+        "WWW_ll", #_4F
         "WZZ",
         "WWZ", #_4F
         "ZZZ",
         "T_tch",
         "TBar_tch",
         "T_sch_lep",
+        "T_tWch_noFullyHad",
         "WWTo2L2Nu_DPS_hpp",
         "TTWToLNu_fxfx",
-        "TTZToLLNuNu_amc",
+        "TTZToLLNuNu_amc$",
         "TTZToLLNuNu_m1to10",
         "TTGJets",
         "TGJets_lep",
 
 #more to be included
-#            "ZZTo2L2Q",
-            "WpWpJJ",
+        "ZZTo2L2Q",
+        "WpWpJJ",
 #            "WZTo1L3Nu",
-#            "WGToLNuG_amcatnlo_ext",
-#            "ZGTo2LG_ext",
-#            "WZTo2L2Q",
-
+        "WGToLNuG",
+        "ZGTo2LG",
+        "WZTo2L2Q",
+        "WW_DPS",
+        "TZQToLL",
+        "tWll",
+        "WZTo3LNu_mllmin01",
 
         ##signal SUSY
-        "SMS_TChiWZ"
+        "SMS_TChiWZ",
 
     ])
 
-    DatasetsAndTriggers.append( ("DoubleMuon", triggers["SOS_doublemulowMET"] + triggers["mumu_iso"] + triggers["3mu"]) )
-    DatasetsAndTriggers.append( ("MET",     triggers["SOS_highMET"] ) )
-    DatasetsAndTriggers.append( ("SingleElectron",  triggers["SOS_eleTnP"] ) )
-    DatasetsAndTriggers.append( ("SingleMuon",      triggers["SOS_muTnP"] ) )
+    DatasetsAndTriggers.append( ("MET",         ["%s_v*"%x for x in ['HLT_PFMETNoMu120_PFMHTNoMu120_IDTight','HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60']] ) )
+    DatasetsAndTriggers.append( ("DoubleMuon",  ["%s_v*"%x for x in ['HLT_DoubleMu3_DZ_PFMET50_PFMHT60','HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8']]) )
+
+#    DatasetsAndTriggers.append( ("DoubleMuon", triggers["SOS_doublemulowMET"] + triggers["mumu_iso"] + triggers["3mu"]) )
+#    DatasetsAndTriggers.append( ("MET",     triggers["SOS_highMET"] ) )
+#    DatasetsAndTriggers.append( ("SingleElectron",  triggers["SOS_eleTnP"] ) )
+#    DatasetsAndTriggers.append( ("SingleMuon",      triggers["SOS_muTnP"] ) )
 
 elif year == 2016:
+#    from CMGTools.RootTools.samples.triggers_13TeV_DATA2016 import all_triggers as triggers
     mcSamples = byCompName(mcSamples_, [
 
         ## low Mll Samples
-        # "ZZTo4L_M1toInf",
-        # "VVTo2L2Nu_M1toInf",
-        # "DYJetsToLL_M1to4_HT70to100",
-        # "DYJetsToLL_M1to4_HT100to200",
-        # "DYJetsToLL_M1to4_HT200to400",
-        # "DYJetsToLL_M1to4_HT400to600",
-        # "DYJetsToLL_M1to4_HT600toInf",
+        "ZZTo4L_M1toInf",
+        "VVTo2L2Nu_M1toInf",
+        "DYJetsToLL_M1to5_HT",
 
-        "DYJetsToLL_M50_LO", # for Tag and Probe studies
-        "DYJetsToLL_M10to50_LO$",
+#        "DYJetsToLL_M50_LO", # for Tag and Probe studies
+#        "DYJetsToLL_M10to50_LO$",
 
         ##main bkgs
         "T_tWch_noFullyHad", #extensions are to be included?
@@ -264,15 +266,6 @@ elif year == 2016:
         "DYJetsToLL_M5to50_HT400to600_ext",
         "DYJetsToLL_M5to50_HT600toInf",
         "DYJetsToLL_M5to50_HT600toInf_ext",
-##        "DYJetsToLL_M4to50_HT70to100", 
-##        "DYJetsToLL_M4to50_HT70to100_ext1",
-##        "DYJetsToLL_M4to50_HT100to200", 
-##        "DYJetsToLL_M4to50_HT100to200_ext1",
-##        "DYJetsToLL_M4to50_HT200to400",
-##        "DYJetsToLL_M4to50_HT200to400_ext1",
-##        "DYJetsToLL_M4to50_HT400to600",
-##        "DYJetsToLL_M4to50_HT400to600_ext1",
-##        "DYJetsToLL_M4to50_HT600toInf",
 
 
         "DYJetsToLL_M50_HT70to100", 
@@ -286,22 +279,13 @@ elif year == 2016:
         "DYJetsToLL_M50_HT800to1200",
         "DYJetsToLL_M50_HT1200to2500",
         "DYJetsToLL_M50_HT2500toInf",
-#        "DYJetsToLL_M50_HT100to200", 
-#        "DYJetsToLL_M50_HT100to200_ext1",
-#        "DYJetsToLL_M50_HT200to400",
-#        "DYJetsToLL_M50_HT200to400_ext1",
-#        "DYJetsToLL_M50_HT400to600",
-#        "DYJetsToLL_M50_HT400to600_ext1",
-#        "DYJetsToLL_M50_HT600to800",
-#        "DYJetsToLL_M50_HT800to1200",
-#        "DYJetsToLL_M50_HT1200to2500",
-#        "DYJetsToLL_M50_HT2500toInf",
 
         "TTJets_DiLepton",
 
         #main VV
-        "WWTo2L2Nu",
-        "ZZTo2L2Nu",
+#        "WWTo2L2Nu",
+#        "ZZTo2L2Nu",
+        "VVTo2L2Nu",
 
         #fakesbkg
         "TTJets_SingleLeptonFromT",
@@ -324,59 +308,57 @@ elif year == 2016:
         "WJetsToLNu_HT1200to2500_ext",
         "WJetsToLNu_HT2500toInf",
         "WJetsToLNu_HT2500toInf_ext",
-##        "WJetsToLNu_HT100to200",
-##        "WJetsToLNu_HT200to400",
-##        "WJetsToLNu_HT400to600",
-##        "WJetsToLNu_HT600to800",
-##        "WJetsToLNu_HT800to1200",
-##        "WJetsToLNu_HT1200to2500",
-##        "WJetsToLNu_HT2500toInf",
 
         #rarebkg
         "WZTo3LNu_fxfx",
         "WWToLNuQQ",
         "WZTo1L1Nu2Q",
         "ZZTo4L",
-        "WWW", #_4F
+        "WWW_ll", #_4F
         "WZZ",
         "WWZ", #why not _4F?
         "ZZZ",
         "T_tch",
         "TBar_tch",
         "T_sch_lep",
-##        "WWTo2L2Nu_DPS_hpp", #missing
-        "TTWToLNu", "TTWToLNu_ext",  #_fxfx
-        "TTZToLLNuNu", "TTZToLLNuNu_ext", "TTZToLLNuNu_ext2", #_amc
+        "WWDoubleTo2L",
+        "TTWToLNu",  #_fxfx
+        "TTZToLLNuNu", #_amc
         "TTZToLLNuNu_m1to10",
-        "TTGJets", "TTGJets_ext"
-       # "TGJets_lep" #missing
+        "TTGJets",
+        "TGJets_lep",
 
 #more to be included
         "ZZTo2L2Q", 
         "WpWpJJ",
-        "WZTo1L3Nu",
+#        "WZTo1L3Nu",
         "WGToLNuG_amcatnlo",
-        "WGToLNuG_amcatnlo_ext",
         "ZGTo2LG",
         "WZTo2L2Q",
-
+        "TZQToLL",
+        "tWll",
+        "WZTo3LNu_mllmin01",
 
         ##signal SUSY
         "SMS_TChiWZ"
 
 ###        "DYJetsToLL_M50$", "TT(Lep|Semi)_pow" 
     ])
-    DatasetsAndTriggers.append( ("DoubleMuon",      triggers["SOS_doublemulowMET"] + triggers["mumu_iso"] + triggers["3mu"]) )
-    DatasetsAndTriggers.append( ("MET",             triggers["SOS_highMET"] ) )
-    DatasetsAndTriggers.append( ("SingleElectron",  triggers["SOS_eleTnP"] ) )
-    DatasetsAndTriggers.append( ("SingleMuon",      triggers["SOS_muTnP"] ) )
-# make MC
+                                
+    DatasetsAndTriggers.append( ("MET",         ["%s_v*"%x for x in ['HLT_DoubleMu3_PFMET50','HLT_PFMETNoMu120_PFMHTNoMu120_IDTight']] ) )
+    DatasetsAndTriggers.append( ("DoubleMuon",  ["%s_v*"%x for x in ['HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ']]) )
 
-print "mcSamples ",mcSamples
+#    DatasetsAndTriggers.append( ("DoubleMuon",      triggers["mumu_iso"] + triggers["3mu"]) )
+#    DatasetsAndTriggers.append( ("MET",             triggers["SOS_doublemulowMET"] + triggers["SOS_highMET"] ) )
+#    DatasetsAndTriggers.append( ("SingleElectron",  triggers["SOS_eleTnP"] ) )
+#    DatasetsAndTriggers.append( ("SingleMuon",      triggers["SOS_muTnP"] ) )
+
 
 mcTriggers = sum((trigs for (pd,trigs) in DatasetsAndTriggers), [])
-for comp in mcSamples:
-    comp.triggers = mcTriggers
+if getHeppyOption('applyTriggersInMC'):
+    raise RuntimeError, 'Applying triggers in MC might bias the input PU distribution for the PU reweighting! If really sure comment out this line.'
+    for comp in mcSamples:
+        comp.triggers = mcTriggers
 
 # make data
 dataSamples = []; vetoTriggers = []
@@ -389,11 +371,16 @@ for pd, triggers in DatasetsAndTriggers:
 
 selectedComponents = mcSamples + dataSamples
 if getHeppyOption('selectComponents'):
-    selectedComponents = byCompName(selectedComponents, getHeppyOption('selectComponents').split(","))
-autoAAA(selectedComponents, quiet=False)##not(getHeppyOption("verboseAAA",False)))
-configureSplittingFromTime(mcSamples,250 if preprocessor else 10,10)
-configureSplittingFromTime(dataSamples,80 if preprocessor else 10,10)
-selectedComponents, _ = mergeExtensions(selectedComponents)
+    if getHeppyOption('selectComponents')=='MC':
+        selectedComponents = mcSamples
+    elif getHeppyOption('selectComponents')=='DATA':
+        selectedComponents = dataSamples
+    else:
+        selectedComponents = byCompName(selectedComponents, getHeppyOption('selectComponents').split(","))
+autoAAA(selectedComponents, quiet=not(getHeppyOption("verboseAAA",False)), redirectorAAA="xrootd-cms.infn.it") # must be done before mergeExtensions
+configureSplittingFromTime(mcSamples,500 if preprocessor else 10,10)
+configureSplittingFromTime(dataSamples,160 if preprocessor else 10,10)
+selectedComponents, _ = mergeExtensions(selectedComponents, verbose=True)
 
 # create and set preprocessor if requested
 if getHeppyOption("nanoPreProcessor"):
@@ -401,7 +388,7 @@ if getHeppyOption("nanoPreProcessor"):
     preproc_cfg = {2016: ("mc94X2016","data94X2016"),
                    2017: ("mc94Xv2","data94Xv2"),
                    2018: ("mc102X","data102X_ABC","data102X_D")}
-    preproc_cmsswArea = "/afs/cern.ch/user/v/vtavolar/work/SusySOSSW_2_clean/nanoAOD/CMSSW_10_2_15" #MODIFY ACCORDINGLY
+    preproc_cmsswArea = "/afs/cern.ch/user/p/peruzzi/work/cmgtools_sos/CMSSW_10_2_18" #MODIFY ACCORDINGLY
     preproc_mc = nanoAODPreprocessor(cfg='%s/src/PhysicsTools/NanoAOD/test/%s_NANO.py'%(preproc_cmsswArea,preproc_cfg[year][0]),cmsswArea=preproc_cmsswArea,keepOutput=True)
     if year==2018:
         preproc_data_ABC = nanoAODPreprocessor(cfg='%s/src/PhysicsTools/NanoAOD/test/%s_NANO.py'%(preproc_cmsswArea,preproc_cfg[year][1]),cmsswArea=preproc_cmsswArea,keepOutput=True, injectTriggerFilter=True, injectJSON=True)
