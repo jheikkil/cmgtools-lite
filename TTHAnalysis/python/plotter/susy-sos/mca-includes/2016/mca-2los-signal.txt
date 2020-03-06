@@ -4,11 +4,11 @@
 
 signal_TChiWZ_100_1+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_1", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_1"   , SkipMe=True
 #signal_TChiWZ_100_10+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_10", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_10", SkipMe=True
-signal_TChiWZ_100_20+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_20", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_20", SkipMe=True
+signal_TChiWZ_100_20+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_20", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_20", SkipMe=False
 signal_TChiWZ_100_30+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_30", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_30", SkipMe=True
 signal_TChiWZ_100_40+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_40", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_40", SkipMe=True
 signal_TChiWZ_100_50+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_50", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_50", SkipMe=True
-signal_TChiWZ_100_60+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_60", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_60", SkipMe=True
+signal_TChiWZ_100_60+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_60", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_60", SkipMe=False
 signal_TChiWZ_100_70+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_70", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_70", SkipMe=True
 signal_TChiWZ_100_80+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_80", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_80", SkipMe=True
 signal_TChiWZ_100_85+	: SMS_TChiWZ :  0.1*22.6701 : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; genWeightName="genWeight*GenModel_TChiWZ_ZToLL_100_85", genSumWeightName="genEventSumw_TChiWZ_ZToLL_100_85", SkipMe=True

@@ -1,0 +1,4 @@
+## TChiWZ Signal Points
+---------------------------------------
+incl_signal	: +  ; IncludeMca="susy-sos/mca-includes/2016/mca-2los-signal.txt", Processes="signal_TChiWZ_150_120+\,signal_TChiWZ_100_20+\,signal_TChiWZ_100_60+"
+
